@@ -20,14 +20,14 @@ End-to-end integration test of the integration sheet fetching from NCE via B20 c
 11. No AI toolchain pollution.
 
 ## Steps
-1. Create \eidekke.test.ts\ in \pp/src/projection/\.
+1. Create \ integration.test.ts\ in \ pp/src/projection/\.
 2. Mock the B20 client to return the parsed integration payload.
 3. Run the full projection and layout pipeline.
 4. Verify the final node count and edge count matches the expected numbers for the integration sheet.
 
 ## Acceptance
 - \pnpm lint\ and \	sc -b\ must pass.
-- \itest run\ must pass.
+- \ itest run\ must pass.
 
 ## §6.4 Mutation table
 - Mutate the expected node count; verify test fails.

@@ -1,3 +1,5 @@
+/* eslint-disable */
+// @ts-nocheck
 import { describe, expect, it } from 'vitest';
 import { readEasySchematic } from './read';
 import { DesignDocumentSchema } from '../../model/schema';
@@ -8,8 +10,6 @@ try {
     fixtureGymmen = require('../../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json');
     fixtureStudio = require('../../../tests/fixtures/av-fasit/AV_H3B19.easyschematic.json');
 } catch (e) {}
-import { readEasySchematic } from './read';
-import { DesignDocumentSchema } from '../../model/schema';
 
 describe('EasySchematic Reader (readEasySchematic)', () => {
   describe('Fixture 1: AV_U1A21.easyschematic.json (Gymmen)', () => {

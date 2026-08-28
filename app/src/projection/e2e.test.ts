@@ -1,15 +1,14 @@
 import { describe, expect, it } from 'vitest';
-// @ts-expect-error`nimport fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json';
-// @ts-expect-error`nimport fixtureStudio from '../../tests/fixtures/av-fasit/AV_H3B19.easyschematic.json';
-// @ts-expect-error`nimport fixtureAuditorium from '../../tests/fixtures/av-fasit/AV_H1A04.easyschematic.json';
+// @ts-nocheck
+import fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json';
+import fixtureStudio from '../../tests/fixtures/av-fasit/AV_H3B19.easyschematic.json';
+import fixtureAuditorium from '../../tests/fixtures/av-fasit/AV_H1A04.easyschematic.json';
 import { readEasySchematic } from '../exchange/easyschematic/read';
 import { toFlow } from './toFlow';
 import { applyElkLayout } from './layout';
 import { enhanceEdges, DEFAULT_EDGE_STYLE, DEFAULT_EDGE_TYPE } from './edges';
 import { DesignDocumentSchema } from '../model/schema';
 import { CARD_WIDTH } from '../model/geometry';
-
-/**
  * Batch 025 — P.W7 the-premise-proof
  * ============================================================================
  * End-to-end integration test proving the core premise:

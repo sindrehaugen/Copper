@@ -1,0 +1,681 @@
+{
+ "version": 29,
+ "name": "Nordvik U1A21 Gymmen — AV-anlegg",
+ "nodes": [
+  {
+   "id": "room-U1A36",
+   "type": "room",
+   "position": {
+    "x": 616,
+    "y": 620
+   },
+   "data": {
+    "label": "U1 A36 — Hovedtelematikkrom",
+    "locked": false
+   },
+   "style": {
+    "width": 638,
+    "height": 552
+   },
+   "width": 638,
+   "height": 552,
+   "zIndex": -1
+  },
+  {
+   "id": "room-U1A21",
+   "type": "room",
+   "position": {
+    "x": 616,
+    "y": 319
+   },
+   "data": {
+    "label": "U1 A21 — Gymmen",
+    "locked": false
+   },
+   "style": {
+    "width": 1048,
+    "height": 878
+   },
+   "width": 1048,
+   "height": 878,
+   "zIndex": -1
+  },
+  {
+   "id": "device-U1-UM003",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 60
+   },
+   "parentId": "room-U1A36",
+   "data": {
+    "label": "UM003 · GSM4230PX-100EUS",
+    "deviceType": "network-switch",
+    "manufacturer": "NETGEAR",
+    "modelNumber": "GSM4230PX-100EUS",
+    "ports": [
+     {
+      "id": "p-U1-UM003-1-0-1",
+      "label": "1/0/1",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-U1-UM003-proj-POE2",
+      "label": "1/0/2 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-U1-UM003-proj-POE3",
+      "label": "1/0/3 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-U1-UM003-1-0-27",
+      "label": "1/0/27 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM003-1-0-28",
+      "label": "1/0/28 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Nettverk",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM003",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM006",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 336
+   },
+   "parentId": "room-U1A36",
+   "data": {
+    "label": "UM006 · CX-Q2K4-NA",
+    "deviceType": "amplifier",
+    "manufacturer": "QSC",
+    "modelNumber": "CX-Q2K4-NA",
+    "ports": [
+     {
+      "id": "p-U1-UM006-i0",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "iec"
+     },
+     {
+      "id": "p-U1-UM006-o1",
+      "label": "SPEAKER +/- 1",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-U1-UM006-o2",
+      "label": "SPEAKER +/- 2",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-U1-UM006-o3",
+      "label": "SPEAKER +/- 3",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-U1-UM006-o4",
+      "label": "SPEAKER +/- 4",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Forsterker",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM006",
+      "position": "footer"
+     },
+     {
+      "text": "SW-08 1/0/1 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM008",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 60
+   },
+   "parentId": "room-U1A21",
+   "data": {
+    "label": "UM008 · TSC-50-G3",
+    "deviceType": "control-processor",
+    "manufacturer": "QSC",
+    "modelNumber": "TSC-50-G3",
+    "ports": [
+     {
+      "id": "p-U1-UM008-i0",
+      "label": "POE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Styring",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM008",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM009",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 176
+   },
+   "parentId": "room-U1A21",
+   "data": {
+    "label": "UM009 · UND6IO-BT",
+    "deviceType": "av-over-ip",
+    "manufacturer": "QSC",
+    "modelNumber": "UND6IO-BT",
+    "ports": [
+     {
+      "id": "p-U1-UM009-i0",
+      "label": "DANTE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-U1-UM009-o1",
+      "label": "LINE",
+      "signalType": "analog-audio",
+      "direction": "output",
+      "connectorType": "trs-eighth"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "AV-distribusjon",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM009",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM010",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 314
+   },
+   "parentId": "room-U1A21",
+   "data": {
+    "label": "UM010 · AD-S8T-BK",
+    "deviceType": "speaker",
+    "manufacturer": "QSC",
+    "modelNumber": "AD-S8T-BK",
+    "ports": [
+     {
+      "id": "p-U1-UM010-i0",
+      "label": "SPEAKER  +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-U1-UM010-o1",
+      "label": "LOOP THRU +/-",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM010",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM011",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 85
+   },
+   "parentId": "room-U1A21",
+   "data": {
+    "label": "UM011 · AD-S8T-BK",
+    "deviceType": "speaker",
+    "manufacturer": "QSC",
+    "modelNumber": "AD-S8T-BK",
+    "ports": [
+     {
+      "id": "p-U1-UM011-i0",
+      "label": "SPEAKER  +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-U1-UM011-o1",
+      "label": "LOOP THRU +/-",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM011",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM012",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 452
+   },
+   "parentId": "room-U1A21",
+   "data": {
+    "label": "UM012 · AD-S8T-BK",
+    "deviceType": "speaker",
+    "manufacturer": "QSC",
+    "modelNumber": "AD-S8T-BK",
+    "ports": [
+     {
+      "id": "p-U1-UM012-i0",
+      "label": "SPEAKER  +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-U1-UM012-o1",
+      "label": "LOOP THRU +/-",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM012",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM013",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 223
+   },
+   "parentId": "room-U1A21",
+   "data": {
+    "label": "UM013 · AD-S8T-BK",
+    "deviceType": "speaker",
+    "manufacturer": "QSC",
+    "modelNumber": "AD-S8T-BK",
+    "ports": [
+     {
+      "id": "p-U1-UM013-i0",
+      "label": "SPEAKER  +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-U1-UM013-o1",
+      "label": "LOOP THRU +/-",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM013",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM014",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 590
+   },
+   "parentId": "room-U1A21",
+   "data": {
+    "label": "UM014 · AD-S8T-BK",
+    "deviceType": "speaker",
+    "manufacturer": "QSC",
+    "modelNumber": "AD-S8T-BK",
+    "ports": [
+     {
+      "id": "p-U1-UM014-i0",
+      "label": "SPEAKER  +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-U1-UM014-o1",
+      "label": "LOOP THRU +/-",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM014",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM015",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 361
+   },
+   "parentId": "room-U1A21",
+   "data": {
+    "label": "UM015 · AD-S8T-BK",
+    "deviceType": "speaker",
+    "manufacturer": "QSC",
+    "modelNumber": "AD-S8T-BK",
+    "ports": [
+     {
+      "id": "p-U1-UM015-i0",
+      "label": "SPEAKER  +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-U1-UM015-o1",
+      "label": "LOOP THRU +/-",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM015",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM016",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 728
+   },
+   "parentId": "room-U1A21",
+   "data": {
+    "label": "UM016 · AD-S8T-BK",
+    "deviceType": "speaker",
+    "manufacturer": "QSC",
+    "modelNumber": "AD-S8T-BK",
+    "ports": [
+     {
+      "id": "p-U1-UM016-i0",
+      "label": "SPEAKER  +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-U1-UM016-o1",
+      "label": "LOOP THRU +/-",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM016",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM017",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 499
+   },
+   "parentId": "room-U1A21",
+   "data": {
+    "label": "UM017 · AD-S8T-BK",
+    "deviceType": "speaker",
+    "manufacturer": "QSC",
+    "modelNumber": "AD-S8T-BK",
+    "ports": [
+     {
+      "id": "p-U1-UM017-i0",
+      "label": "SPEAKER  +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-U1-UM017-o1",
+      "label": "LOOP THRU +/-",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM017",
+      "position": "footer"
+     }
+    ]
+   }
+  }
+ ],
+ "edges": [
+  {
+   "id": "edge-0",
+   "source": "device-U1-UM003",
+   "target": "device-U1-UM008",
+   "sourceHandle": "p-U1-UM003-proj-POE2",
+   "targetHandle": "p-U1-UM008-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-1",
+   "source": "device-U1-UM003",
+   "target": "device-U1-UM009",
+   "sourceHandle": "p-U1-UM003-proj-POE3",
+   "targetHandle": "p-U1-UM009-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-2",
+   "source": "device-U1-UM006",
+   "target": "device-U1-UM016",
+   "sourceHandle": "p-U1-UM006-o4",
+   "targetHandle": "p-U1-UM016-i0",
+   "data": {
+    "signalType": "speaker-level",
+    "label": "Forsterker"
+   },
+   "style": {
+    "stroke": "var(--color-speaker-level)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-3",
+   "source": "device-U1-UM006",
+   "target": "device-U1-UM014",
+   "sourceHandle": "p-U1-UM006-o3",
+   "targetHandle": "p-U1-UM014-i0",
+   "data": {
+    "signalType": "speaker-level",
+    "label": "Forsterker"
+   },
+   "style": {
+    "stroke": "var(--color-speaker-level)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-4",
+   "source": "device-U1-UM006",
+   "target": "device-U1-UM012",
+   "sourceHandle": "p-U1-UM006-o2",
+   "targetHandle": "p-U1-UM012-i0",
+   "data": {
+    "signalType": "speaker-level",
+    "label": "Forsterker"
+   },
+   "style": {
+    "stroke": "var(--color-speaker-level)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-5",
+   "source": "device-U1-UM006",
+   "target": "device-U1-UM010",
+   "sourceHandle": "p-U1-UM006-o1",
+   "targetHandle": "p-U1-UM010-i0",
+   "data": {
+    "signalType": "speaker-level",
+    "label": "Forsterker"
+   },
+   "style": {
+    "stroke": "var(--color-speaker-level)",
+    "strokeWidth": 2
+   }
+  }
+ ],
+ "printPaperId": "iso-a2",
+ "printOrientation": "landscape",
+ "printScale": 0.985,
+ "titleBlock": {
+  "showName": "Nordvik Eiendom AS — Hovedkontor",
+  "venue": "Eksempelveien 1, 0000 Eksempelby",
+  "designer": "Bravo Norge AS",
+  "engineer": "Ola Eksempel",
+  "drawingTitle": "AV-anlegg U1A21 Gymmen",
+  "date": "13.08.2026",
+  "company": "Bravo Norge AS",
+  "revision": "C — nettverk fra NetBox/Engage"
+ },
+ "customFields": []
+}

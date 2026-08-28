@@ -2,3 +2,4 @@ node_modules/
 dist/
 coverage/
 .vite/
+app/tests/fixtures/av-fasit/*.easyschematic.json

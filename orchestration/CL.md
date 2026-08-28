@@ -40,7 +40,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 ### Lane F — Foundations (`app/` scaffold, gates, model core)
 
-* [LOCKED] B1 — F.W1 app-scaffold: pnpm + Vite + React 19 + TS strict app, eslint flat config, vitest, CI (lint/typecheck/test) · tier: T1 · dep: — [NO TAG]
+* [RUNNING] B1 — F.W1 app-scaffold: pnpm + Vite + React 19 + TS strict app, eslint flat config, vitest, CI (lint/typecheck/test) · tier: T1 · dep: — [NO TAG]
   · Files: `package.json`, `pnpm-workspace.yaml`, `pnpm-lock.yaml`, `app/**` (new), `.github/workflows/ci.yml`, `tsconfig*.json`, `eslint.config.js`, `vitest.config.ts`, `.gitignore` · Goal: empty app builds, gates run green in CI, folder layout `app/src/{model,layout,editor,views,exchange,store,shell}` exists with placeholder index · Accept: `pnpm lint && pnpm typecheck && pnpm vitest run` green locally and in Actions; `app/src/model/index.test.ts` trivially passes. Brief: `prompts/Batch_001_F_W1.md`
 * [LOCKED] B2 — F.W2 licence-gate: licence-checker CI step + allowlist + forbidden-source scan · tier: T1 · dep: B1 [NO TAG]
   · Files: `scripts/check-licences.mjs`, `scripts/forbidden-sources.mjs`, `.github/workflows/ci.yml` (one edit — chokepoint), `docs/decisions/0005-…` (link only) · Goal: CI fails on any dep outside MIT/BSD/Apache/ISC/CC0 and greps the diffable tree for forbidden-source markers (EasySchematic paths, `banesok`/`rutekvalitet`/`connectorAccepts` identifiers, Norwegian routing vocabulary) · Accept: seeded violation fixture makes both scripts exit non-zero (RED shown); clean tree passes. Brief: `prompts/Batch_002_F_W2.md`

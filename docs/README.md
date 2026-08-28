@@ -16,6 +16,12 @@
 - [ADR-0004 — Reference designation](decisions/0004-reference-designation.md) *(proposed)*
 - [ADR-0005 — Romtegning reuse & licence lists](decisions/0005-romtegning-reuse-and-licence-lists.md)
 - [ADR-0006 — NetBox methodology is binding](decisions/0006-netbox-methodology-is-binding.md)
+- [ADR-0007 — Copper is the vertical-suite front end](decisions/0007-copper-is-the-vertical-suite-front-end.md)
+- [ADR-0008 — EU/Nordic compliance baseline](decisions/0008-eu-nordic-compliance-baseline.md)
+
+## Handoffs
+
+- [Module 6 completion guide](m6_completion_guide.md) — build spec for the NCE ML orchestrator (surface hole fix, W13a–W20, the contract table Copper consumes)
 
 ## Orchestration
 

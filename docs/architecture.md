@@ -1,10 +1,12 @@
 # Architecture
 
-> **Status:** current · **Sources:** Rev 2 build proposal (2026-08-26), NCE seam audit (2026-08-28), steps-ai Romtegning survey (2026-08-28) · **Binding ADRs:** 0001, 0002, 0005, 0006
+> **Status:** current · **Sources:** Rev 2 build proposal (2026-08-26), NCE seam audit (2026-08-28), steps-ai Romtegning survey (2026-08-28) · **Binding ADRs:** 0001, 0002, 0005, 0006, 0007, 0008
 
 ## What Copper is
 
-The system design and integration front end for AV + IT, running on NCE. L1-first: the physical layer — devices, ports, cables, racks, locations — is the model; the schematic, the rack elevation, the 3D view, the cable schedule and every export are **projections of one document**, and that document is a projection of **NCE's graph**.
+**The front end for the NCE vertical suite** (ADR-0007): the operational cockpit of an AV/IT/network-operations company where the tech is the business — one shell hosting per-module surfaces (sales, procurement, project, economy, inventory, assets, netops …), all storeless over NCE, shaped for the EU/Nordic market, laws and standards (ADR-0008: GDPR, EN 301 549 accessibility, nb-NO/en i18n, EN 50173/NEK 700 as the primary cabling standards, EU-AI-Act-aligned transparency).
+
+Its flagship surface is the **system design canvas**, L1-first: the physical layer — devices, ports, cables, racks, locations — is the model; the schematic, the rack elevation, the 3D view, the cable schedule and every export are **projections of one document**, and that document is a projection of **NCE's graph**. The trust machinery — C9a citations, event-log audit, design-vs-reality divergence, human-confirm on every AI-proposed write — is first-class UI, because it is the differentiator, not plumbing.
 
 ```mermaid
 flowchart LR
@@ -31,7 +33,8 @@ flowchart LR
 |---|---|---|
 | **Store** | NCE (`kg_nodes`/`kg_edges` + Module 6 side-tables) | The only persistence. ADR-0001. Writes go through Module 6 owner tools (Contract A) |
 | **Seam** | NCE, landed by the NS lane | MCP tool + REST route pairs wrapping the existing `do_author_*` / `_fetch_*` / `validate_design_graph` domain layer. Registered in BOTH `tool_registry.py` and `mcp_stdio_tools.py` |
-| **BFF** | `bff/` (TypeScript, Hono) | Holds `NCE_API_KEY`, speaks REST+HMAC server-side (NCE has no browser path: no CORS, stdio-only MCP). Exposes a browser-safe session API. Stateless — no DB |
+| **BFF** | `bff/` (TypeScript, Hono) | Holds `NCE_API_KEY`, speaks REST+HMAC server-side (NCE has no browser path: no CORS, stdio-only MCP). Exposes a browser-safe session API. Stateless — no DB. Grows an **allowlisted generalized proxy** to the other module route families (`/api/sales/*`, `/api/project/*`, …) as their surfaces are built (U.W3) |
+| **Shell & surfaces** | `app/src/shell/` + per-module surface dirs | One navigation/session/i18n/a11y shell (ADR-0008 ratchets from wave one) hosting module surfaces; the canvas is one surface. Each new surface names the Portal capability it supersedes, or explicitly doesn't (ADR-0007) |
 | **Document** | `app/src/model/` | NetBox-shaped types (ADR-0006): DeviceType templates → Device instances with owned components; front/rear port mapping; Site→Location→Rack; status lifecycle; signal extension layer beside the core |
 | **Projections** | `app/src/{editor,views,exchange}/` | `toFlow()` for the 2D canvas, the 3D scene builder, print, DXF, cable schedule, NetBox export — all pure functions of (document, layout), guaranteed to agree |
 | **Layout & routing** | `app/src/layout/` | elkjs placement + Copper's own A*-grid cable router (clean-room; ADR-0005). Quality measured by the headless rig against the 15 real fixture sheets |

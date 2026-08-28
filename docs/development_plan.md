@@ -4,13 +4,13 @@
 
 ## 1. Objectives and non-goals
 
-**Objective:** a production-grade design front end where a Bravo engineer draws an AV+IT system as live NCE data (NetBox methodology throughout, ADR-0006), gets standards-computed validation while drawing, and feeds the design-generated quote path — with routing/drawing quality measured against the 15 real customer sheets, never eyeballed.
+**Objective:** Copper is **the front end for the NCE vertical suite** (ADR-0007) — the cockpit of an AV/IT/network-operations business run tech-first, shaped for the EU/Nordic market (ADR-0008). Its flagship surface: a production-grade design canvas where an engineer draws an AV+IT system as live NCE data (NetBox methodology throughout, ADR-0006), gets standards-computed validation while drawing, and feeds the design-generated quote path — routing/drawing quality measured against the 15 real customer sheets, never eyeballed. Module surfaces beyond design are added evidence-first (inventory both sides: what NCE exposes, what the Portal's existing screens already prove) with Sindre picking the order at HS-8.
 
-**Non-goals (this plan):** IFC/COBie, NMOS observe integrations, autonomy of any kind, public multi-tenant hardening, offline mode.
+**Non-goals (this plan):** NMOS observe integrations, autonomy of any kind, public multi-tenant hardening, offline mode, replacing any Portal capability before a wired equivalent exists (the FE-boundary rule).
 
 ## 2. Ground truths the plan is built on (all verified 2026-08-28)
 
-1. **NCE Module 6's domain layer exists; its external surface does not.** `do_author_device_topology`, `do_author_functional_location`, `validate_design_graph` and the topology read queries are implemented and test-covered — and unreachable by any MCP tool, REST route, or A2A skill. ML.md's own defect sweep names this shape ("surface hole") and never scheduled the fix for Module 6. → the **NS lane** funds it. Details + traps: [nce_seam_audit.md](nce_seam_audit.md).
+1. **NCE Module 6's domain layer exists; its external surface does not.** `do_author_device_topology`, `do_author_functional_location`, `validate_design_graph` and the topology read queries are implemented and test-covered — and unreachable by any MCP tool, REST route, or A2A skill. ML.md's own defect sweep names this shape ("surface hole") and never scheduled the fix for Module 6. Details + traps: [nce_seam_audit.md](nce_seam_audit.md). **Execution (2026-08-28): the fix is handed to the NCE ML orchestrator as the [Module 6 completion guide](m6_completion_guide.md)** — Sindre pushes it up front in the ML queue. Copper's NS lane holds `[HOLD-ML]`: at each Copper boot the orchestrator content-verifies which M6 completion waves landed on NCE `main`, consumes those, and executes only what ML did not adopt.
 2. **No browser path into NCE exists** (stdio-only MCP, HMAC REST, no CORS) → Copper ships a stateless **BFF**, using NCE's two sanctioned seams (NCE-FE-1 `extra_routes`, NCE-FE-2 `register_tool`) — never a fork of `nce/`.
 3. **Romtegning (steps-ai) is proven prior art.** Its clean files are ported to TS (ADR-0005 PORT list), its AGPL-derived router/scorer/compat-table are reimplemented clean-room (PATTERN list), its measured domain lessons (grid pitch, three-independent-port-facts, per-instance port overrides, confirm-warn, the four forbidden routing optimizations) are binding, and its 15 anonymized fixture sheets become Copper's quality ground truth. Its 3D room view (three.js) proves the 3D lane is another pure projection of the same document.
 4. **Missing entirely, everywhere:** delete/patch of design objects, geometry storage, lifecycle status, BOM_LINE implementation. These are designed decisions (ADR-0003/0004 + two HARD-STOPs), not incidental waves.
@@ -32,6 +32,9 @@
 | **X** Exchange | Copper (+NS) | DXF (MIT port), EasySchematic-format import, NetBox export/import, D365 FL import | B54–B58 |
 | **B** BOM | NCE + Copper | BOM_LINE contract (**coordinate with ML** — B132a territory), design→BOM emission | B59–B60 |
 | **W** CAD/BIM workflows | Copper + plugin repos | W.W1 recon (verify VW/ConnectCAD/Revit/SketchUp exchange formats — nothing designed against unverified seams), glTF/Collada export from the T lane, IFC/COBie with reference designations, **Vectorworks plugin** (embedded Python, pulls devices/cables from the BFF API, pushes placements back), ConnectCAD schema mapping (the NetBox treatment for its device/circuit model), SketchUp path, Revit/Dynamo path | B61–B67 |
+| **U** Shell & platform | Copper | app shell (navigation, session, tenancy, **i18n nb-NO/en from wave one**), **accessibility ratchets** (EN 301 549/WCAG AA: a11y lint + axe smoke in CI), generalized allowlisted BFF module-route proxy | B68–B70 |
+| **M** Module surfaces | Copper | M.W0 two-sided inventory: (a) what every NCE engine exposes today (seam-audit method suite-wide), (b) what the Portal's screens already prove (quote spreadsheet, customer/location trees, room-sign flow, product picker — PORT/PATTERN verdicts per screen, ADR-0005 method) → 🛑 HS-8 Sindre picks surface order; then per-surface waves (sales/quote, project, assets, inventory, netops…), each naming the Portal capability it supersedes or explicitly doesn't | B71 + unscheduled |
+| **C** Compliance surfaces | Copper | DSAR surface over NCE `me_app`, provenance/audit viewer (C9a citations as UI), AI-transparency dialogs (Contract B posture made visible, EU-AI-Act-aligned) | B72–B74 (post-HS-8) |
 | **O** Observe | both | divergence overlay (Engine 18), RMM health (Engine 19) | unscheduled tail |
 
 Full wave rows with `Files:`/Goal/Acceptance live in the ledger; briefs for B1–B14 are pre-authored in `orchestration/prompts/`, later briefs are authored by the orchestrator at dispatch from the ledger row + `_TEMPLATE.md` (deliberate anti-rot deviation from ML practice — NCE §7.6/§7.8 incidents).
@@ -62,6 +65,7 @@ F, K and NS start **in parallel** (disjoint repos). The **Veidekke read-only pro
 | 🛑 HS-5 | B59 | BOM_LINE: adopt-into-ML vs Copper-funded — cross-orchestrator coordination |
 | 🛑 HS-6 | X.W3/W4 | First NetBox export/import against a real NetBox — data leaves the system |
 | 🛑 HS-7 | W lane post-recon | Which CAD integrations to fund first, based on W.W1's verified format findings (VW plugin is the presumed priority) |
+| 🛑 HS-8 | M lane post-inventory | Which module surfaces to build, in what order, from B71's two-sided inventory (NCE surfaces × Portal prior art) |
 
 ## 6. Quality machinery (what makes it *extremely good*)
 

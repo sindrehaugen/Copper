@@ -31,6 +31,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 | 🛑 HS-5 | B59 | BOM_LINE: adopt-into-ML vs Copper-funded (cross-orchestrator coordination) |
 | 🛑 HS-6 | B56/B57 | First NetBox export/import against a real instance |
 | 🛑 HS-7 | B63+ | Which CAD integrations to fund, from B61's verified findings |
+| 🛑 HS-8 | B72+ (M/C lanes) | Which module surfaces to build, in what order, from B71's two-sided inventory |
 
 ---
 
@@ -64,16 +65,18 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 ### Lane NS — NCE seam (worktree `NCE-Copper`, branch `copper/*`, PR to NCE main · ⚠ ONE in flight at a time · every tool wave edits BOTH registries + the 5 count tests — see `docs/nce_seam_audit.md`)
 
+> **⚠ LANE RE-SCOPED 2026-08-28 — HANDED TO THE ML ORCHESTRATOR.** Sindre is pushing `docs/m6_completion_guide.md` up front in the NCE ML queue; its waves M6.W13a–W20 cover B12–B18's scope (and more). NS rows below are `[HOLD-ML]`: at every Copper boot, content-verify (grep for the tool symbols on fresh NCE `main`, never ancestry) which completion waves landed; flip landed scope to `[DONE — delivered by ML <batch>, verified <sha>]` on the row; execute ONLY what ML has not adopted after Sindre confirms the handoff outcome. B11 (recon) stays Copper-owned — it is how the verification happens. Downstream deps read "B12" etc. as "B12's *scope* is on NCE main", whoever landed it.
+
 * [LOCKED] B11 — NS.W1 seam-recon: re-verify the 2026-08-28 seam audit against current NCE `main`; record baseline (env-pinned) + tool counts on this row; refresh `docs/nce_seam_audit.md` · tier: T1 (orchestrator-assisted, read-only) · dep: — [NO TAG]
-* [LOCKED] B12 — NS.W2 read-adapter: `system_design_get_topology(namespace_id, design_label, statuses?)` MCP tool + `GET /api/system-design/topology` REST · tier: T2 · dep: B11 [NO TAG]
+* [HOLD-ML] B12 — NS.W2 read-adapter: `system_design_get_topology(namespace_id, design_label, statuses?)` MCP tool + `GET /api/system-design/topology` REST · tier: T2 · dep: B11 [NO TAG]
   · Goal: promote the private `_fetch_*` queries (`validation_queries.py:373-553`) into one structured read (devices+ports+capabilities+edges+FL tree); namespace pinned in SQL per house pattern · Files: `nce/vertical_modules/system_design/{mcp_handlers,read}.py`, `nce/tool_registry.py`, `nce/mcp_stdio_tools.py`, `nce/admin_app.py`, `nce/admin_handlers/system_design.py`, + the 5 count tests · Accept: RED-first tenant-isolation proof through the owner pool; tool visible in `tools/list`. Brief: `prompts/Batch_012_NS_W2.md`
-* [LOCKED] B13 — NS.W3 author-adapter: `system_design_author_topology` + `system_design_author_functional_location` MCP tools + POST routes wrapping the existing `do_author_*` (no domain changes) · tier: T3 · dep: B12 [NO TAG]
+* [HOLD-ML] B13 — NS.W3 author-adapter: `system_design_author_topology` + `system_design_author_functional_location` MCP tools + POST routes wrapping the existing `do_author_*` (no domain changes) · tier: T3 · dep: B12 [NO TAG]
   · Accept: mutation=True flags; `assert_owner` path proven RED when ownership seeding removed (scratch copy); idempotent double-call proven. Brief: `prompts/Batch_013_NS_W3.md`
-* [LOCKED] B14 — NS.W4 validate-adapter: `system_design_validate_design_graph` read tool + REST · tier: T2 · dep: B12 [NO TAG]
+* [HOLD-ML] B14 — NS.W4 validate-adapter: `system_design_validate_design_graph` read tool + REST · tier: T2 · dep: B12 [NO TAG]
   · Accept: the 5 checks reachable externally; unknown-format warn semantics preserved. Brief: `prompts/Batch_014_NS_W4.md`
-* [LOCKED] B15 — NS.W5 geometry-store: new FORCE-RLS table `system_design_geometry` (`namespace_id, node_label, x, y, rack_position NUMERIC(4,1), rack_face, meta JSONB`) + read/write folded into B12/B13 adapters · tier: T2 · dep: B13 [NO TAG]
+* [HOLD-ML] B15 — NS.W5 geometry-store: new FORCE-RLS table `system_design_geometry` (`namespace_id, node_label, x, y, rack_position NUMERIC(4,1), rack_face, meta JSONB`) + read/write folded into B12/B13 adapters · tier: T2 · dep: B13 [NO TAG]
   · Note: NetBox vocabulary for `position`/`face` (ADR-0006); migration number pre-allocated by orchestrator at dispatch (never self-picked — in-flight ML migrations own numbers).
-* [LOCKED] B16 — NS.W6 cable-two-ended: fix `uses_cable` to link BOTH terminations (+ docstring), preserving existing rows · tier: T2 · dep: B13 [NO TAG]
+* [HOLD-ML] B16 — NS.W6 cable-two-ended: fix `uses_cable` to link BOTH terminations (+ docstring), preserving existing rows · tier: T2 · dep: B13 [NO TAG]
   · Note: touches ML-owned module — flag the fix to the ML ledger owner on dispatch; RED-first traversal test.
 * [HOLD-HS1] B17 — NS.W7 status-lifecycle: ADR-0003 — `status` (NetBox vocab, default `planned`) on design objects in the side-table; reads filter by `statuses`; `DESIGN_REVISION` scoping for planned objects · tier: T3 · dep: B15 [NO TAG]
 * [HOLD-HS2] B18 — NS.W8 delete-patch: design + implement removal of `planned` objects (nodes+edges+capability+geometry rows, event-logged); `active` deletion explicitly out of scope · tier: T3 · dep: B17 [NO TAG]
@@ -107,7 +110,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 ### Lane V — Validators (one standard = one microwave; client advisory now, NS server mirrors later)
 
 * [LOCKED] B36 — V.W1 poe-budget: IEEE 802.3 af/at/bt class budget vs switch capacity · tier: T2 · dep: B30 [NO TAG]
-* [LOCKED] B37 — V.W2 channel-length: TIA-568 channel refusal (the 140 m run) · tier: T2 · dep: B29 [NO TAG]
+* [LOCKED] B37 — V.W2 channel-length: EN 50173 / NEK 700 channel limits (TIA-568 as compatibility secondary; divergences documented — ADR-0008 §4) — refuses the 140 m run · tier: T2 · dep: B29 [NO TAG]
 * [LOCKED] B38 — V.W3 rack-fit: u_height vs gap, is_full_depth collisions · tier: T2 · dep: B41 [NO TAG]
 * [LOCKED] B39 — V.W4 port-occupancy: no second cable on an occupied termination · tier: T2 · dep: B33 [NO TAG]
 * [LOCKED] B40 — V.W5 hdcp-chain: version-chain downgrade detection · tier: T2 · dep: B29 [NO TAG]
@@ -157,6 +160,25 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 * [HOLD-HS7] B66 — W.W6 revit-dynamo-path: Dynamo script consuming the BFF API (shared parameters carry designations) · tier: T2 · dep: B62 [NO TAG]
 * [HOLD-HS7] B67 — W.W7 vw-placement-writeback: plugin pushes placed positions back (writes as `planned` through B34's path — same fact, same store) · tier: T3 · dep: B63,B34 [NO TAG]
 
+### Lane U — Shell & platform (ADR-0007/0008 — a11y and i18n are wave-one ratchets, not retrofits)
+
+* [LOCKED] B68 — U.W1 app-shell: navigation + module-surface registry, session/tenancy context, **i18n scaffold (nb-NO/en, all copy externalized)**, theme tokens · tier: T2 · dep: B1 [NO TAG]
+  · Note: the canvas becomes the first registered surface; shell owns routing chrome only — no business logic.
+* [LOCKED] B69 — U.W2 a11y-ratchets: eslint a11y rules + axe smoke against the shell + keyboard-operability harness; EN 301 549/WCAG 2.1 AA acceptance wording added to `_TEMPLATE.md` rule 10 (one surgical edit) · tier: T2 · dep: B68 [NO TAG]
+  · Note: the canvas's accessible *equivalent path* (schedules/tables/structured nav) is recorded as the compliance approach — honest, not pretended-AA-canvas.
+* [LOCKED] B70 — U.W3 bff-module-proxy: generalized allowlisted proxy for NCE module route families (`/api/sales/*`, `/api/project/*`, …) with per-family enable flags; `-32005`/governance surfaced uniformly · tier: T2 · dep: B20,B68 [NO TAG]
+
+### Lane M — Module surfaces (ADR-0007 — evidence-first; Portal prior art surveyed per the ADR-0005 method)
+
+* [LOCKED] B71 — M.W0 surface-inventory 🛑→HS-8: two-sided verified inventory — (a) every NCE engine's reachable REST/MCP surface today (seam-audit method suite-wide, on fresh `main`), (b) every Portal screen in steps-ai worth learning from (quote spreadsheet/`lysning`, KatalogVelger product picker, customer/location trees, room-sign flow, recurring/finago steps) with PORT/PATTERN/ignore verdicts and the Portal capability each candidate surface would supersede · tier: T1 (research, read-only, two agents' worth — split at dispatch if >25 min each side) · dep: B68 [NO TAG]
+* Per-surface waves (sales/quote, project, assets, inventory, netops dashboard, economy views): **UNSCHEDULED until HS-8** — each will carry: the NCE routes it consumes, the Portal screen verdicts it builds on, the FE-boundary statement (supersedes X / supersedes nothing), i18n + a11y acceptance criteria.
+
+### Lane C — Compliance surfaces (ADR-0008 — post-HS-8 unless Sindre pulls them forward)
+
+* [HOLD-HS8] B72 — C.W1 dsar-surface: wire NCE `me_app` DSAR/GDPR endpoints into the shell · tier: T2 · dep: B68,B70 [NO TAG]
+* [HOLD-HS8] B73 — C.W2 provenance-viewer: C9a citations + event-log audit trail as first-class UI on any NCE-backed value · tier: T2 · dep: B70 [NO TAG]
+* [HOLD-HS8] B74 — C.W3 ai-transparency: Contract-B confirm dialogs (AI-proposed vs human-decided, provenance shown, confidence never presented as calibrated) as a shared shell component · tier: T3 · dep: B73 [NO TAG]
+
 ### Lane O — Observe (UNSCHEDULED — rows recorded, no briefs)
 
 * Divergence overlay: Engine 18 capture vs design, greyed/flagged on the canvas — the thing no drawing tool on the market can do.
@@ -176,4 +198,5 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 ## Change log
 
+- 2026-08-28 (later) — **Scope broadened + NS lane handed to ML.** Sindre's directives: (1) Copper = front end for the whole vertical suite, tech-is-the-business, EU/Nordic shaped → ADR-0007/0008, new lanes U (shell/i18n/a11y), M (module surfaces, two-sided inventory incl. Portal prior art), C (compliance surfaces), HS-8; B37 re-scoped to EN 50173/NEK 700 primary. (2) Module 6 completion handed to the NCE ML orchestrator via `docs/m6_completion_guide.md` (Sindre pushes it up front); NS rows B12–B16 → `[HOLD-ML]`, adoption content-verified at every Copper boot.
 - 2026-08-28 — **Ledger authored.** 67 waves across 13 lanes + unscheduled O lane; 7 HARD-STOPs. Grounded in: the NCE seam audit (Module 6 surface hole confirmed unfunded in ML's 231-wave plan — Copper pays), the steps-ai Romtegning survey (PORT/PATTERN/FORBIDDEN lists → ADR-0005), the ML.md house-style extraction, and Sindre's directives this session: NetBox methodology binding (ADR-0006), 3D lane (T), CAD/BIM lane (W — Revit/SketchUp/Vectorworks + VW plugins), private repo, NCE docsify tooling. Briefs pre-authored for B1–B6 and B12–B14; the orchestrator authors the rest at dispatch from rows (anti-rot deviation from ML practice, per NCE §7.6/§7.8 incidents).

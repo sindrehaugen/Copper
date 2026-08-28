@@ -6,7 +6,9 @@
     "dev": "pnpm --filter app dev",
     "lint": "eslint .",
     "typecheck": "tsc -b",
-    "test": "vitest run"
+    "test": "vitest run",
+    "licences": "node scripts/check-licences.mjs",
+    "forbidden": "node scripts/forbidden-sources.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

@@ -1,0 +1,7 @@
+[
+  {
+    "name": "elkjs",
+    "licence": "EPL-2.0",
+    "decision": "docs/decisions/0010-elkjs-epl-licence-exception.md"
+  }
+]

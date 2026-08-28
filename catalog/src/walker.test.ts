@@ -14,17 +14,13 @@ manufacturer: Vendor A
 model: Device 1
 slug: vendor-a-device-1
 `);
-    await writeFile(join(FIXTURES_DIR, 'vendor-a', 'device-2.yml'), \---
-manufacturer: Vendor A
-model: Device 2
-slug: vendor-a-device-2
-\);
-    await writeFile(join(FIXTURES_DIR, 'vendor-a', 'ignore.txt'), 'Not a yaml file');
+    await writeFile(join(FIXTURES_DIR, 'vendor-a', 'device-2.yml'), `---
 manufacturer: Vendor A
 model: Device 2
 slug: vendor-a-device-2
 `);
-    
+    await writeFile(join(FIXTURES_DIR, 'vendor-a', 'ignore.txt'), 'Not a yaml file');
+
     await mkdir(join(FIXTURES_DIR, 'vendor-b', 'sub'), { recursive: true });
     await writeFile(join(FIXTURES_DIR, 'vendor-b', 'sub', 'device-3.yaml'), `---
 manufacturer: Vendor B

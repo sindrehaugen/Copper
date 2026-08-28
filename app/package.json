@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@material/material-color-utilities": "^0.3.0",
+    "@xyflow/react": "^12.11.5",
+    "@xyflow/system": "^0.0.81",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "zod": "^3.24.2"

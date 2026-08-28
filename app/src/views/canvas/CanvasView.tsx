@@ -10,7 +10,6 @@ import { DeviceNode } from './nodes/DeviceNode';
 
 export const defaultNodeTypes: NodeTypes = {
   device: DeviceNode,
-  default: DeviceNode,
 };
 
 export interface CanvasViewProps extends Omit<ReactFlowProps, 'nodes' | 'edges'> {

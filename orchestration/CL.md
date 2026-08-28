@@ -102,7 +102,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 ### Lane G — Signal model (the extension Copper owns)
 
 * [PASSED TAG] B27 — G.W1 signal-classes: SIGNAL_CLASSES port (clean, "our own" per steps-ai) + three-independent-facts port model (`type`/`signalType`/`connectorType` — 345-RJ45 lesson) · tier: T2 · dep: B4b [NO TAG]
-* [LOCKED] B28 — G.W2 connector-accepts-rebuild: compatibility table from first principles (~50 rows) · tier: T3 (clean-room; brief bans the forbidden file by path) · dep: B27 [NO TAG]
+* [RUNNING] B28 — G.W2 connector-accepts-rebuild: compatibility table from first principles (~50 rows) · tier: T3 (clean-room; brief bans the forbidden file by path) · dep: B27 [NO TAG]
 * [LOCKED] B29 — G.W3 validate-join: two-axis validation → `direct|adapter|incompatible|unknown`; **confirm-warn, never reject** (a drawing is documentation) · tier: T2 · dep: B28 [NO TAG]
 * [LOCKED] B30 — G.W4 port-overrides: `portsOf` chain with NetBox instantiate-then-own semantics · tier: T2 · dep: B4b,B8 [NO TAG]
 

@@ -21,7 +21,8 @@ export function findPath(
     startY: number,
     endX: number,
     endY: number,
-    obstacles: Point[]
+    obstacles: Point[],
+    costGrid?: Map<string, number>
 ): Point[] {
     if (startX === endX && startY === endY) {
         return [{ x: startX, y: startY }];
@@ -86,8 +87,10 @@ export function findPath(
                 continue;
             }
 
-            const turnCost = (current.direction === 'NONE' || current.direction === neighbor.dir) ? 0 : 10;
-            const tentativeGScore = current.gScore + 1 + turnCost;
+            const turnCost = (current.direction === 'NONE' || current.direction === neighbor.dir) ? 0 : 100;
+            const costDelta = costGrid?.get(neighbor.x + ',' + neighbor.y) ?? 0;
+            const stepCost = Math.max(1, 10 + costDelta);
+            const tentativeGScore = current.gScore + stepCost + turnCost;
 
             const existingOpen = openSetMap.get(neighborKey);
             
@@ -138,4 +141,15 @@ function reconstructPath(current: State): Point[] {
         curr = curr.parent;
     }
     return path.reverse();
+}
+
+
+
+
+export function updateCostGrid(costGrid: Map<string, number>, path: Point[]): void {
+    for (const pt of path) {
+        const key = `${pt.x},${pt.y}`;
+        const currentCost = costGrid.get(key) ?? 0;
+        costGrid.set(key, currentCost - 2);
+    }
 }

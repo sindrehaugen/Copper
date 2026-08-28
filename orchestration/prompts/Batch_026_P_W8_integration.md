@@ -1,10 +1,10 @@
-# Copper Orchestration — Batch 026 — P.W8 veidekke-proof
+# Copper Orchestration — Batch 026 — P.W8 integration-proof
 
 ## Goal
-End-to-end integration test of the Veidekke sheet fetching from NCE via B20 client, projecting via B21/B22/B23, and rendering. This serves as the final proof for Phase 2 before HARD-STOP 3.
+End-to-end integration test of the integration sheet fetching from NCE via B20 client, projecting via B21/B22/B23, and rendering. This serves as the final proof for Phase 2 before HARD-STOP 3.
 
 ## Files (exactly these — nothing else)
-- \pp/src/projection/veidekke.test.ts\
+- \pp/src/projection/integration.test.ts\
 
 ## 11 Strict Rules
 1. Never import \asyschematic\ directly in \pp/\ except in tests where explicitly allowed as a fixture.
@@ -21,9 +21,9 @@ End-to-end integration test of the Veidekke sheet fetching from NCE via B20 clie
 
 ## Steps
 1. Create \eidekke.test.ts\ in \pp/src/projection/\.
-2. Mock the B20 client to return the parsed Veidekke payload.
+2. Mock the B20 client to return the parsed integration payload.
 3. Run the full projection and layout pipeline.
-4. Verify the final node count and edge count matches the expected numbers for the Veidekke sheet.
+4. Verify the final node count and edge count matches the expected numbers for the integration sheet.
 
 ## Acceptance
 - \pnpm lint\ and \	sc -b\ must pass.

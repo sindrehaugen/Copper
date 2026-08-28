@@ -23,7 +23,7 @@
 | **F** Foundations | Copper | scaffold, CI, licence gate, geometry ratchet, schema core, fixtures + rig skeleton | B1–B6 |
 | **K** Catalog | Copper | devicetype-library vendoring + parser, Bravo AV authoring format (CC0, upstreamable), seed set | B7–B10 |
 | **NS** NCE seam | **NCE** (worktree `NCE-Copper`, branch `copper/*`, PR to `main`) | read/author/validate adapters, geometry table, status lifecycle, cable fix, delete design | B11–B18 |
-| **P** Projection | Copper | BFF, typed NCE client, toFlow, read-only canvas, ELK layout, cable schedule, **Veidekke proof**, graph↔document codec, contract-pin + fixture seam server | B19–B26, B76–B77 |
+| **P** Projection | Copper | BFF, typed NCE client, toFlow, read-only canvas, ELK layout, cable schedule, **integration proof**, graph↔document codec, contract-pin + fixture seam server | B19–B26, B76–B77 |
 | **G** Signal model | Copper | signal classes, clean-room compat table, two-axis validation, port overrides | B27–B30 |
 | **E** Editing & writes | Copper | zustand store, palette, connect gesture, write-through (`planned`), promote | B31–B35 |
 | **V** Validators | Copper (+NS mirrors) | PoE, channel length, rack fit, port occupancy, HDCP | B36–B40 |
@@ -45,7 +45,7 @@ Wave rows live in the ledger (near-horizon rows carry full `Files:`/Goal/Accepta
 ```mermaid
 flowchart LR
   F[F: foundations] --> K[K: catalog] --> P
-  F --> NS[NS: seam] --> P[P: read-only projection<br/>+ Veidekke proof 🛑]
+  F --> NS[NS: seam] --> P[P: read-only projection<br/>+ integration proof 🛑]
   P --> G[G: signal] --> E[E: edit + write planned]
   NS --> E
   E --> V[V: validators] & R[R: racks] & Q[Q: routing]
@@ -53,7 +53,7 @@ flowchart LR
   E --> BOM[B: BOM 🛑 ML coordination]
 ```
 
-At boot, **B1 (F), B11 (NS recon) and B61 (W recon) run in parallel** — B11's work is in the NCE repo, the other lanes in Copper; K and U unlock behind B1, and Copper-side parallelism is governed by disjoint `Files:` + the chokepoint locks (`orchestration/_ORCHESTRATOR.md` §7 is the single chokepoint list). The **Veidekke read-only proof (B26)** is the premise checkpoint: real site, real nodes, auto-layout, cable schedule out, with measurable pass criteria on its row — the cheapest way to discover the L1-first premise is wrong (Rev 2 §07). Q is a continuous track after the router ships; quality is ratcheted by the rig, never by taste. While NS scope sits with ML, the P lane develops against B77's recorded-fixture seam server; only B26 requires the real thing.
+At boot, **B1 (F), B11 (NS recon) and B61 (W recon) run in parallel** — B11's work is in the NCE repo, the other lanes in Copper; K and U unlock behind B1, and Copper-side parallelism is governed by disjoint `Files:` + the chokepoint locks (`orchestration/_ORCHESTRATOR.md` §7 is the single chokepoint list). The **integration read-only proof (B26)** is the premise checkpoint: real site, real nodes, auto-layout, cable schedule out, with measurable pass criteria on its row — the cheapest way to discover the L1-first premise is wrong (Rev 2 §07). Q is a continuous track after the router ships; quality is ratcheted by the rig, never by taste. While NS scope sits with ML, the P lane develops against B77's recorded-fixture seam server; only B26 requires the real thing.
 
 ## 5. HARD-STOPs (Sindre's gates — the orchestrator pauses, reports, waits)
 
@@ -61,7 +61,7 @@ At boot, **B1 (F), B11 (NS recon) and B61 (W recon) run in parallel** — B11's 
 |---|---|---|
 | 🛑 HS-1 | NS.W7 (B17) | ADR-0003 draft semantics sign-off (status vocabulary + revisions concept) |
 | 🛑 HS-2 | NS.W8 (B18) | Delete semantics for design objects (WORM/audit implications — one-way door) |
-| 🛑 HS-3 | after B26 | Premise check: does the Veidekke projection hold up? GO/NO-GO for the E lane |
+| 🛑 HS-3 | after B26 | Premise check: does the integration projection hold up? GO/NO-GO for the E lane |
 | 🛑 HS-4 | B35 promote | Promote flow review (first `action_approval_queue` writer) |
 | 🛑 HS-5 | B59 | BOM_LINE: adopt-into-ML vs Copper-funded — cross-orchestrator coordination |
 | 🛑 HS-6 | X.W3/W4 | First NetBox export/import against a real NetBox — data leaves the system |

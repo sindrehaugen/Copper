@@ -26,7 +26,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 |---|---|---|
 | 🛑 HS-1 | B17 | ADR-0003 sign-off (status vocabulary + design revisions) |
 | 🛑 HS-2 | B18 | Delete semantics (WORM/audit one-way door) |
-| 🛑 HS-3 | B31+ (E lane) | Premise check on the Veidekke read-only proof (B26) |
+| 🛑 HS-3 | B31+ (E lane) | Premise check on the integration read-only proof (B26) |
 | 🛑 HS-4 | B35 | Promote flow (first `action_approval_queue` writer) |
 | 🛑 HS-5 | B59 | BOM_LINE: adopt-into-ML vs Copper-funded (cross-orchestrator coordination) |
 | 🛑 HS-6 | B56/B57 | First NetBox export/import against a real instance |
@@ -93,7 +93,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 * [RUNNING] B23 — P.W5 elk-layout: elkjs layered auto-layout for unpositioned designs (technique-level reuse, own code) · tier: T2 · dep: B21 [NO TAG]
 * [LOCKED] B24 — P.W6 naive-edges: orthogonal-naive cable paths (no router; Q lane replaces) · tier: T2 · dep: B22 [NO TAG]
 * [LOCKED] B25 — P.W7 cable-schedule: schedule view + CSV export from the same document · tier: T2 · dep: B20,B4b [NO TAG]
-* [LOCKED] B26 — P.W8 veidekke-proof 🛑→HS-3: seed local NCE with the Veidekke core stack (source: `Documents\Veidekke-AV-Core` files + as-built sheets) via the B13-scope author tool, render read-only via B20–B24, cable schedule out; orchestrator runs the live stack itself · tier: T2 (run-it wave) · dep: B13,B20,B22,B23,B24,B25,B76 [NO TAG]
+* [LOCKED] B26 — P.W8 integration-proof 🛑→HS-3: seed local NCE with the integration core stack (source: `Documents\integration-AV-Core` files + as-built sheets) via the B13-scope author tool, render read-only via B20–B24, cable schedule out; orchestrator runs the live stack itself · tier: T2 (run-it wave) · dep: B13,B20,B22,B23,B24,B25,B76 [NO TAG]
   · Accept (measurable, per the plan's own motto): (a) every seeded device/cable is representable without model workarounds, OR each failure is named on this row; (b) cable-schedule row count equals the seed count exactly; (c) initial render of the full site < 3 s locally; (d) screenshot + counts recorded here. HS-3 reviews the named-failures list, not a vibe.
 * [LOCKED] B76 — P.W9 graph-doc-codec [ORCH-INSERTED, audit 2026-08-28]: the two pure mappings the lane silently assumed — NCE read shape → `DesignDocument`, and `DesignDocument` → author-tool payloads (component classes + front/rear mapping via the m6 guide Rev 2 §5 `extra` keys; geometry per Rev 2 §4 units) · tier: T2 · dep: B4b,B20 [NO TAG]
   · Accept: round-trip (document → author payload → simulated read shape → document) is identity on a two-device+plate fixture; unknown `extra` keys surfaced, not dropped.

@@ -11,7 +11,7 @@ The audit flagged that no deployment story existed anywhere: ADR-0008 asserted "
 1. **Internal-only v1:** Copper serves Bravo staff behind Entra ID (ADR-0011). No public exposure, no multi-org tenancy beyond NCE namespaces.
 2. **Target: Azure Container Apps in an EU/Norwegian region** (aligning with the Portal's Azure-readiness direction and D365 estate): one container for the BFF (serving the built app statically), TLS by platform, secrets from Key Vault into env.
 3. **Environments:** `dev` (local: BFF + Vite against local NCE, dev-identity seam) and `prod`. No staging until a real release cadence exists.
-4. **This ADR schedules nothing.** An ops wave lands when the Veidekke proof (HS-3) passes and something is worth deploying; until then the decision's value is that ADR-0008's residency claim has an owner and the BFF is built 12-factor (config via env, stateless) so the target stays cheap.
+4. **This ADR schedules nothing.** An ops wave lands when the integration proof (HS-3) passes and something is worth deploying; until then the decision's value is that ADR-0008's residency claim has an owner and the BFF is built 12-factor (config via env, stateless) so the target stays cheap.
 
 ## What would reopen this
 

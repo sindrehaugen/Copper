@@ -44,3 +44,4 @@
 5. If the acceptance gate fails and you cannot fix it within this wave's stated scope, **STOP and report** — do not widen scope, do not "fix" a mismatch, do not start the next wave. A STOP is a successful outcome.
 
 **§6.3 — name what you verified and how; name what you did NOT verify and why. Never say "complete", "all", or "every" about something you sampled.** An omission that is named is a scope decision; an omission that is silent is a defect.
+

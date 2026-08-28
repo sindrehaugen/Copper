@@ -14,7 +14,12 @@ manufacturer: Vendor A
 model: Device 1
 slug: vendor-a-device-1
 `);
-    await writeFile(join(FIXTURES_DIR, 'vendor-a', 'device-2.yml'), `---
+    await writeFile(join(FIXTURES_DIR, 'vendor-a', 'device-2.yml'), \---
+manufacturer: Vendor A
+model: Device 2
+slug: vendor-a-device-2
+\);
+    await writeFile(join(FIXTURES_DIR, 'vendor-a', 'ignore.txt'), 'Not a yaml file');
 manufacturer: Vendor A
 model: Device 2
 slug: vendor-a-device-2

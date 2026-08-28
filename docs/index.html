@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Copper Documentation</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Copper — the system design and integration front end for AV+IT, running on NCE">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Docsify Themeable stylesheet -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
+
+  <!-- KaTeX CSS for LaTeX math formula rendering -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+  <style>
+    :root {
+      --theme-color: #b87333;
+      --base-background: #0d0f0e;
+      --base-font-family: 'Inter', -apple-system, sans-serif;
+      --heading-font-family: 'Outfit', 'Inter', sans-serif;
+      --code-font-family: 'Fira Code', ui-monospace, monospace;
+      --sidebar-background: #080a09;
+      --sidebar-nav-link-color--active: #d98e4a;
+      --sidebar-nav-link-border-color--active: #b87333;
+      --link-color: #d98e4a;
+      --content-max-width: 58rem;
+      --search-input-background-color: #141716;
+      --table-cell-border-color: #26302c;
+      --code-theme-background: #101413;
+    }
+    h1, h2, h3 { font-family: var(--heading-font-family); }
+    .sidebar-nav li.active > a { font-weight: 600; }
+    .markdown-section code { border-radius: 3px; }
+    .markdown-section .mermaid { background: transparent; }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-thumb { background: #2b3531; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <div id="app">Loading Copper documentation...</div>
+
+  <script>
+    window.$docsify = {
+      name: 'Copper',
+      repo: '',
+      loadSidebar: true,
+      loadNavbar: true,
+      subMaxLevel: 3,
+      auto2top: true,
+      notFoundPage: true,
+
+      search: {
+        maxAge: 86400000,
+        paths: 'auto',
+        placeholder: 'Search documentation...',
+        noData: 'No pages found.',
+        depth: 6,
+        hideOtherSidebarContent: false
+      },
+
+      copyCode: {
+        buttonText : 'Copy code',
+        errorText  : 'Error',
+        successText: 'Copied!'
+      },
+
+      flexibleAlerts: {
+        style: 'flat'
+      }
+    }
+  </script>
+
+  <!-- Required JS dependencies -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  <script src="https://unpkg.com/docsify-plugin-flexible-alerts"></script>
+
+  <!-- KaTeX for LaTeX formula rendering -->
+  <script src="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script>
+
+  <!-- Mermaid for visual diagram rendering -->
+  <script src="//cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+  <script src="//unpkg.com/docsify-mermaid@latest/dist/docsify-mermaid.js"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: false });
+  </script>
+
+  <!-- Prism components for syntax highlighting -->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-typescript.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-tsx.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
+</body>
+</html>

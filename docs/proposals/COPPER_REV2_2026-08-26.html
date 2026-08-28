@@ -1,0 +1,776 @@
+<title>The Copper Layer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --ground: #EDF1F2;
+    --surface: #F8FBFB;
+    --surface-2: #E3EAEC;
+    --ink: #14212A;
+    --ink-soft: #33454F;
+    --muted: #5A6C75;
+    --rule: #C4D0D4;
+    --rule-soft: #D9E1E3;
+    --accent: #0F7A85;
+    --keep: #2E7D5B;
+    --warn: #A6701A;
+    --stop: #A83A2E;
+
+    --f-display: "Saira Condensed", "Arial Narrow", Helvetica, sans-serif;
+    --f-body: "Source Sans 3", -apple-system, "Segoe UI", Helvetica, sans-serif;
+    --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+
+    --col: 68ch;
+    --wide: 1080px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0F1519;
+      --surface: #161F25;
+      --surface-2: #1C272E;
+      --ink: #DDE6E9;
+      --ink-soft: #BECBD1;
+      --muted: #8A9BA3;
+      --rule: #2C3A42;
+      --rule-soft: #232F36;
+      --accent: #35AEB8;
+      --keep: #4FA97F;
+      --warn: #C79A4A;
+      --stop: #C96A5C;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #0F1519;
+    --surface: #161F25;
+    --surface-2: #1C272E;
+    --ink: #DDE6E9;
+    --ink-soft: #BECBD1;
+    --muted: #8A9BA3;
+    --rule: #2C3A42;
+    --rule-soft: #232F36;
+    --accent: #35AEB8;
+    --keep: #4FA97F;
+    --warn: #C79A4A;
+    --stop: #C96A5C;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 17px;
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: var(--wide); margin: 0 auto; padding: 0 24px 96px; }
+
+  .mast { padding: 72px 0 40px; border-bottom: 1px solid var(--rule); }
+  .eyebrow {
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 18px;
+  }
+  h1 {
+    font-family: var(--f-display);
+    font-weight: 700;
+    font-size: clamp(46px, 8vw, 84px);
+    line-height: 0.94;
+    letter-spacing: -0.005em;
+    text-transform: uppercase;
+    margin: 0 0 22px;
+    text-wrap: balance;
+  }
+  .standfirst {
+    max-width: 62ch;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .standfirst strong { color: var(--ink); font-weight: 600; }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+    margin: 32px 0 0;
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  section { padding: 56px 0 0; }
+
+  .rail { display: grid; grid-template-columns: 44px 1fr; align-items: start; }
+  .rail-ticks { position: relative; align-self: stretch; border-right: 1px solid var(--rule); }
+  .rail-ticks span { position: absolute; right: -1px; width: 9px; height: 1px; background: var(--rule); }
+  .rail-n {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    padding-top: 2px;
+  }
+  .rail-body { padding-left: 28px; min-width: 0; }
+
+  h2 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.06;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+  .dek {
+    font-family: var(--f-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 26px;
+  }
+  h3 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 21px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 34px 0 8px;
+  }
+  p { max-width: var(--col); margin: 0 0 18px; }
+  strong { font-weight: 600; }
+  a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  code {
+    font-family: var(--f-mono);
+    font-size: 0.86em;
+    background: var(--surface-2);
+    border: 1px solid var(--rule-soft);
+    padding: 0.08em 0.34em;
+  }
+
+  ul { max-width: var(--col); margin: 0 0 18px; padding-left: 0; list-style: none; }
+  ul li { position: relative; padding-left: 20px; margin-bottom: 9px; }
+  ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.72em;
+    width: 8px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .panel { background: var(--surface); border: 1px solid var(--rule); margin: 28px 0; }
+  .panel-tag {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 18px 9px;
+    border-bottom: 1px solid var(--rule-soft);
+    background: var(--surface-2);
+  }
+  .panel-body { padding: 20px 18px 4px; }
+  .panel-body p { max-width: 64ch; }
+
+  .pull {
+    border-left: 2px solid var(--accent);
+    padding: 2px 0 2px 20px;
+    margin: 26px 0;
+    max-width: 58ch;
+  }
+  .pull p {
+    font-family: var(--f-display);
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 1.22;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .ledger { border-top: 1px solid var(--rule); margin: 24px 0 8px; }
+  .row {
+    display: grid;
+    grid-template-columns: 104px 1fr;
+    gap: 0 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    align-items: start;
+  }
+  .chip {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border: 1px solid currentColor;
+    display: inline-block;
+    white-space: nowrap;
+  }
+  .chip.keep { color: var(--keep); }
+  .chip.cut { color: var(--stop); }
+  .chip.free { color: var(--accent); }
+  .row h4 {
+    font-family: var(--f-display);
+    font-weight: 600;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0 0 4px;
+  }
+  .row p { margin: 0; max-width: 62ch; font-size: 16px; color: var(--ink-soft); }
+  .row p + p { margin-top: 8px; }
+
+  .tw { overflow-x: auto; margin: 26px 0; border: 1px solid var(--rule); background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 580px; }
+  caption {
+    text-align: left;
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 16px 9px;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  th, td {
+    text-align: left;
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--rule-soft);
+    vertical-align: top;
+    font-size: 15.5px;
+  }
+  th {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  td.m { font-family: var(--f-mono); font-size: 13.5px; font-variant-numeric: tabular-nums; }
+
+  figure { margin: 32px 0; }
+  figure svg { display: block; width: 100%; max-width: 100%; height: auto; color: var(--ink); }
+  .figframe { border: 1px solid var(--rule); background: var(--surface); padding: 22px 20px 10px; overflow-x: auto; }
+  figcaption {
+    font-size: 14.5px;
+    color: var(--muted);
+    max-width: 66ch;
+    margin: 12px 0 0;
+    line-height: 1.5;
+  }
+  .sf { fill: var(--accent); }
+  .ss { stroke: var(--accent); }
+  .svg-tag { font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: 0.08em; }
+  .svg-lbl { font-family: "Saira Condensed", sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .svg-sub { font-family: "IBM Plex Mono", monospace; font-size: 10px; }
+  .svg-edge { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.04em; }
+
+  .flag {
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--warn);
+    background: var(--surface);
+    padding: 18px 20px 4px;
+    margin: 26px 0;
+  }
+  .flag-tag {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--warn);
+    margin: 0 0 8px;
+  }
+  .flag p { max-width: 64ch; margin-bottom: 14px; }
+  .flag.stop { border-left-color: var(--stop); }
+  .flag.stop .flag-tag { color: var(--stop); }
+
+  footer {
+    margin-top: 72px;
+    padding-top: 26px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--f-mono);
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  footer p { max-width: 74ch; margin: 0 0 10px; }
+
+  @media (max-width: 760px) {
+    body { font-size: 16px; }
+    .rail { grid-template-columns: 1fr; }
+    .rail-ticks { display: none; }
+    .rail-body { padding-left: 0; }
+    .mast { padding-top: 48px; }
+    .row { grid-template-columns: 1fr; gap: 8px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <p class="eyebrow">Build proposal &middot; Rev 2 &middot; 26 Aug 2026</p>
+    <h1>The Copper<br>Layer</h1>
+    <p class="standfirst">The system design and integration front end for AV and IT, running on NCE. Take EasySchematic's good ideas, build them <strong>L1-first</strong>, store nothing of your own &mdash; and make the schema, the interchange formats and the verification loop <strong>speak the industry's standards</strong> rather than a private dialect.</p>
+    <p class="meta">
+      <span>Working name: Copper</span>
+      <span>Store: NCE Module 6</span>
+      <span>Schema: NetBox-compatible</span>
+    </p>
+  </header>
+
+  <section>
+    <div class="rail">
+      <div class="rail-ticks"><span style="top:8px"></span><span style="top:30px"></span><span style="top:52px"></span><span style="top:74px"></span><div class="rail-n">01</div></div>
+      <div class="rail-body">
+        <h2>The inversion</h2>
+        <p class="dek">One store, and it is the one you already own</p>
+
+        <p>EasySchematic is signal-flow-first. Its centre of gravity is the drawing: a <code>.json</code> file holding devices, ports, edges, canvas positions and rooms. The cable schedule, the pack list, the rack elevation are all derived paperwork, and an inventory system is at best an export target. That polarity is the whole problem &mdash; export means two stores both claiming to describe one building, reconciled by a human remembering to re-export.</p>
+
+        <p>L1-first fixes the polarity. But the useful move is not to make NetBox the store; it is to notice that <strong>you already have one</strong>. NCE Module 6 owns <code>DEVICE</code>, <code>PORT</code>, <code>SIGNAL_CHAIN</code>, <code>RACK</code> and <code>CABLE</code> as first-class node types, with tenancy, provenance, event replay and an MCP tool registry already around them.</p>
+
+        <div class="pull"><p>Copper has no database. NCE is the store, the drawing is a projection of it, and NetBox is a schema to agree with &mdash; not a system to depend on.</p></div>
+
+        <figure>
+          <div class="figframe">
+            <svg viewBox="0 0 880 316" role="img" aria-label="Comparison of two architectures. In the document-first model a schematic file holds the truth and exports to an inventory, with a dashed hand re-import arrow, producing two stores that drift. In the Copper model NCE Module 6 is the single store, the canvas projects from it and writes back to it, and NetBox sits to one side connected only by one-shot import and export arrows.">
+              <defs>
+                <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+                </marker>
+                <marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" class="sf"/>
+                </marker>
+              </defs>
+
+              <text x="30" y="22" class="svg-tag" fill="currentColor" opacity="0.62">A &middot; DOCUMENT-FIRST (EASYSCHEMATIC)</text>
+              <rect x="30" y="42" width="230" height="52" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <text x="145" y="66" class="svg-lbl" fill="currentColor" text-anchor="middle">Schematic file</text>
+              <text x="145" y="82" class="svg-sub" fill="currentColor" text-anchor="middle" opacity="0.66">holds the truth</text>
+
+              <line x1="96" y1="94" x2="96" y2="190" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/>
+              <text x="88" y="146" class="svg-edge" fill="currentColor" text-anchor="end">exports</text>
+
+              <line x1="196" y1="192" x2="196" y2="96" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+              <text x="206" y="140" class="svg-edge" fill="currentColor">re-import,</text>
+              <text x="206" y="154" class="svg-edge" fill="currentColor">by hand</text>
+
+              <rect x="30" y="192" width="230" height="52" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <text x="145" y="216" class="svg-lbl" fill="currentColor" text-anchor="middle">Inventory</text>
+              <text x="145" y="232" class="svg-sub" fill="currentColor" text-anchor="middle" opacity="0.66">also holds the truth</text>
+
+              <text x="145" y="278" class="svg-tag" fill="currentColor" text-anchor="middle" opacity="0.62">TWO STORES &mdash; DRIFT IS STRUCTURAL</text>
+
+              <line x1="330" y1="14" x2="330" y2="292" stroke="currentColor" stroke-width="1" opacity="0.28"/>
+
+              <text x="370" y="22" class="svg-tag sf">B &middot; COPPER ON NCE</text>
+              <rect x="370" y="42" width="230" height="52" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <text x="485" y="66" class="svg-lbl" fill="currentColor" text-anchor="middle">Canvas</text>
+              <text x="485" y="82" class="svg-sub" fill="currentColor" text-anchor="middle" opacity="0.66">a view, no save file</text>
+
+              <line x1="436" y1="192" x2="436" y2="96" class="ss" stroke-width="1.5" marker-end="url(#ara)"/>
+              <text x="428" y="146" class="svg-edge sf" text-anchor="end">projects</text>
+
+              <line x1="536" y1="94" x2="536" y2="190" class="ss" stroke-width="1.5" marker-end="url(#ara)"/>
+              <text x="546" y="140" class="svg-edge sf">writes</text>
+              <text x="546" y="154" class="svg-edge sf">nodes</text>
+
+              <rect x="370" y="192" width="230" height="52" fill="none" class="ss" stroke-width="2"/>
+              <text x="485" y="216" class="svg-lbl sf" text-anchor="middle">NCE Module 6</text>
+              <text x="485" y="232" class="svg-sub sf" text-anchor="middle">the only store</text>
+
+              <text x="485" y="278" class="svg-tag sf" text-anchor="middle">ONE STORE &mdash; NOTHING TO RECONCILE</text>
+
+              <rect x="700" y="176" width="150" height="84" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 3"/>
+              <text x="775" y="206" class="svg-lbl" fill="currentColor" text-anchor="middle">NetBox</text>
+              <text x="775" y="224" class="svg-sub" fill="currentColor" text-anchor="middle" opacity="0.66">a schema, and</text>
+              <text x="775" y="238" class="svg-sub" fill="currentColor" text-anchor="middle" opacity="0.66">an exit door</text>
+
+              <line x1="604" y1="206" x2="694" y2="206" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/>
+              <line x1="694" y1="230" x2="604" y2="230" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar)"/>
+              <text x="649" y="196" class="svg-edge" fill="currentColor" text-anchor="middle">one-shot</text>
+              <text x="649" y="252" class="svg-edge" fill="currentColor" text-anchor="middle">not a sync</text>
+            </svg>
+          </div>
+          <figcaption>The choice is which arrow you delete. Model A needs a human in the dashed loop forever. Model B has no dashed loop, and the NetBox arrows are migrations that run when someone asks &mdash; never a background mirror, because a mirror is just model A with better manners.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="rail">
+      <div class="rail-ticks"><span style="top:8px"></span><span style="top:30px"></span><span style="top:52px"></span><span style="top:74px"></span><div class="rail-n">02</div></div>
+      <div class="rail-body">
+        <h2>Why agree with NetBox at all</h2>
+        <p class="dek">Two payoffs, one condition</p>
+
+        <p>If NCE is the store, NetBox stops being infrastructure and becomes a <em>convention</em>. That is a much cheaper relationship &mdash; no Postgres-plus-Redis-plus-Django to carry, no plugin API to track, and nothing to install before a customer can use Copper. So why agree with its schema at all? Two reasons, and both are worth real money.</p>
+
+        <div class="panel">
+          <div class="panel-tag">Payoff one &middot; half the device library problem disappears</div>
+          <div class="panel-body">
+            <p><a href="https://github.com/netbox-community/devicetype-library">netbox-community/devicetype-library</a> holds device type definitions for <strong>314 manufacturers</strong> in YAML, licensed <strong>CC0-1.0</strong> &mdash; public domain, no restrictions, commercial use fine. Each one defines exactly what Copper needs: interfaces, front ports, rear ports, console ports, power ports and outlets, module bays, device bays, <code>u_height</code>, <code>is_full_depth</code>, weight, airflow. Consuming it requires only that your port and component model matches NetBox's, which is the whole argument for schema compatibility.</p>
+            <p>But I read the manufacturer list, and <strong>it splits along exactly the AV / IT line</strong>. Strong on the IT side: Cisco, Juniper, Netgear, Ubiquiti, Ruckus, Fortinet, APC, Eaton, Middle Atlantic &mdash; the switch, firewall, UPS, power and rack layer, which is most of the IT half of an AV-over-IP job.</p>
+            <p>Absent: QSC, Extron, Crestron, Biamp, Shure, Sennheiser, Barco, Christie, Lightware, Kramer, Atlona, Symetrix, Powersoft, Genelec, Bose, ETC, Vaddio, Poly, Sony, Panasonic, AJA, Ross, Clear-Com, Audinate. Yamaha, Blackmagic Design and Canon are the only meaningful AV presences in 314.</p>
+            <p>So this is not the free replacement for EasySchematic's 3,884 AV templates. It is the free replacement for the <em>IT</em> catalogue, and the AV catalogue stays a real build item.</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-tag">Which points at the leverage play</div>
+          <div class="panel-body">
+            <p>Author Bravo's AV device types <em>in devicetype-library's own format</em> and contribute them upstream under CC0. The format is already proven, the tooling to consume it already exists, and you get community maintenance on the long tail instead of owning four thousand definitions forever.</p>
+            <p>The ecosystem gets the AV coverage it visibly lacks; Bravo becomes the AV contributor in the NetBox world, which is worth more than a private catalogue and costs less to maintain. The alternative is a proprietary library &mdash; which is precisely the cost this architecture was meant to delete, paid in full.</p>
+            <p>One thing not to do: lift EasySchematic's device definitions. They are part of an AGPL-3.0 work, and the community submissions behind its hosted API have no clear grant at all. Its catalogue is a map of what to cover, not a source to copy.</p>
+          </div>
+        </div>
+
+        <p><strong>Payoff two is the exit door.</strong> A customer who already runs NetBox can import their estate in one shot; a customer who leaves can export theirs. That removes the objection that kills infrastructure tools in procurement &mdash; nobody wants to hand their source of truth to a vendor with no way out. Being schema-compatible answers that without giving up ownership of the store.</p>
+
+        <p>What you should <em>not</em> do is emulate NetBox's REST API so that <code>pynetbox</code> and the Ansible collections work against Copper. Impersonating another product's API faithfully enough for its ecosystem, across its version history, is an unbounded chase for a payoff you will probably never collect. Agree with the schema; publish your own API.</p>
+
+        <div class="flag">
+          <p class="flag-tag">Revision to Rev 1</p>
+          <p>Rev 1 said Copper needs about a fifth of NetBox's model. That was scoped to AV signal flow. <strong>Extending to IT brings more of it back</strong> &mdash; VLANs, prefixes and IP addressing are not optional once you are designing Dante and ST 2110 networks rather than drawing them. Still not circuits or wireless links, but budget for the IPAM core.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="rail">
+      <div class="rail-ticks"><span style="top:8px"></span><span style="top:30px"></span><span style="top:52px"></span><span style="top:74px"></span><div class="rail-n">03</div></div>
+      <div class="rail-body">
+        <h2>Standards, three ways</h2>
+        <p class="dek">The part that makes it an integration tool</p>
+
+        <p>&ldquo;Industry standards compatible&rdquo; is not one requirement. It is three, with different costs, different payoffs, and different owners inside the programme &mdash; and conflating them is how a standards story turns into a logo wall.</p>
+
+        <figure>
+          <div class="figframe">
+            <svg viewBox="0 0 880 384" role="img" aria-label="Copper sits in the centre. Standards enter from three directions: standards it computes against, feeding design-time validation; standards it exchanges through, connecting to BIM, drawings, specifications and NetBox; and standards it observes through, feeding verification from the live network. A reference designation scheme runs underneath all three as a spine.">
+              <defs>
+                <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+                </marker>
+                <marker id="a2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" class="sf"/>
+                </marker>
+              </defs>
+
+              <rect x="330" y="140" width="220" height="86" fill="none" class="ss" stroke-width="2"/>
+              <text x="440" y="176" class="svg-lbl sf" text-anchor="middle">Copper on NCE</text>
+              <text x="440" y="196" class="svg-sub sf" text-anchor="middle">design + integration</text>
+              <text x="440" y="212" class="svg-sub sf" text-anchor="middle">front end</text>
+
+              <rect x="30" y="36" width="240" height="76" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <text x="44" y="60" class="svg-lbl" fill="currentColor">1 &middot; Compute against</text>
+              <text x="44" y="78" class="svg-sub" fill="currentColor" opacity="0.66">AVIXA DISCAS &middot; audio coverage</text>
+              <text x="44" y="94" class="svg-sub" fill="currentColor" opacity="0.66">PoE class &middot; HDCP &middot; channel length</text>
+
+              <rect x="30" y="164" width="240" height="76" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <text x="44" y="188" class="svg-lbl" fill="currentColor">2 &middot; Exchange through</text>
+              <text x="44" y="206" class="svg-sub" fill="currentColor" opacity="0.66">NetBox schema &middot; IFC / COBie</text>
+              <text x="44" y="222" class="svg-sub" fill="currentColor" opacity="0.66">DXF &middot; MasterFormat Div 27</text>
+
+              <rect x="30" y="292" width="240" height="76" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <text x="44" y="316" class="svg-lbl" fill="currentColor">3 &middot; Observe through</text>
+              <text x="44" y="334" class="svg-sub" fill="currentColor" opacity="0.66">LLDP &middot; SNMP &middot; gNMI</text>
+              <text x="44" y="350" class="svg-sub" fill="currentColor" opacity="0.66">NMOS IS-04 / IS-05 &middot; ONVIF</text>
+
+              <polyline points="274,74 302,74 302,158 324,158" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#a2)"/>
+              <text x="312" y="66" class="svg-edge" fill="currentColor">validates the design</text>
+
+              <line x1="274" y1="202" x2="324" y2="188" stroke="currentColor" stroke-width="1.5" marker-end="url(#a2)"/>
+              <text x="282" y="230" class="svg-edge" fill="currentColor">carries it in and out</text>
+
+              <polyline points="274,330 302,330 302,212 324,212" fill="none" class="ss" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#a2a)"/>
+              <text x="312" y="352" class="svg-edge sf">proves it was built</text>
+
+              <rect x="612" y="36" width="238" height="76" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.8"/>
+              <text x="626" y="60" class="svg-lbl" fill="currentColor">Module 6</text>
+              <text x="626" y="78" class="svg-sub" fill="currentColor" opacity="0.66">validate_design_graph</text>
+              <text x="626" y="94" class="svg-sub" fill="currentColor" opacity="0.66">AVIXA parameter table</text>
+
+              <rect x="612" y="164" width="238" height="76" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.8"/>
+              <text x="626" y="188" class="svg-lbl" fill="currentColor">Copper import / export</text>
+              <text x="626" y="206" class="svg-sub" fill="currentColor" opacity="0.66">devicetype-library</text>
+              <text x="626" y="222" class="svg-sub" fill="currentColor" opacity="0.66">D365 functional location</text>
+
+              <rect x="612" y="292" width="238" height="76" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.8"/>
+              <text x="626" y="316" class="svg-lbl" fill="currentColor">Engine 18 / 19</text>
+              <text x="626" y="334" class="svg-sub" fill="currentColor" opacity="0.66">edge capture, RMM health</text>
+              <text x="626" y="350" class="svg-sub" fill="currentColor" opacity="0.66">divergence log</text>
+
+              <line x1="556" y1="158" x2="606" y2="80" stroke="currentColor" stroke-width="1" opacity="0.5" marker-end="url(#a2)"/>
+              <line x1="556" y1="184" x2="606" y2="192" stroke="currentColor" stroke-width="1" opacity="0.5" marker-end="url(#a2)"/>
+              <line x1="556" y1="212" x2="606" y2="322" stroke="currentColor" stroke-width="1" opacity="0.5" marker-end="url(#a2)"/>
+              <text x="700" y="140" class="svg-tag" fill="currentColor" opacity="0.62">ALREADY HAS AN OWNER</text>
+            </svg>
+          </div>
+          <figcaption>Three unrelated jobs that all get filed under &ldquo;standards support&rdquo;. Each one already has a home in the programme, which is why this is a front end rather than a new system.</figcaption>
+        </figure>
+
+        <h3>The spine: one identifier, everywhere</h3>
+        <p>Underneath all three sits the thing that actually makes integration work, and it is the least glamorous item on the page. A device on a drawing, a printed label on a cable, a line on a BOM, an asset in D365, a functional location in the FL hierarchy and an interface in a network capture all have to <strong>refer to the same physical object</strong>. Without a canonical reference designation, none of the compatibility above buys anything, because you cannot join the records.</p>
+        <p>That is a solved problem in adjacent industries &mdash; TIA-606 for telecom infrastructure administration and labelling, AVIXA's cable labelling standard for AV, IEC 81346 for reference designation in general. Adopt one, derive labels from it rather than typing them, and make it the primary key that crosses every boundary. The vendor-neutral naming rule from the D365 work is the same instinct; this generalises it.</p>
+
+        <div class="tw">
+          <table>
+            <caption>The standards that would actually earn their place</caption>
+            <thead><tr><th>Kind</th><th>Standard</th><th>What Copper does with it</th></tr></thead>
+            <tbody>
+              <tr><td class="m">compute</td><td>AVIXA DISCAS (display sizing)</td><td>Sizes a display from viewing distance and content, at design time</td></tr>
+              <tr><td class="m">compute</td><td>AVIXA audio coverage uniformity</td><td>Flags speaker layouts that will not cover the room</td></tr>
+              <tr><td class="m">compute</td><td>IEEE 802.3af / at / bt</td><td>PoE budget per class against switch capacity &mdash; a real, common design error</td></tr>
+              <tr><td class="m">compute</td><td>TIA-568 channel length</td><td>Refuses the 140 m copper run before someone pulls it</td></tr>
+              <tr><td class="m">compute</td><td>HDCP version chain</td><td>Catches the sink that will go black because one hop downgrades</td></tr>
+              <tr><td class="m">compute</td><td>SMPTE ST 2110 bandwidth</td><td>Stream bitrate against link and switch fabric capacity</td></tr>
+              <tr><td class="m">exchange</td><td>NetBox schema + devicetype-library</td><td>The device catalogue, and the import and export doors</td></tr>
+              <tr><td class="m">exchange</td><td>IFC / buildingSMART, COBie</td><td>Coordination with the model in Solibri; handover data to FM</td></tr>
+              <tr><td class="m">exchange</td><td>DXF / DWG</td><td>Plates, elevations and plans the architect can open</td></tr>
+              <tr><td class="m">exchange</td><td>CSI MasterFormat Div 27 / 28</td><td>Specification and BOM classification the contractor expects</td></tr>
+              <tr><td class="m">observe</td><td>LLDP, SNMP, gNMI</td><td>What is really plugged into what &mdash; the L1 and L2 arbiter</td></tr>
+              <tr><td class="m">observe</td><td>AMWA NMOS IS-04 / IS-05</td><td>Registered devices and actual stream connections in an IP media plant</td></tr>
+              <tr><td class="m">observe</td><td>AVIXA performance verification</td><td>Turns commissioning into a checklist the system can hold and sign off</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>That last row is quietly the most valuable. A published verification standard gives the <code>TESTED</code> transition an <em>externally defined meaning</em> &mdash; not &ldquo;the tech ticked a box&rdquo; but &ldquo;these named checks passed, and here is the evidence.&rdquo; That is the difference between a status field and a certificate.</p>
+
+        <p class="dek" style="margin-top:26px">Revision numbers for the AVIXA and TIA documents need confirming against current editions before any of this reaches a spec.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="rail">
+      <div class="rail-ticks"><span style="top:8px"></span><span style="top:30px"></span><span style="top:52px"></span><span style="top:74px"></span><div class="rail-n">04</div></div>
+      <div class="rail-body">
+        <h2>What Copper inherits free</h2>
+        <p class="dek">Because it runs on NCE</p>
+
+        <p>Running on NCE deletes most of what I costed in Rev 1 as &ldquo;build your own store.&rdquo; The comparison worth making is not Copper against EasySchematic; it is Copper against the standalone DCIM you would otherwise have to write underneath it.</p>
+
+        <div class="ledger">
+          <div class="row">
+            <div><span class="chip free">Free</span></div>
+            <div>
+              <h4>The store and the node types</h4>
+              <p>Module 6 already owns <code>DEVICE</code>, <code>PORT</code>, <code>SIGNAL_CHAIN</code>, <code>RACK</code> and <code>CABLE</code>, with an AVIXA-parameter capabilities table underneath and propose-only validation behind <code>validate_design_graph</code>.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div><span class="chip free">Free</span></div>
+            <div>
+              <h4>Tenancy and access control</h4>
+              <p>Namespaces and row-level security, already built and already load-bearing. Note the standing rule: scope every fetch explicitly by namespace rather than trusting RLS, because the owner pool bypasses it.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div><span class="chip free">Free</span></div>
+            <div>
+              <h4>The audit trail</h4>
+              <p>Event types and replay. Design changes become events, so the change log that a DCIM has to build from scratch is a consequence of the architecture rather than a feature.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div><span class="chip free">Free</span></div>
+            <div>
+              <h4>The API, and the agent surface with it</h4>
+              <p>The MCP tool registry with its cacheable, mutation and admin classification. Rev 1 argued for making the agent surface primary rather than a bolted-on beta; on NCE that is not a decision, it is the default. The canvas becomes one client among several.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div><span class="chip free">Free</span></div>
+            <div>
+              <h4>Provenance and reconciliation</h4>
+              <p>Citations on answers, and the resolve and registry machinery for matching an external identifier to a node. Copper needs exactly this to reconcile a captured device against a drawn one.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div><span class="chip keep">Build</span></div>
+            <div>
+              <h4>Cable path tracing</h4>
+              <p>Walking a signal through front and rear port chains and passthrough hops, answering where it ends up and whether the path is complete. The one genuinely hard algorithm, the most important query the tool makes, and not something NCE has today.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div><span class="chip keep">Build</span></div>
+            <div>
+              <h4>The physical validation body</h4>
+              <p>A 2U device does not fit a 1U gap; a cable does not terminate on an occupied port. Individually trivial, collectively large, and the whole difference between a DCIM and a drawing toy.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div><span class="chip keep">Build</span></div>
+            <div>
+              <h4>The canvas and the routing engine</h4>
+              <p>Including trunk nesting, which is the long pole and stays the long pole under every option on the table.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="rail">
+      <div class="rail-ticks"><span style="top:8px"></span><span style="top:30px"></span><span style="top:52px"></span><span style="top:74px"></span><div class="rail-n">05</div></div>
+      <div class="rail-body">
+        <h2>The loop this closes</h2>
+        <p class="dek">The reason to build rather than buy</p>
+
+        <p>Of the five open-ended quote origination paths, one is literally <strong>design-generated</strong> &mdash; and it currently has no producer. A drawn design emitting <code>BOM_LINE</code>s with per-line provenance is not a feature request, it is a path with nothing feeding it. Because provenance is per line rather than per quote, a mixed quote of drawn devices plus manually picked accessories plus a package expansion stays correctly attributed.</p>
+
+        <p>At the other end, the <code>BOM_LINE</code> status machine runs <code>ORDERED</code> to <code>DELIVERED</code> to <code>INSTALLED</code> to <code>TESTED</code>. Per my notes only <code>DELIVERED</code> ever got a writer wave. <code>INSTALLED</code> and <code>TESTED</code> are exactly the moment a drawing becomes an as-built &mdash; and with a verification standard behind it, <code>TESTED</code> stops being a checkbox and becomes evidence.</p>
+
+        <figure>
+          <div class="figframe">
+            <svg viewBox="0 0 880 268" role="img" aria-label="A six-stage loop. Draw in Copper, emit BOM lines in NCE Module 8, order via Module 1, install and test via Module 7 against a verification standard, hold the as-built in Module 6, and verify by capture in Engine 18. A dashed return arrow labelled divergence reopens the design.">
+              <defs>
+                <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="currentColor"/>
+                </marker>
+                <marker id="a3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" class="sf"/>
+                </marker>
+              </defs>
+
+              <text x="8" y="26" class="svg-tag" fill="currentColor" opacity="0.62">EVERY STAGE ALREADY HAS AN OWNER &mdash; ONLY THE FIRST BOX IS MISSING</text>
+
+              <rect x="8" y="52" width="124" height="72" fill="none" class="ss" stroke-width="2"/>
+              <text x="70" y="82" class="svg-lbl sf" text-anchor="middle">Draw</text>
+              <text x="70" y="102" class="svg-sub sf" text-anchor="middle">Copper</text>
+
+              <line x1="136" y1="88" x2="166" y2="88" stroke="currentColor" stroke-width="1.5" marker-end="url(#a3)"/>
+
+              <rect x="172" y="52" width="124" height="72" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <text x="234" y="82" class="svg-lbl" fill="currentColor" text-anchor="middle">BOM lines</text>
+              <text x="234" y="102" class="svg-sub" fill="currentColor" text-anchor="middle" opacity="0.66">NCE M8</text>
+
+              <line x1="300" y1="88" x2="330" y2="88" stroke="currentColor" stroke-width="1.5" marker-end="url(#a3)"/>
+
+              <rect x="336" y="52" width="124" height="72" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <text x="398" y="82" class="svg-lbl" fill="currentColor" text-anchor="middle">Order</text>
+              <text x="398" y="102" class="svg-sub" fill="currentColor" text-anchor="middle" opacity="0.66">NCE M1</text>
+
+              <line x1="464" y1="88" x2="494" y2="88" stroke="currentColor" stroke-width="1.5" marker-end="url(#a3)"/>
+
+              <rect x="500" y="52" width="124" height="72" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <text x="562" y="76" class="svg-lbl" fill="currentColor" text-anchor="middle">Verify + sign</text>
+              <text x="562" y="94" class="svg-sub" fill="currentColor" text-anchor="middle" opacity="0.66">NCE M7 gate</text>
+              <text x="562" y="110" class="svg-sub" fill="currentColor" text-anchor="middle" opacity="0.66">INSTALLED / TESTED</text>
+
+              <line x1="628" y1="88" x2="658" y2="88" stroke="currentColor" stroke-width="1.5" marker-end="url(#a3)"/>
+
+              <rect x="664" y="52" width="104" height="72" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <text x="716" y="82" class="svg-lbl" fill="currentColor" text-anchor="middle">As-built</text>
+              <text x="716" y="102" class="svg-sub" fill="currentColor" text-anchor="middle" opacity="0.66">NCE M6</text>
+
+              <line x1="772" y1="88" x2="798" y2="88" stroke="currentColor" stroke-width="1.5" marker-end="url(#a3)"/>
+
+              <rect x="804" y="52" width="68" height="72" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <text x="838" y="82" class="svg-lbl" fill="currentColor" text-anchor="middle">Capture</text>
+              <text x="838" y="102" class="svg-sub" fill="currentColor" text-anchor="middle" opacity="0.66">Eng 18</text>
+
+              <polyline points="838,124 838,186 70,186 70,128" fill="none" class="ss" stroke-width="1.5" stroke-dasharray="5 3" marker-end="url(#a3a)"/>
+              <text x="454" y="210" class="svg-edge sf" text-anchor="middle">divergence reopens the design</text>
+            </svg>
+          </div>
+          <figcaption>EasySchematic owns box one and stops. NCE owns boxes two to five with nothing feeding them. The dashed return &mdash; capture disagreeing with the drawing &mdash; is what makes this a system rather than a pipeline, and it is the thing no drawing tool on the market can do.</figcaption>
+        </figure>
+
+        <p>Two smaller hooks worth naming. <strong>Engine 19 puts state on the drawing</strong> &mdash; RMM health against the same device nodes means a signal chain that greys out at the fault, which is a support tool rather than a picture. And <strong>the D365 functional location work gets simpler</strong>: its v2 schema concluded that columns cannot carry topology because ports and edges need their own row types. Going node-native dissolves that. You stop shipping a ten-sheet workbook and import to objects, with the FL hierarchy landing as site and location.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="rail">
+      <div class="rail-ticks"><span style="top:8px"></span><span style="top:30px"></span><span style="top:52px"></span><span style="top:74px"></span><div class="rail-n">06</div></div>
+      <div class="rail-body">
+        <h2>The four hard problems</h2>
+        <p class="dek">Where this actually gets difficult</p>
+
+        <h3>1 &middot; Which Module 6 tools actually write</h3>
+        <p>This is the first thing to check, and it may be the whole first wave. My notes say Module 6's last wave added <em>no</em> tools because its work was flow-invoked, and that its five validation queries are <strong>propose-only</strong>. If that is still true, Module 6 has node types, a schema and validation but no write surface for <code>DEVICE</code>, <code>PORT</code> or <code>CABLE</code> &mdash; and Copper cannot persist a single dragged device until someone writes those tools.</p>
+        <p>The programme's own rule applies here with force: never design against a seam that is planned rather than wired. Verify the tool surface before anything else, because the answer changes the first month of work entirely.</p>
+
+        <h3>2 &middot; Design intent versus record</h3>
+        <p>NCE records what is. AV design is about what will be &mdash; half-finished, speculative, three competing options for the same rack. Copper needs a draft concept, and now it needs it inside NCE rather than in a document. Options are a status on the node, a separate draft namespace promoted on commit, or draft-scoped nodes; the honest answer is that whoever owns the merge semantics owns the hard part, and it should be decided before the first write lands rather than after.</p>
+        <p>Worth noting that this is the one thing EasySchematic gets free by being a document, and the one place the document model is genuinely better.</p>
+
+        <h3>3 &middot; Signal type has no home in the NetBox schema</h3>
+        <p>EasySchematic carries 73 signal types and colour-codes every edge by them. NetBox's vocabulary is Ethernet-centric &mdash; rich for networking media, thin for everything else &mdash; and a large share of AV is not an interface at all: analog audio, DMX, speaker line, contact closure, intercom. Front and rear ports cover some of it generically.</p>
+        <p>So signal type is an extension you own, sitting alongside the compatible schema rather than inside it, plus the compatibility matrix that drives adapter insertion. Unavoidable, and also the single most valuable thing Copper would own, because nobody else models AV signal semantics on top of a source of truth.</p>
+
+        <h3>4 &middot; The schedule, not the software</h3>
+        <p>NCE has a long wave queue and a documented habit of waves that ratify their own shortfalls. Copper is a large new surface on a system that is still mid-build, and the realistic risk is not that it is technically wrong but that it sits behind ninety other things and lands half-wired. Sizing it as a side project only works if it is scoped as a genuinely thin front end over seams that already exist &mdash; which is exactly what problem one determines.</p>
+
+        <div class="flag">
+          <p class="flag-tag">Licence hygiene</p>
+          <p>EasySchematic is <strong>AGPL-3.0</strong>. Architecture and approach are not copyrightable; its routing implementation is. Read it to understand trunk nesting, then write your own, and do not paste &mdash; AGPL section 13 would oblige you to offer source to every user reaching a Bravo-facing service over a network.</p>
+          <p>devicetype-library is <strong>CC0-1.0</strong>, so the catalogue is genuinely free to use. NetBox core is Apache 2.0. And <strong>netbox-branching is PolyForm Shield 1.0.0</strong> &mdash; not open source, and it forbids competing with the licensor. Not a dependency under this architecture, which is one more reason the architecture is better.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="rail">
+      <div class="rail-ticks"><span style="top:8px"></span><span style="top:30px"></span><span style="top:52px"></span><div class="rail-n">07</div></div>
+      <div class="rail-body">
+        <h2>Where to start, and what would make me wrong</h2>
+        <p class="dek">Ordered by what unblocks what</p>
+
+        <ul>
+          <li><strong>Audit the Module 6 write surface.</strong> Not a build step &mdash; a two-hour read that determines everything after it. Which of the five node types have mutation tools, and is <code>validate_design_graph</code> still propose-only?</li>
+          <li><strong>Import devicetype-library.</strong> The catalogue before the canvas &mdash; it proves the schema decision cheaply and is useful the moment it lands. Expect it to cover the IT layer and almost none of the AV layer.</li>
+          <li><strong>Then author the AV catalogue in the same format</strong>, starting with the brands Bravo actually specifies, and contribute it upstream. This is the largest unglamorous work item on the list and the easiest one to under-plan.</li>
+          <li><strong>Read-only projection of one site.</strong> Laid out automatically from real nodes, with a cable schedule out. No writes, no drafts. Immediately useful on the Veidekke core stack, and the cheapest possible way to discover the premise is wrong.</li>
+          <li><strong>Then the signal-type extension</strong>, because colour coding, validation, adapters and AV-meaningful paperwork all depend on it and nothing depends on them.</li>
+          <li><strong>Then drafts and the first writes</strong>, blocked on the decision in 06.2 &mdash; so make that decision before you need it.</li>
+          <li><strong>Then <code>BOM_LINE</code> emission</strong>, which is what turns a drawing tool into part of the business.</li>
+          <li><strong>Routing quality is a continuous track, not a milestone.</strong> Naive orthogonal routing ships; trunk nesting is where drawings start looking professional. Budget it as ongoing.</li>
+        </ul>
+
+        <p>What would make this wrong: the L1-first premise rests on the gear being modellable as nodes and ports. If a large share of what Bravo actually draws is non-rack, non-networked, one-off kit &mdash; loose speakers, trim plates, furniture-mounted plates, runs with no endpoint device &mdash; then you spend your time fighting the object model instead of benefiting from it, and a document-first tool with an exporter starts looking reasonable again. Sampling a few real projects settles that cheaply, and so does the read-only projection step.</p>
+
+        <p>Two smaller unknowns: whether the front and rear port model survives contact with real AV patch fields at scale, and how much routing quality is reachable before it stops being worth the effort. Neither is answerable from here.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Verified this session against the EasySchematic v0.43.0 source at C:\Claude\EasySchematic &mdash; the routing and patch-bay internals, the template and port type definitions, the 26-tool MCP bridge, the 7.96 MB library endpoint and its intermittent Cloudflare Worker CPU failures, and the absence of any NetBox reference anywhere in the codebase. The devicetype-library manufacturer list (314 directories, queried via the GitHub API), its CC0 licence, and the netbox-branching PolyForm Shield licence were read from their repositories.</p>
+    <p>NCE specifics &mdash; Module 6 node ownership and tool surface, the BOM_LINE writer-wave gap, the five quote origination paths, Engine 18 and 19 scope, the RLS owner-pool caveat &mdash; come from working notes rather than a fresh read of main, and section 06.1 exists because the most important of them is the least certain. Re-verify against the current tree before any of this becomes a build decision. AVIXA and TIA document revisions are unconfirmed.</p>
+  </footer>
+
+</div>

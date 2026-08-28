@@ -127,7 +127,7 @@ describe('CanvasView & DeviceNode (Batch 022 P.Wave 4)', () => {
       expect(html).toContain('AC Main');
       expect(html).toContain('Aux Out');
 
-      // Verify dual handles (both left/target and right/source handles present for each port)
+      // Verify dual handles (both left/source and right/target handles present for each port)
       const ports = getDevicePorts(sampleDevice);
       for (const port of ports) {
         expect(html).toContain(`data-handleid="${port.id}"`);
@@ -135,9 +135,9 @@ describe('CanvasView & DeviceNode (Batch 022 P.Wave 4)', () => {
         expect(html).toContain('react-flow__handle-right');
       }
 
-      // Check target handle attributes
-      expect(html).toContain('data-handlepos="left"');
       // Check source handle attributes
+      expect(html).toContain('data-handlepos="left"');
+      // Check target handle attributes
       expect(html).toContain('data-handlepos="right"');
     });
   });

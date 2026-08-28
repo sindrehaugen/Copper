@@ -190,7 +190,7 @@ export function DeviceNode({ data }: NodeProps<DeviceNodeType>): JSX.Element {
               data-port-kind={port.kind}
             >
               <Handle
-                type="target"
+                type="source"
                 position={Position.Left}
                 id={port.id}
                 style={{ top: '50%', transform: 'translateY(-50%)' }}
@@ -200,7 +200,7 @@ export function DeviceNode({ data }: NodeProps<DeviceNodeType>): JSX.Element {
               </span>
               <span style={portKindBadgeStyle}>{port.kind}</span>
               <Handle
-                type="source"
+                type="target"
                 position={Position.Right}
                 id={port.id}
                 style={{ top: '50%', transform: 'translateY(-50%)' }}

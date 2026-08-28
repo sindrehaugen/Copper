@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 // @ts-nocheck
-const fixtureGymmen  = {} as any;
-const fixtureStudio  = {} as any;
-const fixtureAuditorium  = {} as any;
+const fixtureGymmen  = {} as unknown;
+const fixtureStudio  = {} as unknown;
+const fixtureAuditorium  = {} as unknown;
 import { readEasySchematic } from '../exchange/easyschematic/read';
 import { toFlow } from './toFlow';
 import { applyElkLayout } from './layout';

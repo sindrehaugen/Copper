@@ -88,7 +88,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 * [WAITING TAG] B19 — P.W1 bff-scaffold: `bff/` Hono TS server; config seams (`NCE_BASE_URL`, `NCE_API_KEY` via env/file — key class + blast radius per the seam audit; dev-identity seam per ADR-0011), `/healthz`, session stub (replaced by B75) · tier: T2 · dep: B1 [NO TAG]
 * [LOCKED] B20 — P.W2 bff-nce-client: HMAC client (`X-NCE-Timestamp` + canonical `METHOD\nPATH\nTIMESTAMP[\nSHA256(body)]` — **verify query-string canonicalization against NCE's middleware; the topology GET carries params**) + typed zod-parsed calls to the B12/B14-scope routes; `-32005` (governance-disabled) surfaced as distinct state · tier: T2 · dep: B12,B19 [NO TAG]
-* [RUNNING] B21 — P.W3 to-flow: pure `toFlow(document, layout)` projection (PORT-list port), `initialWidth/Height` seeding (steps-ai ADR 0021 trap) · tier: T2 · dep: B3,B4b [NO TAG]
+* [WAITING TAG] B21 — P.W3 to-flow: pure `toFlow(document, layout)` projection (PORT-list port), `initialWidth/Height` seeding (steps-ai ADR 0021 trap) · tier: T2 · dep: B3,B4b [NO TAG]
 * [LOCKED] B22 — P.W4 canvas-readonly: React Flow canvas; device cards with port rows, dual source+target handles per port, measure-on-mount · tier: T2 · dep: B21 [NO TAG]
 * [LOCKED] B23 — P.W5 elk-layout: elkjs layered auto-layout for unpositioned designs (technique-level reuse, own code) · tier: T2 · dep: B21 [NO TAG]
 * [LOCKED] B24 — P.W6 naive-edges: orthogonal-naive cable paths (no router; Q lane replaces) · tier: T2 · dep: B22 [NO TAG]

@@ -57,7 +57,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 ### Lane K — Catalog (devicetype-library + Bravo AV types, CC0)
 
-* [LOCKED] B7 — K.W1 dtl-vendor: vendor devicetype-library subset + sync script · tier: T1 · dep: B1 [NO TAG]
+* [DONE] B7 — K.W1 dtl-vendor: vendor devicetype-library subset + sync script · tier: T1 · dep: B1 [NO TAG]
   · Files: `catalog/devicetype-library/**` (vendored subset: Cisco, Netgear, Ubiquiti, APC, Eaton, Middle Atlantic, Yamaha, Blackmagic), `catalog/scripts/sync-dtl.mjs`, `catalog/README.md` (CC0 provenance note) · Goal: reproducible vendoring pinned to an upstream SHA · Accept: sync script idempotent; provenance recorded.
 * [LOCKED] B8 — K.W2 dtl-parser: YAML → DeviceType parser · tier: T2 · dep: B4b,B7 [NO TAG]
   · Files: `catalog/src/parse.ts` + tests · Goal: parse interfaces/front-ports/rear-ports/console/power/module-bays/u_height/is_full_depth/weight/airflow into B4 DeviceType; unknown keys surfaced, not swallowed · Accept: 5 named real files parse with hand-checked assertions; malformed YAML RED.
@@ -89,8 +89,8 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 * [WAITING TAG] B19 — P.W1 bff-scaffold: `bff/` Hono TS server; config seams (`NCE_BASE_URL`, `NCE_API_KEY` via env/file — key class + blast radius per the seam audit; dev-identity seam per ADR-0011), `/healthz`, session stub (replaced by B75) · tier: T2 · dep: B1 [NO TAG]
 * [LOCKED] B20 — P.W2 bff-nce-client: HMAC client (`X-NCE-Timestamp` + canonical `METHOD\nPATH\nTIMESTAMP[\nSHA256(body)]` — **verify query-string canonicalization against NCE's middleware; the topology GET carries params**) + typed zod-parsed calls to the B12/B14-scope routes; `-32005` (governance-disabled) surfaced as distinct state · tier: T2 · dep: B12,B19 [NO TAG]
 * [RUNNING] B21 — P.W3 to-flow: pure `toFlow(document, layout)` projection (PORT-list port), `initialWidth/Height` seeding (steps-ai ADR 0021 trap) · tier: T2 · dep: B3,B4b [NO TAG]
-* [LOCKED] B22 — P.W4 canvas-readonly: React Flow canvas; device cards with port rows, dual source+target handles per port, measure-on-mount · tier: T2 · dep: B21 [NO TAG]
-* [LOCKED] B23 — P.W5 elk-layout: elkjs layered auto-layout for unpositioned designs (technique-level reuse, own code) · tier: T2 · dep: B21 [NO TAG]
+* [RUNNING] B22 — P.W4 canvas-readonly: React Flow canvas; device cards with port rows, dual source+target handles per port, measure-on-mount · tier: T2 · dep: B21 [NO TAG]
+* [RUNNING] B23 — P.W5 elk-layout: elkjs layered auto-layout for unpositioned designs (technique-level reuse, own code) · tier: T2 · dep: B21 [NO TAG]
 * [LOCKED] B24 — P.W6 naive-edges: orthogonal-naive cable paths (no router; Q lane replaces) · tier: T2 · dep: B22 [NO TAG]
 * [LOCKED] B25 — P.W7 cable-schedule: schedule view + CSV export from the same document · tier: T2 · dep: B20,B4b [NO TAG]
 * [LOCKED] B26 — P.W8 veidekke-proof 🛑→HS-3: seed local NCE with the Veidekke core stack (source: `Documents\Veidekke-AV-Core` files + as-built sheets) via the B13-scope author tool, render read-only via B20–B24, cable schedule out; orchestrator runs the live stack itself · tier: T2 (run-it wave) · dep: B13,B20,B22,B23,B24,B25,B76 [NO TAG]
@@ -163,7 +163,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 ### Lane W — CAD/BIM workflows (plugins are ordinary API clients)
 
-* [LOCKED] B61 — W.W1 cad-recon: verify, with sources, the actual exchange surfaces: Vectorworks plugin runtime (embedded Python/VectorScript/SDK), ConnectCAD device+circuit import/export formats, Revit IFC/Dynamo entry points, SketchUp import formats (glTF/DAE) — findings → `docs/cad_interop.md` · tier: T2 (research feeding a funding one-way door: fresh-session verification pass over the cited sources before HS-7) · dep: — [NO TAG]
+* [DONE] B61 — W.W1 cad-recon: verify, with sources, the actual exchange surfaces: Vectorworks plugin runtime (embedded Python/VectorScript/SDK), ConnectCAD device+circuit import/export formats, Revit IFC/Dynamo entry points, SketchUp import formats (glTF/DAE) — findings → `docs/cad_interop.md` · tier: T2 (research feeding a funding one-way door: fresh-session verification pass over the cited sources before HS-7) · dep: — [NO TAG]
 * [HOLD-HS7] B62 — W.W2 ifc-cobie-export: IFC (+COBie sheet) carrying reference designations (ADR-0004 decided first) · tier: T2 · dep: B44 [NO TAG]
 * [HOLD-HS7] B63 — W.W3 vw-plugin-mvp: Vectorworks plugin (embedded Python) pulling device/cable/rack schedules from the BFF API into the drawing · tier: T3 · dep: B61,B20 [NO TAG]
 * [HOLD-HS7] B64 — W.W4 connectcad-mapping: schema map ConnectCAD device/circuit ↔ Copper model (the NetBox treatment); one-shot circuit import · tier: T2 · dep: B61 [NO TAG]

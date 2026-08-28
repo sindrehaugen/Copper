@@ -1,14 +1,17 @@
+// app/src/ui/settings/SettingsPanel.tsx
 import React from 'react';
 import { useLocale } from '../../locale/context';
+import { useTranslation } from 'react-i18next';
 
 export const SettingsPanel: React.FC = () => {
   const { language, region, timezone, setLanguage, setRegion, setTimezone } = useLocale();
+  const { t } = useTranslation();
 
   return (
     <div>
-      <h2>Settings</h2>
+      <h2>{t('settings.title', 'Settings')}</h2>
       <div>
-        <label>Language:</label>
+        <label>{t('settings.language', 'Language:')}</label>
         <input 
           data-testid="language-input"
           value={language} 
@@ -16,7 +19,7 @@ export const SettingsPanel: React.FC = () => {
         />
       </div>
       <div>
-        <label>Region:</label>
+        <label>{t('settings.region', 'Region:')}</label>
         <input 
           data-testid="region-input"
           value={region} 
@@ -24,7 +27,7 @@ export const SettingsPanel: React.FC = () => {
         />
       </div>
       <div>
-        <label>Timezone:</label>
+        <label>{t('settings.timezone', 'Timezone:')}</label>
         <input 
           data-testid="timezone-input"
           value={timezone} 

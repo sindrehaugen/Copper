@@ -9,6 +9,8 @@ import { applyElkLayout } from './layout';
 import { enhanceEdges, DEFAULT_EDGE_STYLE, DEFAULT_EDGE_TYPE } from './edges';
 import { DesignDocumentSchema } from '../model/schema';
 import { CARD_WIDTH } from '../model/geometry';
+
+/**
  * Batch 025 — P.W7 the-premise-proof
  * ============================================================================
  * End-to-end integration test proving the core premise:

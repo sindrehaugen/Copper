@@ -20,7 +20,7 @@ const POE_CLASSES: Record<number, number> = {
 
 function extractClassFromText(text: string): number | undefined {
   const match = text.match(/Class\s*([1-8])/i);
-  if (match) {
+  if (match && match[1]) {
     return parseInt(match[1], 10);
   }
   return undefined;
@@ -77,7 +77,7 @@ export function validatePoEBudget(
   switchDevice: Device,
   connectedDevices: Device[],
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  cables: Cable[]
+  _cables: Cable[]
 ): PoEBudgetResult {
   const errors: string[] = [];
   let totalDrawWatts = 0;

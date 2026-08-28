@@ -1,25 +1,25 @@
-# Batch 069 - U.Wave 2 - `a11y-ratchets`
+# Batch 069 - U.W2: A11y Ratchets
+## Context
+We need to enforce accessibility (a11y) baselines across the app shell and future components. We will add eslint-plugin-jsx-a11y rules, axe smoke tests against the shell, and a keyboard-operability harness. We will also update the acceptance gate in the prompt template to explicitly require EN 301 549/WCAG 2.1 AA compliance.
 
-> **FRESH SESSION REQUIRED.** Fully self-contained brief; one wave = one session = one branch = one commit = one TAG.
-> **Engine class:** Flash (Gemini Flash 3.7 High, turbo). Unwritten design decision -> STOP and report.
+## Files:
+eslint.config.js
+app/src/ui/shell/Shell.test.tsx
+package.json
+orchestration/protocols/_TEMPLATE.md
 
-Rules 1-11: as in `orchestration/_TEMPLATE.md`, verbatim. Branch: `cu-b069-u-w2-a11y-ratchets`.
+## Rules
+1. **Scope:** ONLY the listed files.
+2. **IP Firewall:** Absolutely NO EasySchematic paths or Norwegian words.
 
-**Skills:** web-accessibility, vitest
-**Depends on:** B68b
-**Reads (context, do not edit):** `app/src/shell/layout.tsx`
-**Files (exactly these):** `app/package.json`, `pnpm-lock.yaml`, `orchestration/_TEMPLATE.md`, `app/src/shell/a11y.test.tsx` (new), `eslint.config.js` (or existing eslint config)
-**Goal:** Introduce strict a11y ratchets: eslint-plugin-jsx-a11y + Axe smoke test against the shell layout. Add the EN 301 549/WCAG 2.1 AA acceptance requirement into the master template. We will defer full Playwright axe smoke to B78, so use `vitest` + `jsdom` + `@axe-core/react` (or `axe-core`) here for the unit test.
+## Steps
+1. In `package.json`, add `eslint-plugin-jsx-a11y` and `@axe-core/react` to `devDependencies` if not present.
+2. In `eslint.config.js`, configure `jsx-a11y` recommended rules.
+3. In `app/src/ui/shell/Shell.test.tsx`, add an axe test to ensure the Shell component has no a11y violations. Also add a basic keyboard operability test (e.g. tabbing through interactive elements).
+4. In `orchestration/protocols/_TEMPLATE.md`, update rule 5 (Acceptance gate) to state: "Code must comply with EN 301 549 / WCAG 2.1 AA standards for accessibility."
 
-**Steps:**
-1. Install `eslint-plugin-jsx-a11y` and configure it in the `app/` ESLint setup to error on violations.
-2. Install `axe-core` and `@axe-core/react` (if useful) or `vitest-axe` as devDependencies.
-3. Write `app/src/shell/a11y.test.tsx` which renders `layout.tsx` (mocking contexts if needed) and runs `axe` to ensure zero violations.
-4. Edit `orchestration/_TEMPLATE.md` rule 5 (Acceptance Gate) to explicitly include: "Must pass WCAG 2.1 AA / EN 301 549 criteria via automated axe checks and keyboard operability."
-5. Gate; commit.
+## Acceptance
+`pnpm install && pnpm lint && pnpm typecheck && pnpm vitest run app/src/ui/shell/Shell.test.tsx`
 
-**Acceptance:** ESLint throws on a11y violations (verify via scratch edit), axe test passes.
-
-**§6.4 mutation table:** (1) remove an `aria-label` or add an inaccessible image to `layout.tsx`, fail the axe test.
-
-## Final: as `orchestration/_TEMPLATE.md` §Final.
+## Final
+Return a summary of what you did. Include your §6.4 mutation test results (e.g., mutate a `tabIndex` or aria label to break the test).

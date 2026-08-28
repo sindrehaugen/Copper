@@ -59,8 +59,10 @@
  */
 
 import { describe, expect, it } from 'vitest';
-// @ts-expect-error`nimport fixtureGymmen from '../../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json';
-// @ts-expect-error`nimport fixtureStudio from '../../../tests/fixtures/av-fasit/AV_H3B19.easyschematic.json';
+// @ts-expect-error
+import fixtureGymmen from '../../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json';
+// @ts-expect-error
+import fixtureStudio from '../../../tests/fixtures/av-fasit/AV_H3B19.easyschematic.json';
 import { readEasySchematic } from './read';
 import { DesignDocumentSchema } from '../../model/schema';
 

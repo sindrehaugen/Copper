@@ -1,0 +1,7 @@
+packages:
+  - "app"
+  - "bff"
+  - "catalog"
+  - "rig"
+allowBuilds:
+  esbuild: true

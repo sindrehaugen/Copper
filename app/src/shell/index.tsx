@@ -1,10 +1,19 @@
-import { ReactNode } from 'react';
+import { ReactNode, createContext, useContext } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ErrorState } from './error-state';
 
+// Placeholder Context for Session/Tenancy
+interface SessionContextType {
+  tenantId: string;
+  userId: string;
+}
+
+const SessionContext = createContext<SessionContextType | null>(null);
+
 function Layout({ children }: { children: ReactNode }) {
   const { t } = useTranslation();
+  const session = useContext(SessionContext);
 
   return (
     <div className="app-layout">
@@ -22,6 +31,9 @@ function Layout({ children }: { children: ReactNode }) {
             </li>
           </ul>
         </nav>
+        <div className="session-info">
+          Tenant: {session?.tenantId} | User: {session?.userId}
+        </div>
       </header>
       <main>
         {children}
@@ -36,16 +48,20 @@ function Home() {
 }
 
 export function AppShell() {
+  const placeholderSession = { tenantId: 'tenant-1', userId: 'user-1' };
+
   return (
-    <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<div>Dashboard</div>} />
-          <Route path="/settings" element={<div>Settings</div>} />
-          <Route path="*" element={<ErrorState error={{ code: -32005 }} />} />
-        </Routes>
-      </Layout>
-    </BrowserRouter>
+    <SessionContext.Provider value={placeholderSession}>
+      <BrowserRouter>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<div>Dashboard</div>} />
+            <Route path="/settings" element={<div>Settings</div>} />
+            <Route path="*" element={<ErrorState error={{ code: -32005 }} />} />
+          </Routes>
+        </Layout>
+      </BrowserRouter>
+    </SessionContext.Provider>
   );
 }

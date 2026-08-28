@@ -1,6 +1,7 @@
 /**
  * @vitest-environment jsdom
  */
+import React from 'react';
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 
@@ -9,7 +10,7 @@ import '../locales/i18n';
 
 describe('AppShell', () => {
   it('renders the layout and navigation with correct translations', async () => {
-    render(<AppShell />);
+    render(React.createElement(AppShell));
     
     // Check if navigation home is rendered
     // The translation key is 'nav.home' -> 'Hjem' (in nb-NO which is default)

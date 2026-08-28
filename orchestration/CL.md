@@ -118,10 +118,10 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 ### Lane V — Validators (one standard = one microwave; client advisory now, NS server mirrors later)
 
 * [PASSED TAG] B36 — V.W1 poe-budget: IEEE 802.3 af/at/bt class budget vs switch capacity · tier: T2 · dep: B30 [NO TAG]
-* [LOCKED] B37 — V.W2 channel-length: EN 50173 / NEK 700 channel limits (TIA-568 as compatibility secondary; divergences documented — ADR-0008 §4) — refuses the 140 m run · tier: T2 · dep: B29 [NO TAG]
+* [RUNNING] B37 — V.W2 channel-length: EN 50173 / NEK 700 channel limits (TIA-568 as compatibility secondary; divergences documented — ADR-0008 §4) — refuses the 140 m run · tier: T2 · dep: B29 [NO TAG]
 * [LOCKED] B38 — V.W3 rack-fit: u_height vs gap, is_full_depth collisions · tier: T2 · dep: B41 (transitively held via B41→B15 `[HOLD-ML]`) [NO TAG]
 * [LOCKED] B39 — V.W4 port-occupancy: no second cable on an occupied termination · tier: T2 · dep: B33 (transitively held via B33 `[HOLD-HS3]`) [NO TAG]
-* [LOCKED] B40 — V.W5 hdcp-chain: version-chain downgrade detection · tier: T2 · dep: B29 [NO TAG]
+* [RUNNING] B40 — V.W5 hdcp-chain: version-chain downgrade detection · tier: T2 · dep: B29 [NO TAG]
 
 ### Lane R — Racks & rooms
 

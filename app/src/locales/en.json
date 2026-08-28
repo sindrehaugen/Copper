@@ -1,0 +1,16 @@
+{
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "settings": "Settings"
+  },
+  "common": {
+    "loading": "Loading...",
+    "empty": "No data available",
+    "error": "An error occurred",
+    "retry": "Retry"
+  },
+  "errors": {
+    "-32005": "Server error (-32005): Method not found or unavailable."
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "nav": {
+    "home": "Hjem",
+    "dashboard": "Oversikt",
+    "settings": "Innstillinger"
+  },
+  "common": {
+    "loading": "Laster...",
+    "empty": "Ingen data tilgjengelig",
+    "error": "Det oppsto en feil",
+    "retry": "Prøv igjen"
+  },
+  "errors": {
+    "-32005": "Serverfeil (-32005): Metoden ble ikke funnet eller er ikke tilgjengelig."
+  }
+}

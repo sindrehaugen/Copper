@@ -89,9 +89,9 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 * [PASSED TAG] B19 — P.W1 bff-scaffold: `bff/` Hono TS server; config seams (`NCE_BASE_URL`, `NCE_API_KEY` via env/file — key class + blast radius per the seam audit; dev-identity seam per ADR-0011), `/healthz`, session stub (replaced by B75) · tier: T2 · dep: B1 [NO TAG]
 * [LOCKED] B20 — P.W2 bff-nce-client: HMAC client (`X-NCE-Timestamp` + canonical `METHOD\nPATH\nTIMESTAMP[\nSHA256(body)]` — **verify query-string canonicalization against NCE's middleware; the topology GET carries params**) + typed zod-parsed calls to the B12/B14-scope routes; `-32005` (governance-disabled) surfaced as distinct state · tier: T2 · dep: B12,B19 [NO TAG]
 * [RUNNING] B21 — P.W3 to-flow: pure `toFlow(document, layout)` projection (PORT-list port), `initialWidth/Height` seeding (steps-ai ADR 0021 trap) · tier: T2 · dep: B3,B4b [NO TAG]
-* [WAITING TAG] B22 — P.W4 canvas-readonly: React Flow canvas; device cards with port rows, dual source+target handles per port, measure-on-mount · tier: T2 · dep: B21 [NO TAG]
+* [PASSED TAG] B22 — P.W4 canvas-readonly: React Flow canvas; device cards with port rows, dual source+target handles per port, measure-on-mount · tier: T2 · dep: B21 [NO TAG]
 * [RUNNING] B23 — P.W5 elk-layout: elkjs layered auto-layout for unpositioned designs (technique-level reuse, own code) · tier: T2 · dep: B21 [NO TAG]
-* [WAITING TAG] B24 — P.W6 naive-edges: orthogonal-naive cable paths (no router; Q lane replaces) · tier: T2 · dep: B22 [NO TAG]
+* [PASSED TAG] B24 — P.W6 naive-edges: orthogonal-naive cable paths (no router; Q lane replaces) · tier: T2 · dep: B22 [NO TAG]
 * [PASSED TAG] B25 — P.W7 cable-schedule: schedule view + CSV export from the same document · tier: T2 · dep: B20,B4b [NO TAG]
 * [LOCKED] B26 — P.W8 integration-proof 🛑→HS-3: seed local NCE with the integration core stack (source: `Documents\integration-AV-Core` files + as-built sheets) via the B13-scope author tool, render read-only via B20–B24, cable schedule out; orchestrator runs the live stack itself · tier: T2 (run-it wave) · dep: B13,B20,B22,B23,B24,B25,B76 [NO TAG]
   · Accept (measurable, per the plan's own motto): (a) every seeded device/cable is representable without model workarounds, OR each failure is named on this row; (b) cable-schedule row count equals the seed count exactly; (c) initial render of the full site < 3 s locally; (d) screenshot + counts recorded here. HS-3 reviews the named-failures list, not a vibe.
@@ -104,7 +104,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 * [PASSED TAG] B27 — G.W1 signal-classes: SIGNAL_CLASSES port (clean, "our own" per steps-ai) + three-independent-facts port model (`type`/`signalType`/`connectorType` — 345-RJ45 lesson) · tier: T2 · dep: B4b [NO TAG]
 * [PASSED TAG] B28 — G.W2 connector-accepts-rebuild: compatibility table from first principles (~50 rows) · tier: T3 (clean-room; brief bans the forbidden file by path) · dep: B27 [NO TAG]
 * [PASSED TAG] B29 — G.W3 validate-join: two-axis validation → `direct|adapter|incompatible|unknown`; **confirm-warn, never reject** (a drawing is documentation) · tier: T2 · dep: B28 [NO TAG]
-* [RUNNING] B30 — G.W4 port-overrides: `portsOf` chain with NetBox instantiate-then-own semantics · tier: T2 · dep: B4b,B8 [NO TAG]
+* [PASSED TAG] B30 — G.W4 port-overrides: `portsOf` chain with NetBox instantiate-then-own semantics · tier: T2 · dep: B4b,B8 [NO TAG]
 
 ### Lane E — Editing & writes (opens after HS-3)
 
@@ -118,10 +118,10 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 ### Lane V — Validators (one standard = one microwave; client advisory now, NS server mirrors later)
 
 * [PASSED TAG] B36 — V.W1 poe-budget: IEEE 802.3 af/at/bt class budget vs switch capacity · tier: T2 · dep: B30 [NO TAG]
-* [RUNNING] B37 — V.W2 channel-length: EN 50173 / NEK 700 channel limits (TIA-568 as compatibility secondary; divergences documented — ADR-0008 §4) — refuses the 140 m run · tier: T2 · dep: B29 [NO TAG]
+* [PASSED TAG] B37 — V.W2 channel-length: EN 50173 / NEK 700 channel limits (TIA-568 as compatibility secondary; divergences documented — ADR-0008 §4) — refuses the 140 m run · tier: T2 · dep: B29 [NO TAG]
 * [LOCKED] B38 — V.W3 rack-fit: u_height vs gap, is_full_depth collisions · tier: T2 · dep: B41 (transitively held via B41→B15 `[HOLD-ML]`) [NO TAG]
 * [LOCKED] B39 — V.W4 port-occupancy: no second cable on an occupied termination · tier: T2 · dep: B33 (transitively held via B33 `[HOLD-HS3]`) [NO TAG]
-* [RUNNING] B40 — V.W5 hdcp-chain: version-chain downgrade detection · tier: T2 · dep: B29 [NO TAG]
+* [PASSED TAG] B40 — V.W5 hdcp-chain: version-chain downgrade detection · tier: T2 · dep: B29 [NO TAG]
 
 ### Lane R — Racks & rooms
 
@@ -134,7 +134,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 * [PASSED TAG] B45 — Q.W1a router-core [SPLIT into B45/B45b, sizing audit 2026-08-28]: A* on uniform grid with direction-in-state + turn penalties, pure function, synthetic-fixture tests only · tier: T3 (clean-room; path bans in brief) · dep: B3 [NO TAG]
 * [PASSED TAG] B45b — Q.W1b router-integration [SPLIT from B45]: U-turn multiplier + per-cable expansion budget + wiring into the canvas edge rendering (replaces B24's naive paths) · tier: T3 (clean-room; path bans in brief) · dep: B45,B24 [NO TAG]
-* [RUNNING] B46 — Q.W2 penalty-zones: routed cables deposit cost; sequential routing becomes globally aware · tier: T3 (clean-room; path bans in brief) · dep: B45b [NO TAG]
+* [PASSED TAG] B46 — Q.W2 penalty-zones: routed cables deposit cost; sequential routing becomes globally aware · tier: T3 (clean-room; path bans in brief) · dep: B45b [NO TAG]
 * [LOCKED] B47 — Q.W3 bundling: trunk-follow discount + bundle proposals · tier: T3 (clean-room; path bans in brief) · dep: B46 [NO TAG]
 * [LOCKED] B48 — Q.W4 quality-score: outside-in ugliness score, blind to router internals · tier: T3 (clean-room) · dep: B6,B45b [NO TAG]
 * [LOCKED] B49 — Q.W5 portfolio-worker: route N strategies in a Web Worker, pick best by B48 · tier: T2 · dep: B47,B48 [NO TAG]

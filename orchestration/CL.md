@@ -59,7 +59,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 * [DONE] B7 — K.W1 dtl-vendor: vendor devicetype-library subset + sync script · tier: T1 · dep: B1 [NO TAG]
   · Files: `catalog/devicetype-library/**` (vendored subset: Cisco, Netgear, Ubiquiti, APC, Eaton, Middle Atlantic, Yamaha, Blackmagic), `catalog/scripts/sync-dtl.mjs`, `catalog/README.md` (CC0 provenance note) · Goal: reproducible vendoring pinned to an upstream SHA · Accept: sync script idempotent; provenance recorded.
-* [RUNNING] B8 — K.W2 dtl-parser: YAML → DeviceType parser · tier: T2 · dep: B4b,B7 [NO TAG]
+* [PASSED TAG] B8 — K.W2 dtl-parser: YAML → DeviceType parser · tier: T2 · dep: B4b,B7 [NO TAG]
   · Files: `catalog/src/parse.ts` + tests · Goal: parse interfaces/front-ports/rear-ports/console/power/module-bays/u_height/is_full_depth/weight/airflow into B4 DeviceType; unknown keys surfaced, not swallowed · Accept: 5 named real files parse with hand-checked assertions; malformed YAML RED.
 * [LOCKED] B9 — K.W3 av-authoring-format: Bravo AV device-type format = DTL format + `copper_extensions` (per-port signal classes) · tier: T2 · dep: B8 [NO TAG]
   · Files: `catalog/bravo/README.md` (CC0 declaration), `catalog/schema/copper-extensions.schema.json`, `catalog/scripts/validate.mjs`, CI edit (chokepoint) · Goal: authoring format validated in CI; extensions layered so upstream contribution = strip extensions (ADR-0006 §6) · Accept: valid + invalid sample both proven.

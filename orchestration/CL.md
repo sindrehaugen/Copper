@@ -132,8 +132,8 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 ### Lane Q — Routing quality (continuous track after B50; the four forbidden optimizations are pre-registered false wins)
 
-* [LOCKED] B45 — Q.W1a router-core [SPLIT into B45/B45b, sizing audit 2026-08-28]: A* on uniform grid with direction-in-state + turn penalties, pure function, synthetic-fixture tests only · tier: T3 (clean-room; path bans in brief) · dep: B3 [NO TAG]
-* [LOCKED] B45b — Q.W1b router-integration [SPLIT from B45]: U-turn multiplier + per-cable expansion budget + wiring into the canvas edge rendering (replaces B24's naive paths) · tier: T3 (clean-room; path bans in brief) · dep: B45,B24 [NO TAG]
+* [RUNNING] B45 — Q.W1a router-core [SPLIT into B45/B45b, sizing audit 2026-08-28]: A* on uniform grid with direction-in-state + turn penalties, pure function, synthetic-fixture tests only · tier: T3 (clean-room; path bans in brief) · dep: B3 [NO TAG]
+* [RUNNING] B45b — Q.W1b router-integration [SPLIT from B45]: U-turn multiplier + per-cable expansion budget + wiring into the canvas edge rendering (replaces B24's naive paths) · tier: T3 (clean-room; path bans in brief) · dep: B45,B24 [NO TAG]
 * [LOCKED] B46 — Q.W2 penalty-zones: routed cables deposit cost; sequential routing becomes globally aware · tier: T3 (clean-room; path bans in brief) · dep: B45b [NO TAG]
 * [LOCKED] B47 — Q.W3 bundling: trunk-follow discount + bundle proposals · tier: T3 (clean-room; path bans in brief) · dep: B46 [NO TAG]
 * [LOCKED] B48 — Q.W4 quality-score: outside-in ugliness score, blind to router internals · tier: T3 (clean-room) · dep: B6,B45b [NO TAG]

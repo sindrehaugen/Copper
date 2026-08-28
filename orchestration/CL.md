@@ -52,7 +52,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
   · Files: same two (chokepoint — serialized behind B4) · Goal: Interface/FrontPort(+rear mapping)/RearPort/Console/Power templates + owned components (instantiate-then-own), Cable (2 terminations, status `planned|connected|decommissioning`), SignalClass + per-port signal/connector (three independent facts), `DesignDocument` with `schemaVersion`+`revision?` · Accept: third-termination RED, missing-rear-port RED, three-facts independence RED. Brief: `prompts/Batch_004b_F_W4b.md`
 * [DONE] B5 — F.W5 es-reader: EasySchematic **format** reader (clean PORT-list port of `fraEasySchematic.js`) → schema · tier: T2 · dep: B4b [PASSED TAG] (**2026-08-28: T2 gate verified. FAILED TAG initially due to auxiliaryData omission; escalated to Pro, verified fix manually and merged.**)
   · Files: `app/src/exchange/easyschematic/read.ts` + test + 2 fixture sheets under `app/tests/fixtures/av-fasit/` · Goal: read a real sheet into the Copper document model, lossy fields reported not dropped silently · Accept: both fixtures parse; count assertions (devices/ports/cables) match hand-verified numbers. Brief: `prompts/Batch_005_F_W5.md`
-* [FAILED TAG: Hardcoded format string tripped forbidden-sources gate] B6 — F.W6 fixtures-rig: headless rig skeleton over all 15 sheets · tier: T2 · dep: B5 [NO TAG]
+* [RUNNING] B6 — F.W6 fixtures-rig: headless rig skeleton over all 15 sheets · tier: T2 · dep: B5 [NO TAG]
   · Files: `app/tests/fixtures/av-fasit/` (13 more sheets), `rig/run.mjs`, `rig/README.md` · Goal: `node rig/run.mjs` loads all 15 via B5, emits per-sheet counts + placeholder score JSON in <60s, no browser · Accept: 15/15 parsed; output schema pinned by test. Brief: `prompts/Batch_006_F_W6.md`
 
 ### Lane K — Catalog (devicetype-library + Bravo AV types, CC0)
@@ -88,7 +88,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 * [WAITING TAG] B19 — P.W1 bff-scaffold: `bff/` Hono TS server; config seams (`NCE_BASE_URL`, `NCE_API_KEY` via env/file — key class + blast radius per the seam audit; dev-identity seam per ADR-0011), `/healthz`, session stub (replaced by B75) · tier: T2 · dep: B1 [NO TAG]
 * [LOCKED] B20 — P.W2 bff-nce-client: HMAC client (`X-NCE-Timestamp` + canonical `METHOD\nPATH\nTIMESTAMP[\nSHA256(body)]` — **verify query-string canonicalization against NCE's middleware; the topology GET carries params**) + typed zod-parsed calls to the B12/B14-scope routes; `-32005` (governance-disabled) surfaced as distinct state · tier: T2 · dep: B12,B19 [NO TAG]
-* [FAILED TAG: Scope bleed + IP violation in test, escalate to Pro] B21 — P.W3 to-flow: pure `toFlow(document, layout)` projection (PORT-list port), `initialWidth/Height` seeding (steps-ai ADR 0021 trap) · tier: T2 · dep: B3,B4b [NO TAG]
+* [RUNNING] B21 — P.W3 to-flow: pure `toFlow(document, layout)` projection (PORT-list port), `initialWidth/Height` seeding (steps-ai ADR 0021 trap) · tier: T2 · dep: B3,B4b [NO TAG]
 * [LOCKED] B22 — P.W4 canvas-readonly: React Flow canvas; device cards with port rows, dual source+target handles per port, measure-on-mount · tier: T2 · dep: B21 [NO TAG]
 * [LOCKED] B23 — P.W5 elk-layout: elkjs layered auto-layout for unpositioned designs (technique-level reuse, own code) · tier: T2 · dep: B21 [NO TAG]
 * [LOCKED] B24 — P.W6 naive-edges: orthogonal-naive cable paths (no router; Q lane replaces) · tier: T2 · dep: B22 [NO TAG]

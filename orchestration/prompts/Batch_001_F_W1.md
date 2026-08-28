@@ -18,7 +18,7 @@ Rules 1–11: as in `orchestration/_TEMPLATE.md` — read them there first; they
 **Steps:**
 1. `pnpm init` at repo root; author `pnpm-workspace.yaml` with `packages: ["app", "bff", "catalog", "rig"]` (only `app` exists yet — that is fine).
 2. Scaffold `app/` with Vite (react-ts template), React 19, TypeScript strict (`strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes` all true). Dependencies allowed: `react`, `react-dom`, `zod`. Dev: `vite`, `@vitejs/plugin-react`, `typescript`, `vitest`, `eslint` + `typescript-eslint`, `@types/react`, `@types/react-dom`. **No other packages** — `@xyflow/react`, `elkjs`, `zustand` arrive in their own waves.
-3. Create the folder skeleton `app/src/{model,layout,editor,views,exchange,store}/` each with an `index.ts` exporting nothing (`export {}`) and `app/src/model/index.test.ts` with one trivial vitest test.
+3. Create the folder skeleton `app/src/{model,layout,editor,views,exchange,store,shell}/` each with an `index.ts` exporting nothing (`export {}`) and `app/src/model/index.test.ts` with one trivial vitest test.
 4. Root scripts in `package.json`: `lint` (eslint), `typecheck` (`tsc -b`), `test` (`vitest run`), `dev` (vite in app).
 5. Author `.github/workflows/ci.yml`: single job on `push` + `pull_request` — checkout (SHA-pinned like `deploy-pages.yml` does), pnpm setup, `pnpm install --frozen-lockfile`, then `pnpm lint && pnpm typecheck && pnpm test`.
 6. `.gitignore`: `node_modules/`, `dist/`, `coverage/`, `.vite/`.

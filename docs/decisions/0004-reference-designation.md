@@ -1,6 +1,6 @@
 # ADR-0004: Reference designation — one identifier that crosses every boundary
 
-> **Status:** proposed — decide before X-lane (labels/exports) dispatches; does not block F/K/NS/P lanes · **Date:** 2026-08-28 · **Deciders:** Sindre
+> **Status:** proposed — **the charset below is frozen and already implemented from B4 (schema-core) onward; the scheme choice (IEC 81346/TFM vs TIA-606 rendering) is what remains open, and must be decided before B62 (IFC/COBie) and the X lane (labels/exports)** · **Date:** 2026-08-28 · **Deciders:** Sindre
 
 ## Context
 

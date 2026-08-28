@@ -1,6 +1,6 @@
 # ADR-0002: Frontend stack — Vite + React + TypeScript strict + @xyflow/react + elkjs + zustand
 
-> **Status:** accepted · **Date:** 2026-08-28 · **Deciders:** Sindre
+> **Status:** accepted · **Date:** 2026-08-28 · **Amended:** 2026-08-28 (ADR-0009 UI-kit refinement; ADR-0010 elkjs licence correction; router/i18n named) · **Deciders:** Sindre
 
 ## Context
 
@@ -8,7 +8,7 @@ Bravo already built a working AV design canvas — **Romtegning / AV Designer** 
 
 ## Decision
 
-Copper uses: **pnpm · Vite · React 19 · TypeScript `strict` · @xyflow/react 12 · elkjs · zustand · @tanstack/react-query · zod · vitest · Playwright**. English identifiers only. No UI kit initially (hand-written CSS like Romtegning); revisit if form-heavy surfaces appear.
+Copper uses: **pnpm · Vite · React 19 · TypeScript `strict` · @xyflow/react 12 · elkjs · zustand · @tanstack/react-query · zod · react-router · i18next/react-i18next · vitest · Playwright** (Playwright is installed by the visual-regression wave B78, nothing earlier). English identifiers only. No third-party UI *component kit*; hand-written components styled to **Material Design 3 via a generated token system — see ADR-0009** (amended 2026-08-28; originally "hand-written CSS like Romtegning", which ADR-0009 refines rather than reverses).
 
 Structural rules carried over from what Romtegning proved:
 
@@ -22,7 +22,7 @@ Structural rules carried over from what Romtegning proved:
 
 - Everything ported from Romtegning is ported **into TypeScript**, which forces the implicit contracts in its prose comments into types — a feature, not a tax.
 - React 19 + React Flow 12 quirks are known and documented rather than novel.
-- elkjs and @xyflow/react are MIT; the licence gate stays clean.
+- @xyflow/react, zustand, react-router and i18next are MIT; **elkjs is `EPL-2.0 OR GPL-3.0-or-later` — NOT MIT as this ADR originally claimed** (corrected 2026-08-28); it passes the licence gate only via the recorded ADR-0010 exception (EPL-2.0 branch, unmodified-dependency use).
 
 ## What would reopen this
 

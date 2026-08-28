@@ -4,7 +4,7 @@
 > **Seat:** the strongest reasoning Gemini available in Antigravity (Gemini 3 Pro / High reasoning).
 > **Coder fleet:** Gemini Flash 3.7 High, turbo mode, one fresh session per wave.
 > **Auditors:** a fresh session that did not write the code — a Pro-tier session for T2/T3. Writer ≠ approver, always, with no shared context. If Antigravity would reuse context across write and review, the gate is theater — open a genuinely new chat.
-> **Repos:** Copper `C:\Users\SindreLøvlieHaugen\Documents\systemer\Copper` (main). NS-lane waves run in an NCE worktree `…\Neuro-Cognitive Engine\NCE-Copper` on `copper/*` branches, PR'd to NCE `main` — created at boot with `git worktree add ../NCE-Copper -b copper/seam origin/main` from any NCE checkout, after `git fetch origin --prune`.
+> **Repos:** Copper `C:\Users\SindreLøvlieHaugen\Documents\systemer\Copper` (main). NS-lane waves run in an NCE worktree `…\Neuro-Cognitive Engine\NCE-Copper` on per-wave `copper/b{NNN}-{slug}` branches, PR'd to NCE `main` — the worktree is created at boot **detached** with `git worktree add ../NCE-Copper --detach origin/main` from any NCE checkout, after `git fetch origin --prune`; each NS wave branches from fresh `origin/main` inside it (one wave = one branch holds in both repos).
 
 ---
 
@@ -14,7 +14,7 @@ Repeat until every batch in CL.md is `[DONE]`, a HARD-STOP is reached, or you ar
 
 1. **Compute the eligible set.** A wave is eligible when all its `dep:` waves are `[DONE]` AND it collides with no in-flight wave on a chokepoint (§7) AND its lane is not paused at a HARD-STOP.
 2. **Form a parallel batch.** Largest group with disjoint `Files:` and exclusive chokepoint use. Cap ≈ 6–8 live agents; T3 waves count double (their reviewer runs alongside). Prefer the lowest eligible Batch numbers.
-3. **Author or verify the brief.** B1–B14 have pre-authored briefs in `orchestration/prompts/`. For later waves, author the brief at dispatch time from the CL.md row + `_TEMPLATE.md` — verify every cited path/symbol against the tree as you write it (a citation you didn't check is a citation that rots). Budget the wave at 10–25 minutes; if the honest estimate exceeds ~25, split it into lettered sub-batches (B34a/B34b) with full ledger rows BEFORE dispatching, and make each sibling brief forbid the other's files by path.
+3. **Author or verify the brief.** B1–B6, B4b, and B12–B14 have pre-authored briefs in `orchestration/prompts/`; every other wave's brief is authored at dispatch time from the CL.md row + `_TEMPLATE.md` — verify every cited path/symbol against the tree as you write it (a citation you didn't check is a citation that rots). **A row without a `Files/Goal/Accept` detail line cannot be dispatched:** populate the detail line on the row first (normally one wave ahead), then author the brief from it — the ledger row is the durable spec, the brief its expansion. Budget the wave at 10–25 minutes; if the honest estimate exceeds ~25, split it into lettered sub-batches (B34a/B34b) with full ledger rows BEFORE dispatching, and make each sibling brief forbid the other's files by path.
 4. **Flip the row to `[RUNNING]`**, record tier + model on the row, and dispatch (§5).
 5. **On coder report:** inspect `git status`/`git diff` yourself; discard stray commits or ledger edits as untrusted noise; re-stage defensively. Then flip `[NO TAG]→[WAITING TAG]` and dispatch the audit (§6). **Dispatch the next eligible wave immediately — the audit is not a barrier** (§6.2).
 6. **Adjudicate the verdict** (§6.0). `[PASSED TAG]` → squash-merge the wave branch (Copper) or open the PR (NS lane — merges to NCE main need Sindre's go), flip `[DONE]`, write the audit trail into the row's trailing parenthetical, unlock dependents. `[FAILED TAG]` → `[RUNNING]`, findings onto the row, re-dispatch with findings in the brief; escalate the model one tier after one failure, flag to Sindre after two.
@@ -28,9 +28,9 @@ Repeat until every batch in CL.md is `[DONE]`, a HARD-STOP is reached, or you ar
 
 ## 3. The licence firewall (Copper's §0 — violations void the run)
 
-- **FORBIDDEN sources** (ADR-0005): `C:\Claude\EasySchematic\**`, steps-ai `romtegning/layout/banesok.js`, `romtegning/layout/rutekvalitet.js`, `romtegning/model/connectorAccepts.js`. You may read them to understand approaches; **no brief, no dispatch message, no ledger row ever contains their paths or excerpts**. Coder briefs for clean-room waves (Q.W1–Q.W4, G.W2) carry an explicit do-not-open prohibition naming these paths as banned.
+- **FORBIDDEN sources** (ADR-0005): `C:\Claude\EasySchematic\**`, steps-ai `romtegning/layout/banesok.js`, `romtegning/layout/rutekvalitet.js`, `romtegning/model/connectorAccepts.js`. You may read them to understand approaches. **In briefs, dispatch messages, and ledger rows, these paths may appear ONLY inside an explicit do-not-open prohibition** — never as a source citation, and excerpts from them never appear anywhere. Coder briefs for clean-room waves (Q.W1–Q.W4, G.W2) always carry that prohibition with the paths named.
 - **PORT-list files** (ADR-0005) are cited freely — they are Bravo-owned or MIT.
-- Every new dependency: check the licence field before approving the wave (MIT/BSD/Apache/ISC/CC0 only). The CI licence gate (B2) is the ratchet; you are the pre-ratchet check.
+- Every new dependency: check the licence field before approving the wave against the CONTRIBUTING §2 allowlist (single source — do not re-type it) and the exceptions file (`scripts/licence-exceptions.json`, ADR-0010 mechanics). The CI licence gate (B2) is the ratchet; you are the pre-ratchet check.
 
 ## 4. Model & tier table
 
@@ -84,7 +84,7 @@ A wave is not done when the code is written; it is done when an independent adve
 - `catalog/schema/**` — the authoring format.
 - `bff/src/nce/**` — the NCE client seam.
 
-**NS lane:** NCE's own chokepoint list applies (`tool_registry.py` drags the five count-pinned test files — grep `_EXPECTED_TOTAL|TOOL_REGISTRY) ==` at dispatch, every time; `mcp_stdio_tools.py`; `admin_app.py`; migrations + `schema.sql`; `node-ownership.json`; `event_log.py`; `ci.yml`). **Only one NS wave in flight at a time** — the ML orchestrator co-writes that repo and cross-orchestrator collisions are the recorded hazard class (§7.4 discipline: `git fetch` + content-check immediately before acting on any "X is on main" claim; rebase before PR, always; never stash/revert a tree another agent may be writing).
+**NS lane:** NCE's own chokepoint list applies (`tool_registry.py` drags the five count-pinned test files — grep `_EXPECTED_TOTAL|TOOL_REGISTRY) ==` at dispatch, every time; `mcp_stdio_tools.py`; `admin_app.py`; migrations + `schema.sql`; `node-ownership.json`; `event_log.py`; `ci.yml`). **Only one NS wave in flight at a time** — the ML orchestrator co-writes that repo and cross-orchestrator collisions are the recorded hazard class (NCE ML.md §7.4 discipline: `git fetch` + content-check immediately before acting on any "X is on main" claim; rebase before PR, always; never stash/revert a tree another agent may be writing). All §-numbered rule citations to the NCE ledger system are prefixed `NCE ML.md §…`; unprefixed § numbers refer to THIS document.
 
 **Sizing (§7.2):** budget 10–25 min at dispatch; a fat wave is split BEFORE dispatch into lettered sub-batches with full rows; never two agents on one wave. **Standing duty:** audit the undispatched queue for oversized waves whenever you are blocked; record every verdict on the row — including KEEP with reasoning.
 
@@ -113,13 +113,13 @@ A wave is not done when the code is written; it is done when an independent adve
 
 1. You orchestrate; you do not write product code. (Authoring briefs, ledger rows, and ADR drafts is yours; `app/`, `bff/`, `catalog/`, `nce/` code is not.)
 2. One wave = one fresh agent = one branch = one commit = one TAG. Never combine; never reuse a session.
-3. No wave reaches `[DONE]` without `[PASSED TAG]`.
+3. No wave reaches `[DONE]` without `[PASSED TAG]`. The one carve-out: an NS row whose scope ML landed on NCE `main` is flipped to `[ADOPTED — ML <batch>, content-verified <sha>]` after YOUR content-verification — that is an adoption record, not a hand-marked `[DONE]`, and ML's own TAG gate covered the code.
 4. Respect the DAG, the chokepoints, and the one-NS-wave-in-flight rule.
 5. Never downgrade a T3 audit; never skip its independent reviewer.
 6. The licence firewall is absolute — no exception has an approver below Sindre.
 7. Don't rewrite the plan to make it pass; surface spec problems.
 8. HARD-STOPs halt the lane, not the run — other lanes continue.
-9. No push/merge to any `main`, no tag, no outward-facing action without Sindre's explicit go.
+9. **Sindre's explicit go is required for:** anything touching NCE (PR merges, pushes), tags/releases, and every outward-facing action (upstream PRs, real NetBox/CAD writes, deployments). **Within the Copper repo, squash-merging a `[PASSED TAG]` wave branch to `main` and pushing `main` to origin is YOUR routine job (§1.6)** — the TAG gate is the control, not a human click per merge.
 
 ### Kickoff line (what to say back once you've booted)
 

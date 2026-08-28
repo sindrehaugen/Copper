@@ -3,13 +3,15 @@
 > **FRESH SESSION REQUIRED.** Fully self-contained brief; one wave = one session = one branch = one commit = one TAG.
 > **Engine class:** Flash (Gemini Flash 3.7 High, turbo). Unwritten design decision → STOP and report.
 > **Workspace:** NCE worktree `NCE-Copper`, branch `copper/b014-validate-adapter` off fresh `origin/main` (rebased after B13 merges). Shared-repo rules as in Batch 012 header.
+>
+> **⚠ [HOLD-ML] 2026-08-28:** handed to the NCE ML orchestrator (M6.W13c). Do not dispatch until the boot content-check confirms ML has NOT landed it.
 
-Rules 1–11 of `orchestration/_TEMPLATE.md` with the NCE gate (as Batch 012).
+Rules 1–11 of `orchestration/_TEMPLATE.md` apply **with rule 1's branch replaced by the branch named above and rule 5's gate replaced by the NCE gate** (as Batch 012).
 
 **Skills:** python-pro (primary), mcp-builder
 **Depends on:** B12
 **Reads (context, do not edit):** `nce/vertical_modules/system_design/validation_queries.py` (`validate_design_graph` ~561–647 — pure read, five checks; verify by symbol)
-**Files (exactly these):** `nce/vertical_modules/system_design/mcp_handlers.py` (one handler) · `nce/tool_registry.py` (`system_design_validate_design_graph`, `cacheable=False, admin_only=False, mutation=False` — not cacheable: results must reflect the current graph) — **chokepoint** · `nce/mcp_stdio_tools.py` (schema) · `nce/admin_app.py` + `nce/admin_handlers/system_design.py` (one POST route — POST because the body carries the design ref) · the five count tests (+1 each; grep-verify first) · `tests/unit/test_system_design_validate_adapter.py` (new)
+**Files (exactly these):** `nce/vertical_modules/system_design/mcp_handlers.py` (one handler) · `nce/tool_registry.py` (`system_design_validate_design_graph`, `cacheable=False, admin_only=False, mutation=False` — not cacheable: results must reflect the current graph) — **chokepoint** · `nce/mcp_stdio_tools.py` (schema) · `nce/admin_app.py` + `nce/admin_handlers/system_design.py` (one POST route — exactly `POST /api/system-design/validate`, contractual; POST because the body carries the design ref) · the five count tests (+1 each; grep-verify first) · `tests/unit/test_system_design_validate_adapter.py` (new)
 
 **Do NOT modify `validation_queries.py`** — the five checks and their warn-only semantics (unknown formats pass with a note; power/heat is informational, always `passed=True`) are the contract. If wrapping exposes a bug in them, STOP and report — fixing it is its own wave.
 

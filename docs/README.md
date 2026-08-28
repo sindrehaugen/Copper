@@ -18,6 +18,11 @@
 - [ADR-0006 — NetBox methodology is binding](decisions/0006-netbox-methodology-is-binding.md)
 - [ADR-0007 — Copper is the vertical-suite front end](decisions/0007-copper-is-the-vertical-suite-front-end.md)
 - [ADR-0008 — EU/Nordic compliance baseline](decisions/0008-eu-nordic-compliance-baseline.md)
+- [ADR-0009 — Material Design 3, OS-following dark/light](decisions/0009-material-design-3.md)
+- [ADR-0010 — elkjs EPL-2.0 licence exception](decisions/0010-elkjs-epl-licence-exception.md)
+- [ADR-0011 — Identity, session, tenancy](decisions/0011-identity-session-tenancy.md) *(proposed — HS-9)*
+- [ADR-0012 — Deployment posture](decisions/0012-deployment-posture.md) *(proposed)*
+- [ADR template](decisions/0000-template.md)
 
 ## Handoffs
 
@@ -29,4 +34,4 @@ Development runs as an orchestrated promptwave ledger, executed by Gemini Flash 
 
 ## Proposals
 
-- [Rev 2 build proposal — "The Copper Layer"](proposals/COPPER_REV2_2026-08-26.html) (2026-08-26; the founding document)
+- [Rev 2 build proposal — "The Copper Layer"](proposals/COPPER_REV2_2026-08-26.html ':ignore') (2026-08-26; the founding document)

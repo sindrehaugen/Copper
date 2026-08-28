@@ -13,7 +13,8 @@
 1. **NCE Module 6's domain layer exists; its external surface does not.** `do_author_device_topology`, `do_author_functional_location`, `validate_design_graph` and the topology read queries are implemented and test-covered — and unreachable by any MCP tool, REST route, or A2A skill. ML.md's own defect sweep names this shape ("surface hole") and never scheduled the fix for Module 6. Details + traps: [nce_seam_audit.md](nce_seam_audit.md). **Execution (2026-08-28): the fix is handed to the NCE ML orchestrator as the [Module 6 completion guide](m6_completion_guide.md)** — Sindre pushes it up front in the ML queue. Copper's NS lane holds `[HOLD-ML]`: at each Copper boot the orchestrator content-verifies which M6 completion waves landed on NCE `main`, consumes those, and executes only what ML did not adopt.
 2. **No browser path into NCE exists** (stdio-only MCP, HMAC REST, no CORS) → Copper ships a stateless **BFF**, using NCE's two sanctioned seams (NCE-FE-1 `extra_routes`, NCE-FE-2 `register_tool`) — never a fork of `nce/`.
 3. **Romtegning (steps-ai) is proven prior art.** Its clean files are ported to TS (ADR-0005 PORT list), its AGPL-derived router/scorer/compat-table are reimplemented clean-room (PATTERN list), its measured domain lessons (grid pitch, three-independent-port-facts, per-instance port overrides, confirm-warn, the four forbidden routing optimizations) are binding, and its 15 anonymized fixture sheets become Copper's quality ground truth. Its 3D room view (three.js) proves the 3D lane is another pure projection of the same document.
-4. **Missing entirely, everywhere:** delete/patch of design objects, geometry storage, lifecycle status, BOM_LINE implementation. These are designed decisions (ADR-0003/0004 + two HARD-STOPs), not incidental waves.
+4. **Missing entirely, everywhere:** delete/patch of design objects, geometry storage, lifecycle status, BOM_LINE implementation. These are designed decisions (ADR-0003 + three HARD-STOPs: HS-1 status, HS-2 delete, HS-5 BOM), not incidental waves.
+5. **Identity, tenancy and deployment were audit-found holes, now owned:** ADR-0011 (Entra ID OIDC via the BFF, session→namespace validation, `actor` on writes — HS-9) and ADR-0012 (internal-only, EU-resident posture). The graph↔document codec and a contract-drift gate are explicit waves (B76/B77), not assumptions.
 
 ## 3. Lanes
 
@@ -22,22 +23,22 @@
 | **F** Foundations | Copper | scaffold, CI, licence gate, geometry ratchet, schema core, fixtures + rig skeleton | B1–B6 |
 | **K** Catalog | Copper | devicetype-library vendoring + parser, Bravo AV authoring format (CC0, upstreamable), seed set | B7–B10 |
 | **NS** NCE seam | **NCE** (worktree `NCE-Copper`, branch `copper/*`, PR to `main`) | read/author/validate adapters, geometry table, status lifecycle, cable fix, delete design | B11–B18 |
-| **P** Projection | Copper | BFF, typed NCE client, toFlow, read-only canvas, ELK layout, cable schedule, **Veidekke proof** | B19–B26 |
+| **P** Projection | Copper | BFF, typed NCE client, toFlow, read-only canvas, ELK layout, cable schedule, **Veidekke proof**, graph↔document codec, contract-pin + fixture seam server | B19–B26, B76–B77 |
 | **G** Signal model | Copper | signal classes, clean-room compat table, two-axis validation, port overrides | B27–B30 |
 | **E** Editing & writes | Copper | zustand store, palette, connect gesture, write-through (`planned`), promote | B31–B35 |
 | **V** Validators | Copper (+NS mirrors) | PoE, channel length, rack fit, port occupancy, HDCP | B36–B40 |
 | **R** Racks & rooms | Copper | rack model, **rack elevation (net-new)**, rack editing, location tree | B41–B44 |
-| **Q** Routing quality | Copper | clean-room A* router → penalty zones → bundling → outside-in score → portfolio/worker → CI rig ratchet | B45–B50, then continuous |
+| **Q** Routing quality | Copper | clean-room A* router (split core/integration) → penalty zones → bundling → outside-in score → portfolio/worker → CI rig ratchet → Playwright visual regression | B45/B45b–B50, B78, then continuous |
 | **T** 3D | Copper | three.js scene from the same document/layout: rooms, racks, devices; camera/print | B51–B53 |
 | **X** Exchange | Copper (+NS) | DXF (MIT port), EasySchematic-format import, NetBox export/import, D365 FL import | B54–B58 |
 | **B** BOM | NCE + Copper | BOM_LINE contract (**coordinate with ML** — B132a territory), design→BOM emission | B59–B60 |
 | **W** CAD/BIM workflows | Copper + plugin repos | W.W1 recon (verify VW/ConnectCAD/Revit/SketchUp exchange formats — nothing designed against unverified seams), glTF/Collada export from the T lane, IFC/COBie with reference designations, **Vectorworks plugin** (embedded Python, pulls devices/cables from the BFF API, pushes placements back), ConnectCAD schema mapping (the NetBox treatment for its device/circuit model), SketchUp path, Revit/Dynamo path | B61–B67 |
-| **U** Shell & platform | Copper | app shell (navigation, session, tenancy, **i18n nb-NO/en from wave one**), **accessibility ratchets** (EN 301 549/WCAG AA: a11y lint + axe smoke in CI), generalized allowlisted BFF module-route proxy | B68–B70 |
+| **U** Shell & platform | Copper | **M3 token foundation (ADR-0009: OS-following dark/light, copper seed)**, app shell (navigation, session, tenancy, **i18n nb-NO/en from wave one**), **accessibility ratchets** (EN 301 549/WCAG AA), allowlisted BFF module-route proxy (T3 security surface), **auth-session (ADR-0011, HS-9)** | B68/B68b–B70, B75 |
 | **M** Module surfaces | Copper | M.W0 two-sided inventory: (a) what every NCE engine exposes today (seam-audit method suite-wide), (b) what the Portal's screens already prove (quote spreadsheet, customer/location trees, room-sign flow, product picker — PORT/PATTERN verdicts per screen, ADR-0005 method) → 🛑 HS-8 Sindre picks surface order; then per-surface waves (sales/quote, project, assets, inventory, netops…), each naming the Portal capability it supersedes or explicitly doesn't | B71 + unscheduled |
 | **C** Compliance surfaces | Copper | DSAR surface over NCE `me_app`, provenance/audit viewer (C9a citations as UI), AI-transparency dialogs (Contract B posture made visible, EU-AI-Act-aligned) | B72–B74 (post-HS-8) |
 | **O** Observe | both | divergence overlay (Engine 18), RMM health (Engine 19) | unscheduled tail |
 
-Full wave rows with `Files:`/Goal/Acceptance live in the ledger; briefs for B1–B14 are pre-authored in `orchestration/prompts/`, later briefs are authored by the orchestrator at dispatch from the ledger row + `_TEMPLATE.md` (deliberate anti-rot deviation from ML practice — NCE §7.6/§7.8 incidents).
+Wave rows live in the ledger (near-horizon rows carry full `Files:`/Goal/Acceptance detail; a row cannot be dispatched until its detail line exists); briefs for **B1–B6, B4b, and B12–B14** are pre-authored in `orchestration/prompts/`, all later briefs are authored by the orchestrator at dispatch from the ledger row + `_TEMPLATE.md` (deliberate anti-rot deviation from ML practice — NCE ML.md §7.6/§7.8 incidents).
 
 ## 4. Sequencing (critical path, not numeric)
 
@@ -52,7 +53,7 @@ flowchart LR
   E --> BOM[B: BOM 🛑 ML coordination]
 ```
 
-F, K and NS start **in parallel** (disjoint repos). The **Veidekke read-only proof (B26)** is the premise checkpoint: real site, real nodes, auto-layout, cable schedule out — the cheapest way to discover the L1-first premise is wrong (Rev 2 §07). Q is a continuous track after Q.W1 ships naive-but-working routing; quality is ratcheted by the rig, never by taste.
+At boot, **B1 (F), B11 (NS recon) and B61 (W recon) run in parallel** — B11's work is in the NCE repo, the other lanes in Copper; K and U unlock behind B1, and Copper-side parallelism is governed by disjoint `Files:` + the chokepoint locks (`orchestration/_ORCHESTRATOR.md` §7 is the single chokepoint list). The **Veidekke read-only proof (B26)** is the premise checkpoint: real site, real nodes, auto-layout, cable schedule out, with measurable pass criteria on its row — the cheapest way to discover the L1-first premise is wrong (Rev 2 §07). Q is a continuous track after the router ships; quality is ratcheted by the rig, never by taste. While NS scope sits with ML, the P lane develops against B77's recorded-fixture seam server; only B26 requires the real thing.
 
 ## 5. HARD-STOPs (Sindre's gates — the orchestrator pauses, reports, waits)
 
@@ -66,6 +67,7 @@ F, K and NS start **in parallel** (disjoint repos). The **Veidekke read-only pro
 | 🛑 HS-6 | X.W3/W4 | First NetBox export/import against a real NetBox — data leaves the system |
 | 🛑 HS-7 | W lane post-recon | Which CAD integrations to fund first, based on W.W1's verified format findings (VW plugin is the presumed priority) |
 | 🛑 HS-8 | M lane post-inventory | Which module surfaces to build, in what order, from B71's two-sided inventory (NCE surfaces × Portal prior art) |
+| 🛑 HS-9 | B75 (auth) and thereby all writes | ADR-0011 identity/session/tenancy sign-off (Entra ID recommendation) |
 
 ## 6. Quality machinery (what makes it *extremely good*)
 
@@ -78,8 +80,8 @@ F, K and NS start **in parallel** (disjoint repos). The **Veidekke read-only pro
 
 ## 7. Efficiency machinery (what makes it *fast*)
 
-- **10–25 min waves, split at dispatch** (§7.2): every brief is one concern with explicit paths; Flash 3.7 turbo never faces an open design decision.
-- **Three parallel lanes from minute one** (F/K/NS are repo-disjoint), then `Files:`-disjoint parallelism inside Copper with the chokepoint list (schema.ts, geometry.ts, package.json, ci.yml, CL.md) serializing the rest.
+- **10–25 min waves, split at dispatch** (`_ORCHESTRATOR.md` §7 sizing rules): every dispatched brief is one concern with explicit paths and no open design decision — open decisions live in ADRs and HARD-STOPs, never inside a Flash wave.
+- **Parallel from minute one** (B1/B11/B61 across two repos), then `Files:`-disjoint parallelism inside Copper with the chokepoint locks (single list: `_ORCHESTRATOR.md` §7) serializing the rest.
 - **Audit overlaps the next dispatch** (§6.2) — the gate is never a barrier.
 - **T1 waves skip the separate reviewer** when the coder ran the full gate (recorded risk acceptance, same terms as NCE's).
 - **Port, don't invent:** the PORT list means the document model, projection, DXF, migrations funnel and rig harness arrive as translations of proven code, with typing as the review.
@@ -92,3 +94,5 @@ F, K and NS start **in parallel** (disjoint repos). The **Veidekke read-only pro
 3. **Clean-room drift** — an agent "helpfully" opening a forbidden file → path bans in briefs, Norwegian-identifier + structure heuristics in the TAG audit, licence gate in CI, and the orchestrator never pastes forbidden content into any brief.
 4. **Turbo mode auto-running the wrong thing** → template rule 9 (no push/PR/merge/network mutations from coders), orchestrator owns commits, Antigravity auto-commit disabled across the writer/approver line.
 5. **devicetype-library covers IT, not AV** (verified: 314 manufacturers, ~3 meaningful AV) → K.W4 seeds Bravo's brands; the AV catalogue is a standing content track, budgeted as such, contributed upstream under CC0.
+6. **The P/E critical path waits on another orchestrator's queue** (NS scope is with ML) → B77's fixture seam keeps B21–B25 and E-lane development unblocked against recorded contract shapes; only B26 needs the real seam. If ML has not landed M6.W13a–W14 within a sensible window, Sindre decides at boot whether NS waves return to Copper execution.
+7. **nb-NO translation is a standing content track** (like the AV catalogue): copy is externalized from B68b, but someone must write and QA the Norwegian — budget it, don't discover it.

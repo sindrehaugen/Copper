@@ -41,7 +41,7 @@ Three lists. Wave briefs cite these lists; the licence gate (wave F.W2) enforces
 - `steps-ai .../romtegning/layout/banesok.js`, `.../layout/rutekvalitet.js`, `.../model/connectorAccepts.js` (AGPL-derived).
 - EasySchematic's device catalogue / community templates (no clear licence grant).
 
-The orchestrator and Sindre may read forbidden files to understand approaches; **coder-agent briefs must never contain these paths or excerpts from them** (CONTRIBUTING §1). Waves Q.W1–Q.W4 and G.W2 carry an explicit "do not open" prohibition with the paths named, per the §7.5 negative-scope convention.
+The orchestrator and Sindre may read forbidden files to understand approaches. **In coder-agent briefs these paths may appear ONLY inside an explicit "do not open" prohibition — never as a source citation — and excerpts from them never appear anywhere** (CONTRIBUTING §1). Clean-room waves (the Q router/score waves and G.W2) always carry that prohibition with the paths named. Tell-tale identifier markers scanned for by CI (B2): `banesok`, `rutekvalitet`, `connectorAccepts`, `stygghetstall` (the upstream quality scorer's internal vocabulary), plus the `EasySchematic` strings outside the format-reader paths.
 
 ## Consequences
 

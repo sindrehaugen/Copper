@@ -15,6 +15,8 @@ Follow ADR-0006 §5 — **the NetBox-native mechanism, layered**:
 3. **Competing options = design revisions, not branches.** A `DESIGN_REVISION` concept (option A / option B for the same room) scopes `planned` objects to a named revision; exactly one revision may be promoted, which retires the siblings (they keep their audit trail, they never become `active`). This is deliberately NOT netbox-branching (PolyForm Shield — forbidden) and deliberately simpler: revisions scope *planned* objects only; `active` state is always singular.
 4. **As-built stays downstream:** `active` objects feed the existing NetBox-bridge `promoted_to_asbuilt` / divergence machinery untouched.
 
+4. **Concurrent edits within one revision get an optimistic-concurrency token** (audit finding, 2026-08-28): a per-design `version` returned by reads and checked by writes (`expected_version` → conflict on staleness). Without it, whole-list upserts are silent last-writer-wins between two canvas users. Carried into the m6 completion guide Rev 2 §2 so ML builds it into the write tools from the start.
+
 ## Consequences
 
 - Reads must filter by status everywhere (`active`-only for as-built consumers, `planned+active` for the canvas) — the read adapter (NS.W2) takes a `statuses` parameter from day one.

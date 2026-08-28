@@ -1,6 +1,6 @@
 # Architecture
 
-> **Status:** current · **Sources:** Rev 2 build proposal (2026-08-26), NCE seam audit (2026-08-28), steps-ai Romtegning survey (2026-08-28) · **Binding ADRs:** 0001, 0002, 0005, 0006, 0007, 0008
+> **Status:** current · **Sources:** Rev 2 build proposal (2026-08-26), NCE seam audit (2026-08-28), steps-ai Romtegning survey (2026-08-28) · **Binding ADRs:** 0001, 0002, 0005, 0006, 0007, 0008, 0009, 0010 · **Proposed (gating):** 0003, 0004, 0011 (HS-9), 0012
 
 ## What Copper is
 
@@ -33,10 +33,11 @@ flowchart LR
 |---|---|---|
 | **Store** | NCE (`kg_nodes`/`kg_edges` + Module 6 side-tables) | The only persistence. ADR-0001. Writes go through Module 6 owner tools (Contract A) |
 | **Seam** | NCE, landed by the NS lane | MCP tool + REST route pairs wrapping the existing `do_author_*` / `_fetch_*` / `validate_design_graph` domain layer. Registered in BOTH `tool_registry.py` and `mcp_stdio_tools.py` |
-| **BFF** | `bff/` (TypeScript, Hono) | Holds `NCE_API_KEY`, speaks REST+HMAC server-side (NCE has no browser path: no CORS, stdio-only MCP). Exposes a browser-safe session API. Stateless — no DB. Grows an **allowlisted generalized proxy** to the other module route families (`/api/sales/*`, `/api/project/*`, …) as their surfaces are built (U.W3) |
-| **Shell & surfaces** | `app/src/shell/` + per-module surface dirs | One navigation/session/i18n/a11y shell (ADR-0008 ratchets from wave one) hosting module surfaces; the canvas is one surface. Each new surface names the Portal capability it supersedes, or explicitly doesn't (ADR-0007) |
+| **BFF** | `bff/` (TypeScript, Hono) | Holds `NCE_API_KEY`, speaks REST+HMAC server-side (NCE has no browser path: no CORS, stdio-only MCP). Stateless — no DB. **Identity & tenancy (ADR-0011):** Entra ID OIDC login, signed HttpOnly session cookie, and an Entra-group→namespace mapping — **every NCE call's `namespace_id` is validated server-side against the session's allowed set** (without this the BFF is a cross-tenant proxy), and the user's UPN rides as `actor` on every mutation. Grows an **allowlisted generalized proxy** to the other module route families (U.W3, T3 security surface) |
+| **Codec** | `app/src/exchange/nce/` (B76) | The two pure mappings between NCE's graph shapes and `DesignDocument`: read shape → document, document → author payloads. NetBox component classes and front/rear mappings persist in NCE capability `extra` keys (m6 guide Rev 2 §5); geometry in grid units, origin top-left, y-down (Rev 2 §4) — exporters convert |
+| **Shell & surfaces** | `app/src/shell/` + per-module surface dirs | One navigation/session/i18n/a11y shell (ADR-0008 ratchets from wave one) hosting module surfaces; the canvas is one surface. **Visual system: Material Design 3 tokens, generated from the copper seed, dark/light following the OS (ADR-0009)** — surfaces consume roles, never raw colors. Each new surface names the Portal capability it supersedes, or explicitly doesn't (ADR-0007) |
 | **Document** | `app/src/model/` | NetBox-shaped types (ADR-0006): DeviceType templates → Device instances with owned components; front/rear port mapping; Site→Location→Rack; status lifecycle; signal extension layer beside the core |
-| **Projections** | `app/src/{editor,views,exchange}/` | `toFlow()` for the 2D canvas, the 3D scene builder, print, DXF, cable schedule, NetBox export — all pure functions of (document, layout), guaranteed to agree |
+| **Projections** | `app/src/{editor,views,exchange}/` | `toFlow()` for the 2D canvas, the 3D scene builder, print, DXF, cable schedule, NetBox export — all pure functions of (document, layout), built so they cannot disagree by construction; B78's visual regression is the check on the rendered result |
 | **Layout & routing** | `app/src/layout/` | elkjs placement + Copper's own A*-grid cable router (clean-room; ADR-0005). Quality measured by the headless rig against the 15 real fixture sheets |
 | **Catalog** | `catalog/` | devicetype-library (CC0) vendored + parsed; Bravo AV types authored in the same format under CC0 for upstream contribution |
 
@@ -46,7 +47,7 @@ Draw (Copper, `status=planned`) → validate (`validate_design_graph` + physical
 
 ## Standards, three ways (Rev 2 §03)
 
-- **Compute against:** AVIXA DISCAS/audio coverage, IEEE 802.3 PoE classes, TIA-568 channel length, HDCP chains, ST 2110 bandwidth — the V-lane validators.
+- **Compute against:** AVIXA DISCAS/audio coverage, IEEE 802.3 PoE classes, EN 50173 / NEK 700 channel length (TIA-568 secondary, ADR-0008 §4), HDCP chains, ST 2110 bandwidth — the V-lane validators.
 - **Exchange through:** NetBox schema + devicetype-library, DXF/DWG, IFC/COBie, D365 FL, glTF/Collada (3D), MasterFormat Div 27/28 (later).
 - **Observe through:** LLDP/SNMP/gNMI via Engine 18, NMOS IS-04/05 (later), AVIXA performance verification as the meaning of `TESTED`.
 

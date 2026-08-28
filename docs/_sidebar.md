@@ -17,6 +17,10 @@
   - [0006 NetBox methodology](decisions/0006-netbox-methodology-is-binding.md)
   - [0007 Vertical-suite front end](decisions/0007-copper-is-the-vertical-suite-front-end.md)
   - [0008 EU/Nordic baseline](decisions/0008-eu-nordic-compliance-baseline.md)
+  - [0009 Material Design 3](decisions/0009-material-design-3.md)
+  - [0010 elkjs EPL exception](decisions/0010-elkjs-epl-licence-exception.md)
+  - [0011 Identity & tenancy](decisions/0011-identity-session-tenancy.md)
+  - [0012 Deployment posture](decisions/0012-deployment-posture.md)
   - [ADR template](decisions/0000-template.md)
 
 - Proposals

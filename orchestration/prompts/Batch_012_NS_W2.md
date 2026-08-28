@@ -3,8 +3,10 @@
 > **FRESH SESSION REQUIRED.** Fully self-contained brief; one wave = one session = one branch = one commit = one TAG.
 > **Engine class:** Flash (Gemini Flash 3.7 High, turbo). Unwritten design decision → STOP and report.
 > **Workspace:** the NCE worktree `…\systemer\Neuro-Cognitive Engine\NCE-Copper` (branch `copper/b012-read-adapter` off fresh `origin/main`). This is a SHARED repo co-written by another orchestrator: never run `git checkout`/`stash`/`restore` outside your branch; if `git status` shows files you did not touch, STOP and report.
+>
+> **⚠ [HOLD-ML] 2026-08-28:** this scope was handed to the NCE ML orchestrator (`docs/m6_completion_guide.md`, wave M6.W13a). **Do not dispatch this brief until the boot content-check confirms ML has NOT landed it.** If dispatched Copper-side, apply the guide's Rev 2 amendments (actor param, version token, cache-generation bump, extra-keys port-class mapping).
 
-Rules 1–11 of `orchestration/_TEMPLATE.md` apply with the NCE gate substituted: **`make lint && make typecheck` clean (mypy: report the DELTA vs main, not an absolute — the repo has a known baseline) · your acceptance tests green serially · `pytest -n auto -m "not integration and not perf" -q` with zero NEW failures vs the baseline recorded on the B11 ledger row · run pytest with `NCE_MCP_NAMESPACE_ID=""`.** Files here are CRLF in the working tree — if you script an edit, match on the file's real line endings and assert every replacement matched.
+Rules 1–11 of `orchestration/_TEMPLATE.md` apply **with rule 1's branch replaced by the branch named above and rule 5's gate replaced by the NCE gate**: **`make lint && make typecheck` clean (mypy: report the DELTA vs main, not an absolute — the repo has a known baseline) · your acceptance tests green serially · `pytest -n auto -m "not integration and not perf" -q` with zero NEW failures vs the baseline recorded on the B11 ledger row · run pytest with `NCE_MCP_NAMESPACE_ID=""`.** Files here are CRLF in the working tree — if you script an edit, match on the file's real line endings and assert every replacement matched.
 
 **Skills:** python-pro (primary), fastapi-pro, mcp-builder
 **Depends on:** B11 (seam recon — its row carries the re-verified tool counts; READ IT via the orchestrator's dispatch note)

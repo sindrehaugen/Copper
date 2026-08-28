@@ -6,7 +6,7 @@
     "lib": ["ES2023"],
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "strict": true,
+    "strict": true, "allowJs": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "skipLibCheck": true,
@@ -14,7 +14,7 @@
     "allowSyntheticDefaultImports": true
   },
   "include": [
-    "vitest.config.ts",
+    
     "eslint.config.js"
   ]
 }

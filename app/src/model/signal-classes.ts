@@ -10,6 +10,10 @@ export const SIGNAL_CLASSES: SignalClass[] = [
   'UNKNOWN',
 ];
 
+/**
+ * Extension — no NetBox equivalent
+ * Represents the three independent facts of a port.
+ */
 export interface PortFacts {
   type: string;
   signalType?: string;

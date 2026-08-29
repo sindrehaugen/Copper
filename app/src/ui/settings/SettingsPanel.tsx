@@ -8,28 +8,31 @@ export const SettingsPanel: React.FC = () => {
     <div>
       <h2>Settings</h2>
       <div>
-        <label>Language:</label>
-        <input 
-          data-testid="language-input"
-          value={language} 
-          onChange={(e) => setLanguage(e.target.value)} 
-        />
+        <label>Language:
+          <input 
+            data-testid="language-input"
+            value={language} 
+            onChange={(e) => setLanguage(e.target.value)} 
+          />
+        </label>
       </div>
       <div>
-        <label>Region:</label>
-        <input 
-          data-testid="region-input"
-          value={region} 
-          onChange={(e) => setRegion(e.target.value)} 
-        />
+        <label>Region:
+          <input 
+            data-testid="region-input"
+            value={region} 
+            onChange={(e) => setRegion(e.target.value)} 
+          />
+        </label>
       </div>
       <div>
-        <label>Timezone:</label>
-        <input 
-          data-testid="timezone-input"
-          value={timezone} 
-          onChange={(e) => setTimezone(e.target.value)} 
-        />
+        <label>Timezone:
+          <input 
+            data-testid="timezone-input"
+            value={timezone} 
+            onChange={(e) => setTimezone(e.target.value)} 
+          />
+        </label>
       </div>
     </div>
   );

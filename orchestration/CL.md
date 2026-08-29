@@ -92,7 +92,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 * [PASSED TAG] B22 — P.W4 canvas-readonly: React Flow canvas; device cards with port rows, dual source+target handles per port, measure-on-mount · tier: T2 · dep: B21 [NO TAG]
 * [PASSED TAG] B23 — P.W5 elk-layout: elkjs layered auto-layout for unpositioned designs (technique-level reuse, own code) · tier: T2 · dep: B21 [PASSED TAG]
 * [PASSED TAG] B24 — P.W6 naive-edges: orthogonal-naive cable paths (no router; Q lane replaces) · tier: T2 · dep: B22 [NO TAG]
-* [LOCKED] B25 — P.W7 cable-schedule: schedule view + CSV export from the same document · tier: T2 · dep: B20,B4b [NO TAG]
+* [RUNNING] B25 — P.W7 cable-schedule: schedule view + CSV export from the same document · tier: T2 · dep: B20,B4b [NO TAG]
 * [LOCKED] B26 — P.W8 integration-proof 🛑→HS-3: seed local NCE with the integration core stack (source: `Documents\integration-AV-Core` files + as-built sheets) via the B13-scope author tool, render read-only via B20–B24, cable schedule out; orchestrator runs the live stack itself · tier: T2 (run-it wave) · dep: B13,B20,B22,B23,B24,B25,B76 [NO TAG]
   · Accept (measurable, per the plan's own motto): (a) every seeded device/cable is representable without model workarounds, OR each failure is named on this row; (b) cable-schedule row count equals the seed count exactly; (c) initial render of the full site < 3 s locally; (d) screenshot + counts recorded here. HS-3 reviews the named-failures list, not a vibe.
 * [DONE] B76 — P.W9 graph-doc-codec [ORCH-INSERTED, audit 2026-08-28]: the two pure mappings the lane silently assumed — NCE read shape → `DesignDocument`, and `DesignDocument` → author-tool payloads (component classes + front/rear mapping via the m6 guide Rev 2 §5 `extra` keys; geometry per Rev 2 §4 units) · tier: T2 · dep: B4b,B20 [NO TAG]
@@ -138,7 +138,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 * [PASSED TAG] B47 — Q.W3 bundling: trunk-follow discount + bundle proposals · tier: T3 (clean-room; path bans in brief) · dep: B46 [NO TAG]
 * [PASSED TAG] B48 — Q.W4 quality-score: outside-in ugliness score, blind to router internals · tier: T3 (clean-room) · dep: B6,B45b [NO TAG]
 * [PASSED TAG] B49 — Q.W5 portfolio-worker: route N strategies in a Web Worker, pick best by B48 · tier: T2 · dep: B47,B48 [NO TAG]
-* [LOCKED] B50 — Q.W6 rig-ratchet: B48 scores across the 15 real sheets (using rig/run.mjs output or similar) to ensure total ugly-score is below FLOOR_SCORE. Fails with process.exit(1) if routing quality regresses. Wired into CI. · tier: T2 · dep: B48 [NO TAG]
+* [RUNNING] B50 — Q.W6 rig-ratchet: B48 scores across the 15 real sheets (using rig/run.mjs output or similar) to ensure total ugly-score is below FLOOR_SCORE. Fails with process.exit(1) if routing quality regresses. Wired into CI. · tier: T2 · dep: B48 [NO TAG]
 * [DONE] B78 — Q.W7 visual-regression [ORCH-INSERTED, audit 2026-08-28]: Playwright (this wave installs it — ADR-0002 names it, nothing else adds it) screenshot tests of 3 fixture sheets on the read-only canvas, light + dark schemes · tier: T2 · dep: B24,B68 [NO TAG]
 
 ### Lane T — 3D (projections of the same document — steps-ai Rom3DView proves the shape)

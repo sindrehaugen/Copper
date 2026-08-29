@@ -81,7 +81,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
   · Note: NetBox vocabulary for `position`/`face` (ADR-0006); migration number pre-allocated by orchestrator at dispatch (never self-picked — in-flight ML migrations own numbers).
 * [HOLD-ML] B16 — NS.W6 cable-two-ended: fix `uses_cable` to link BOTH terminations (+ docstring), preserving existing rows · tier: T2 · dep: B13 [NO TAG]
   · Note: touches ML-owned module — flag the fix to the ML ledger owner on dispatch; RED-first traversal test.
-* [HOLD-ML+HS1] B17 — NS.W7 status-lifecycle: ADR-0003 — `status` (NetBox vocab, default `planned`) on design objects in the side-table; reads filter by `statuses`; `DESIGN_REVISION` scoping for planned objects · tier: T3 · dep: B15 [NO TAG]
+* [HOLD-ML+HS1] B17 — NS.W7 status-lifecycle: ADR-0003 — `status` (NetBox vocab, default `planned`) on design objects in the side-table; reads filter by `statuses`; `DESIGN_REVISION` scoping for planned objects (client-side only; NCE stores inert text) · tier: T3 · dep: B15 [NO TAG]
 * [HOLD-ML+HS2] B18 — NS.W8 delete-patch: design + implement removal of `planned` objects (nodes+edges+capability+geometry rows, event-logged); `active` deletion explicitly out of scope · tier: T3 · dep: B17 [NO TAG]
 
 ### Lane P — Projection (BFF + read-only canvas + the premise proof)

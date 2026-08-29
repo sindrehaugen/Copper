@@ -1,3 +1,4 @@
+/* global process, console */
 import fs from 'fs';
 import path from 'path';
 import * as yaml from 'js-yaml';
@@ -17,7 +18,7 @@ export function validateFile(filePath) {
   let parsed;
   try {
     parsed = yaml.load(content);
-  } catch (err) {
+  } catch {
     return { valid: false, errors: [{ message: 'Invalid YAML format' }] };
   }
 
@@ -29,7 +30,7 @@ export function validateString(content) {
   let parsed;
   try {
     parsed = yaml.load(content);
-  } catch (err) {
+  } catch {
     return { valid: false, errors: [{ message: 'Invalid YAML format' }] };
   }
 

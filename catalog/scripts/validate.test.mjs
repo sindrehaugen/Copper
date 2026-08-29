@@ -1,3 +1,4 @@
+/* global console */
 import assert from 'assert';
 import { validateString } from './validate.mjs';
 

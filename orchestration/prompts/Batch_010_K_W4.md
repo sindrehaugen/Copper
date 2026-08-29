@@ -1,42 +1,31 @@
-# Batch 010 - K.Wave 4 - `catalog-memory`
+# Batch 010 - K.W4: av-seed-set
 
-> **FRESH SESSION REQUIRED.** Run this wave in a **new chat / new agent with no prior context**. This file
-> is fully self-contained - it is the only instruction you need. Do **not** carry state from a previous wave.
-> One wave = one new session = one branch = one commit = one TAG audit.
->
-> **Engine class:** Flash (Gemini Flash 3.7 High in Antigravity, turbo mode).
+> **FRESH SESSION REQUIRED.**
+> **Engine class:** Pro.
 
-1. **One wave = one branch = one commit.** Branch `cu-b010-k-w4-catalog-memory` off current `main`. Squash everything into one commit.
-2. **Verify before you act.**
-3. **Modify only the files listed in `Files:`.**
-4. **Minimal diff.**
-5. **Acceptance gate:** `pnpm lint` clean · `pnpm typecheck` clean · `pnpm vitest run catalog/src/registry.test.ts` clean.
-6. **Licence firewall (voids the wave if broken):** never open, quote, or port from `C:\Claude\EasySchematic\**`.
-7. **NCE is the store.**
-8. **Secrets:** never commit tokens.
-9. **Turbo-mode discipline:** commit on your branch is the last state-changing command.
-10. **Craft gate:** functions small and single-purpose.
-11. **Report format:** files changed, verbatim gate output, what you did NOT verify.
+1. **One wave = one branch = one commit.** Branch cu-b010-k-w4-av-seed-set off current main. Squash everything into one commit.
+2. **Modify only the files listed in Files:.**
+3. **Acceptance gate:** pnpm check:catalog clean.
 
-**Skills:** Node.js.
-**Depends on:** B9.
-**Reads (context, do not edit):** `catalog/src/walker.ts` (for the B9 walker output).
-**Files (exactly these - nothing else):**
-- `catalog/src/registry.ts` (the registry)
-- `catalog/src/registry.test.ts` (tests)
-- `catalog/src/index.ts` (exporting the public API)
+**Files:**
+- catalog/bravo/*/*.yaml
 
-**Goal:** Create an in-memory global registry that holds the output of B9, providing O(1) lookups by `vendor_slug-model_slug`.
+**Goal:**
+Create exactly 10 seed AV types representing core integration devices. You must author these by hand based on public datasheet knowledge, NOT from EasySchematic's catalog.
 
-**Steps:**
-1. In `catalog/src/registry.ts`, implement `CatalogRegistry` class/module.
-2. It should have `initialize(dirPath: string): Promise<void>` which calls B9's `walkDirectory` and stores the Map.
-3. Provide `getDeviceType(id: string): DeviceType | undefined`.
-4. Provide `getAllDeviceTypes(): DeviceType[]`.
-5. In `catalog/src/registry.test.ts`, write tests verifying initialization and lookups.
-6. In `catalog/src/index.ts`, export the public API of the catalog module (`CatalogRegistry`, `getDeviceType`, etc).
+**Required Vendors/Brands (1 each):**
+1. QSC (e.g. Q-SYS Core 110f)
+2. Extron (e.g. IN1608 xi)
+3. Crestron (e.g. CP4)
+4. Biamp (e.g. TesiraFORTE DAN AI)
+5. Shure (e.g. MXA910 or P300)
+6. Sennheiser (e.g. TCC2)
+7. Lightware (e.g. Taurus UCX-4x2-HC30)
+8. Kramer (e.g. VS-411UHD)
+9. Genelec (e.g. 4420A Smart IP)
+10. Barco (e.g. ClickShare CX-50)
 
-**Acceptance:** `pnpm lint && pnpm typecheck && pnpm vitest run catalog/src/registry.test.ts` clean.
+**Format:**
+Must be valid DTL format with the copper_extensions root key (as defined in B9). Include signal classes for ports. Include a comment citing the public datasheet used.
 
-## Final (the TAG gate - this is the ONLY way this wave reaches DONE):
-Follow the standard final rules.
+**Acceptance:** pnpm run check:catalog passes.

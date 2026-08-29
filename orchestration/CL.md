@@ -138,7 +138,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 * [PASSED TAG] B47 — Q.W3 bundling: trunk-follow discount + bundle proposals · tier: T3 (clean-room; path bans in brief) · dep: B46 [NO TAG]
 * [PASSED TAG] B48 — Q.W4 quality-score: outside-in ugliness score, blind to router internals · tier: T3 (clean-room) · dep: B6,B45b [NO TAG]
 * [PASSED TAG] B49 — Q.W5 portfolio-worker: route N strategies in a Web Worker, pick best by B48 · tier: T2 · dep: B47,B48 [NO TAG]
-* [RUNNING] B50 — Q.W6 rig-ratchet: B48 scores across the 15 real sheets (using rig/run.mjs output or similar) to ensure total ugly-score is below FLOOR_SCORE. Fails with process.exit(1) if routing quality regresses. Wired into CI. · tier: T2 · dep: B48 [NO TAG]
+* [PASSED TAG] B50 — Q.W6 rig-ratchet: B48 scores across the 15 real sheets (using rig/run.mjs output or similar) to ensure total ugly-score is below FLOOR_SCORE. Fails with process.exit(1) if routing quality regresses. Wired into CI. · tier: T2 · dep: B48 [NO TAG]
 * [DONE] B78 — Q.W7 visual-regression [ORCH-INSERTED, audit 2026-08-28]: Playwright (this wave installs it — ADR-0002 names it, nothing else adds it) screenshot tests of 3 fixture sheets on the read-only canvas, light + dark schemes · tier: T2 · dep: B24,B68 [NO TAG]
 
 ### Lane T — 3D (projections of the same document — steps-ai Rom3DView proves the shape)

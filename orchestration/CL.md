@@ -88,7 +88,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 * [PASSED TAG] B19 — P.W1 bff-scaffold: `bff/` Hono TS server; config seams (`NCE_BASE_URL`, `NCE_API_KEY` via env/file — key class + blast radius per the seam audit; dev-identity seam per ADR-0011), `/healthz`, session stub (replaced by B75) · tier: T2 · dep: B1 [NO TAG]
 * [PASSED TAG] B20 — P.W2 bff-nce-client: strictly typed REST client mapping NCE Graph to Copper schema, distinct errors for `-32005` (governance disabled) · tier: T2 · dep: B3,B4 [PASSED TAG]
-* [RUNNING] B21 — P.W3 to-flow: pure `toFlow(document, layout)` projection (PORT-list port), `initialWidth/Height` seeding (steps-ai ADR 0021 trap) · tier: T2 · dep: B3,B4b [NO TAG]
+* [PASSED TAG] B21 — P.W3 to-flow: pure `toFlow(document, layout)` projection (PORT-list port), `initialWidth/Height` seeding (steps-ai ADR 0021 trap) · tier: T2 · dep: B3,B4b [PASSED TAG]
 * [PASSED TAG] B22 — P.W4 canvas-readonly: React Flow canvas; device cards with port rows, dual source+target handles per port, measure-on-mount · tier: T2 · dep: B21 [NO TAG]
 * [PASSED TAG] B23 — P.W5 elk-layout: elkjs layered auto-layout for unpositioned designs (technique-level reuse, own code) · tier: T2 · dep: B21 [PASSED TAG]
 * [PASSED TAG] B24 — P.W6 naive-edges: orthogonal-naive cable paths (no router; Q lane replaces) · tier: T2 · dep: B22 [NO TAG]
@@ -128,7 +128,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 * [LOCKED] B41 — R.W1 rack-model: rack schema + U positions/face from B15 geometry · tier: T2 · dep: B4b,B15 [NO TAG]
 * [LOCKED] B42 — R.W2 rack-elevation-view: U-positioned elevation rendering (net-new — no Romtegning prior art) · tier: T2 · dep: B41 [NO TAG]
 * [LOCKED] B43 — R.W3 rack-edit: drag placement + B38 wiring · tier: T2 · dep: B42,B31 [NO TAG]
-* [LOCKED] B44 — R.W4 location-tree: Site→Location(→Room) navigation mapped to FL labels · tier: T2 · dep: B4b,B20 [NO TAG]
+* [RUNNING] B44 — R.W4 location-tree: Site > Location(> Room) navigation mapped to FL labels · tier: T2 · dep: B4b,B20 [NO TAG]
 
 ### Lane Q — Routing quality (continuous track after B50; the four forbidden optimizations are pre-registered false wins)
 
@@ -149,7 +149,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 ### Lane X — Exchange doors
 
-* [LOCKED] B54 — X.W1 dxf: DXF writer port (MIT — keep header) + plate/elevation export · tier: T2 · dep: B23 [NO TAG]
+* [RUNNING] B54 — X.W1 dxf: DXF writer port (MIT — keep header) + plate/elevation export · tier: T2 · dep: B23 [NO TAG]
 * [LOCKED] B55 — X.W2 es-import: EasySchematic-file → NCE (B5 reader + B13 author), one-shot with import report · tier: T3 · dep: B5,B34 [NO TAG]
 * [HOLD-HS6] B56 — X.W3 netbox-export: one-shot export (sites/locations/racks/device-types/devices/cables) — schema mapping is near-mechanical per ADR-0006 · tier: T3 · dep: B4b,B20 [NO TAG]
 * [HOLD-HS6] B57 — X.W4 netbox-import: one-shot import of an existing estate · tier: T3 · dep: B56 [NO TAG]

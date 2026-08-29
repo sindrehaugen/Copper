@@ -13,8 +13,6 @@ export function toFlow(
   layout: LayoutData = {}
 ): { nodes: Node[]; edges: Edge[] } {
   const nodes: Node[] = document.devices.map((device) => {
-    // Collect all ports into a single list for the "PORT-list" style node.
-    // In a single-column layout, the height is proportional to the total number of ports.
     const totalPorts =
       (device.interfaces?.length ?? 0) +
       (device.frontPorts?.length ?? 0) +

@@ -73,7 +73,6 @@ describe('toFlow projection', () => {
     expect(n2).toBeDefined();
     expect(n2?.position).toEqual({ x: 500, y: 300 });
     expect(n2?.initialWidth).toBe(CARD_WIDTH);
-    // 1 front port + 1 rear port = 2 ports
     expect(n2?.initialHeight).toBe(CARD_HEADER_H + CARD_PAD_Y + 2 * PORT_ROW_H);
     expect(n2?.data.device).toBe(device2);
 

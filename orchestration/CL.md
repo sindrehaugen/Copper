@@ -63,7 +63,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
   · Files: `catalog/src/parse.ts` + tests · Goal: parse interfaces/front-ports/rear-ports/console/power/module-bays/u_height/is_full_depth/weight/airflow into B4 DeviceType; unknown keys surfaced, not swallowed · Accept: 5 named real files parse with hand-checked assertions; malformed YAML RED.
 * [PASSED TAG] B9 — K.W3 av-authoring-format: Bravo AV device-type format = DTL format + `copper_extensions` (per-port signal classes) · tier: T2 · dep: B8 [NO TAG]
   · Files: `catalog/bravo/README.md` (CC0 declaration), `catalog/schema/copper-extensions.schema.json`, `catalog/scripts/validate.mjs`, CI edit (chokepoint) · Goal: authoring format validated in CI; extensions layered so upstream contribution = strip extensions (ADR-0006 §6) · Accept: valid + invalid sample both proven.
-* [RUNNING] B10 — K.W4 av-seed-set: 10 seed AV types (QSC, Extron, Crestron, Biamp, Shure, Sennheiser, Lightware, Kramer, Genelec, Barco — from datasheets, never from EasySchematic's catalogue) · tier: T1 (content; full-gate substitute) · dep: B9 [NO TAG]
+* [PASSED TAG] B10 — K.W4 av-seed-set: 10 seed AV types (QSC, Extron, Crestron, Biamp, Shure, Sennheiser, Lightware, Kramer, Genelec, Barco — from datasheets, never from EasySchematic's catalogue) · tier: T1 (content; full-gate substitute) · dep: B9 [NO TAG]
   · Files: `catalog/bravo/*/*.yaml` · Accept: all pass `validate.mjs` + parse via B8; port counts spot-checked against public datasheets, sources cited in YAML comments.
 
 ### Lane NS — NCE seam (worktree `NCE-Copper`, branch `copper/*`, PR to NCE main · ⚠ ONE in flight at a time · every tool wave edits BOTH registries + the 5 count tests — see `docs/nce_seam_audit.md`)

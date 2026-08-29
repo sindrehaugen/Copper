@@ -41,7 +41,7 @@
 2. **Do NOT edit `orchestration/CL.md`.** Ledger state is orchestrator-only.
 3. **Do NOT open a PR and do NOT push** unless the orchestrator asks. Commit on your wave branch and stop there.
 4. **The independent adversarial audit is still the gate** — the orchestrator dispatches it against your commit, adjudicates the verdict, and flips the ledger itself. Your commit being green is *necessary*, never *sufficient*.
-5. If the acceptance gate fails and you cannot fix it within this wave's stated scope, **STOP and report** — do not widen scope, do not "fix" a mismatch, do not start the next wave. A STOP is a successful outcome.
+5. If the acceptance gate fails and you cannot fix it within this wave's stated scope, **STOP and report** — do not widen scope, do not "fix" a mismatch, do not start the next wave. A STOP is a successful outcome. Code must comply with EN 301 549 / WCAG 2.1 AA standards for accessibility.
 
 **§6.3 — name what you verified and how; name what you did NOT verify and why. Never say "complete", "all", or "every" about something you sampled.** An omission that is named is a scope decision; an omission that is silent is a defect.
 

@@ -1,0 +1,19 @@
+---
+# Datasheet: https://www.biamp.com/products/tesira-digital-signal-processors
+manufacturer: Biamp
+model: TesiraFORTE DAN AI
+slug: biamp-tesiraforte-dan-ai
+description: Fixed I/O DSP with Dante
+u_height: 1
+is_full_depth: false
+interfaces:
+  - name: Control
+    type: 1000base-t
+  - name: Dante
+    type: 1000base-t
+copper_extensions:
+  ports:
+    Control:
+      signal_class: control-biamp
+    Dante:
+      signal_class: audio-dante

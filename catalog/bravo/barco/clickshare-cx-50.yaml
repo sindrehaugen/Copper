@@ -1,0 +1,15 @@
+---
+# Datasheet: https://www.barco.com/en/product/clickshare-cx-50
+manufacturer: Barco
+model: ClickShare CX-50
+slug: barco-clickshare-cx-50
+description: Premium wireless conferencing system
+u_height: 1
+is_full_depth: false
+interfaces:
+  - name: LAN
+    type: 1000base-t
+copper_extensions:
+  ports:
+    LAN:
+      signal_class: control

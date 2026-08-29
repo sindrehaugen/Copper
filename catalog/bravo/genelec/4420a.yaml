@@ -1,0 +1,15 @@
+---
+# Datasheet: https://www.genelec.com/4420a
+manufacturer: Genelec
+model: 4420A
+slug: genelec-4420a
+description: Smart IP Installation Speaker
+u_height: 0
+is_full_depth: false
+interfaces:
+  - name: Network
+    type: 100base-tx
+copper_extensions:
+  ports:
+    Network:
+      signal_class: audio-dante

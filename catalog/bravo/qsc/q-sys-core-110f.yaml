@@ -1,0 +1,19 @@
+---
+# Datasheet: https://www.qsys.com/products/audio-and-video-processing/q-sys-core-processors/core-110f/
+manufacturer: QSC
+model: Q-SYS Core 110f
+slug: qsc-qsys-core-110f
+description: Unified audio, video, and control processor
+u_height: 1
+is_full_depth: false
+interfaces:
+  - name: LAN A
+    type: 1000base-t
+  - name: LAN B
+    type: 1000base-t
+copper_extensions:
+  ports:
+    LAN A:
+      signal_class: audio-qlan
+    LAN B:
+      signal_class: audio-dante

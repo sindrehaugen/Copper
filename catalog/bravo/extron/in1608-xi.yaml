@@ -1,0 +1,15 @@
+---
+# Datasheet: https://www.extron.com/product/in1608xi
+manufacturer: Extron
+model: IN1608 xi
+slug: extron-in1608-xi
+description: Eight Input HDCP-Compliant Scaling Presentation Switcher
+u_height: 1
+is_full_depth: true
+interfaces:
+  - name: LAN
+    type: 1000base-t
+copper_extensions:
+  ports:
+    LAN:
+      signal_class: control-extron

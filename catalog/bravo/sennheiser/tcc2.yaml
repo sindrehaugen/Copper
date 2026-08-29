@@ -1,0 +1,19 @@
+---
+# Datasheet: https://en-us.sennheiser.com/tcc2
+manufacturer: Sennheiser
+model: TeamConnect Ceiling 2
+slug: sennheiser-tcc2
+description: Ceiling microphone with dynamic beamforming
+u_height: 0
+is_full_depth: false
+interfaces:
+  - name: Primary
+    type: 1000base-t
+  - name: PoE/Ctrl
+    type: 100base-tx
+copper_extensions:
+  ports:
+    Primary:
+      signal_class: audio-dante
+    PoE/Ctrl:
+      signal_class: control

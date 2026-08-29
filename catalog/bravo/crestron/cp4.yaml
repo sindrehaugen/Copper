@@ -1,0 +1,15 @@
+---
+# Datasheet: https://www.crestron.com/Products/Control-Hardware-Software/Hardware/Control-Systems/CP4
+manufacturer: Crestron
+model: CP4
+slug: crestron-cp4
+description: 4-Series Control System
+u_height: 1
+is_full_depth: false
+interfaces:
+  - name: LAN
+    type: 1000base-t
+copper_extensions:
+  ports:
+    LAN:
+      signal_class: control-crestron

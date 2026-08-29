@@ -1,0 +1,15 @@
+---
+# Datasheet: https://lightware.com/ucx-4x2-hc30
+manufacturer: Lightware
+model: UCX-4x2-HC30
+slug: lightware-ucx-4x2-hc30
+description: Universal Matrix Switcher
+u_height: 1
+is_full_depth: false
+interfaces:
+  - name: LAN
+    type: 1000base-t
+copper_extensions:
+  ports:
+    LAN:
+      signal_class: control

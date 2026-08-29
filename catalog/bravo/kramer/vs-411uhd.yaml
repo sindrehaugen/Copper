@@ -1,0 +1,15 @@
+---
+# Datasheet: https://www.kramerav.com/product/VS-411UHD
+manufacturer: Kramer
+model: VS-411UHD
+slug: kramer-vs-411uhd
+description: 4x1 4K60 Auto Switcher
+u_height: 0.5
+is_full_depth: false
+interfaces:
+  - name: RS-232
+    type: other
+copper_extensions:
+  ports:
+    RS-232:
+      signal_class: control-serial

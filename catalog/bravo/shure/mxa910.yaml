@@ -1,0 +1,15 @@
+---
+# Datasheet: https://www.shure.com/en-US/products/microphones/mxa910
+manufacturer: Shure
+model: MXA910
+slug: shure-mxa910
+description: Ceiling Array Microphone
+u_height: 0
+is_full_depth: false
+interfaces:
+  - name: Network
+    type: 1000base-t
+copper_extensions:
+  ports:
+    Network:
+      signal_class: audio-dante

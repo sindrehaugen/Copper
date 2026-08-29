@@ -57,7 +57,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 ### Lane K — Catalog (devicetype-library + Bravo AV types, CC0)
 
-* [RUNNING] B7 — K.W1 dtl-vendor: vendor devicetype-library subset + sync script · tier: T1 · dep: B1 [NO TAG]
+* [PASSED TAG] B7 — K.W1 dtl-vendor: vendor devicetype-library subset + sync script · tier: T1 · dep: B1 [NO TAG]
   · Files: `catalog/devicetype-library/**` (vendored subset: Cisco, Netgear, Ubiquiti, APC, Eaton, Middle Atlantic, Yamaha, Blackmagic), `catalog/scripts/sync-dtl.mjs`, `catalog/README.md` (CC0 provenance note) · Goal: reproducible vendoring pinned to an upstream SHA · Accept: sync script idempotent; provenance recorded.
 * [PASSED TAG] B8 — K.W2 dtl-parser: YAML → DeviceType parser · tier: T2 · dep: B4b,B7 [NO TAG]
   · Files: `catalog/src/parse.ts` + tests · Goal: parse interfaces/front-ports/rear-ports/console/power/module-bays/u_height/is_full_depth/weight/airflow into B4 DeviceType; unknown keys surfaced, not swallowed · Accept: 5 named real files parse with hand-checked assertions; malformed YAML RED.

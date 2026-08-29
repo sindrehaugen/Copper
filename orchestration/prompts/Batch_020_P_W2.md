@@ -20,22 +20,22 @@
 
 **Skills:** Node.js, fetch, HMAC-SHA256, Zod.
 **Depends on:** B12, B19 (B19 provides BffConfig).
-**Reads (context, do not edit):** ff/src/index.ts (for BffConfig), pp/src/model/schema.ts (for target shapes).
+**Reads (context, do not edit):** bff/src/index.ts (for BffConfig), app/src/model/schema.ts (for target shapes).
 **Files (exactly these - nothing else):**
-- ff/package.json (add zod)
-- ff/src/nce-client/index.ts (the client implementation)
-- ff/src/nce-client/index.test.ts (tests)
-- ff/src/nce-client/hmac.ts (HMAC utility)
-- ff/src/nce-client/hmac.test.ts (HMAC tests)
+- bff/package.json (add zod)
+- bff/src/nce-client/index.ts (the client implementation)
+- bff/src/nce-client/index.test.ts (tests)
+- bff/src/nce-client/hmac.ts (HMAC utility)
+- bff/src/nce-client/hmac.test.ts (HMAC tests)
 
 **Goal:** Implement a strictly typed BFF-to-NCE REST client with HMAC-SHA256 authentication and Zod response validation.
 
 **Steps:**
-1. In ff/package.json, add zod to dependencies.
-2. Create ff/src/nce-client/hmac.ts exporting a function that computes X-NCE-Timestamp and canonical signature: METHOD\nPATH\nTIMESTAMP[\nSHA256(body)]. Use standard Node.js crypto module.
-3. Create ff/src/nce-client/index.ts. Export a client class or factory that takes BffConfig.
+1. In bff/package.json, add zod to dependencies.
+2. Create bff/src/nce-client/hmac.ts exporting a function that computes X-NCE-Timestamp and canonical signature: METHOD\nPATH\nTIMESTAMP[\nSHA256(body)]. Use standard Node.js crypto module.
+3. Create bff/src/nce-client/index.ts. Export a client class or factory that takes BffConfig.
 4. Implement getTopology(namespace: string): Promise<DesignDocument>. It calls GET /api/system-design/topology?namespace={namespace}.
-5. Implement alidateDesign(namespace: string, designLabel: string): Promise<{passed: boolean, reasons: string[]}>. It calls POST /api/system-design/validate with JSON body { "namespace": namespace, "design_label": designLabel }.
+5. Implement validateDesign(namespace: string, designLabel: string): Promise<{passed: boolean, reasons: string[]}>. It calls POST /api/system-design/validate with JSON body { "namespace": namespace, "design_label": designLabel }.
 6. Use zod to validate responses. If the API returns HTTP 403 / -32005, throw a distinct GovernanceDisabledError.
 
 **Acceptance:** pnpm lint && pnpm typecheck && pnpm vitest run bff/src/nce-client clean.

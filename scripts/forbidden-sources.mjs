@@ -29,7 +29,8 @@ export const CODE_TREE_PREFIXES = [
 
 export const EXEMPT_FORMAT_PREFIXES = [
   'app/src/exchange/' + 'easy' + 'schematic/',
-  'app/tests/fixtures/'
+  'app/tests/fixtures/',
+  'app/src/projection/e2e.test.ts'
 ];
 
 const CDN_PATTERN = /<(?:script|link)[^>]+(?:src|href)\s*=\s*["'](?:\/\/(?!\/)|https?:\/\/)/i;

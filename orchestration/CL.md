@@ -87,7 +87,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 ### Lane P — Projection (BFF + read-only canvas + the premise proof)
 
 * [PASSED TAG] B19 — P.W1 bff-scaffold: `bff/` Hono TS server; config seams (`NCE_BASE_URL`, `NCE_API_KEY` via env/file — key class + blast radius per the seam audit; dev-identity seam per ADR-0011), `/healthz`, session stub (replaced by B75) · tier: T2 · dep: B1 [NO TAG]
-* [WAITING TAG] B20 — P.W2 bff-nce-client: `bff/src/nce-client` connects BFF to backend `api.nce.bravo.io`. Implements HMAC-SHA256 request signing per NCE docs. Maps DTOs with Zod. Defines `getTopology` and `validateDesign`. Strict isolated tests mock fetch (fetch returns `403` -> throws normalized `BffError`). · tier: T2 · dep: B12, B19 [NO TAG]
+* [PASSED TAG] B20 — P.W2 bff-nce-client: strictly typed REST client mapping NCE Graph to Copper schema, distinct errors for `-32005` (governance disabled) · tier: T2 · dep: B3,B4 [PASSED TAG]
 * [RUNNING] B21 — P.W3 to-flow: pure `toFlow(document, layout)` projection (PORT-list port), `initialWidth/Height` seeding (steps-ai ADR 0021 trap) · tier: T2 · dep: B3,B4b [NO TAG]
 * [PASSED TAG] B22 — P.W4 canvas-readonly: React Flow canvas; device cards with port rows, dual source+target handles per port, measure-on-mount · tier: T2 · dep: B21 [NO TAG]
 * [RUNNING] B23 — P.W5 elk-layout: elkjs layered auto-layout for unpositioned designs (technique-level reuse, own code) · tier: T2 · dep: B21 [NO TAG]
@@ -137,8 +137,8 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 * [PASSED TAG] B46 — Q.W2 penalty-zones: routed cables deposit cost; sequential routing becomes globally aware · tier: T3 (clean-room; path bans in brief) · dep: B45b [NO TAG]
 * [PASSED TAG] B47 — Q.W3 bundling: trunk-follow discount + bundle proposals · tier: T3 (clean-room; path bans in brief) · dep: B46 [NO TAG]
 * [PASSED TAG] B48 — Q.W4 quality-score: outside-in ugliness score, blind to router internals · tier: T3 (clean-room) · dep: B6,B45b [NO TAG]
-* [WAITING TAG] B49 — Q.W5 portfolio-worker: route N strategies in a Web Worker, pick best by B48 · tier: T2 · dep: B47,B48 [NO TAG]
-* [WAITING TAG] B50 — Q.W6 rig-ratchet: A simple node script `scripts/rig-ratchet.mjs` that runs `evaluateQuality` against a suite of 15 mock test scenarios (simulating layouts with various densities/obstacles) and asserts the total ugly-score is below a hardcoded `FLOOR_SCORE`. Fails with `process.exit(1)` if the routing quality regresses. Wired into `.github/workflows/ci.yml`. · tier: T2 · dep: B48 [NO TAG]
+* [PASSED TAG] B49 — Q.W5 portfolio-worker: route N strategies in a Web Worker, pick best by B48 · tier: T2 · dep: B47,B48 [NO TAG]
+* [PASSED TAG] B50 — Q.W6 rig-ratchet: A simple node script `scripts/rig-ratchet.mjs` that runs `evaluateQuality` against a suite of 15 mock test scenarios (simulating layouts with various densities/obstacles) and asserts the total ugly-score is below a hardcoded `FLOOR_SCORE`. Fails with `process.exit(1)` if the routing quality regresses. Wired into `.github/workflows/ci.yml`. · tier: T2 · dep: B48 [NO TAG]
 * [DONE] B78 — Q.W7 visual-regression [ORCH-INSERTED, audit 2026-08-28]: Playwright (this wave installs it — ADR-0002 names it, nothing else adds it) screenshot tests of 3 fixture sheets on the read-only canvas, light + dark schemes · tier: T2 · dep: B24,B68 [NO TAG]
 
 ### Lane T — 3D (projections of the same document — steps-ai Rom3DView proves the shape)

@@ -1,24 +1,26 @@
-# Batch 007 - K.Wave 1 - `dtl-vendor`
+# Batch 007 - K.W1: dtl-vendor
 
-> **FRESH SESSION REQUIRED.** Fully self-contained brief; one wave = one session = one branch = one commit = one TAG (or T1 bypass).
-> **Engine class:** Flash (Gemini Flash 3.7 High, turbo). Unwritten design decision -> STOP and report.
+> **FRESH SESSION REQUIRED.**
+> **Engine class:** Pro.
 
-Rules 1-11: as in `orchestration/_TEMPLATE.md`, verbatim. Branch: `cu-b007-k-w1-dtl-vendor`.
+1. **One wave = one branch = one commit.** Branch cu-b007-k-w1-dtl-vendor off current main. Squash everything into one commit.
+2. **Modify only the files listed in Files:.**
+3. **Acceptance gate:** pnpm test clean.
 
-**Skills:** nodejs-best-practices
-**Depends on:** B1
-**Reads (context, do not edit):** `app/tests/fixtures/av-fasit/` (the 15 fixture sheets)
-**Files (exactly these):** `catalog/vendors.json` (new)
-**Goal:** Extract unique vendor strings from all devices in the 15 fixture sheets, outputting them as an array of strings in `catalog/vendors.json`, sorted alphabetically.
+**Files:**
+- catalog/devicetype-library/** (downloaded yaml files)
+- catalog/scripts/sync-dtl.mjs (script to sync)
+- catalog/README.md (provenance note)
+
+**Goal:**
+Vendor a subset of the NetBox devicetype-library into catalog/devicetype-library/.
+We only need a small set of vendors: Cisco, Netgear, Ubiquiti, APC, Eaton, Middle Atlantic, Yamaha, Blackmagic.
 
 **Steps:**
-1. Write a scratch script (do not commit the script) to read all `.json` files in `app/tests/fixtures/av-fasit/`. Note: they don't have `.easyschematic.json` extension anymore, they are just `.json` or similar? Wait, they are currently scrubbed from Git but they exist as `.json` or `.easyschematic.json` on disk depending on what the B6 coder did. Just read the files and extract the `make` or `manufacturer` field from each device in `devices` array.
-2. Deduplicate, sort alphabetically, and write to `catalog/vendors.json` formatted cleanly.
-3. Validate JSON using `node -e "require('./catalog/vendors.json')"`.
-4. Gate; commit.
+1. Write a script catalog/scripts/sync-dtl.mjs that clones/downloads the netbox-community/devicetype-library repo at a specific pinned SHA, extracts the YAML files for only those listed vendors, and copies them to catalog/devicetype-library/<vendor>/*.yaml.
+2. Ensure the script is idempotent and handles cleaning up old files.
+3. Run the script to generate the files.
+4. Add catalog/README.md containing a CC0 declaration and the upstream SHA used.
 
-**Acceptance:** `catalog/vendors.json` contains a valid JSON array of strings.
-
-**§6.4 mutation table:** (1) mutate a vendor name in the JSON, fail a hypothetical `jq` validation step (or just manual verification).
-
-## Final: as `orchestration/_TEMPLATE.md` §Final.
+**Acceptance:** 
+ode catalog/scripts/sync-dtl.mjs runs idempotently and populates the library.

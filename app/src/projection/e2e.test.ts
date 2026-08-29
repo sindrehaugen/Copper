@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import fixtureGymmen from '../../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json';
-import fixtureStudio from '../../../tests/fixtures/av-fasit/AV_H3B19.easyschematic.json';
-import fixtureAuditorium from '../../../tests/fixtures/av-fasit/AV_H1A04.easyschematic.json';
+import fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json';
+import fixtureStudio from '../../tests/fixtures/av-fasit/AV_H3B19.easyschematic.json';
+import fixtureAuditorium from '../../tests/fixtures/av-fasit/AV_H1A04.easyschematic.json';
 import { readEasySchematic } from '../exchange/easyschematic/read';
 import { toFlow } from './toFlow';
 import { applyElkLayout } from './layout';

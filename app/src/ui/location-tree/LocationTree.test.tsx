@@ -34,6 +34,11 @@ test('Component correctly nests Locations under Sites and Locations under parent
 
   // Assert Root Locations are under Site 1
   const site1LocationsList = within(site1).getByTestId('site-locations-s1');
+  
+  // CORRECTION: Ensure only exactly the 2 root locations are rendered at this level.
+  // This explicitly catches the flat-rendering mutation.
+  expect(site1LocationsList.children.length).toBe(2);
+
   const loc1 = within(site1LocationsList).getByTestId('location-l1');
   const loc2 = within(site1LocationsList).getByTestId('location-l2');
   expect(loc1).toBeDefined();
@@ -41,6 +46,10 @@ test('Component correctly nests Locations under Sites and Locations under parent
 
   // Assert nested location is under Location 1
   const loc1ChildrenList = within(loc1).getByTestId('location-children-l1');
+  
+  // CORRECTION: Ensure exactly 1 child is rendered at this level.
+  expect(loc1ChildrenList.children.length).toBe(1);
+  
   const loc3 = within(loc1ChildrenList).getByTestId('location-l3');
   expect(loc3).toBeDefined();
 

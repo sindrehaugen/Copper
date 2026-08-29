@@ -149,7 +149,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 ### Lane X — Exchange doors
 
-* [RUNNING] B54 — X.W1 dxf: DXF writer port (MIT — keep header) + plate/elevation export · tier: T2 · dep: B23 [NO TAG]
+* [PASSED TAG] B54 — X.W1 dxf: DXF writer port (MIT — keep header) + plate/elevation export · tier: T2 · dep: B23 [PASSED TAG]
 * [LOCKED] B55 — X.W2 es-import: EasySchematic-file → NCE (B5 reader + B13 author), one-shot with import report · tier: T3 · dep: B5,B34 [NO TAG]
 * [HOLD-HS6] B56 — X.W3 netbox-export: one-shot export (sites/locations/racks/device-types/devices/cables) — schema mapping is near-mechanical per ADR-0006 · tier: T3 · dep: B4b,B20 [NO TAG]
 * [HOLD-HS6] B57 — X.W4 netbox-import: one-shot import of an existing estate · tier: T3 · dep: B56 [NO TAG]

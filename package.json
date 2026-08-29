@@ -8,7 +8,8 @@
     "typecheck": "tsc -b",
     "test": "vitest run",
     "licences": "node scripts/check-licences.mjs",
-    "forbidden": "node scripts/forbidden-sources.mjs"
+    "forbidden": "node scripts/forbidden-sources.mjs",
+    "check:rig": "node scripts/rig-ratchet.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

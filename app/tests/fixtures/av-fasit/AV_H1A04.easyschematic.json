@@ -1,0 +1,3484 @@
+{
+ "version": 29,
+ "name": "Nordvik H1A04 IKT-rom H1 — AV-anlegg",
+ "nodes": [
+  {
+   "id": "room-H1A04",
+   "type": "room",
+   "position": {
+    "x": 84,
+    "y": 85
+   },
+   "data": {
+    "label": "H1 A04 — IKT-rom H1",
+    "locked": false
+   },
+   "style": {
+    "width": 1048,
+    "height": 1118
+   },
+   "width": 1048,
+   "height": 1118,
+   "zIndex": -1
+  },
+  {
+   "id": "room-H1A22",
+   "type": "room",
+   "position": {
+    "x": 780,
+    "y": 81
+   },
+   "data": {
+    "label": "H1 A22 — Flerbrukssone 1",
+    "locked": false
+   },
+   "style": {
+    "width": 1620,
+    "height": 1476
+   },
+   "width": 1620,
+   "height": 1476,
+   "zIndex": -1
+  },
+  {
+   "id": "room-H1A23",
+   "type": "room",
+   "position": {
+    "x": 1066,
+    "y": 56
+   },
+   "data": {
+    "label": "H1 A23 — Flerbrukssone 2",
+    "locked": false
+   },
+   "style": {
+    "width": 1334,
+    "height": 1515
+   },
+   "width": 1334,
+   "height": 1515,
+   "zIndex": -1
+  },
+  {
+   "id": "room-H1A24",
+   "type": "room",
+   "position": {
+    "x": 1352,
+    "y": 354
+   },
+   "data": {
+    "label": "H1 A24 — Provianten",
+    "locked": false
+   },
+   "style": {
+    "width": 1048,
+    "height": 1242
+   },
+   "width": 1048,
+   "height": 1242,
+   "zIndex": -1
+  },
+  {
+   "id": "room-H1B09",
+   "type": "room",
+   "position": {
+    "x": 84,
+    "y": 1131
+   },
+   "data": {
+    "label": "H1 B09 — Rom H1 B09",
+    "locked": false
+   },
+   "style": {
+    "width": 352,
+    "height": 254
+   },
+   "width": 352,
+   "height": 254,
+   "zIndex": -1
+  },
+  {
+   "id": "room-H1B13",
+   "type": "room",
+   "position": {
+    "x": 84,
+    "y": 1313
+   },
+   "data": {
+    "label": "H1 B13 — Rom H1 B13",
+    "locked": false
+   },
+   "style": {
+    "width": 352,
+    "height": 254
+   },
+   "width": 352,
+   "height": 254,
+   "zIndex": -1
+  },
+  {
+   "id": "room-U1A36",
+   "type": "room",
+   "position": {
+    "x": 370,
+    "y": 476
+   },
+   "data": {
+    "label": "U1 A36 — Hovedtelematikkrom",
+    "locked": false
+   },
+   "style": {
+    "width": 352,
+    "height": 700
+   },
+   "width": 352,
+   "height": 700,
+   "zIndex": -1
+  },
+  {
+   "id": "device-01-UM001",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 70
+   },
+   "parentId": "room-H1A04",
+   "data": {
+    "label": "UM001 · CX-Q2K4-NA",
+    "deviceType": "amplifier",
+    "manufacturer": "QSC",
+    "modelNumber": "CX-Q2K4-NA",
+    "ports": [
+     {
+      "id": "p-01-UM001-i0",
+      "label": "LAN A",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM001-i1",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "iec"
+     },
+     {
+      "id": "p-01-UM001-o2",
+      "label": "SPEAKER +/- 2",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM001-o3",
+      "label": "SPEAKER +/- 3",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM001-o4",
+      "label": "SPEAKER +/- 4",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Forsterker",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM001",
+      "position": "footer"
+     },
+     {
+      "text": "SW-02 1/0/40 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM002",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 274
+   },
+   "parentId": "room-H1A04",
+   "data": {
+    "label": "UM002 · CX-Q4K8-NA",
+    "deviceType": "amplifier",
+    "manufacturer": "QSC",
+    "modelNumber": "CX-Q4K8-NA",
+    "ports": [
+     {
+      "id": "p-01-UM002-i0",
+      "label": "LAN A",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM002-i1",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "iec"
+     },
+     {
+      "id": "p-01-UM002-o2",
+      "label": "SPEAKER +/- 1",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM002-o3",
+      "label": "SPEAKER +/- 2",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM002-o4",
+      "label": "SPEAKER +/- 3",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM002-o5",
+      "label": "SPEAKER +/- 4",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM002-o6",
+      "label": "SPEAKER +/- 5",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM002-o7",
+      "label": "SPEAKER +/- 6",
+      "signalType": "speaker-level",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Forsterker",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM002",
+      "position": "footer"
+     },
+     {
+      "text": "SW-02 1/0/39 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM003",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 60
+   },
+   "parentId": "room-H1A04",
+   "data": {
+    "label": "UM003 · GSM4230PX-100EUS",
+    "deviceType": "network-switch",
+    "manufacturer": "NETGEAR",
+    "modelNumber": "GSM4230PX-100EUS",
+    "ports": [
+     {
+      "id": "p-01-UM003-1-0-1",
+      "label": "1/0/1",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-1-0-2",
+      "label": "1/0/2",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-1-0-3",
+      "label": "1/0/3",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-proj-POE4",
+      "label": "1/0/4 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-1-0-5",
+      "label": "1/0/5",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-proj-POE6",
+      "label": "1/0/6 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-1-0-7",
+      "label": "1/0/7",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-proj-POE8",
+      "label": "1/0/8 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-1-0-9",
+      "label": "1/0/9",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-proj-POE10",
+      "label": "1/0/10 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-1-0-11",
+      "label": "1/0/11",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-proj-POE12",
+      "label": "1/0/12 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-1-0-13",
+      "label": "1/0/13",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-1-0-14",
+      "label": "1/0/14",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-1-0-15",
+      "label": "1/0/15",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-proj-POE16",
+      "label": "1/0/16 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-1-0-17",
+      "label": "1/0/17",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-1-0-18",
+      "label": "1/0/18",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-proj-POE23",
+      "label": "1/0/23 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM003-1-0-27",
+      "label": "1/0/27 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-01-UM003-1-0-28",
+      "label": "1/0/28 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Nettverk",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM003",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM004",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 616
+   },
+   "parentId": "room-H1A04",
+   "data": {
+    "label": "UM004 · GSM4248PX-100EUS",
+    "deviceType": "network-switch",
+    "manufacturer": "NETGEAR",
+    "modelNumber": "GSM4248PX-100EUS",
+    "ports": [
+     {
+      "id": "p-01-UM004-1-0-1",
+      "label": "1/0/1",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-1-0-2",
+      "label": "1/0/2",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-proj-POE3",
+      "label": "1/0/3 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-proj-POE4",
+      "label": "1/0/4 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-proj-POE5",
+      "label": "1/0/5 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-1-0-6",
+      "label": "1/0/6",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-proj-POE7",
+      "label": "1/0/7 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-1-0-27",
+      "label": "1/0/27",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-proj-POE28",
+      "label": "1/0/28 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-proj-POE29",
+      "label": "1/0/29 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-proj-POE30",
+      "label": "1/0/30 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-1-0-31",
+      "label": "1/0/31",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-proj-POE32",
+      "label": "1/0/32 (prosjektert)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-1-0-33",
+      "label": "1/0/33",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-1-0-39",
+      "label": "1/0/39",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-1-0-40",
+      "label": "1/0/40",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM004-1-0-41",
+      "label": "1/0/41 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-01-UM004-1-0-42",
+      "label": "1/0/42 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Nettverk",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM004",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM043",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 1166
+   },
+   "parentId": "room-H1A22",
+   "data": {
+    "label": "UM043 · EW-DX EM4",
+    "deviceType": "wired-mic",
+    "manufacturer": "Sennheiser",
+    "modelNumber": "EW-DX EM4",
+    "ports": [
+     {
+      "id": "p-01-UM043-o0",
+      "label": "DANTE",
+      "signalType": "analog-audio",
+      "direction": "output",
+      "connectorType": "rj45"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Mikrofon",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM043",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM044",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 1205
+   },
+   "parentId": "room-H1A23",
+   "data": {
+    "label": "UM044 · EW-DX EM2",
+    "deviceType": "wired-mic",
+    "manufacturer": "Sennheiser",
+    "modelNumber": "EW-DX EM2",
+    "ports": [
+     {
+      "id": "p-01-UM044-o0",
+      "label": "DANTE",
+      "signalType": "analog-audio",
+      "direction": "output",
+      "connectorType": "rj45"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Mikrofon",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM044",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM053",
+   "type": "device",
+   "position": {
+    "x": 1314,
+    "y": 148
+   },
+   "parentId": "room-H1A22",
+   "data": {
+    "label": "UM053 · DM8C-SUB - Black",
+    "deviceType": "speaker",
+    "manufacturer": "Bose Professional",
+    "modelNumber": "DM8C-SUB - Black",
+    "ports": [
+     {
+      "id": "p-01-UM053-i0",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM053-o1",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "bidirectional",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM053",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM056",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 1321
+   },
+   "parentId": "room-H1A23",
+   "data": {
+    "label": "UM056 · NV-21-HU",
+    "deviceType": "audio-dsp",
+    "manufacturer": "QSC",
+    "modelNumber": "NV-21-HU",
+    "ports": [
+     {
+      "id": "p-01-UM056-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM056-i1",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "barrel"
+     },
+     {
+      "id": "p-01-UM056-o2",
+      "label": "RS232",
+      "signalType": "gpio",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM056-o3",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Prosessor",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM056",
+      "position": "footer"
+     },
+     {
+      "text": "SW-01 1/0/11 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM057",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 60
+   },
+   "parentId": "room-H1A23",
+   "data": {
+    "label": "UM057 · NV-21-HU",
+    "deviceType": "audio-dsp",
+    "manufacturer": "QSC",
+    "modelNumber": "NV-21-HU",
+    "ports": [
+     {
+      "id": "p-01-UM057-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM057-i1",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "barrel"
+     },
+     {
+      "id": "p-01-UM057-o2",
+      "label": "RS232",
+      "signalType": "gpio",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM057-o3",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Prosessor",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM057",
+      "position": "footer"
+     },
+     {
+      "text": "SW-01 1/0/17 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM058",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 242
+   },
+   "parentId": "room-H1A23",
+   "data": {
+    "label": "UM058 · NV-21-HU",
+    "deviceType": "audio-dsp",
+    "manufacturer": "QSC",
+    "modelNumber": "NV-21-HU",
+    "ports": [
+     {
+      "id": "p-01-UM058-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM058-i1",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "barrel"
+     },
+     {
+      "id": "p-01-UM058-o2",
+      "label": "RS232",
+      "signalType": "gpio",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM058-o3",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Prosessor",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM058",
+      "position": "footer"
+     },
+     {
+      "text": "SW-01 1/0/15 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM059",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 424
+   },
+   "parentId": "room-H1A23",
+   "data": {
+    "label": "UM059 · NV-21-HU",
+    "deviceType": "audio-dsp",
+    "manufacturer": "QSC",
+    "modelNumber": "NV-21-HU",
+    "ports": [
+     {
+      "id": "p-01-UM059-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM059-i1",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "barrel"
+     },
+     {
+      "id": "p-01-UM059-o2",
+      "label": "RS232",
+      "signalType": "gpio",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM059-o3",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Prosessor",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM059",
+      "position": "footer"
+     },
+     {
+      "text": "SW-01 1/0/13 · 10.0.0.46 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM061",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 1067
+   },
+   "parentId": "room-H1A23",
+   "data": {
+    "label": "UM061 · UND6IO-BT",
+    "deviceType": "av-over-ip",
+    "manufacturer": "QSC",
+    "modelNumber": "UND6IO-BT",
+    "ports": [
+     {
+      "id": "p-01-UM061-i0",
+      "label": "DANTE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM061-o1",
+      "label": "LINE",
+      "signalType": "analog-audio",
+      "direction": "output",
+      "connectorType": "trs-eighth"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "AV-distribusjon",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM061",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM062",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 885
+   },
+   "parentId": "room-H1A23",
+   "data": {
+    "label": "UM062 · V11HA25140",
+    "deviceType": "monitor",
+    "manufacturer": "Epson Home",
+    "modelNumber": "V11HA25140",
+    "ports": [
+     {
+      "id": "p-01-UM062-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM062-i1",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "iec"
+     },
+     {
+      "id": "p-01-UM062-o2",
+      "label": "USB",
+      "signalType": "custom",
+      "direction": "output"
+     },
+     {
+      "id": "p-01-UM062-o3",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Skjerm",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM062",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM063",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 606
+   },
+   "parentId": "room-H1A23",
+   "data": {
+    "label": "UM063 · I/O-USB BRIDGE",
+    "deviceType": "codec",
+    "manufacturer": "QSC",
+    "modelNumber": "I/O-USB BRIDGE",
+    "ports": [
+     {
+      "id": "p-01-UM063-i0",
+      "label": "POE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM063-o1",
+      "label": "RS-232",
+      "signalType": "gpio",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Videokonferanse",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM063",
+      "position": "footer"
+     },
+     {
+      "text": "SW-01 1/0/18 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM064",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 1282
+   },
+   "parentId": "room-H1A22",
+   "data": {
+    "label": "UM064 · NV-21-HU",
+    "deviceType": "audio-dsp",
+    "manufacturer": "QSC",
+    "modelNumber": "NV-21-HU",
+    "ports": [
+     {
+      "id": "p-01-UM064-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM064-i1",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "barrel"
+     },
+     {
+      "id": "p-01-UM064-o2",
+      "label": "RS232",
+      "signalType": "gpio",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM064-o3",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Prosessor",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM064",
+      "position": "footer"
+     },
+     {
+      "text": "SW-01 1/0/9 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM065",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 60
+   },
+   "parentId": "room-H1A22",
+   "data": {
+    "label": "UM065 · NV-21-HU",
+    "deviceType": "audio-dsp",
+    "manufacturer": "QSC",
+    "modelNumber": "NV-21-HU",
+    "ports": [
+     {
+      "id": "p-01-UM065-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM065-i1",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "barrel"
+     },
+     {
+      "id": "p-01-UM065-o2",
+      "label": "RS232",
+      "signalType": "gpio",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM065-o3",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Prosessor",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM065",
+      "position": "footer"
+     },
+     {
+      "text": "SW-01 1/0/2 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM066",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 242
+   },
+   "parentId": "room-H1A22",
+   "data": {
+    "label": "UM066 · NV-21-HU",
+    "deviceType": "audio-dsp",
+    "manufacturer": "QSC",
+    "modelNumber": "NV-21-HU",
+    "ports": [
+     {
+      "id": "p-01-UM066-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM066-i1",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "barrel"
+     },
+     {
+      "id": "p-01-UM066-o2",
+      "label": "RS232",
+      "signalType": "gpio",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM066-o3",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Prosessor",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM066",
+      "position": "footer"
+     },
+     {
+      "text": "SW-01 1/0/5 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM067",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 424
+   },
+   "parentId": "room-H1A22",
+   "data": {
+    "label": "UM067 · NV-21-HU",
+    "deviceType": "audio-dsp",
+    "manufacturer": "QSC",
+    "modelNumber": "NV-21-HU",
+    "ports": [
+     {
+      "id": "p-01-UM067-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM067-i1",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "barrel"
+     },
+     {
+      "id": "p-01-UM067-o2",
+      "label": "RS232",
+      "signalType": "gpio",
+      "direction": "output",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM067-o3",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Prosessor",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM067",
+      "position": "footer"
+     },
+     {
+      "text": "SW-01 1/0/1 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM069",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 1028
+   },
+   "parentId": "room-H1A22",
+   "data": {
+    "label": "UM069 · UND6IO-BT",
+    "deviceType": "av-over-ip",
+    "manufacturer": "QSC",
+    "modelNumber": "UND6IO-BT",
+    "ports": [
+     {
+      "id": "p-01-UM069-i0",
+      "label": "DANTE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM069-o1",
+      "label": "LINE",
+      "signalType": "analog-audio",
+      "direction": "output",
+      "connectorType": "trs-eighth"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "AV-distribusjon",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM069",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM070",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 769
+   },
+   "parentId": "room-H1A23",
+   "data": {
+    "label": "UM070 · TSC-50-G3",
+    "deviceType": "control-processor",
+    "manufacturer": "QSC",
+    "modelNumber": "TSC-50-G3",
+    "ports": [
+     {
+      "id": "p-01-UM070-i0",
+      "label": "POE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Styring",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM070",
+      "position": "footer"
+     },
+     {
+      "text": "SW-01 1/0/14 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM071",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 548
+   },
+   "parentId": "room-H1A22",
+   "data": {
+    "label": "UM071 · TSC-50-G3",
+    "deviceType": "control-processor",
+    "manufacturer": "QSC",
+    "modelNumber": "TSC-50-G3",
+    "ports": [
+     {
+      "id": "p-01-UM071-i0",
+      "label": "POE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Styring",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM071",
+      "position": "footer"
+     },
+     {
+      "text": "SW-01 1/0/7 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM072",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 606
+   },
+   "parentId": "room-H1A22",
+   "data": {
+    "label": "UM072 · I/O-USB BRIDGE",
+    "deviceType": "codec",
+    "manufacturer": "QSC",
+    "modelNumber": "I/O-USB BRIDGE",
+    "ports": [
+     {
+      "id": "p-01-UM072-i0",
+      "label": "POE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM072-o1",
+      "label": "RS-232",
+      "signalType": "gpio",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Videokonferanse",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM072",
+      "position": "footer"
+     },
+     {
+      "text": "SW-01 1/0/3 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM073",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 846
+   },
+   "parentId": "room-H1A22",
+   "data": {
+    "label": "UM073 · V11HA25140",
+    "deviceType": "monitor",
+    "manufacturer": "Epson Home",
+    "modelNumber": "V11HA25140",
+    "ports": [
+     {
+      "id": "p-01-UM073-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM073-i1",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "iec"
+     },
+     {
+      "id": "p-01-UM073-o2",
+      "label": "USB",
+      "signalType": "custom",
+      "direction": "output"
+     },
+     {
+      "id": "p-01-UM073-o3",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Skjerm",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM073",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM074",
+   "type": "device",
+   "position": {
+    "x": 1028,
+    "y": 311
+   },
+   "parentId": "room-H1A23",
+   "data": {
+    "label": "UM074 · DM6C - Black",
+    "deviceType": "speaker",
+    "manufacturer": "Bose Professional",
+    "modelNumber": "DM6C - Black",
+    "ports": [
+     {
+      "id": "p-01-UM074-i0",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM074-o1",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "bidirectional",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM074",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM078",
+   "type": "device",
+   "position": {
+    "x": 1028,
+    "y": 449
+   },
+   "parentId": "room-H1A23",
+   "data": {
+    "label": "UM078 · DM8C-SUB - Black",
+    "deviceType": "speaker",
+    "manufacturer": "Bose Professional",
+    "modelNumber": "DM8C-SUB - Black",
+    "ports": [
+     {
+      "id": "p-01-UM078-i0",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM078-o1",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "bidirectional",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM078",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM082",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 954
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM082 · TeamConnect Ceiling 2",
+    "deviceType": "wired-mic",
+    "manufacturer": "Sennheiser",
+    "modelNumber": "TeamConnect Ceiling 2",
+    "ports": [
+     {
+      "id": "p-01-UM082-i0",
+      "label": "ETHERNET",
+      "signalType": "gpio",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM082-o1",
+      "label": "DANTE",
+      "signalType": "analog-audio",
+      "direction": "output",
+      "connectorType": "rj45"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Mikrofon",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM082",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM083",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 1092
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM083 · TeamConnect Ceiling 2",
+    "deviceType": "wired-mic",
+    "manufacturer": "Sennheiser",
+    "modelNumber": "TeamConnect Ceiling 2",
+    "ports": [
+     {
+      "id": "p-01-UM083-i0",
+      "label": "ETHERNET",
+      "signalType": "gpio",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM083-o1",
+      "label": "DANTE",
+      "signalType": "ethernet",
+      "direction": "output",
+      "connectorType": "rj45"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Mikrofon",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM083",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM084",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 424
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM084 · EW-DX EM2",
+    "deviceType": "adapter",
+    "manufacturer": "Sennheiser",
+    "modelNumber": "EW-DX EM2",
+    "ports": [
+     {
+      "id": "p-01-UM084-o0",
+      "label": "ETHERNET",
+      "signalType": "analog-audio",
+      "direction": "output",
+      "connectorType": "rj45"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Uklassifisert",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM084",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM085",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 540
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM085 · EW-DX EM2",
+    "deviceType": "adapter",
+    "manufacturer": "Sennheiser",
+    "modelNumber": "EW-DX EM2",
+    "ports": [
+     {
+      "id": "p-01-UM085-o0",
+      "label": "ETHERNET",
+      "signalType": "analog-audio",
+      "direction": "output",
+      "connectorType": "rj45"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Uklassifisert",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM085",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM086",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 656
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM086 · I/O-USB BRIDGE",
+    "deviceType": "codec",
+    "manufacturer": "QSC",
+    "modelNumber": "I/O-USB BRIDGE",
+    "ports": [
+     {
+      "id": "p-01-UM086-i0",
+      "label": "POE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM086-o1",
+      "label": "RS-232",
+      "signalType": "gpio",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Videokonferanse",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM086",
+      "position": "footer"
+     },
+     {
+      "text": "SW-02 1/0/1 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM087",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 794
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM087 · I/O-USB BRIDGE",
+    "deviceType": "codec",
+    "manufacturer": "QSC",
+    "modelNumber": "I/O-USB BRIDGE",
+    "ports": [
+     {
+      "id": "p-01-UM087-i0",
+      "label": "POE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM087-o1",
+      "label": "RS-232",
+      "signalType": "gpio",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Videokonferanse",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM087",
+      "position": "footer"
+     },
+     {
+      "text": "SW-02 1/0/33 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM088",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 446
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM088 · TSC-50-G3",
+    "deviceType": "control-processor",
+    "manufacturer": "QSC",
+    "modelNumber": "TSC-50-G3",
+    "ports": [
+     {
+      "id": "p-01-UM088-i0",
+      "label": "POE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Styring",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM088",
+      "position": "footer"
+     },
+     {
+      "text": "SW-02 1/0/6 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM089",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 562
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM089 · TSC-50-G3",
+    "deviceType": "control-processor",
+    "manufacturer": "QSC",
+    "modelNumber": "TSC-50-G3",
+    "ports": [
+     {
+      "id": "p-01-UM089-i0",
+      "label": "POE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Styring",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM089",
+      "position": "footer"
+     },
+     {
+      "text": "SW-02 1/0/31 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM090",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 60
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM090 · NV-21-HU",
+    "deviceType": "audio-dsp",
+    "manufacturer": "QSC",
+    "modelNumber": "NV-21-HU",
+    "ports": [
+     {
+      "id": "p-01-UM090-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM090-i1",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "barrel"
+     },
+     {
+      "id": "p-01-UM090-o2",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     },
+     {
+      "id": "p-01-UM090-o3",
+      "label": "RS232",
+      "signalType": "gpio",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Prosessor",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM090",
+      "position": "footer"
+     },
+     {
+      "text": "SW-02 1/0/2 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM091",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 242
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM091 · NV-21-HU",
+    "deviceType": "audio-dsp",
+    "manufacturer": "QSC",
+    "modelNumber": "NV-21-HU",
+    "ports": [
+     {
+      "id": "p-01-UM091-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM091-i1",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "barrel"
+     },
+     {
+      "id": "p-01-UM091-o2",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     },
+     {
+      "id": "p-01-UM091-o3",
+      "label": "RS232",
+      "signalType": "gpio",
+      "direction": "output",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Prosessor",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM091",
+      "position": "footer"
+     },
+     {
+      "text": "SW-02 1/0/27 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM092",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 678
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM092 · UND6IO-BT",
+    "deviceType": "av-over-ip",
+    "manufacturer": "QSC",
+    "modelNumber": "UND6IO-BT",
+    "ports": [
+     {
+      "id": "p-01-UM092-i0",
+      "label": "DANTE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM092-o1",
+      "label": "LINE",
+      "signalType": "analog-audio",
+      "direction": "output",
+      "connectorType": "trs-eighth"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "AV-distribusjon",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM092",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM093",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 816
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM093 · UND6IO-BT",
+    "deviceType": "av-over-ip",
+    "manufacturer": "QSC",
+    "modelNumber": "UND6IO-BT",
+    "ports": [
+     {
+      "id": "p-01-UM093-i0",
+      "label": "DANTE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM093-o1",
+      "label": "LINE",
+      "signalType": "analog-audio",
+      "direction": "output",
+      "connectorType": "trs-eighth"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "AV-distribusjon",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM093",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM094",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 289
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM094 · DM6C - Black",
+    "deviceType": "speaker",
+    "manufacturer": "Bose Professional",
+    "modelNumber": "DM6C - Black",
+    "ports": [
+     {
+      "id": "p-01-UM094-i0",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM094-o1",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "bidirectional",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM094",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM103",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 427
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM103 · DM6C - Black",
+    "deviceType": "speaker",
+    "manufacturer": "Bose Professional",
+    "modelNumber": "DM6C - Black",
+    "ports": [
+     {
+      "id": "p-01-UM103-i0",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM103-o1",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "bidirectional",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM103",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM106",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 565
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM106 · DM6C - Black",
+    "deviceType": "speaker",
+    "manufacturer": "Bose Professional",
+    "modelNumber": "DM6C - Black",
+    "ports": [
+     {
+      "id": "p-01-UM106-i0",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM106-o1",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "bidirectional",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM106",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM110",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 703
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM110 · DM8C-SUB - Black",
+    "deviceType": "speaker",
+    "manufacturer": "Bose Professional",
+    "modelNumber": "DM8C-SUB - Black",
+    "ports": [
+     {
+      "id": "p-01-UM110-i0",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM110-o1",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "bidirectional",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM110",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM113",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 841
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM113 · DM8C-SUB - Black",
+    "deviceType": "speaker",
+    "manufacturer": "Bose Professional",
+    "modelNumber": "DM8C-SUB - Black",
+    "ports": [
+     {
+      "id": "p-01-UM113-i0",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM113-o1",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "bidirectional",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM113",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM114",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 979
+   },
+   "parentId": "room-H1A24",
+   "data": {
+    "label": "UM114 · DM8C-SUB - Black",
+    "deviceType": "speaker",
+    "manufacturer": "Bose Professional",
+    "modelNumber": "DM8C-SUB - Black",
+    "ports": [
+     {
+      "id": "p-01-UM114-i0",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "input",
+      "connectorType": "phoenix"
+     },
+     {
+      "id": "p-01-UM114-o1",
+      "label": "SPEAKER +/-",
+      "signalType": "speaker-level",
+      "direction": "bidirectional",
+      "connectorType": "phoenix"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM114",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM116",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 60
+   },
+   "parentId": "room-H1B09",
+   "data": {
+    "label": "UM116 · DM3C",
+    "deviceType": "speaker",
+    "manufacturer": "Bose Professional",
+    "modelNumber": "DM3C",
+    "ports": [
+     {
+      "id": "p-01-UM116-i0",
+      "label": "COM",
+      "signalType": "speaker-level",
+      "direction": "input"
+     },
+     {
+      "id": "p-01-UM116-i1",
+      "label": "8 OHM/70/100 VOLT",
+      "signalType": "speaker-level",
+      "direction": "input"
+     },
+     {
+      "id": "p-01-UM116-o2",
+      "label": "COM",
+      "signalType": "speaker-level",
+      "direction": "output"
+     },
+     {
+      "id": "p-01-UM116-o3",
+      "label": "8 OHM/70/100 VOLT",
+      "signalType": "speaker-level",
+      "direction": "output"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM116",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM117",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 60
+   },
+   "parentId": "room-H1B13",
+   "data": {
+    "label": "UM117 · DM3C",
+    "deviceType": "speaker",
+    "manufacturer": "Bose Professional",
+    "modelNumber": "DM3C",
+    "ports": [
+     {
+      "id": "p-01-UM117-i0",
+      "label": "COM",
+      "signalType": "speaker-level",
+      "direction": "input"
+     },
+     {
+      "id": "p-01-UM117-i1",
+      "label": "8 OHM/70/100 VOLT",
+      "signalType": "speaker-level",
+      "direction": "input"
+     },
+     {
+      "id": "p-01-UM117-o2",
+      "label": "COM",
+      "signalType": "speaker-level",
+      "direction": "output"
+     },
+     {
+      "id": "p-01-UM117-o3",
+      "label": "8 OHM/70/100 VOLT",
+      "signalType": "speaker-level",
+      "direction": "output"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Høyttaler",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM117",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-01-UM133",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 664
+   },
+   "parentId": "room-H1A22",
+   "data": {
+    "label": "UM133 · ODE mk3",
+    "deviceType": "control-processor",
+    "manufacturer": "Enttec",
+    "modelNumber": "ODE mk3",
+    "ports": [
+     {
+      "id": "p-01-UM133-i0",
+      "label": "PoE/Ethernet",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-01-UM133-i1",
+      "label": "DC Power",
+      "signalType": "power",
+      "direction": "input"
+     },
+     {
+      "id": "p-01-UM133-o2",
+      "label": "DMX PORT 1",
+      "signalType": "custom",
+      "direction": "output"
+     },
+     {
+      "id": "p-01-UM133-o3",
+      "label": "DMX PORT 2",
+      "signalType": "custom",
+      "direction": "output"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Styring",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-01=556.003-UM133",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM001",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 60
+   },
+   "parentId": "room-U1A36",
+   "data": {
+    "label": "UM001 · XSM4328FV-100NES",
+    "deviceType": "network-switch",
+    "manufacturer": "NETGEAR",
+    "modelNumber": "XSM4328FV-100NES",
+    "ports": [
+     {
+      "id": "p-U1-UM001-stack",
+      "label": "Stack-interconnect",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "qsfp28"
+     },
+     {
+      "id": "p-U1-UM001-1-0-1",
+      "label": "1/0/1 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-2",
+      "label": "1/0/2 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-3",
+      "label": "1/0/3 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-4",
+      "label": "1/0/4 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-5",
+      "label": "1/0/5 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-6",
+      "label": "1/0/6 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-7",
+      "label": "1/0/7 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-8",
+      "label": "1/0/8 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-19",
+      "label": "1/0/19 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Nettverk",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM001",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM002",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 374
+   },
+   "parentId": "room-U1A36",
+   "data": {
+    "label": "UM002 · XSM4328FV-100NES",
+    "deviceType": "network-switch",
+    "manufacturer": "NETGEAR",
+    "modelNumber": "XSM4328FV-100NES",
+    "ports": [
+     {
+      "id": "p-U1-UM002-stack",
+      "label": "Stack-interconnect",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "qsfp28"
+     },
+     {
+      "id": "p-U1-UM002-2-0-1",
+      "label": "2/0/1 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-2",
+      "label": "2/0/2 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-3",
+      "label": "2/0/3 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-4",
+      "label": "2/0/4 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-5",
+      "label": "2/0/5 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-6",
+      "label": "2/0/6 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-7",
+      "label": "2/0/7 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-8",
+      "label": "2/0/8 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-9",
+      "label": "2/0/9 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Nettverk",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM002",
+      "position": "footer"
+     }
+    ]
+   }
+  }
+ ],
+ "edges": [
+  {
+   "id": "edge-0",
+   "source": "device-01-UM043",
+   "target": "device-01-UM003",
+   "sourceHandle": "p-01-UM043-o0",
+   "targetHandle": "p-01-UM003-proj-POE12",
+   "data": {
+    "signalType": "analog-audio",
+    "label": "Lyd"
+   },
+   "style": {
+    "stroke": "var(--color-analog-audio)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-1",
+   "source": "device-01-UM002",
+   "target": "device-01-UM114",
+   "sourceHandle": "p-01-UM002-o7",
+   "targetHandle": "p-01-UM114-o1",
+   "data": {
+    "signalType": "speaker-level",
+    "label": "Forsterker"
+   },
+   "style": {
+    "stroke": "var(--color-speaker-level)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-2",
+   "source": "device-01-UM002",
+   "target": "device-01-UM106",
+   "sourceHandle": "p-01-UM002-o6",
+   "targetHandle": "p-01-UM106-o1",
+   "data": {
+    "signalType": "speaker-level",
+    "label": "Forsterker"
+   },
+   "style": {
+    "stroke": "var(--color-speaker-level)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-3",
+   "source": "device-01-UM002",
+   "target": "device-01-UM113",
+   "sourceHandle": "p-01-UM002-o5",
+   "targetHandle": "p-01-UM113-o1",
+   "data": {
+    "signalType": "speaker-level",
+    "label": "Forsterker"
+   },
+   "style": {
+    "stroke": "var(--color-speaker-level)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-4",
+   "source": "device-01-UM002",
+   "target": "device-01-UM103",
+   "sourceHandle": "p-01-UM002-o4",
+   "targetHandle": "p-01-UM103-o1",
+   "data": {
+    "signalType": "speaker-level",
+    "label": "Forsterker"
+   },
+   "style": {
+    "stroke": "var(--color-speaker-level)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-5",
+   "source": "device-01-UM002",
+   "target": "device-01-UM110",
+   "sourceHandle": "p-01-UM002-o3",
+   "targetHandle": "p-01-UM110-o1",
+   "data": {
+    "signalType": "speaker-level",
+    "label": "Forsterker"
+   },
+   "style": {
+    "stroke": "var(--color-speaker-level)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-6",
+   "source": "device-01-UM002",
+   "target": "device-01-UM094",
+   "sourceHandle": "p-01-UM002-o2",
+   "targetHandle": "p-01-UM094-o1",
+   "data": {
+    "signalType": "speaker-level",
+    "label": "Forsterker"
+   },
+   "style": {
+    "stroke": "var(--color-speaker-level)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-7",
+   "source": "device-01-UM004",
+   "target": "device-01-UM002",
+   "sourceHandle": "p-01-UM004-1-0-39",
+   "targetHandle": "p-01-UM002-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-8",
+   "source": "device-01-UM001",
+   "target": "device-01-UM053",
+   "sourceHandle": "p-01-UM001-o2",
+   "targetHandle": "p-01-UM053-o1",
+   "data": {
+    "signalType": "speaker-level",
+    "label": "Forsterker"
+   },
+   "style": {
+    "stroke": "var(--color-speaker-level)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-9",
+   "source": "device-01-UM001",
+   "target": "device-01-UM074",
+   "sourceHandle": "p-01-UM001-o3",
+   "targetHandle": "p-01-UM074-o1",
+   "data": {
+    "signalType": "speaker-level",
+    "label": "Forsterker"
+   },
+   "style": {
+    "stroke": "var(--color-speaker-level)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-10",
+   "source": "device-01-UM001",
+   "target": "device-01-UM078",
+   "sourceHandle": "p-01-UM001-o4",
+   "targetHandle": "p-01-UM078-o1",
+   "data": {
+    "signalType": "speaker-level",
+    "label": "Forsterker"
+   },
+   "style": {
+    "stroke": "var(--color-speaker-level)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-11",
+   "source": "device-01-UM004",
+   "target": "device-01-UM001",
+   "sourceHandle": "p-01-UM004-1-0-40",
+   "targetHandle": "p-01-UM001-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-12",
+   "source": "device-01-UM004",
+   "target": "device-01-UM091",
+   "sourceHandle": "p-01-UM004-1-0-27",
+   "targetHandle": "p-01-UM091-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-13",
+   "source": "device-01-UM004",
+   "target": "device-01-UM082",
+   "sourceHandle": "p-01-UM004-proj-POE30",
+   "targetHandle": "p-01-UM082-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-14",
+   "source": "device-01-UM082",
+   "target": "device-01-UM004",
+   "sourceHandle": "p-01-UM082-o1",
+   "targetHandle": "p-01-UM004-proj-POE29",
+   "data": {
+    "signalType": "analog-audio",
+    "label": "Lyd"
+   },
+   "style": {
+    "stroke": "var(--color-analog-audio)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-15",
+   "source": "device-01-UM004",
+   "target": "device-01-UM086",
+   "sourceHandle": "p-01-UM004-1-0-1",
+   "targetHandle": "p-01-UM086-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-16",
+   "source": "device-01-UM004",
+   "target": "device-01-UM088",
+   "sourceHandle": "p-01-UM004-1-0-6",
+   "targetHandle": "p-01-UM088-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-17",
+   "source": "device-01-UM004",
+   "target": "device-01-UM092",
+   "sourceHandle": "p-01-UM004-proj-POE7",
+   "targetHandle": "p-01-UM092-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-18",
+   "source": "device-01-UM004",
+   "target": "device-01-UM087",
+   "sourceHandle": "p-01-UM004-1-0-33",
+   "targetHandle": "p-01-UM087-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-19",
+   "source": "device-01-UM004",
+   "target": "device-01-UM090",
+   "sourceHandle": "p-01-UM004-1-0-2",
+   "targetHandle": "p-01-UM090-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-20",
+   "source": "device-01-UM004",
+   "target": "device-01-UM089",
+   "sourceHandle": "p-01-UM004-1-0-31",
+   "targetHandle": "p-01-UM089-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-21",
+   "source": "device-01-UM004",
+   "target": "device-01-UM093",
+   "sourceHandle": "p-01-UM004-proj-POE32",
+   "targetHandle": "p-01-UM093-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-22",
+   "source": "device-01-UM084",
+   "target": "device-01-UM004",
+   "sourceHandle": "p-01-UM084-o0",
+   "targetHandle": "p-01-UM004-proj-POE5",
+   "data": {
+    "signalType": "analog-audio",
+    "label": "Lyd"
+   },
+   "style": {
+    "stroke": "var(--color-analog-audio)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-23",
+   "source": "device-01-UM085",
+   "target": "device-01-UM004",
+   "sourceHandle": "p-01-UM085-o0",
+   "targetHandle": "p-01-UM004-proj-POE28",
+   "data": {
+    "signalType": "analog-audio",
+    "label": "Lyd"
+   },
+   "style": {
+    "stroke": "var(--color-analog-audio)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-24",
+   "source": "device-01-UM003",
+   "target": "device-01-UM062",
+   "sourceHandle": "p-01-UM003-proj-POE10",
+   "targetHandle": "p-01-UM062-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-25",
+   "source": "device-01-UM003",
+   "target": "device-01-UM056",
+   "sourceHandle": "p-01-UM003-1-0-11",
+   "targetHandle": "p-01-UM056-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-26",
+   "source": "device-01-UM003",
+   "target": "device-01-UM063",
+   "sourceHandle": "p-01-UM003-1-0-18",
+   "targetHandle": "p-01-UM063-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-27",
+   "source": "device-01-UM003",
+   "target": "device-01-UM070",
+   "sourceHandle": "p-01-UM003-1-0-14",
+   "targetHandle": "p-01-UM070-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-28",
+   "source": "device-01-UM003",
+   "target": "device-01-UM059",
+   "sourceHandle": "p-01-UM003-1-0-13",
+   "targetHandle": "p-01-UM059-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-29",
+   "source": "device-01-UM003",
+   "target": "device-01-UM061",
+   "sourceHandle": "p-01-UM003-proj-POE16",
+   "targetHandle": "p-01-UM061-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-30",
+   "source": "device-01-UM003",
+   "target": "device-01-UM058",
+   "sourceHandle": "p-01-UM003-1-0-15",
+   "targetHandle": "p-01-UM058-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-31",
+   "source": "device-01-UM044",
+   "target": "device-01-UM003",
+   "sourceHandle": "p-01-UM044-o0",
+   "targetHandle": "p-01-UM003-proj-POE8",
+   "data": {
+    "signalType": "analog-audio",
+    "label": "Lyd"
+   },
+   "style": {
+    "stroke": "var(--color-analog-audio)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-32",
+   "source": "device-01-UM003",
+   "target": "device-01-UM073",
+   "sourceHandle": "p-01-UM003-proj-POE4",
+   "targetHandle": "p-01-UM073-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-33",
+   "source": "device-01-UM003",
+   "target": "device-01-UM066",
+   "sourceHandle": "p-01-UM003-1-0-5",
+   "targetHandle": "p-01-UM066-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-34",
+   "source": "device-01-UM003",
+   "target": "device-01-UM071",
+   "sourceHandle": "p-01-UM003-1-0-7",
+   "targetHandle": "p-01-UM071-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-35",
+   "source": "device-01-UM003",
+   "target": "device-01-UM057",
+   "sourceHandle": "p-01-UM003-1-0-17",
+   "targetHandle": "p-01-UM057-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-36",
+   "source": "device-01-UM003",
+   "target": "device-01-UM067",
+   "sourceHandle": "p-01-UM003-1-0-1",
+   "targetHandle": "p-01-UM067-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-37",
+   "source": "device-01-UM003",
+   "target": "device-01-UM072",
+   "sourceHandle": "p-01-UM003-1-0-3",
+   "targetHandle": "p-01-UM072-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-38",
+   "source": "device-01-UM003",
+   "target": "device-01-UM065",
+   "sourceHandle": "p-01-UM003-1-0-2",
+   "targetHandle": "p-01-UM065-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-39",
+   "source": "device-01-UM003",
+   "target": "device-01-UM069",
+   "sourceHandle": "p-01-UM003-proj-POE6",
+   "targetHandle": "p-01-UM069-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-40",
+   "source": "device-U1-UM001",
+   "target": "device-01-UM004",
+   "sourceHandle": "p-U1-UM001-1-0-2",
+   "targetHandle": "p-01-UM004-1-0-41",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-41",
+   "source": "device-U1-UM002",
+   "target": "device-01-UM004",
+   "sourceHandle": "p-U1-UM002-2-0-2",
+   "targetHandle": "p-01-UM004-1-0-42",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-42",
+   "source": "device-U1-UM001",
+   "target": "device-01-UM003",
+   "sourceHandle": "p-U1-UM001-1-0-3",
+   "targetHandle": "p-01-UM003-1-0-27",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-43",
+   "source": "device-U1-UM002",
+   "target": "device-01-UM003",
+   "sourceHandle": "p-U1-UM002-2-0-3",
+   "targetHandle": "p-01-UM003-1-0-28",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-44",
+   "source": "device-01-UM083",
+   "target": "device-01-UM004",
+   "sourceHandle": "p-01-UM083-o1",
+   "targetHandle": "p-01-UM004-proj-POE3",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-45",
+   "source": "device-01-UM004",
+   "target": "device-01-UM083",
+   "sourceHandle": "p-01-UM004-proj-POE4",
+   "targetHandle": "p-01-UM083-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-46",
+   "source": "device-01-UM003",
+   "target": "device-01-UM064",
+   "sourceHandle": "p-01-UM003-1-0-9",
+   "targetHandle": "p-01-UM064-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-47",
+   "source": "device-01-UM003",
+   "target": "device-01-UM133",
+   "sourceHandle": "p-01-UM003-proj-POE23",
+   "targetHandle": "p-01-UM133-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  }
+ ],
+ "printPaperId": "iso-a2",
+ "printOrientation": "landscape",
+ "printScale": 0.904,
+ "titleBlock": {
+  "showName": "Nordvik Eiendom AS — Hovedkontor",
+  "venue": "Eksempelveien 1, 0000 Eksempelby",
+  "designer": "Bravo Norge AS",
+  "engineer": "Ola Eksempel",
+  "drawingTitle": "AV-anlegg H1A04 IKT-rom H1 (IKT/teknisk rom)",
+  "date": "13.08.2026",
+  "company": "Bravo Norge AS",
+  "revision": "C — nettverk fra NetBox/Engage"
+ },
+ "customFields": []
+}

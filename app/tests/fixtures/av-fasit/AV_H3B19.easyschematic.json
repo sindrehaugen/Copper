@@ -1,0 +1,762 @@
+{
+ "version": 29,
+ "name": "Nordvik H3B19 Studio — AV-anlegg",
+ "nodes": [
+  {
+   "id": "room-H3B19",
+   "type": "room",
+   "position": {
+    "x": 616,
+    "y": 300
+   },
+   "data": {
+    "label": "H3 B19 — Studio",
+    "locked": false
+   },
+   "style": {
+    "width": 1048,
+    "height": 916
+   },
+   "width": 1048,
+   "height": 916,
+   "zIndex": -1
+  },
+  {
+   "id": "room-U1A36",
+   "type": "room",
+   "position": {
+    "x": 616,
+    "y": 565
+   },
+   "data": {
+    "label": "U1 A36 — Hovedtelematikkrom",
+    "locked": false
+   },
+   "style": {
+    "width": 638,
+    "height": 565
+   },
+   "width": 638,
+   "height": 565,
+   "zIndex": -1
+  },
+  {
+   "id": "device-03-UM001",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 176
+   },
+   "parentId": "room-H3B19",
+   "data": {
+    "label": "UM001 · NV-21-HU",
+    "deviceType": "audio-dsp",
+    "manufacturer": "QSC",
+    "modelNumber": "NV-21-HU",
+    "ports": [
+     {
+      "id": "p-03-UM001-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-03-UM001-i1",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "input",
+      "connectorType": "hdmi"
+     },
+     {
+      "id": "p-03-UM001-i2",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "barrel"
+     },
+     {
+      "id": "p-03-UM001-o3",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Prosessor",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-03=556.003-UM001",
+      "position": "footer"
+     },
+     {
+      "text": "SW-06 1/0/35 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-03-UM002",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 358
+   },
+   "parentId": "room-H3B19",
+   "data": {
+    "label": "UM002 · NV-21-HU",
+    "deviceType": "audio-dsp",
+    "manufacturer": "QSC",
+    "modelNumber": "NV-21-HU",
+    "ports": [
+     {
+      "id": "p-03-UM002-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-03-UM002-i1",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "input",
+      "connectorType": "hdmi"
+     },
+     {
+      "id": "p-03-UM002-i2",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "barrel"
+     },
+     {
+      "id": "p-03-UM002-o3",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Prosessor",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-03=556.003-UM002",
+      "position": "footer"
+     },
+     {
+      "text": "SW-06 1/0/38 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-03-UM003",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 540
+   },
+   "parentId": "room-H3B19",
+   "data": {
+    "label": "UM003 · NV-21-HU",
+    "deviceType": "audio-dsp",
+    "manufacturer": "QSC",
+    "modelNumber": "NV-21-HU",
+    "ports": [
+     {
+      "id": "p-03-UM003-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-03-UM003-i1",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "input",
+      "connectorType": "hdmi"
+     },
+     {
+      "id": "p-03-UM003-i2",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "barrel"
+     },
+     {
+      "id": "p-03-UM003-o3",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Prosessor",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-03=556.003-UM003",
+      "position": "footer"
+     },
+     {
+      "text": "SW-06 1/0/39 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-03-UM004",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 722
+   },
+   "parentId": "room-H3B19",
+   "data": {
+    "label": "UM004 · NV-21-HU",
+    "deviceType": "audio-dsp",
+    "manufacturer": "QSC",
+    "modelNumber": "NV-21-HU",
+    "ports": [
+     {
+      "id": "p-03-UM004-i0",
+      "label": "LAN",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-03-UM004-i1",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "input",
+      "connectorType": "hdmi"
+     },
+     {
+      "id": "p-03-UM004-i2",
+      "label": "POWER",
+      "signalType": "power",
+      "direction": "input",
+      "connectorType": "barrel"
+     },
+     {
+      "id": "p-03-UM004-o3",
+      "label": "HDMI",
+      "signalType": "hdmi",
+      "direction": "output",
+      "connectorType": "hdmi"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Prosessor",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-03=556.003-UM004",
+      "position": "footer"
+     },
+     {
+      "text": "SW-06 1/0/37 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-03-UM005",
+   "type": "device",
+   "position": {
+    "x": 742,
+    "y": 60
+   },
+   "parentId": "room-H3B19",
+   "data": {
+    "label": "UM005 · TSC-101-G3",
+    "deviceType": "control-processor",
+    "manufacturer": "QSC",
+    "modelNumber": "TSC-101-G3",
+    "ports": [
+     {
+      "id": "p-03-UM005-i0",
+      "label": "POE",
+      "signalType": "ethernet",
+      "direction": "input",
+      "connectorType": "rj45"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Styring",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-03=556.003-UM005",
+      "position": "footer"
+     },
+     {
+      "text": "SW-06 1/0/40 · VLAN 1100",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-03-UM021",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 146
+   },
+   "parentId": "room-H3B19",
+   "data": {
+    "label": "UM021 · GSM4248PX-100EUS",
+    "deviceType": "network-switch",
+    "manufacturer": "NETGEAR",
+    "modelNumber": "GSM4248PX-100EUS",
+    "ports": [
+     {
+      "id": "p-03-UM021-1-0-27",
+      "label": "1/0/27 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-03-UM021-1-0-28",
+      "label": "1/0/28 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-03-UM021-1-0-29",
+      "label": "1/0/29 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-03-UM021-1-0-30",
+      "label": "1/0/30 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-03-UM021-1-0-33",
+      "label": "1/0/33 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-03-UM021-1-0-35",
+      "label": "1/0/35",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-03-UM021-1-0-37",
+      "label": "1/0/37",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-03-UM021-1-0-38",
+      "label": "1/0/38",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-03-UM021-1-0-39",
+      "label": "1/0/39",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-03-UM021-1-0-40",
+      "label": "1/0/40",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "rj45"
+     },
+     {
+      "id": "p-03-UM021-1-0-41",
+      "label": "1/0/41 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-03-UM021-1-0-42",
+      "label": "1/0/42 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Nettverk",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-03=556.003-UM021",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM001",
+   "type": "device",
+   "position": {
+    "x": 46,
+    "y": 239
+   },
+   "parentId": "room-U1A36",
+   "data": {
+    "label": "UM001 · XSM4328FV-100NES",
+    "deviceType": "network-switch",
+    "manufacturer": "NETGEAR",
+    "modelNumber": "XSM4328FV-100NES",
+    "ports": [
+     {
+      "id": "p-U1-UM001-stack",
+      "label": "Stack-interconnect",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "qsfp28"
+     },
+     {
+      "id": "p-U1-UM001-1-0-1",
+      "label": "1/0/1 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-2",
+      "label": "1/0/2 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-3",
+      "label": "1/0/3 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-4",
+      "label": "1/0/4 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-5",
+      "label": "1/0/5 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-6",
+      "label": "1/0/6 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-7",
+      "label": "1/0/7 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-8",
+      "label": "1/0/8 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM001-1-0-19",
+      "label": "1/0/19 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Nettverk",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM001",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "device-U1-UM002",
+   "type": "device",
+   "position": {
+    "x": 332,
+    "y": 60
+   },
+   "parentId": "room-U1A36",
+   "data": {
+    "label": "UM002 · XSM4328FV-100NES",
+    "deviceType": "network-switch",
+    "manufacturer": "NETGEAR",
+    "modelNumber": "XSM4328FV-100NES",
+    "ports": [
+     {
+      "id": "p-U1-UM002-stack",
+      "label": "Stack-interconnect",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "qsfp28"
+     },
+     {
+      "id": "p-U1-UM002-2-0-1",
+      "label": "2/0/1 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-2",
+      "label": "2/0/2 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-3",
+      "label": "2/0/3 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-4",
+      "label": "2/0/4 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-5",
+      "label": "2/0/5 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-6",
+      "label": "2/0/6 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-7",
+      "label": "2/0/7 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-8",
+      "label": "2/0/8 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     },
+     {
+      "id": "p-U1-UM002-2-0-9",
+      "label": "2/0/9 (uplink)",
+      "signalType": "ethernet",
+      "direction": "bidirectional",
+      "connectorType": "sfp"
+     }
+    ],
+    "auxiliaryData": [
+     {
+      "text": "Nettverk",
+      "position": "header"
+     },
+     {
+      "text": "+B1K1-U1=556.003-UM002",
+      "position": "footer"
+     }
+    ]
+   }
+  },
+  {
+   "id": "note-open",
+   "type": "note",
+   "position": {
+    "x": 1664,
+    "y": 360
+   },
+   "data": {
+    "html": "<div><b>Kabler uten motpart i Visio-tegningen (5)</b></div><div><br></div><div>&bull; <b>HDM-024</b> &mdash; UM004 NV-21-HU <i>HDMI</i> (DVID)</div><div>&bull; <b>HDM-025</b> &mdash; UM001 NV-21-HU <i>HDMI</i> (DVID)</div><div>&bull; <b>HDM-026</b> &mdash; UM002 NV-21-HU <i>HDMI</i> (DVID)</div><div>&bull; <b>HDM-027</b> &mdash; UM003 NV-21-HU <i>HDMI</i> (DVID)</div><div>&bull; <b>PATCH-101</b> &mdash; UM021 GSM4248PX-100EUS <i>POE+ 6</i> (POWER/DATA) &rarr; NetBox: 1/0/6 st&aring;r ledig</div><div><br></div><div><i>Alle er terminert i én ende; motparten er ikke tegnet i Visio.</i></div>"
+   },
+   "style": {
+    "width": 440,
+    "height": 216
+   },
+   "width": 440,
+   "height": 216,
+   "zIndex": 1
+  }
+ ],
+ "edges": [
+  {
+   "id": "edge-4",
+   "source": "device-03-UM021",
+   "target": "device-03-UM005",
+   "sourceHandle": "p-03-UM021-1-0-40",
+   "targetHandle": "p-03-UM005-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-5",
+   "source": "device-03-UM021",
+   "target": "device-03-UM004",
+   "sourceHandle": "p-03-UM021-1-0-37",
+   "targetHandle": "p-03-UM004-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-6",
+   "source": "device-03-UM021",
+   "target": "device-03-UM001",
+   "sourceHandle": "p-03-UM021-1-0-35",
+   "targetHandle": "p-03-UM001-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-7",
+   "source": "device-03-UM021",
+   "target": "device-03-UM002",
+   "sourceHandle": "p-03-UM021-1-0-38",
+   "targetHandle": "p-03-UM002-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-8",
+   "source": "device-03-UM021",
+   "target": "device-03-UM003",
+   "sourceHandle": "p-03-UM021-1-0-39",
+   "targetHandle": "p-03-UM003-i0",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-10",
+   "source": "device-U1-UM001",
+   "target": "device-03-UM021",
+   "sourceHandle": "p-U1-UM001-1-0-7",
+   "targetHandle": "p-03-UM021-1-0-41",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  },
+  {
+   "id": "edge-11",
+   "source": "device-U1-UM002",
+   "target": "device-03-UM021",
+   "sourceHandle": "p-U1-UM002-2-0-7",
+   "targetHandle": "p-03-UM021-1-0-42",
+   "data": {
+    "signalType": "ethernet",
+    "label": "Nettverk"
+   },
+   "style": {
+    "stroke": "var(--color-ethernet)",
+    "strokeWidth": 2
+   }
+  }
+ ],
+ "printPaperId": "iso-a2",
+ "printOrientation": "landscape",
+ "printScale": 0.985,
+ "titleBlock": {
+  "showName": "Nordvik Eiendom AS — Hovedkontor",
+  "venue": "Eksempelveien 1, 0000 Eksempelby",
+  "designer": "Bravo Norge AS",
+  "engineer": "Ola Eksempel",
+  "drawingTitle": "AV-anlegg H3B19 Studio",
+  "date": "13.08.2026",
+  "company": "Bravo Norge AS",
+  "revision": "C — nettverk fra NetBox/Engage · 5 kabel(er) uten motpart i Visio"
+ },
+ "customFields": []
+}

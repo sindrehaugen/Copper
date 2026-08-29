@@ -1,8 +1,7 @@
 import { describe, expect, it } from 'vitest';
-// @ts-nocheck
-const fixtureGymmen  = {} as unknown;
-const fixtureStudio  = {} as unknown;
-const fixtureAuditorium  = {} as unknown;
+import fixtureGymmen from '../../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json';
+import fixtureStudio from '../../../tests/fixtures/av-fasit/AV_H3B19.easyschematic.json';
+import fixtureAuditorium from '../../../tests/fixtures/av-fasit/AV_H1A04.easyschematic.json';
 import { readEasySchematic } from '../exchange/easyschematic/read';
 import { toFlow } from './toFlow';
 import { applyElkLayout } from './layout';
@@ -11,7 +10,7 @@ import { DesignDocumentSchema } from '../model/schema';
 import { CARD_WIDTH } from '../model/geometry';
 
 /**
- * Batch 025 — P.W7 the-premise-proof
+ * Batch 025 - P.W7 the-premise-proof
  * ============================================================================
  * End-to-end integration test proving the core premise:
  * External schematic JSON -> readEasySchematic (B5)
@@ -22,7 +21,7 @@ import { CARD_WIDTH } from '../model/geometry';
  * ============================================================================
  */
 
-describe.skip('Projection Pipeline E2E Integration (Batch 025 P.W7 the-premise-proof)', () => {
+describe('Projection Pipeline E2E Integration (Batch 025 P.W7 the-premise-proof)', () => {
   describe('Pipeline Proof 1: AV_U1A21 (Gymmen) Fixture', () => {
     it('successfully processes full pipeline: read -> toFlow -> applyElkLayout -> enhanceEdges', async () => {
       // Step 1: Ingest foreign schematic into Copper DesignDocument

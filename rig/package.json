@@ -1,0 +1,14 @@
+{
+  "name": "rig",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node run.mjs",
+    "test": "node --input-type=module -e \"import { startVitest } from 'vitest/node'; import path from 'node:path'; const root = path.resolve('..'); startVitest('test', ['rig/run.test.mjs'], { watch: false, run: true, root, include: ['rig/**/*.test.mjs'] });\""
+  },
+  "devDependencies": {
+    "tsx": "^4.19.3",
+    "zod": "^3.24.2"
+  }
+}

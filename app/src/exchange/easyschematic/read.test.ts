@@ -1,15 +1,68 @@
-/* eslint-disable */
-// @ts-nocheck
+/**
+ * EasySchematic File Format Specification & Verification (Batch 005 F.Wave 5)
+ * ============================================================================
+ * Format Shape as Verified from the Fixtures (AV_U1A21 and AV_H3B19):
+ *
+ * 1. Root Object:
+ *    - `version`: number (e.g. 29)
+ *    - `name`: string, human-readable sheet title (e.g. "Nordvik U1A21 Gymmen — AV-anlegg")
+ *    - `nodes`: Array of node objects representing rooms, devices, and notes
+ *    - `edges`: Array of edge objects representing wires/cables connecting ports
+ *    - `printPaperId`: string (e.g. "iso-a2")
+ *    - `printOrientation`: "portrait" | "landscape"
+ *    - `printScale`: number (e.g. 0.985)
+ *    - `titleBlock`: object containing showName, venue, designer, engineer, drawingTitle, date, company, revision
+ *    - `customFields`: Array of custom metadata definitions
+ *
+ * 2. Node Types:
+ *    a. `room`:
+ *       - `id`: string (e.g. "room-U1A36")
+ *       - `type`: "room"
+ *       - `position`: { x: number, y: number }
+ *       - `data`: { label: string, locked: boolean }
+ *       - `style`, `width`, `height`, `zIndex`: Layout and styling parameters
+ *    b. `device`:
+ *       - `id`: string (e.g. "device-U1-UM003")
+ *       - `type`: "device"
+ *       - `position`: { x: number, y: number }
+ *       - `parentId`: string referencing room node id (e.g. "room-U1A36")
+ *       - `data`: {
+ *           label: string,
+ *           deviceType: string,
+ *           manufacturer: string,
+ *           modelNumber: string,
+ *           ports: Array<{ id: string, label: string, signalType: string, direction: string, connectorType: string }>,
+ *           auxiliaryData: Array<{ text: string, position: "header" | "footer" }>
+ *         }
+ *    c. `note`:
+ *       - `id`: string (e.g. "note-open")
+ *       - `type`: "note"
+ *       - `position`: { x: number, y: number }
+ *       - `data`: { html: string }
+ *
+ * 3. Edge (Wire/Cable) Shape:
+ *    - `id`: string (e.g. "edge-0")
+ *    - `source`: string referencing source device id
+ *    - `target`: string referencing target device id
+ *    - `sourceHandle`: string referencing source port id
+ *    - `targetHandle`: string referencing target port id
+ *    - `data`: { signalType: string, label: string }
+ *    - `style`: { stroke: string, strokeWidth: number }
+ *
+ * 4. Mapping to Copper Model:
+ *    - Devices -> Device (+ materialized Interfaces) & DeviceType
+ *    - Rooms -> Location
+ *    - Wires -> Cable (2 terminations with discriminated PortRef)
+ *    - Notes -> Skipped in report.skippedObjects
+ *    - Layout/unmapped properties -> Accounted in report.unmappedFields
+ * ============================================================================
+ */
+
 import { describe, expect, it } from 'vitest';
+import fixtureGymmen from '../../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json';
+import fixtureStudio from '../../../tests/fixtures/av-fasit/AV_H3B19.easyschematic.json';
 import { readEasySchematic } from './read';
 import { DesignDocumentSchema } from '../../model/schema';
-
-let fixtureGymmen: any = {};
-let fixtureStudio: any = {};
-try {
-    fixtureGymmen = require('../../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json');
-    fixtureStudio = require('../../../tests/fixtures/av-fasit/AV_H3B19.easyschematic.json');
-} catch (e) {}
 
 describe('EasySchematic Reader (readEasySchematic)', () => {
   describe('Fixture 1: AV_U1A21.easyschematic.json (Gymmen)', () => {

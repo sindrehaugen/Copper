@@ -128,7 +128,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 * [LOCKED] B41 — R.W1 rack-model: rack schema + U positions/face from B15 geometry · tier: T2 · dep: B4b,B15 [NO TAG]
 * [LOCKED] B42 — R.W2 rack-elevation-view: U-positioned elevation rendering (net-new — no Romtegning prior art) · tier: T2 · dep: B41 [NO TAG]
 * [LOCKED] B43 — R.W3 rack-edit: drag placement + B38 wiring · tier: T2 · dep: B42,B31 [NO TAG]
-* [RUNNING] B44 — R.W4 location-tree: Site > Location(> Room) navigation mapped to FL labels · tier: T2 · dep: B4b,B20 [NO TAG]
+* [PASSED TAG] B44 — R.W4 location-tree: Site > Location(> Room) navigation mapped to FL labels · tier: T2 · dep: B4b,B20 [PASSED TAG]
 
 ### Lane Q — Routing quality (continuous track after B50; the four forbidden optimizations are pre-registered false wins)
 

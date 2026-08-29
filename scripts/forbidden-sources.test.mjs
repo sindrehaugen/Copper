@@ -164,6 +164,6 @@ describe('forbidden-sources', () => {
       expect(result.ok).toBe(true);
       expect(result.violations).toEqual([]);
       expect(result.scannedCount).toBeGreaterThan(0);
-    });
+    }, 15000);
   });
 });

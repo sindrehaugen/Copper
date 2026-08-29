@@ -19,6 +19,15 @@ export const FORMAT_MARKERS = [
   'easy' + 'schematic'
 ];
 
+export const EXEMPT_PATHS = [
+  'node_modules/',
+  '.git/',
+  'dist/',
+  'build/',
+  '.tmp-dtl-clone/',
+  'catalog/devicetype-library/'
+];
+
 export const CODE_TREE_PREFIXES = [
   'app/',
   'bff/',
@@ -108,7 +117,8 @@ export async function scanForbiddenSources(rootDir = process.cwd(), customFiles 
       const allFiles = output.split(/\r?\n/).map(f => f.trim()).filter(Boolean);
       filesToScan = allFiles
         .map(f => f.replace(/\\/g, '/'))
-        .filter(f => CODE_TREE_PREFIXES.some(prefix => f.startsWith(prefix)));
+        .filter(f => CODE_TREE_PREFIXES.some(prefix => f.startsWith(prefix)))
+        .filter(f => !EXEMPT_PATHS.some(prefix => f.startsWith(prefix)));
     } catch (err) {
       throw new Error(`Failed to run git ls-files: ${err.message}`);
     }

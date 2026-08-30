@@ -153,7 +153,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 * [PASSED TAG] B55 — X.W2 es-import: EasySchematic-file → NCE (B5 reader + B13 author), one-shot with import report · tier: T3 · dep: B5,B34 [NO TAG]
 * [HOLD-HS6] B56 — X.W3 netbox-export: one-shot export (sites/locations/racks/device-types/devices/cables) — schema mapping is near-mechanical per ADR-0006 · tier: T3 · dep: B4b,B20 [NO TAG]
 * [HOLD-HS6] B57 — X.W4 netbox-import: one-shot import of an existing estate · tier: T3 · dep: B56 [NO TAG]
-* [RUNNING] B58 — X.W5 d365-fl-import: FL hierarchy → Site/Location (supersedes the workbook path; `bravo_customerassetupload` defects noted in memory docs) · tier: T3 · dep: B44,B34 [NO TAG]
+* [PASSED TAG] B58 — X.W5 d365-fl-import: FL hierarchy → Site/Location (supersedes the workbook path; `bravo_customerassetupload` defects noted in memory docs) · tier: T3 · dep: B44,B34 [NO TAG]
 
 ### Lane B — BOM (Contract A; greenfield in NCE per seam audit)
 

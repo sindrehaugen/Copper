@@ -29,7 +29,7 @@ describe('DsarSurface', () => {
       expect(screen.getByTestId('export-status').textContent).toContain('Data Ready to Download');
     });
 
-    expect(global.fetch).toHaveBeenCalledWith('/api/me/dsar/export', { method: 'POST' });
+    expect(global.fetch).toHaveBeenCalledWith('/api/me/dsar/export');
   });
 
   it('handles data deletion request correctly', async () => {
@@ -46,6 +46,8 @@ describe('DsarSurface', () => {
       expect(screen.getByTestId('delete-status').textContent).toContain('Deletion Request Received');
     });
 
-    expect(global.fetch).toHaveBeenCalledWith('/api/me/dsar/delete', { method: 'POST' });
+    expect(global.fetch).toHaveBeenCalledWith('/api/me/dsar/erase', { method: 'POST' });
   });
 });
+
+

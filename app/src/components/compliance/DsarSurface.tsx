@@ -7,7 +7,7 @@ export const DsarSurface: React.FC = () => {
   const requestExport = async () => {
     setExportStatus('Request Pending');
     try {
-      await fetch('/api/me/dsar/export', { method: 'POST' });
+      await fetch('/api/me/dsar/export');
       setExportStatus('Data Ready to Download');
     } catch {
       setExportStatus('Export Failed');
@@ -17,7 +17,7 @@ export const DsarSurface: React.FC = () => {
   const requestDeletion = async () => {
     setDeleteStatus('Request Pending');
     try {
-      await fetch('/api/me/dsar/delete', { method: 'POST' });
+      await fetch('/api/me/dsar/erase', { method: 'POST' });
       setDeleteStatus('Deletion Request Received');
     } catch {
       setDeleteStatus('Deletion Failed');
@@ -42,3 +42,5 @@ export const DsarSurface: React.FC = () => {
     </div>
   );
 };
+
+

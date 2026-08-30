@@ -24,15 +24,14 @@ describe('NceClient', () => {
 
   it('getTopology parses successful response', async () => {
     const mockDoc = {
-      schemaVersion: 1,
-      designLabel: 'v1',
-      sites: [],
-      locations: [],
-      racks: [],
-      deviceTypes: [],
-      devices: [],
+      version: 1,
+      design: { designLabel: 'v1' },
+      functional_locations: {},
+      devices: {},
+      racks: {},
       cables: [],
-      signalClasses: []
+      edges: [],
+      geometry: {}
     };
 
     vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify(mockDoc), { status: 200 }));

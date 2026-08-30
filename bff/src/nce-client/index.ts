@@ -1,3 +1,4 @@
+import { NceTopologyResponseSchema } from './schema.js';
 import { BffConfig } from '../index.js';
 import { DesignDocument, DesignDocumentSchema } from '../../../app/src/model/schema.js';
 import { computeHmacSignature } from './hmac.js';
@@ -64,7 +65,24 @@ export class NceClient {
       throw new GovernanceDisabledError('Governance disabled (-32005)');
     }
 
-    return DesignDocumentSchema.parse(data);
+    const parsed = NceTopologyResponseSchema.parse(data);
+
+    const doc = {
+      schemaVersion: 1,
+      designLabel: parsed.design?.designLabel || 'v1',
+      revision: parsed.design?.revision,
+      sites: parsed.functional_locations?.sites || [],
+      locations: parsed.functional_locations?.locations || [],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      racks: parsed.racks ? Object.values(parsed.racks).map((r: any) => r.node || r) : [],
+      deviceTypes: parsed.design?.deviceTypes || [],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      devices: parsed.devices ? Object.values(parsed.devices).map((d: any) => d.node || d) : [],
+      cables: parsed.cables || [],
+      signalClasses: parsed.design?.signalClasses || [],
+    };
+
+    return DesignDocumentSchema.parse(doc);
   }
 
   async validateDesign(namespace: string, designLabel: string): Promise<ValidateDesignResponse> {

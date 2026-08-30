@@ -108,7 +108,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 ### Lane E — Editing & writes (opens after HS-3)
 
-* [HOLD-HS3] B31 — E.W1 store: zustand document store, immutable updates, snapshot-stack undo, selectors · tier: T2 · dep: B26 [NO TAG]
+* [RUNNING] B31 — E.W1 store: zustand document store, immutable updates, snapshot-stack undo, selectors · tier: T2 · dep: B26 [NO TAG]
   · Note: undo semantics vs write-through are decided HERE and stated in the brief — undo rewinds local document state; a write already sent to NCE is compensated by a new write (never a client-side "unsend"). B34 builds on that statement.
 * [HOLD-HS3] B32 — E.W2 palette: catalog browser + instantiate DeviceType→Device (components materialized per ADR-0006 §1) · tier: T2 · dep: B31,B8 [NO TAG]
 * [HOLD-HS3] B33 — E.W3 connect: connect gesture; three-state edge (dragging/sought/guessed); B29 wiring on drop · tier: T2 · dep: B31,B29 [NO TAG]

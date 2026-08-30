@@ -15,6 +15,7 @@ export interface DocumentState {
   redo: () => void;
   saveDocument: (client: any, namespace: string, actor: string) => Promise<void>;
   resolveConflict: (doc: DesignDocument) => void;
+  promoteDocument: (client: any, namespace: string, targetStatus: string) => Promise<void>;
 }
 
 export const useDocumentStore = create<DocumentState>((set, get) => ({
@@ -86,6 +87,38 @@ export const useDocumentStore = create<DocumentState>((set, get) => ({
       set({ isSaving: false });
     } catch (e: any) {
       if (e.message && e.message.includes('409')) { // Version conflict
+        set({ isSaving: false, syncConflict: true });
+      } else {
+        set({ isSaving: false });
+        throw e;
+      }
+    }
+  },
+
+    promoteDocument: async (client: any, namespace: string, targetStatus: string) => {
+    const { document } = get();
+    if (!document) return;
+    
+    set({ isSaving: true, syncConflict: false });
+    try {
+      const res = await client.promoteTopology(namespace, targetStatus, document.revision || '');
+      set((state) => {
+        if (!state.document) return state;
+        const nextDoc = produce(state.document, draft => {
+          // B17: revision bumping on active state
+          draft.revision = res.revision;
+        });
+        const nextHistory = state.history.slice(0, state.historyIndex + 1);
+        nextHistory.push(nextDoc);
+        return {
+          document: nextDoc,
+          history: nextHistory,
+          historyIndex: nextHistory.length - 1,
+          isSaving: false
+        };
+      });
+    } catch (e: any) {
+      if (e.message && e.message.includes('409')) {
         set({ isSaving: false, syncConflict: true });
       } else {
         set({ isSaving: false });

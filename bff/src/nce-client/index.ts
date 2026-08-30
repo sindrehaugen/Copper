@@ -95,6 +95,16 @@ export class NceClient {
     }
   }
 
+    async promoteTopology(namespace: string, targetStatus: string, expectedVersion: string): Promise<{ revision: string }> {
+    const body = JSON.stringify({ namespace, target_status: targetStatus, expected_version: expectedVersion });
+    const res = await this.fetchNce('POST', '/api/system-design/promote', body);
+    const data = await res.json();
+    if (data.error && data.error.code === -32005) {
+      throw new GovernanceDisabledError('Governance disabled (-32005)');
+    }
+    return data as { revision: string };
+  }
+
   async validateDesign(namespace: string, designLabel: string): Promise<ValidateDesignResponse> {
     const body = JSON.stringify({ namespace, design_label: designLabel });
     const res = await this.fetchNce('POST', '/api/system-design/validate', body);

@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useContext } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useDocumentStore } from '../store/documentStore';
 import { ErrorState } from './error-state';
 
 // Placeholder Context for Session/Tenancy
@@ -13,6 +14,7 @@ const SessionContext = createContext<SessionContextType | null>(null);
 
 function Layout({ children }: { children: ReactNode }) {
   const { t } = useTranslation();
+  const { document, promoteDocument, isSaving } = useDocumentStore();
   const session = useContext(SessionContext);
 
   return (
@@ -44,6 +46,7 @@ function Layout({ children }: { children: ReactNode }) {
 
 function Home() {
   const { t } = useTranslation();
+  const { document, promoteDocument, isSaving } = useDocumentStore();
   return <div><h1>{t('nav.home')}</h1></div>;
 }
 
@@ -65,3 +68,4 @@ export function AppShell() {
     </SessionContext.Provider>
   );
 }
+

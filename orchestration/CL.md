@@ -157,8 +157,8 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 ### Lane B — BOM (Contract A; greenfield in NCE per seam audit)
 
-* [HOLD-HS5] B59 — B.W1 bom-contract: node-ownership row + label scheme (no `_`/`%` — LIKE-wildcard bug class) + status-edge writer design — **coordinate with the ML orchestrator (NCE ML-B132a/133b territory) before any dispatch** · tier: T3 · dep: B35 [NO TAG]
-* [HOLD-HS5] B60 — B.W2 bom-emit: design→BOM_LINE emission with per-line provenance (design-generated origination path); delta emission on revision · tier: T3 · dep: B59 [NO TAG]
+* [RUNNING] B59 — B.W1 bom-contract: node-ownership row + label scheme (no `_`/`%` — LIKE-wildcard bug class) + status-edge writer design — **coordinate with the ML orchestrator (NCE ML-B132a/133b territory) before any dispatch** · tier: T3 · dep: B35 [NO TAG]
+* [RUNNING] B60 — B.W2 bom-emit: design→BOM_LINE emission with per-line provenance (design-generated origination path); delta emission on revision · tier: T3 · dep: B59 [NO TAG]
 
 ### Lane W — CAD/BIM workflows (plugins are ordinary API clients)
 

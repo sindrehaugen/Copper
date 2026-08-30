@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import process from 'node:process';
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
+import { requireAuth } from './auth';
 import type { Context, Next } from 'hono';
 
 /**
@@ -143,8 +144,8 @@ export async function sessionStubMiddleware(c: Context, next: Next): Promise<voi
 export function createBffApp(): Hono {
   const app = new Hono();
 
-  // Session stub middleware
-  app.use('*', sessionStubMiddleware);
+  // Auth middleware
+  app.use('*', requireAuth);
 
   // Health check endpoint
   app.get('/healthz', (c) => {

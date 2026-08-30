@@ -637,6 +637,7 @@ export const DesignDocumentSchema = z
     devices: z.array(DeviceSchema).default([]), // netbox: designdocument.devices
     cables: z.array(CableSchema).default([]), // netbox: designdocument.cables
     signalClasses: z.array(SignalClassSchema).default([]), // extension: designdocument.signal_classes
+    geometry: z.record(z.any()).default({}), // extension: designdocument.geometry
   })
   .strict()
   .refine(

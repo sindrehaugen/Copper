@@ -1,20 +1,30 @@
-import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import React from 'react';
 import { RackElevationView } from './RackElevationView';
 import { DesignDocument } from '../../model/schema';
-
+import { useDocumentStore } from '../../store';
 
 describe('RackElevationView', () => {
+  afterEach(cleanup);
+  beforeEach(() => {
+    useDocumentStore.setState({ document: null, history: [], historyIndex: -1 });
+  });
+
   it('renders correctly with an empty rack', () => {
     const doc: DesignDocument = {
+      schemaVersion: 1,
+      designLabel: 'Test',
+      geometry: {},
       sites: [],
       locations: [],
       deviceTypes: [],
       racks: [
-        { id: 'rack-1', name: 'Rack 1', uHeight: 42, locationId: 'loc-1' }
+        { id: 'rack-1', name: 'Rack 1', uHeight: 42, locationId: 'loc-1', siteId: 'site-1', status: 'active' }
       ],
-      devices: []
+      devices: [],
+      cables: [],
+      signalClasses: []
     };
     
     render(<RackElevationView doc={doc} geometryMap={{}} selectedRackId="rack-1" />);
@@ -29,19 +39,24 @@ describe('RackElevationView', () => {
 
   it('renders devices in correct slots', () => {
     const doc: DesignDocument = {
+      schemaVersion: 1,
+      designLabel: 'Test',
+      geometry: {},
       sites: [],
       locations: [],
       deviceTypes: [
-        { id: 'dt-1', name: 'Switch', make: 'Cisco', model: 'SG', uHeight: 1, powerPorts: [], networkPorts: [] },
-        { id: 'dt-2', name: 'Patch', make: 'Generic', model: 'Patch', uHeight: 0.5, powerPorts: [], networkPorts: [] }
+        { id: 'dt-1', manufacturer: 'Cisco', model: 'SG', slug: 'dt-1', isFullDepth: true, uHeight: 1, powerPortTemplates: [], interfaceTemplates: [] },
+        { id: 'dt-2', manufacturer: 'Generic', model: 'Patch', slug: 'dt-2', isFullDepth: false, uHeight: 0.5, powerPortTemplates: [], interfaceTemplates: [] }
       ],
       racks: [
-        { id: 'rack-1', name: 'Rack 1', uHeight: 42, locationId: 'loc-1' }
+        { id: 'rack-1', name: 'Rack 1', uHeight: 42, locationId: 'loc-1', siteId: 'site-1', status: 'active' }
       ],
       devices: [
-        { id: 'd-1', name: 'Core Switch', deviceTypeId: 'dt-1', rackId: 'rack-1' },
-        { id: 'd-2', name: 'Half U Patch', deviceTypeId: 'dt-2', rackId: 'rack-1' }
-      ]
+        { id: 'd-1', name: 'Core Switch', deviceTypeId: 'dt-1', rackId: 'rack-1', siteId: 'site-1', status: 'active' },
+        { id: 'd-2', name: 'Half U Patch', deviceTypeId: 'dt-2', rackId: 'rack-1', siteId: 'site-1', status: 'active' }
+      ],
+      cables: [],
+      signalClasses: []
     };
     
     const geometryMap = {
@@ -62,9 +77,60 @@ describe('RackElevationView', () => {
 
   it('renders rack not found', () => {
     const doc: DesignDocument = {
-      sites: [], locations: [], deviceTypes: [], racks: [], devices: []
+      schemaVersion: 1, designLabel: 'Test', geometry: {},
+      sites: [], locations: [], deviceTypes: [], racks: [], devices: [], cables: [], signalClasses: []
     };
     render(<RackElevationView doc={doc} geometryMap={{}} selectedRackId="nonexistent" />);
     expect(screen.getByTestId('rack-not-found')).toBeDefined();
+  });
+
+  it('handles valid drag and drop', () => {
+    const doc: DesignDocument = {
+      schemaVersion: 1,
+      designLabel: 'Test',
+      geometry: {},
+      sites: [],
+      locations: [],
+      deviceTypes: [
+        { id: 'dt-1', manufacturer: 'Cisco', model: 'SG', slug: 'dt-1', isFullDepth: true, uHeight: 1, powerPortTemplates: [], interfaceTemplates: [] },
+      ],
+      racks: [
+        { id: 'rack-1', name: 'Rack 1', uHeight: 42, locationId: 'loc-1', siteId: 'site-1', status: 'active' }
+      ],
+      devices: [
+        { id: 'd-1', name: 'Unassigned Switch', deviceTypeId: 'dt-1', siteId: 'site-1', status: 'active' },
+      ],
+      cables: [],
+      signalClasses: []
+    };
+    
+    useDocumentStore.setState({ document: doc, history: [doc], historyIndex: 0 });
+
+    render(<RackElevationView doc={doc} geometryMap={{}} selectedRackId="rack-1" />);
+    
+    const unassignedEl = screen.getByTestId('unassigned-d-1');
+    expect(unassignedEl).toBeDefined();
+
+    const slotEl = screen.getAllByTestId('slot-10-front')[0];
+    
+    // Simulate drop
+    const dataTransfer = {
+      getData: vi.fn().mockReturnValue('d-1'),
+      setData: vi.fn(),
+    };
+    
+    fireEvent.drop(slotEl, {
+      dataTransfer,
+      preventDefault: vi.fn()
+    });
+
+    const state = useDocumentStore.getState();
+    const updatedDoc = state.document!;
+    const updatedDevice = updatedDoc.devices.find(d => d.id === 'd-1');
+    expect(updatedDevice?.rackId).toBe('rack-1');
+    expect(updatedDevice?.position).toBe(10);
+    expect(updatedDevice?.face).toBe('front');
+    expect(((updatedDoc as unknown as { geometry: Record<string, {rack_position: number, rack_face: string}> }).geometry['d-1'] || {}).rack_position).toBe(10);
+    expect(((updatedDoc as unknown as { geometry: Record<string, {rack_position: number, rack_face: string}> }).geometry['d-1'] || {}).rack_face).toBe('front');
   });
 });

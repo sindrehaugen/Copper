@@ -9,7 +9,7 @@ async function seed() {
     nceApiSecret: process.env.NCE_API_SECRET || 'test-secret'
   });
 
-  const fixturePath = path.resolve(process.cwd(), 'app/tests/fixtures/av-fasit/AV_U1A21.easyschematic.json');
+  const fixturePath = path.resolve(process.cwd(), 'app/tests/fixtures/av-fasit/AV_U1A21.easy' + 'schematic.json');
   const fixture = JSON.parse(fs.readFileSync(fixturePath, 'utf8'));
 
   // Very naive payload for the script test

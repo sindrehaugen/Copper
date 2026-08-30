@@ -168,7 +168,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 * [PASSED TAG] B64 — W.W4 connectcad-mapping: schema map ConnectCAD device/circuit ↔ Copper model (the NetBox treatment); one-shot circuit import · tier: T2 · dep: B61 [NO TAG]
 * [HOLD-HS7] B65 — W.W5 sketchup-path: glTF/DAE handoff validated in real SketchUp; metadata survival checked · tier: T2 · dep: B53 [NO TAG]
 * [PASSED TAG] B66 — W.W6 revit-dynamo-path: Dynamo script consuming the BFF API (shared parameters carry designations) · tier: T2 · dep: B62 [NO TAG]
-* [RUNNING] B67 — W.W7 vw-placement-writeback: plugin pushes placed positions back (writes as `planned` through B34's path — same fact, same store) · tier: T3 · dep: B63,B34 [NO TAG]
+* [PASSED TAG] B67 — W.W7 vw-placement-writeback: plugin pushes placed positions back (writes as `planned` through B34's path — same fact, same store) · tier: T3 · dep: B63,B34 [NO TAG]
 
 ### Lane U — Shell & platform (ADR-0007/0008 — a11y and i18n are wave-one ratchets, not retrofits)
 

@@ -145,7 +145,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 * [PASSED TAG] B51 — T.W1 scene-from-design: three.js scene builder (rooms as volumes, racks/devices as dimensioned boxes) from (document, layout) · tier: T2 · dep: B23,B41 [NO TAG]
 * [LOCKED] B52 — T.W2 room-walkthrough: camera controls, selection sync with canvas · tier: T2 · dep: B51 [NO TAG]
-* [RUNNING] B53 — T.W3 gltf-export: glTF (+Collada if cheap) export with designations as node names · tier: T2 · dep: B51 [NO TAG]
+* [PASSED TAG] B53 — T.W3 gltf-export: glTF (+Collada if cheap) export with designations as node names · tier: T2 · dep: B51 [NO TAG]
 
 ### Lane X — Exchange doors
 

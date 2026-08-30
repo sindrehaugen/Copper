@@ -86,7 +86,7 @@ export class NceClient {
   }
 
   
-  async authorTopology(namespace: string, payload: unknown): Promise<void> {
+  async authorTopology(namespace: string, payload: any): Promise<void> {
     const body = JSON.stringify({ namespace, ...payload });
     const res = await this.fetchNce('POST', '/api/system-design/author', body);
     const data = await res.json();

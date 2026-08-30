@@ -7,6 +7,7 @@ export interface DocumentState {
   document: DesignDocument | null;
   history: DesignDocument[];
   historyIndex: number;
+  selectedIds: string[];
   isSaving: boolean;
   syncConflict: boolean;
   loadDocument: (doc: DesignDocument) => void;
@@ -29,6 +30,7 @@ export const useDocumentStore = create<DocumentState>((set, get) => ({
     document: doc,
     history: [doc],
     historyIndex: 0,
+    selectedIds: [],
     syncConflict: false
   }),
 
@@ -127,10 +129,13 @@ export const useDocumentStore = create<DocumentState>((set, get) => ({
     }
   },
 
+  setSelectedIds: (ids) => set({ selectedIds: ids }),
   resolveConflict: (doc) => set({
     document: doc,
     history: [doc],
     historyIndex: 0,
+    selectedIds: [],
     syncConflict: false
   })
 }));
+

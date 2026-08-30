@@ -20,7 +20,7 @@ export function RackVolume({ rack, devices, position = [0, 0, 0] }: RackVolumePr
   const rackDepth = 1.0;
 
   return (
-    <group position={position}>
+    <group position={position} name={rack.name || rack.id}>
       <mesh position={[0, rackHeight / 2, 0]}>
         <boxGeometry args={[rackWidth, rackHeight, rackDepth]} />
         <meshStandardMaterial color="#333333" wireframe />
@@ -42,4 +42,5 @@ export function RackVolume({ rack, devices, position = [0, 0, 0] }: RackVolumePr
     </group>
   );
 }
+
 

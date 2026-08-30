@@ -18,7 +18,7 @@ export function RoomVolume({ location }: RoomVolumeProps) {
   const z = layout.y * scale + d / 2;
 
   return (
-    <group position={[x, h / 2, z]}>
+    <group position={[x, h / 2, z]} name={location.name || location.id}>
       <mesh>
         <boxGeometry args={[w, h, d]} />
         <meshStandardMaterial color="#88aaff" opacity={0.2} transparent depthWrite={false} />
@@ -26,5 +26,6 @@ export function RoomVolume({ location }: RoomVolumeProps) {
     </group>
   );
 }
+
 
 

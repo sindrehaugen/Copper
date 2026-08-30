@@ -1,4 +1,4 @@
-import { DesignDocument, Device, Rack } from './schema';
+import { DesignDocument, Device } from './schema';
 
 export interface RackSlot {
   uNumber: number;
@@ -13,8 +13,7 @@ export interface RackElevation {
   slots: RackSlot[];
 }
 
-export function computeRackElevations(doc: DesignDocument, geometryMap: Record<string, any>): RackElevation[] {
-  const rackMap = new Map<string, Rack>(doc.racks.map(r => [r.id, r]));
+export function computeRackElevations(doc: DesignDocument, geometryMap: Record<string, unknown>): RackElevation[] {
   const deviceTypeMap = new Map(doc.deviceTypes.map(dt => [dt.id, dt]));
 
   const elevationsMap = new Map<string, RackElevation>();
@@ -38,7 +37,7 @@ export function computeRackElevations(doc: DesignDocument, geometryMap: Record<s
     const elevation = elevationsMap.get(device.rackId);
     if (!elevation) continue;
 
-    const geometry = geometryMap[device.id];
+    const geometry = geometryMap[device.id] as { rack_position?: number, rack_face?: string } | undefined;
     if (!geometry) continue;
 
     const dt = deviceTypeMap.get(device.deviceTypeId);

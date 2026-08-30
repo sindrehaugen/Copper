@@ -191,7 +191,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 ### Lane C — Compliance surfaces (ADR-0008 — post-HS-8 unless Sindre pulls them forward)
 
 * [HOLD-HS8] B72 — C.W1 dsar-surface: wire NCE `me_app` DSAR/GDPR endpoints into the shell · tier: T2 · dep: B68b,B70 [NO TAG]
-* [RUNNING] B73 — C.W2 provenance-viewer: C9a citations + event-log audit trail as first-class UI on any NCE-backed value · tier: T2 · dep: B70 [NO TAG]
+* [PASSED TAG] B73 — C.W2 provenance-viewer: C9a citations + event-log audit trail as first-class UI on any NCE-backed value · tier: T2 · dep: B70 [NO TAG]
 * [PASSED TAG] B74 — C.W3 ai-transparency: Contract-B confirm dialogs (AI-proposed vs human-decided, provenance shown, confidence never presented as calibrated) as a shared shell component · tier: T3 · dep: B73 [NO TAG]
 
 ### Lane O — Observe (UNSCHEDULED — rows recorded, no briefs)

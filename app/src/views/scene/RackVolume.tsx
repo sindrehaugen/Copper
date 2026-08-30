@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Rack, Device } from '../../model/schema';
+import { useDocumentStore } from '../../store';
 
 interface DeviceWithGeometry extends Device {
   geometry?: {
@@ -42,5 +43,6 @@ export function RackVolume({ rack, devices, position = [0, 0, 0] }: RackVolumePr
     </group>
   );
 }
+
 
 

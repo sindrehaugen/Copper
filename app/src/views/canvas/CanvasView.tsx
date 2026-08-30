@@ -8,6 +8,7 @@ import {
 } from '@xyflow/react';
 import { DeviceNode } from './nodes/DeviceNode';
 import { useWiringInteraction } from './CanvasWiringInteraction';
+import { useDocumentStore } from '../../store';
 
 export const defaultNodeTypes: NodeTypes = {
   device: DeviceNode,
@@ -44,6 +45,7 @@ export function CanvasView({
   ...restProps
 }: CanvasViewProps): JSX.Element {
   const wiringProps = useWiringInteraction();
+  const setSelectedIds = useDocumentStore(state => state.setSelectedIds);
   
   // Only override interaction props if enableWiring is true
   const interactionProps = enableWiring ? {
@@ -68,9 +70,11 @@ export function CanvasView({
         nodesDraggable={nodesDraggable}
         elementsSelectable={elementsSelectable}
         fitView={fitView}
+        onSelectionChange={({ nodes }) => setSelectedIds(nodes.map(n => n.id))}
         {...interactionProps}
         {...restProps}
       />
     </div>
   );
 }
+

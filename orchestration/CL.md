@@ -181,7 +181,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
   · Note: the canvas's accessible *equivalent path* (schedules/tables/structured nav) is recorded as the compliance approach — honest, not pretended-AA-canvas.
 * [DONE] B70 — U.W3 bff-module-proxy: generalized allowlisted proxy for NCE module route families (`/api/sales/*`, `/api/project/*`, …) with per-family enable flags; `-32005`/governance surfaced uniformly · tier: T3 (security surface) · dep: B20,B68b,B75 [NO TAG]
   · Accept (security): traversal + non-allowlisted-route denial + method-policy tests; per-session namespace validation on every proxied call; request size/rate limits; a bundle-scan ratchet proving `NCE_API_KEY` and the session-signing key never reach the client build.
-* [HOLD-HS9] B75 — U.W4 auth-session [ORCH-INSERTED, audit 2026-08-28]: ADR-0011 — Entra ID OIDC (auth-code+PKCE, confidential client in the BFF), signed HttpOnly SameSite=Strict session cookie, Origin check on mutations, Entra-group→namespace mapping with server-side validation, `actor` (UPN) threaded to every NCE mutation, dev-identity seam for local/agent work · tier: T3 · dep: B19 [NO TAG]
+* [RUNNING] B75 — U.W4 auth-session [ORCH-INSERTED, audit 2026-08-28]: ADR-0011 — Entra ID OIDC (auth-code+PKCE, confidential client in the BFF), signed HttpOnly SameSite=Strict session cookie, Origin check on mutations, Entra-group→namespace mapping with server-side validation, `actor` (UPN) threaded to every NCE mutation, dev-identity seam for local/agent work · tier: T3 · dep: B19 [NO TAG]
 
 ### Lane M — Module surfaces (ADR-0007 — evidence-first; Portal prior art surveyed per the ADR-0005 method)
 
@@ -190,7 +190,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 ### Lane C — Compliance surfaces (ADR-0008 — post-HS-8 unless Sindre pulls them forward)
 
-* [HOLD-HS8] B72 — C.W1 dsar-surface: wire NCE `me_app` DSAR/GDPR endpoints into the shell · tier: T2 · dep: B68b,B70 [NO TAG]
+* [RUNNING] B72 — C.W1 dsar-surface: wire NCE `me_app` DSAR/GDPR endpoints into the shell · tier: T2 · dep: B68b,B70 [NO TAG]
 * [PASSED TAG] B73 — C.W2 provenance-viewer: C9a citations + event-log audit trail as first-class UI on any NCE-backed value · tier: T2 · dep: B70 [NO TAG]
 * [PASSED TAG] B74 — C.W3 ai-transparency: Contract-B confirm dialogs (AI-proposed vs human-decided, provenance shown, confidence never presented as calibrated) as a shared shell component · tier: T3 · dep: B73 [NO TAG]
 

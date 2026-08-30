@@ -181,7 +181,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
   · Note: the canvas's accessible *equivalent path* (schedules/tables/structured nav) is recorded as the compliance approach — honest, not pretended-AA-canvas.
 * [DONE] B70 — U.W3 bff-module-proxy: generalized allowlisted proxy for NCE module route families (`/api/sales/*`, `/api/project/*`, …) with per-family enable flags; `-32005`/governance surfaced uniformly · tier: T3 (security surface) · dep: B20,B68b,B75 [NO TAG]
   · Accept (security): traversal + non-allowlisted-route denial + method-policy tests; per-session namespace validation on every proxied call; request size/rate limits; a bundle-scan ratchet proving `NCE_API_KEY` and the session-signing key never reach the client build.
-* [RUNNING] B75 — U.W4 auth-session [ORCH-INSERTED, audit 2026-08-28]: ADR-0011 — Entra ID OIDC (auth-code+PKCE, confidential client in the BFF), signed HttpOnly SameSite=Strict session cookie, Origin check on mutations, Entra-group→namespace mapping with server-side validation, `actor` (UPN) threaded to every NCE mutation, dev-identity seam for local/agent work · tier: T3 · dep: B19 [NO TAG]
+* [PASSED TAG] B75 — U.W4 auth-session [ORCH-INSERTED, audit 2026-08-28]: ADR-0011 — Entra ID OIDC (auth-code+PKCE, confidential client in the BFF), signed HttpOnly SameSite=Strict session cookie, Origin check on mutations, Entra-group→namespace mapping with server-side validation, `actor` (UPN) threaded to every NCE mutation, dev-identity seam for local/agent work · tier: T3 · dep: B19 [NO TAG]
 
 ### Lane M — Module surfaces (ADR-0007 — evidence-first; Portal prior art surveyed per the ADR-0005 method)
 

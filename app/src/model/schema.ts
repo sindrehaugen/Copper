@@ -438,7 +438,6 @@ export const LocationSchema = z
     slug: z.string(), // netbox: location.slug
     siteId: IdentifierSchema, // netbox: location.site
     parentId: IdentifierSchema.optional(), // netbox: location.parent
-    position: z.tuple([z.number(), z.number(), z.number()]).optional(), // extension: explicit XYZ coordinates for 3D layout
     description: z.string().optional(), // netbox: location.description
   })
   .strict();
@@ -638,7 +637,6 @@ export const DesignDocumentSchema = z
     devices: z.array(DeviceSchema).default([]), // netbox: designdocument.devices
     cables: z.array(CableSchema).default([]), // netbox: designdocument.cables
     signalClasses: z.array(SignalClassSchema).default([]), // extension: designdocument.signal_classes
-    geometry: z.record(z.any()).default({}), // extension: designdocument.geometry
   })
   .strict()
   .refine(
@@ -688,3 +686,24 @@ export const DesignDocumentSchema = z
 export type DesignDocument = z.infer<typeof DesignDocumentSchema>;
 
 
+// ============================================================================
+// Bill of Materials (BOM) Contract
+// ============================================================================
+
+/**
+ * BomLineSchema: Bill of Materials line item contract.
+ */
+export const BomLineSchema = z
+  .object({
+    id: z.string().uuid(), // extension: bomline.id
+    designId: z.string(), // extension: bomline.design_id
+    nodeOwnership: z.string(), // extension: bomline.node_ownership
+    label: z.string().regex(/^[^_%]*$/, 'Label must not contain "_" or "%" characters'), // extension: bomline.label
+    statusEdge: z.string(), // extension: bomline.status_edge
+    provenance: z.array(z.string()), // extension: bomline.provenance
+    quantity: z.number(), // extension: bomline.quantity
+    partNumber: z.string(), // extension: bomline.part_number
+  })
+  .strict();
+
+export type BomLine = z.infer<typeof BomLineSchema>;

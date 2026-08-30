@@ -48,6 +48,7 @@ import {
   type RearPortTemplate,
   type SignalClass,
   type Site,
+  BomLineSchema,
 } from './schema';
 
 describe('Containment & Lifecycle Schemas (ADR-0006, ADR-0004, ADR-0003)', () => {
@@ -450,7 +451,7 @@ describe('Component Templates, Materialized Components, Cables & DesignDocument 
       };
 
       const parsed = DesignDocumentSchema.parse(doc);
-      doc.geometry = {}; expect(parsed).toEqual(doc);
+      expect(parsed).toEqual(doc);
       expect(DesignDocumentSchema.parse(JSON.parse(JSON.stringify(doc)))).toEqual(parsed);
     });
   });
@@ -767,5 +768,23 @@ describe('Component Templates, Materialized Components, Cables & DesignDocument 
 
       expect(DesignDocumentSchema.safeParse(docWithMissingDevice).success).toBe(false);
     });
+  });
+});
+
+describe('BomLineSchema', () => {
+  it('rejects labels with _ or % characters', () => {
+    const baseBomLine = {
+      id: '123e4567-e89b-12d3-a456-426614174000',
+      designId: 'design-123',
+      nodeOwnership: 'plugin-x',
+      statusEdge: 'written',
+      provenance: ['path/to/source'],
+      quantity: 1,
+      partNumber: 'PN-123',
+    };
+    
+    expect(BomLineSchema.safeParse({ ...baseBomLine, label: 'valid-label' }).success).toBe(true);
+    expect(BomLineSchema.safeParse({ ...baseBomLine, label: 'invalid_label' }).success).toBe(false);
+    expect(BomLineSchema.safeParse({ ...baseBomLine, label: 'invalid%label' }).success).toBe(false);
   });
 });

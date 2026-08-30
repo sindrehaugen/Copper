@@ -438,6 +438,7 @@ export const LocationSchema = z
     slug: z.string(), // netbox: location.slug
     siteId: IdentifierSchema, // netbox: location.site
     parentId: IdentifierSchema.optional(), // netbox: location.parent
+    position: z.tuple([z.number(), z.number(), z.number()]).optional(), // extension: explicit XYZ coordinates for 3D layout
     description: z.string().optional(), // netbox: location.description
   })
   .strict();
@@ -685,4 +686,5 @@ export const DesignDocumentSchema = z
   );
 
 export type DesignDocument = z.infer<typeof DesignDocumentSchema>;
+
 

@@ -7,6 +7,7 @@ import {
   type ReactFlowProps,
 } from '@xyflow/react';
 import { DeviceNode } from './nodes/DeviceNode';
+import { useWiringInteraction } from './CanvasWiringInteraction';
 
 export const defaultNodeTypes: NodeTypes = {
   device: DeviceNode,
@@ -17,6 +18,7 @@ export interface CanvasViewProps extends Omit<ReactFlowProps, 'nodes' | 'edges'>
   edges?: Edge[];
   className?: string;
   style?: CSSProperties;
+  enableWiring?: boolean;
 }
 
 const defaultCanvasStyle: CSSProperties = {
@@ -26,7 +28,7 @@ const defaultCanvasStyle: CSSProperties = {
 };
 
 /**
- * Read-only React Flow CanvasView rendering toFlow projection.
+ * React Flow CanvasView rendering toFlow projection.
  * Defaults to read-only interaction and wires custom DeviceNode.
  */
 export function CanvasView({
@@ -38,8 +40,21 @@ export function CanvasView({
   elementsSelectable = true,
   fitView = true,
   style,
+  enableWiring = false,
   ...restProps
 }: CanvasViewProps): JSX.Element {
+  const wiringProps = useWiringInteraction();
+  
+  // Only override interaction props if enableWiring is true
+  const interactionProps = enableWiring ? {
+    nodesConnectable: true,
+    connectionLineComponent: wiringProps.connectionLineComponent,
+    onConnect: wiringProps.onConnect,
+    isValidConnection: wiringProps.isValidConnection,
+  } : {
+    nodesConnectable
+  };
+
   return (
     <div
       className="copper-canvas-container"
@@ -51,9 +66,9 @@ export function CanvasView({
         edges={edges}
         nodeTypes={nodeTypes}
         nodesDraggable={nodesDraggable}
-        nodesConnectable={nodesConnectable}
         elementsSelectable={elementsSelectable}
         fitView={fitView}
+        {...interactionProps}
         {...restProps}
       />
     </div>

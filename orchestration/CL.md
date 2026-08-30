@@ -164,10 +164,10 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 
 * [DONE] B61 — W.W1 cad-recon: verify, with sources, the actual exchange surfaces: Vectorworks plugin runtime (embedded Python/VectorScript/SDK), ConnectCAD device+circuit import/export formats, Revit IFC/Dynamo entry points, SketchUp import formats (glTF/DAE) — findings → `docs/cad_interop.md` · tier: T2 (research feeding a funding one-way door: fresh-session verification pass over the cited sources before HS-7) · dep: — [NO TAG]
 * [PASSED TAG] B62 — W.W2 ifc-cobie-export: IFC (+COBie sheet) carrying reference designations (ADR-0004 decided first) · tier: T2 · dep: B44 [NO TAG]
-* [HOLD-HS7] B63 — W.W3 vw-plugin-mvp: Vectorworks plugin (embedded Python) pulling device/cable/rack schedules from the BFF API into the drawing · tier: T3 · dep: B61,B20 [NO TAG]
+* [RUNNING] B63 — W.W3 vw-plugin-mvp: Vectorworks plugin (embedded Python) pulling device/cable/rack schedules from the BFF API into the drawing · tier: T3 · dep: B61,B20 [NO TAG]
 * [PASSED TAG] B64 — W.W4 connectcad-mapping: schema map ConnectCAD device/circuit ↔ Copper model (the NetBox treatment); one-shot circuit import · tier: T2 · dep: B61 [NO TAG]
 * [HOLD-HS7] B65 — W.W5 sketchup-path: glTF/DAE handoff validated in real SketchUp; metadata survival checked · tier: T2 · dep: B53 [NO TAG]
-* [HOLD-HS7] B66 — W.W6 revit-dynamo-path: Dynamo script consuming the BFF API (shared parameters carry designations) · tier: T2 · dep: B62 [NO TAG]
+* [RUNNING] B66 — W.W6 revit-dynamo-path: Dynamo script consuming the BFF API (shared parameters carry designations) · tier: T2 · dep: B62 [NO TAG]
 * [HOLD-HS7] B67 — W.W7 vw-placement-writeback: plugin pushes placed positions back (writes as `planned` through B34's path — same fact, same store) · tier: T3 · dep: B63,B34 [NO TAG]
 
 ### Lane U — Shell & platform (ADR-0007/0008 — a11y and i18n are wave-one ratchets, not retrofits)

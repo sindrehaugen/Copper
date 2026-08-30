@@ -111,7 +111,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep
 * [PASSED TAG] B31 — E.W1 store: zustand document store, immutable updates, snapshot-stack undo, selectors · tier: T2 · dep: B26 [NO TAG]
   · Note: undo semantics vs write-through are decided HERE and stated in the brief — undo rewinds local document state; a write already sent to NCE is compensated by a new write (never a client-side "unsend"). B34 builds on that statement.
 * [PASSED TAG] B32 — E.W2 palette: catalog browser + instantiate DeviceType→Device (components materialized per ADR-0006 §1) · tier: T2 · dep: B31,B8 [NO TAG]
-* [RUNNING] B33 — E.W3 connect: connect gesture; three-state edge (dragging/sought/guessed); B29 wiring on drop · tier: T2 · dep: B31,B29 [NO TAG]
+* [PASSED TAG] B33 — E.W3 connect: connect gesture; three-state edge (dragging/sought/guessed); B29 wiring on drop · tier: T2 · dep: B31,B29 [NO TAG]
 * [HOLD-HS3] B34 — E.W4 write-through: save via BFF→B13-scope tools as `status=planned` with `actor` + `expected_version` (m6 guide Rev 2 §1–2); optimistic UI + conflict surfacing on version rejection · tier: T3 · dep: B31,B13,B15,B17,B75,B76 [NO TAG]
 * [HOLD-HS4] B35 — E.W5 promote: planned→active via `do_validate_design` verdicts + first `action_approval_queue` writer; human-confirm-only; the confirm dialog states AI-proposed vs human-decided with provenance (the B74 pattern, pulled forward here because promote ships first) · tier: T3 · dep: B34,B75 [NO TAG]
 

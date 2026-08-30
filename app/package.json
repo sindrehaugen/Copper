@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@material/material-color-utilities": "^0.3.0",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
     "@xyflow/react": "^12.11.5",
     "@xyflow/system": "^0.0.81",
     "dxf-writer": "^1.18.4",
@@ -20,6 +22,7 @@
     "react-dom": "^19.0.0",
     "react-i18next": "^17.0.12",
     "react-router-dom": "^7.18.2",
+    "three": "^0.185.1",
     "zod": "^3.24.2",
     "zustand": "^5.0.15"
   },
@@ -28,6 +31,7 @@
     "@testing-library/react": "^16.3.2",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@types/three": "^0.185.4",
     "@vitejs/plugin-react": "^4.3.4",
     "jsdom": "^30.0.1",
     "typescript": "^5.7.3",

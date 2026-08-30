@@ -85,6 +85,16 @@ export class NceClient {
     return DesignDocumentSchema.parse(doc);
   }
 
+  
+  async authorTopology(namespace: string, payload: any): Promise<void> {
+    const body = JSON.stringify({ namespace, ...payload });
+    const res = await this.fetchNce('POST', '/api/system-design/author', body);
+    const data = await res.json();
+    if (data.error && data.error.code === -32005) {
+      throw new GovernanceDisabledError('Governance disabled (-32005)');
+    }
+  }
+
   async validateDesign(namespace: string, designLabel: string): Promise<ValidateDesignResponse> {
     const body = JSON.stringify({ namespace, design_label: designLabel });
     const res = await this.fetchNce('POST', '/api/system-design/validate', body);

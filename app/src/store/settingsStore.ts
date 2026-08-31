@@ -10,6 +10,7 @@ interface SettingsState {
   headerFontSize: number; // Font size of device header in px
 
   setWireSpacing: (v: number) => void;
+  setPortPadding: (v: number) => void;
   setShowCableLabels: (v: boolean) => void;
   setCableLabelPosition: (v: 'start' | 'middle' | 'end') => void;
   setTerminalSpacing: (v: number) => void;
@@ -19,6 +20,7 @@ interface SettingsState {
 
 export const useSettingsStore = create<SettingsState>((set) => ({
   wireSpacing: 4,
+  portPadding: 30,
   showCableLabels: true,
   cableLabelPosition: 'middle',
   terminalSpacing: 20,
@@ -26,11 +28,13 @@ export const useSettingsStore = create<SettingsState>((set) => ({
   headerFontSize: 10,
 
   setWireSpacing: (v) => set({ wireSpacing: v }),
+  setPortPadding: (v) => set({ portPadding: v }),
   setShowCableLabels: (v) => set({ showCableLabels: v }),
   setCableLabelPosition: (v) => set({ cableLabelPosition: v }),
   setTerminalSpacing: (v) => set({ terminalSpacing: v }),
   setTerminalFontSize: (v) => set({ terminalFontSize: v }),
   setHeaderFontSize: (v) => set({ headerFontSize: v }),
 }));
+
 
 

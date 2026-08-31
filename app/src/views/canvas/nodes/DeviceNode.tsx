@@ -12,8 +12,12 @@ export interface PortItemNode {
   type?: string;
 }
 
+import { PHYSICAL_LOCATIONS } from '../../../model/locations';
+import type { DeviceType } from '../../../model/schema';
+
 export interface DeviceNodeData {
   device: Device;
+  deviceType?: DeviceType;
   inputPorts: PortItemNode[];
   outputPorts: PortItemNode[];
 }
@@ -87,8 +91,16 @@ export const DeviceNodeComponent: React.FC<{ node?: Node }> = ({ node }) => {
   const data = node?.getData<DeviceNodeData>();
   if (!data) return null;
 
-  const { device, inputPorts = [], outputPorts = [] } = data;
-  const displayName = device?.name ?? device?.designation ?? device?.id ?? 'Unknown Device';
+  const { device, deviceType, inputPorts = [], outputPorts = [] } = data;
+  
+  const designation = device?.designation ?? device?.name?.split(' ')[0] ?? '';
+  const brand = deviceType?.manufacturer ?? 'Unknown';
+  const model = deviceType?.model ?? 'Unknown';
+  const kind = deviceType?.id ? deviceType.id.split('-').pop() : ''; // fallback, or we can just use model
+  
+  const displayName = `${designation} - ${brand} ${model} (${kind})`.replace(' ()', '');
+  
+  const loc = device?.physicalLocation ? PHYSICAL_LOCATIONS[device.physicalLocation] : null;
 
   const renderPort = (port: PortItemNode, isInput: boolean) => {
     const portDisplayName = port.label || port.name;
@@ -118,9 +130,27 @@ export const DeviceNodeComponent: React.FC<{ node?: Node }> = ({ node }) => {
 
   return (
     <div className="copper-device-node" style={cardStyle}>
-      <header className="copper-device-header" style={headerStyle}>
-        <div style={titleStyle} title={displayName}>
-          {displayName}
+      <header className="copper-device-header" style={{
+        ...headerStyle,
+        backgroundColor: loc ? loc.bgColor : headerStyle.backgroundColor,
+        color: loc ? loc.color : headerStyle.color
+      }}>
+        <div style={{ display: 'flex', width: '100%', alignItems: 'center', gap: '8px' }}>
+          {loc && (
+            <span style={{
+              fontWeight: 900,
+              padding: '2px 4px',
+              borderRadius: '4px',
+              backgroundColor: loc.color,
+              color: loc.bgColor,
+              fontSize: 'calc(var(--copper-header-font-size, 10px) - 1px)'
+            }} title={device.physicalLocation}>
+              {loc.code}
+            </span>
+          )}
+          <div style={titleStyle} title={displayName}>
+            {displayName}
+          </div>
         </div>
       </header>
       <div style={columnsContainerStyle}>
@@ -134,4 +164,5 @@ export const DeviceNodeComponent: React.FC<{ node?: Node }> = ({ node }) => {
     </div>
   );
 };
+
 

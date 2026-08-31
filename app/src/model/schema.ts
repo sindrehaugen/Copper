@@ -504,6 +504,7 @@ export const DeviceSchema = z
     face: DeviceFaceSchema.optional(), // netbox: device.face
     status: DeviceStatusSchema, // netbox: device.status
     designation: DesignationSchema.optional(), // extension: reference designation per ADR-0004
+      physicalLocation: z.string().optional(), // extension: physical location
     description: z.string().optional(), // netbox: device.description
     interfaces: z.array(InterfaceSchema).optional(), // netbox: device.interfaces
     frontPorts: z.array(FrontPortSchema).optional(), // netbox: device.front_ports
@@ -707,3 +708,4 @@ export const BomLineSchema = z
   .strict();
 
 export type BomLine = z.infer<typeof BomLineSchema>;
+

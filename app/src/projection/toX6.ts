@@ -127,5 +127,18 @@ export function toX6(
     };
   });
 
-  return { nodes, edges };
+      // Add Legend Node
+    nodes.push({
+      id: 'legend-node',
+      shape: 'legend-node',
+      x: 0,
+      y: 0,
+      width: 300,
+      height: 250,
+      data: {}
+    });
+
+    return { nodes, edges };
 }
+
+

@@ -373,6 +373,7 @@ export function readProjectSchema(json: unknown): {
         locationId: validLocationId,
         status: 'active',
         designation: designation,
+          physicalLocation: dData.physicalLocation ? String(dData.physicalLocation) : undefined,
         interfaces: interfaces.length > 0 ? interfaces : undefined,
       };
 
@@ -508,3 +509,4 @@ export function readProjectSchema(json: unknown): {
     report,
   };
 }
+

@@ -2,12 +2,20 @@ import React, { useEffect, useRef, CSSProperties } from 'react';
 import { Graph } from '@antv/x6';
 import { register, getProvider } from '@antv/x6-react-shape';
 import { DeviceNodeComponent } from './nodes/DeviceNode';
+import { LegendNodeComponent } from './nodes/LegendNode';
 
 register({
   shape: 'device-node',
   width: 200,
   height: 100,
   component: DeviceNodeComponent,
+});
+
+register({
+  shape: 'legend-node',
+  width: 300,
+  height: 250,
+  component: LegendNodeComponent,
 });
 
 const ReactShapeProvider = getProvider();
@@ -112,6 +120,7 @@ export function CanvasView({
     </div>
   );
 }
+
 
 
 

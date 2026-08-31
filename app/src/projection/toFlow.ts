@@ -26,6 +26,7 @@ export function toFlow(
 
     return {
       id: device.id,
+      type: 'device',
       position,
       data: { device },
       initialWidth: CARD_WIDTH,
@@ -48,3 +49,5 @@ export function toFlow(
 
   return { nodes, edges };
 }
+
+

@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 
 interface SettingsState {
-  wireSpacing: number; // ELK edgeEdge spacing
+  wireSpacing: number;
+  portPadding: number; // ELK edgeEdge spacing
   showCableLabels: boolean;
   cableLabelPosition: 'start' | 'middle' | 'end';
   terminalSpacing: number; // Height of port rows in px
@@ -31,4 +32,5 @@ export const useSettingsStore = create<SettingsState>((set) => ({
   setTerminalFontSize: (v) => set({ terminalFontSize: v }),
   setHeaderFontSize: (v) => set({ headerFontSize: v }),
 }));
+
 

@@ -6,6 +6,7 @@ const elk = new ELK();
 
 export interface ElkLayoutOptions {
   wireSpacing?: number;
+  portPadding?: number;
 }
 
 export async function applyElkLayoutX6(
@@ -16,19 +17,22 @@ export async function applyElkLayoutX6(
   if (nodes.length === 0) return { nodes, edges };
 
   const wSpacing = (options?.wireSpacing ?? 10).toString();
+  const pPadding = (options?.portPadding ?? 30).toString(); // User requested 30px minimum straight out of terminal
 
   const elkNodes: ElkNode[] = nodes.map((node) => {
     return {
       id: node.id,
       width: node.width ?? CARD_WIDTH,
       height: node.height ?? CARD_HEADER_H,
+      layoutOptions: {
+        'elk.portConstraints': 'FIXED_POS'
+      },
       ports: node.ports?.items?.map((p: any) => ({
         id: p.id,
         x: p.args?.x ?? (p.group === 'in' ? 0 : (node.width ?? CARD_WIDTH)),
         y: p.args?.y ?? 0,
         properties: { 
-          'port.side': p.group === 'in' ? 'WEST' : 'EAST',
-          'port.alignment': 'FIXED'
+          'port.side': p.group === 'in' ? 'WEST' : 'EAST'
         }
       })) || []
     };
@@ -46,12 +50,11 @@ export async function applyElkLayoutX6(
       'elk.algorithm': 'layered',
       'elk.direction': 'RIGHT',
       'elk.layered.spacing.nodeNodeBetweenLayers': '150',
-      'elk.layered.spacing.edgeNodeBetweenLayers': wSpacing,
+      'elk.layered.spacing.edgeNodeBetweenLayers': pPadding, // This forces the edge to go straight for pPadding pixels
       'elk.spacing.edgeEdge': wSpacing,
       'elk.spacing.nodeNode': '80',
       'elk.edgeRouting': 'ORTHOGONAL',
-      'elk.layered.nodePlacement.strategy': 'NETWORK_SIMPLEX',
-      'elk.portConstraints': 'FIXED_POS'
+      'elk.layered.nodePlacement.strategy': 'NETWORK_SIMPLEX'
     },
     children: elkNodes,
     edges: elkEdges,
@@ -101,4 +104,3 @@ export async function applyElkLayoutX6(
 
   return { nodes: updatedNodes, edges: updatedEdges };
 }
-

@@ -32,6 +32,17 @@ export const SettingsPanel: React.FC = () => {
 
       <div>
         <label style={{ display: 'block', marginBottom: '8px', fontSize: 'var(--md-sys-typescale-label-medium-font-size)', color: 'var(--md-sys-color-on-surface-variant)' }}>
+          Terminal Padding: {settings.portPadding}px
+        </label>
+        <input 
+          type="range" min="10" max="100" value={settings.portPadding}
+          onChange={(e) => settings.setPortPadding(Number(e.target.value))}
+          style={{ width: '100%', accentColor: 'var(--md-sys-color-primary)' }}
+        />
+      </div>
+
+      <div>
+        <label style={{ display: 'block', marginBottom: '8px', fontSize: 'var(--md-sys-typescale-label-medium-font-size)', color: 'var(--md-sys-color-on-surface-variant)' }}>
           Terminal Spacing: {settings.terminalSpacing}px
         </label>
         <input 
@@ -106,3 +117,5 @@ export const SettingsPanel: React.FC = () => {
     </div>
   );
 };
+
+

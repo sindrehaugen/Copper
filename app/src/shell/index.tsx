@@ -74,11 +74,11 @@ function ConnectedCanvasView() {
       headerHeight: settings.headerFontSize + 14
     });
     
-    applyElkLayoutX6(rawNodes, rawEdges, { wireSpacing: settings.wireSpacing }).then(({ nodes: layoutedNodes, edges: layoutedEdges }) => {
+    applyElkLayoutX6(rawNodes, rawEdges, { wireSpacing: settings.wireSpacing, portPadding: settings.portPadding }).then(({ nodes: layoutedNodes, edges: layoutedEdges }) => {
       setNodes(layoutedNodes);
       setEdges(layoutedEdges);
     });
-  }, [document, settings.wireSpacing, settings.terminalSpacing, settings.headerFontSize, settings.showCableLabels, settings.cableLabelPosition]);
+  }, [document, settings.wireSpacing, settings.portPadding, settings.terminalSpacing, settings.headerFontSize, settings.showCableLabels, settings.cableLabelPosition]);
 
   const cssVars = {
     '--copper-terminal-spacing': `${settings.terminalSpacing}px`,
@@ -139,3 +139,4 @@ export function AppShell() {
     </SessionContext.Provider>
   );
 }
+

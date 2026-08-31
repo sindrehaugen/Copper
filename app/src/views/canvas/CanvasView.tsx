@@ -7,7 +7,7 @@ register({
   shape: 'device-node',
   width: 200,
   height: 100,
-  component: <DeviceNodeComponent />,
+  component: DeviceNodeComponent,
 });
 
 const ReactShapeProvider = getProvider();
@@ -48,7 +48,7 @@ export function CanvasView({
       interacting: { nodeMovable: enableWiring, edgeMovable: enableWiring },
       connecting: {
         router: {
-          name: 'orth',
+          name: 'normal',
         },
         connector: { name: 'rounded', args: { radius: 8 } },
         allowBlank: false,
@@ -96,6 +96,10 @@ export function CanvasView({
           stroke: 'var(--md-sys-color-outline, #79747e)',
           strokeWidth: 2,
           targetMarker: { name: 'block', width: 6, height: 6 }
+        },
+        tools: [
+          { name: 'vertices' }
+        ]
         }
       }
     }));
@@ -111,5 +115,10 @@ export function CanvasView({
     </div>
   );
 }
+
+
+
+
+
 
 

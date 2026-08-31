@@ -13,6 +13,7 @@ import fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.
 import { readEasySchematic } from '../exchange/easyschematic/read';
 import { toFlow } from '../projection/toFlow';
 import { applyElkLayout } from '../projection/layout';
+import { enhanceEdges } from '../projection/edges';
 import type { Node, Edge } from '@xyflow/react';
 
 // Placeholder Context for Session/Tenancy
@@ -61,12 +62,28 @@ function ConnectedCanvasView() {
     const { nodes: rawNodes, edges: rawEdges } = toFlow(document);
     applyElkLayout(rawNodes, rawEdges).then(layoutedNodes => {
       setNodes(layoutedNodes);
-      setEdges(rawEdges);
+      setEdges(enhanceEdges(rawEdges));
     });
   }, [document]);
 
   if (!document) return <div style={{padding: '2rem'}}>Loading document...</div>;
   return <CanvasView nodes={nodes} edges={edges} enableWiring={true} />;
+}
+
+function ConnectedRackElevationView() {
+  const document = useDocumentStore(state => state.document);
+  if (!document) return <div style={{padding: '2rem'}}>Loading document...</div>;
+  // Use first rack as default selected
+  const firstRackId = document.racks[0]?.id ?? '';
+  // Fallback empty geometry map for the view
+  const geometryMap = {};
+  return <RackElevationView doc={document} geometryMap={geometryMap} selectedRackId={firstRackId} />;
+}
+
+function ConnectedCableScheduleView() {
+  const document = useDocumentStore(state => state.document);
+  if (!document) return <div style={{padding: '2rem'}}>Loading document...</div>;
+  return <CableScheduleView document={document} />;
 }
 
 export function AppShell() {
@@ -88,8 +105,8 @@ export function AppShell() {
         <Layout>
           <Routes>
             <Route path="/" element={<ConnectedCanvasView />} />
-            <Route path="/rack" element={<RackElevationView />} />
-            <Route path="/schedule" element={<CableScheduleView />} />
+            <Route path="/rack" element={<ConnectedRackElevationView />} />
+            <Route path="/schedule" element={<ConnectedCableScheduleView />} />
             <Route path="/3d" element={<SceneView />} />
             <Route path="/compliance" element={<div style={{padding: '2rem'}}><DsarSurface /></div>} />
             <Route path="*" element={<ErrorState error={{ code: -32005 }} />} />

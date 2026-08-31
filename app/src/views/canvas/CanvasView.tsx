@@ -48,8 +48,7 @@ export function CanvasView({
       interacting: { nodeMovable: enableWiring, edgeMovable: enableWiring },
       connecting: {
         router: {
-          name: 'manhattan',
-          args: { padding: 10 },
+          name: 'orth',
         },
         connector: { name: 'rounded', args: { radius: 8 } },
         allowBlank: false,
@@ -112,4 +111,5 @@ export function CanvasView({
     </div>
   );
 }
+
 

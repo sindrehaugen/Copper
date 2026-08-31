@@ -64,9 +64,9 @@ function ConnectedCanvasView() {
       headerHeight: settings.headerFontSize + 14
     });
     
-    applyElkLayoutX6(rawNodes, rawEdges, { wireSpacing: settings.wireSpacing }).then(layoutedNodes => {
+    applyElkLayoutX6(rawNodes, rawEdges, { wireSpacing: settings.wireSpacing }).then(({ nodes: layoutedNodes, edges: layoutedEdges }) => {
       setNodes(layoutedNodes);
-      setEdges(rawEdges); // Labels and extra config handled in CanvasView
+      setEdges(layoutedEdges); // Labels and extra config handled in CanvasView
     });
   }, [document, settings.wireSpacing, settings.terminalSpacing, settings.headerFontSize, settings.showCableLabels, settings.cableLabelPosition]);
 
@@ -129,3 +129,4 @@ export function AppShell() {
     </SessionContext.Provider>
   );
 }
+

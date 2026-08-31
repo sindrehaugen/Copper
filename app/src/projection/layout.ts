@@ -12,8 +12,8 @@ export async function applyElkLayoutX6(
   nodes: any[],
   edges: any[],
   options?: ElkLayoutOptions
-): Promise<any[]> {
-  if (nodes.length === 0) return [];
+): Promise<{ nodes: any[]; edges: any[] }> {
+  if (nodes.length === 0) return { nodes, edges };
 
   const wSpacing = (options?.wireSpacing ?? 10).toString();
 
@@ -53,6 +53,7 @@ export async function applyElkLayoutX6(
 
   const layoutedGraph = await elk.layout(graph);
   const positionMap = new Map<string, { x: number; y: number }>();
+  const edgePositionMap = new Map<string, Array<{ x: number; y: number }>>();
 
   for (const child of layoutedGraph.children ?? []) {
     if (child.x !== undefined && child.y !== undefined) {
@@ -60,7 +61,14 @@ export async function applyElkLayoutX6(
     }
   }
 
-  return nodes.map((node) => {
+  for (const edge of layoutedGraph.edges ?? []) {
+    if (edge.sections && edge.sections.length > 0) {
+      const bends = edge.sections[0].bendPoints ?? [];
+      edgePositionMap.set(edge.id, bends.map(b => ({ x: b.x, y: b.y })));
+    }
+  }
+
+  const updatedNodes = nodes.map((node) => {
     const pos = positionMap.get(node.id);
     if (!pos) return node;
     return {
@@ -69,4 +77,15 @@ export async function applyElkLayoutX6(
       y: pos.y,
     };
   });
+
+  const updatedEdges = edges.map((edge) => {
+    const bends = edgePositionMap.get(edge.id);
+    if (!bends || bends.length === 0) return edge;
+    return {
+      ...edge,
+      vertices: bends
+    };
+  });
+
+  return { nodes: updatedNodes, edges: updatedEdges };
 }

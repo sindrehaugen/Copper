@@ -1,6 +1,5 @@
 import ELK from 'elkjs/lib/elk.bundled.js';
 import type { ElkNode, ElkExtendedEdge } from 'elkjs';
-import type { Node, Edge } from '@xyflow/react';
 import { CARD_WIDTH, CARD_HEADER_H } from '../model/geometry';
 
 const elk = new ELK();
@@ -9,35 +8,31 @@ export interface ElkLayoutOptions {
   wireSpacing?: number;
 }
 
-export async function applyElkLayout(
-  nodes: Node[],
-  edges: Edge[],
+export async function applyElkLayoutX6(
+  nodes: any[],
+  edges: any[],
   options?: ElkLayoutOptions
-): Promise<Node[]> {
+): Promise<any[]> {
   if (nodes.length === 0) return [];
 
   const wSpacing = (options?.wireSpacing ?? 10).toString();
 
-  const elkNodes: ElkNode[] = nodes.map((node) => ({
-    id: node.id,
-    width: node.initialWidth ?? node.width ?? CARD_WIDTH,
-    height: node.initialHeight ?? node.height ?? CARD_HEADER_H,
-    ports: [
-      ...(node.data.inputPorts as any[] || []).map(p => ({
+  const elkNodes: ElkNode[] = nodes.map((node) => {
+    return {
+      id: node.id,
+      width: node.width ?? CARD_WIDTH,
+      height: node.height ?? CARD_HEADER_H,
+      ports: node.ports?.items?.map((p: any) => ({
         id: p.id,
-        properties: { 'port.side': 'WEST' }
-      })),
-      ...(node.data.outputPorts as any[] || []).map(p => ({
-        id: p.id,
-        properties: { 'port.side': 'EAST' }
-      }))
-    ]
-  }));
+        properties: { 'port.side': p.group === 'in' ? 'WEST' : 'EAST' }
+      })) || []
+    };
+  });
 
   const elkEdges: ElkExtendedEdge[] = edges.map((edge) => ({
     id: edge.id,
-    sources: [edge.sourceHandle || edge.source],
-    targets: [edge.targetHandle || edge.target],
+    sources: [edge.source.port || edge.source.cell],
+    targets: [edge.target.port || edge.target.cell],
   }));
 
   const graph: ElkNode = {
@@ -70,7 +65,8 @@ export async function applyElkLayout(
     if (!pos) return node;
     return {
       ...node,
-      position: { x: pos.x, y: pos.y },
+      x: pos.x,
+      y: pos.y,
     };
   });
 }

@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useEffect, useState, useMemo } from 'react';
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDocumentStore } from '../store/documentStore';
@@ -13,10 +13,8 @@ import { SettingsPanel } from '../views/canvas/SettingsPanel';
 
 import fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json';
 import { readEasySchematic } from '../exchange/easyschematic/read';
-import { toFlow } from '../projection/toFlow';
-import { applyElkLayout } from '../projection/layout';
-import { enhanceEdges } from '../projection/edges';
-import type { Node, Edge } from '@xyflow/react';
+import { toX6 } from '../projection/toX6';
+import { applyElkLayoutX6 } from '../projection/layout';
 
 interface SessionContextType {
   tenantId: string;
@@ -56,22 +54,19 @@ function Layout({ children }: { children: ReactNode }) {
 function ConnectedCanvasView() {
   const document = useDocumentStore(state => state.document);
   const settings = useSettingsStore();
-  const [nodes, setNodes] = useState<Node[]>([]);
-  const [edges, setEdges] = useState<Edge[]>([]);
+  const [nodes, setNodes] = useState<any[]>([]);
+  const [edges, setEdges] = useState<any[]>([]);
 
   useEffect(() => {
     if (!document) return;
-    const { nodes: rawNodes, edges: rawEdges } = toFlow(document, {}, {
+    const { nodes: rawNodes, edges: rawEdges } = toX6(document, {}, {
       terminalSpacing: settings.terminalSpacing,
-      headerHeight: settings.headerFontSize + 14 // Approximation of header height based on font
+      headerHeight: settings.headerFontSize + 14
     });
     
-    applyElkLayout(rawNodes, rawEdges, { wireSpacing: settings.wireSpacing }).then(layoutedNodes => {
+    applyElkLayoutX6(rawNodes, rawEdges, { wireSpacing: settings.wireSpacing }).then(layoutedNodes => {
       setNodes(layoutedNodes);
-      setEdges(enhanceEdges(rawEdges, {
-        showLabel: settings.showCableLabels,
-        labelPosition: settings.cableLabelPosition
-      }));
+      setEdges(rawEdges); // Labels and extra config handled in CanvasView
     });
   }, [document, settings.wireSpacing, settings.terminalSpacing, settings.headerFontSize, settings.showCableLabels, settings.cableLabelPosition]);
 

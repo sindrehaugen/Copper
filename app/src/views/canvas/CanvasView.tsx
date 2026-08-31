@@ -1,22 +1,20 @@
-import type { CSSProperties, JSX } from 'react';
-import {
-  ReactFlow,
-  type Node,
-  type Edge,
-  type NodeTypes,
-  type ReactFlowProps,
-} from '@xyflow/react';
-import { DeviceNode } from './nodes/DeviceNode';
-import { useWiringInteraction } from './CanvasWiringInteraction';
-import { useDocumentStore } from '../../store';
+import React, { useEffect, useRef, CSSProperties } from 'react';
+import { Graph } from '@antv/x6';
+import { register, getProvider } from '@antv/x6-react-shape';
+import { DeviceNodeComponent } from './nodes/DeviceNode';
 
-export const defaultNodeTypes: NodeTypes = {
-  device: DeviceNode,
-};
+register({
+  shape: 'device-node',
+  width: 200,
+  height: 100,
+  component: <DeviceNodeComponent />,
+});
 
-export interface CanvasViewProps extends Omit<ReactFlowProps, 'nodes' | 'edges'> {
-  nodes?: Node[];
-  edges?: Edge[];
+const ReactShapeProvider = getProvider();
+
+export interface CanvasViewProps {
+  nodes?: any[];
+  edges?: any[];
   className?: string;
   style?: CSSProperties;
   enableWiring?: boolean;
@@ -26,54 +24,91 @@ const defaultCanvasStyle: CSSProperties = {
   width: '100%',
   height: '100%',
   minHeight: '400px',
+  position: 'relative'
 };
 
-/**
- * React Flow CanvasView rendering toFlow projection.
- * Defaults to read-only interaction and wires custom DeviceNode.
- */
 export function CanvasView({
   nodes = [],
   edges = [],
-  nodeTypes = defaultNodeTypes,
-  nodesDraggable = false,
-  nodesConnectable = false,
-  elementsSelectable = true,
-  fitView = true,
   style,
   enableWiring = false,
-  ...restProps
-}: CanvasViewProps): JSX.Element {
-  const wiringProps = useWiringInteraction();
-  const setSelectedIds = useDocumentStore(state => state.setSelectedIds);
-  
-  // Only override interaction props if enableWiring is true
-  const interactionProps = enableWiring ? {
-    nodesConnectable: true,
-    connectionLineComponent: wiringProps.connectionLineComponent,
-    onConnect: wiringProps.onConnect,
-    isValidConnection: wiringProps.isValidConnection,
-  } : {
-    nodesConnectable
-  };
+}: CanvasViewProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const graphRef = useRef<Graph | null>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const graph = new Graph({
+      container: containerRef.current,
+      autoResize: true,
+      background: { color: 'var(--md-sys-color-surface-container-lowest, #ffffff)' },
+      panning: true,
+      mousewheel: { enabled: true, modifiers: ['ctrl', 'meta'] },
+      interacting: { nodeMovable: enableWiring, edgeMovable: enableWiring },
+      connecting: {
+        router: {
+          name: 'manhattan',
+          args: { padding: 10 },
+        },
+        connector: { name: 'rounded', args: { radius: 8 } },
+        allowBlank: false,
+        allowLoop: false,
+        allowNode: false,
+      }
+    });
+
+    graphRef.current = graph;
+
+    return () => {
+      graph.dispose();
+    };
+  }, [enableWiring]);
+
+  useEffect(() => {
+    const graph = graphRef.current;
+    if (!graph) return;
+
+    const x6Nodes = nodes.map(n => ({
+      ...n,
+      ports: {
+        ...n.ports,
+        groups: {
+          in: {
+            position: 'absolute',
+            attrs: {
+              circle: { r: 4, magnet: true, stroke: '#79747e', fill: '#ffffff', strokeWidth: 1 }
+            }
+          },
+          out: {
+            position: 'absolute',
+            attrs: {
+              circle: { r: 4, magnet: true, stroke: '#79747e', fill: '#ffffff', strokeWidth: 1 }
+            }
+          }
+        }
+      }
+    }));
+
+    const x6Edges = edges.map(e => ({
+      ...e,
+      attrs: {
+        line: {
+          stroke: 'var(--md-sys-color-outline, #79747e)',
+          strokeWidth: 2,
+          targetMarker: { name: 'block', width: 6, height: 6 }
+        }
+      }
+    }));
+
+    graph.fromJSON({ nodes: x6Nodes, edges: x6Edges });
+    graph.centerContent();
+  }, [nodes, edges]);
 
   return (
-    <div
-      className="copper-canvas-container"
-      style={{ ...defaultCanvasStyle, ...style }}
-      data-testid="copper-canvas-view"
-    >
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        nodeTypes={nodeTypes}
-        nodesDraggable={nodesDraggable}
-        elementsSelectable={elementsSelectable}
-        fitView={fitView}
-        onSelectionChange={({ nodes }) => setSelectedIds(nodes.map(n => n.id))}
-        {...interactionProps}
-        {...restProps}
-      />
+    <div className="copper-canvas-container" style={{ ...defaultCanvasStyle, ...style }} data-testid="copper-canvas-view">
+      <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
+      <ReactShapeProvider />
     </div>
   );
 }

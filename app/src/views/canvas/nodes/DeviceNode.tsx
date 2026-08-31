@@ -1,29 +1,27 @@
-import type { CSSProperties, JSX } from 'react';
-import { Handle, Position, type NodeProps, type Node } from '@xyflow/react';
+import React from 'react';
+import type { CSSProperties } from 'react';
 import type { Device } from '../../../model/schema';
 import { CARD_WIDTH } from '../../../model/geometry';
+import type { Node } from '@antv/x6';
 
-export interface PortItem {
+export interface PortItemNode {
   id: string;
   name: string;
   label?: string;
   kind: string;
   type?: string;
-  signalClassId?: string;
 }
 
 export interface DeviceNodeData {
   device: Device;
-  inputPorts: PortItem[];
-  outputPorts: PortItem[];
-  [key: string]: unknown;
+  inputPorts: PortItemNode[];
+  outputPorts: PortItemNode[];
 }
-
-export type DeviceNodeType = Node<DeviceNodeData, 'device'>;
 
 const cardStyle: CSSProperties = {
   boxSizing: 'border-box',
   width: `${CARD_WIDTH}px`,
+  height: '100%',
   backgroundColor: 'var(--md-sys-color-surface-container, #ffffff)',
   color: 'var(--md-sys-color-on-surface, #1c1b1f)',
   border: '1px solid var(--md-sys-color-outline-variant, #cac4d0)',
@@ -67,7 +65,6 @@ const columnStyle: CSSProperties = {
 const portRowStyle: CSSProperties = {
   height: `var(--copper-terminal-spacing, 24px)`,
   boxSizing: 'border-box',
-  position: 'relative',
   display: 'flex',
   alignItems: 'center',
   padding: '0 8px',
@@ -86,13 +83,14 @@ const portTypeStyle: CSSProperties = {
   fontSize: 'calc(var(--copper-terminal-font-size, 8px) - 1px)',
 };
 
-export function DeviceNode({ data }: NodeProps<DeviceNodeType>): JSX.Element {
-  const device = data.device;
-  const inputPorts = data.inputPorts || [];
-  const outputPorts = data.outputPorts || [];
+export const DeviceNodeComponent: React.FC<{ node?: Node }> = ({ node }) => {
+  const data = node?.getData<DeviceNodeData>();
+  if (!data) return null;
+
+  const { device, inputPorts = [], outputPorts = [] } = data;
   const displayName = device?.name ?? device?.designation ?? device?.id ?? 'Unknown Device';
 
-  const renderPort = (port: PortItem, isInput: boolean) => {
+  const renderPort = (port: PortItemNode, isInput: boolean) => {
     const portDisplayName = port.label || port.name;
     return (
       <div
@@ -103,18 +101,7 @@ export function DeviceNode({ data }: NodeProps<DeviceNodeType>): JSX.Element {
           justifyContent: isInput ? 'flex-start' : 'flex-end',
           textAlign: isInput ? 'left' : 'right'
         }}
-        data-port-id={port.id}
-        data-port-kind={port.kind}
       >
-        {isInput && (
-          <Handle
-            type="target"
-            position={Position.Left}
-            id={port.id}
-            style={{ top: '50%', transform: 'translateY(-50%)', left: -5 }}
-          />
-        )}
-        
         <div style={{ display: 'flex', alignItems: 'center', flexDirection: isInput ? 'row' : 'row-reverse' }}>
           <span style={portNameStyle} title={portDisplayName}>
             {portDisplayName}
@@ -125,21 +112,12 @@ export function DeviceNode({ data }: NodeProps<DeviceNodeType>): JSX.Element {
             </span>
           )}
         </div>
-
-        {!isInput && (
-          <Handle
-            type="source"
-            position={Position.Right}
-            id={port.id}
-            style={{ top: '50%', transform: 'translateY(-50%)', right: -5 }}
-          />
-        )}
       </div>
     );
   };
 
   return (
-    <div className="copper-device-node" style={cardStyle} data-device-id={device?.id}>
+    <div className="copper-device-node" style={cardStyle}>
       <header className="copper-device-header" style={headerStyle}>
         <div style={titleStyle} title={displayName}>
           {displayName}
@@ -155,28 +133,4 @@ export function DeviceNode({ data }: NodeProps<DeviceNodeType>): JSX.Element {
       </div>
     </div>
   );
-}
-
-export function getDevicePorts(device: Device): PortItem[] {
-  const ports: PortItem[] = [];
-  const addPorts = (list: any[] | undefined, kind: string) => {
-    if (!list) return;
-    for (const p of list) {
-      ports.push({
-        id: p.id ?? `${kind}-${p.name}`,
-        name: p.name,
-        label: p.label,
-        kind,
-        type: p.type,
-        signalClassId: p.signalClassId,
-      });
-    }
-  };
-  addPorts(device.interfaces, 'interface');
-  addPorts(device.frontPorts, 'frontPort');
-  addPorts(device.rearPorts, 'rearPort');
-  addPorts(device.consolePorts, 'consolePort');
-  addPorts(device.powerPorts, 'powerPort');
-  addPorts(device.powerOutlets, 'powerOutlet');
-  return ports;
-}
+};

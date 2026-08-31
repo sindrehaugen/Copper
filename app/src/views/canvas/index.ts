@@ -1,8 +1,6 @@
-export { CanvasView, defaultNodeTypes, type CanvasViewProps } from './CanvasView';
+export { CanvasView, type CanvasViewProps } from './CanvasView';
 export {
-  DeviceNode,
-  getDevicePorts,
+  DeviceNodeComponent,
   type DeviceNodeData,
-  type DeviceNodeType,
-  type PortItem,
+  type PortItemNode,
 } from './nodes/DeviceNode';

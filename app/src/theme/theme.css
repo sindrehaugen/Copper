@@ -211,3 +211,64 @@
     --md-sys-color-surface-tint: #ffb77b;
   }
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+  font-family: var(--md-sys-typescale-body-large-font-family);
+}
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.app-layout header {
+  width: 240px;
+  background-color: var(--md-sys-color-surface-container);
+  border-right: 1px solid var(--md-sys-color-outline-variant);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.app-layout header nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.app-layout header nav ul li a {
+  text-decoration: none;
+  color: var(--md-sys-color-on-surface);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  display: block;
+  font-weight: var(--md-sys-typescale-label-large-font-weight);
+}
+
+.app-layout header nav ul li a:hover {
+  background-color: var(--md-sys-color-surface-variant);
+}
+
+.session-info {
+  margin-top: auto;
+  font-size: var(--md-sys-typescale-label-small-font-size);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.app-layout main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  position: relative;
+}
+

@@ -198,7 +198,7 @@ export function DeviceNode({ data }: NodeProps<DeviceNodeType>): JSX.Element {
               <span style={portNameStyle} title={portDisplayName}>
                 {portDisplayName}
               </span>
-              <span style={portKindBadgeStyle}>{port.kind}</span>
+              <span style={portKindBadgeStyle}>{port.type || ''}</span>
               <Handle
                 type="target"
                 position={Position.Right}
@@ -212,3 +212,4 @@ export function DeviceNode({ data }: NodeProps<DeviceNodeType>): JSX.Element {
     </div>
   );
 }
+

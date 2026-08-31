@@ -2,6 +2,8 @@
 
 **A modern, browser-based System Design Canvas for Audio-Visual (AV) and IT infrastructure.**
 
+> 🚧 **Work in Progress (Under Construction):** Copper is currently under heavy development. Core APIs, features, and schemas are actively being built and are subject to change.
+
 Copper is an engineering tool for designing physical L1 network topologies, AV signal flows, and rack elevations. It provides a node-based interface to draw devices, connect ports, and automatically generate cable schedules and 3D visual representations of the resulting systems. 
 
 Built with modern web technologies, it features an automated orthogonal routing engine, responsive Material Design 3 interfaces, and strict adherence to industry-standard schemas.
@@ -52,3 +54,4 @@ Copper is designed to act as a pure UI layer over standard infrastructure schema
 ## Architecture
 
 Copper has **no internal database**. The web application operates on a stateless frontend architecture, reading and writing graph topologies through standardized API contracts. The canvas, 3D views, and schedules are all pure projections of the underlying document schema. 
+

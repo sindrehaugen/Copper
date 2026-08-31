@@ -1,5 +1,5 @@
 import ELK from 'elkjs/lib/elk.bundled.js';
-import type { ElkNode, ElkExtendedEdge } from 'elkjs';
+import type { ElkNode, ElkExtendedEdge, ElkPort } from 'elkjs';
 import { CARD_WIDTH, CARD_HEADER_H } from '../model/geometry';
 
 const elk = new ELK();
@@ -24,7 +24,12 @@ export async function applyElkLayoutX6(
       height: node.height ?? CARD_HEADER_H,
       ports: node.ports?.items?.map((p: any) => ({
         id: p.id,
-        properties: { 'port.side': p.group === 'in' ? 'WEST' : 'EAST' }
+        x: p.args?.x ?? (p.group === 'in' ? 0 : (node.width ?? CARD_WIDTH)),
+        y: p.args?.y ?? 0,
+        properties: { 
+          'port.side': p.group === 'in' ? 'WEST' : 'EAST',
+          'port.alignment': 'FIXED'
+        }
       })) || []
     };
   });
@@ -45,7 +50,8 @@ export async function applyElkLayoutX6(
       'elk.spacing.edgeEdge': wSpacing,
       'elk.spacing.nodeNode': '80',
       'elk.edgeRouting': 'ORTHOGONAL',
-      'elk.layered.nodePlacement.strategy': 'NETWORK_SIMPLEX'
+      'elk.layered.nodePlacement.strategy': 'NETWORK_SIMPLEX',
+      'elk.portConstraints': 'FIXED_POS'
     },
     children: elkNodes,
     edges: elkEdges,
@@ -64,7 +70,13 @@ export async function applyElkLayoutX6(
   for (const edge of layoutedGraph.edges ?? []) {
     if (edge.sections && edge.sections.length > 0) {
       const bends = edge.sections[0].bendPoints ?? [];
-      edgePositionMap.set(edge.id, bends.map(b => ({ x: b.x, y: b.y })));
+      
+      const allPoints = [];
+      if (edge.sections[0].startPoint) allPoints.push(edge.sections[0].startPoint);
+      allPoints.push(...bends);
+      if (edge.sections[0].endPoint) allPoints.push(edge.sections[0].endPoint);
+      
+      edgePositionMap.set(edge.id, allPoints.map(b => ({ x: b.x, y: b.y })));
     }
   }
 
@@ -89,3 +101,4 @@ export async function applyElkLayoutX6(
 
   return { nodes: updatedNodes, edges: updatedEdges };
 }
+

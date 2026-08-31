@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDocumentStore } from '../store/documentStore';
 import { useSettingsStore } from '../store/settingsStore';
@@ -23,28 +23,38 @@ interface SessionContextType {
 
 const SessionContext = createContext<SessionContextType | null>(null);
 
+function NavItem({ to, label }: { to: string; label: string }) {
+  const location = useLocation();
+  const isActive = location.pathname === to;
+  return (
+    <li>
+      <Link to={to} className={isActive ? 'active' : ''}>
+        {label}
+      </Link>
+    </li>
+  );
+}
+
 function Layout({ children }: { children: ReactNode }) {
   const { t } = useTranslation();
   const session = useContext(SessionContext);
 
   return (
     <div className="app-layout">
-      <header>
-        <div style={{ padding: '0 1rem 2rem 1rem', fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--md-sys-color-primary)' }}>Copper</div>
-        <nav>
-          <ul>
-            <li><Link to="/">Canvas</Link></li>
-            <li><Link to="/rack">Rack Elevation</Link></li>
-            <li><Link to="/schedule">Cable Schedule</Link></li>
-            <li><Link to="/3d">3D Walkthrough</Link></li>
-            <li><Link to="/compliance">Compliance (DSAR)</Link></li>
-          </ul>
-        </nav>
+      <nav className="m3-nav-drawer">
+        <div className="m3-nav-header">Copper</div>
+        <ul>
+          <NavItem to="/" label="Canvas" />
+          <NavItem to="/rack" label="Rack Elevation" />
+          <NavItem to="/schedule" label="Cable Schedule" />
+          <NavItem to="/3d" label="3D Walkthrough" />
+          <NavItem to="/compliance" label="Compliance (DSAR)" />
+        </ul>
         <div className="session-info">
-          Tenant: {session?.tenantId} | User: {session?.userId}
+          {session?.tenantId} • {session?.userId}
         </div>
-      </header>
-      <main>
+      </nav>
+      <main className="m3-main-content">
         {children}
       </main>
     </div>
@@ -66,7 +76,7 @@ function ConnectedCanvasView() {
     
     applyElkLayoutX6(rawNodes, rawEdges, { wireSpacing: settings.wireSpacing }).then(({ nodes: layoutedNodes, edges: layoutedEdges }) => {
       setNodes(layoutedNodes);
-      setEdges(layoutedEdges); // Labels and extra config handled in CanvasView
+      setEdges(layoutedEdges);
     });
   }, [document, settings.wireSpacing, settings.terminalSpacing, settings.headerFontSize, settings.showCableLabels, settings.cableLabelPosition]);
 
@@ -129,4 +139,3 @@ export function AppShell() {
     </SessionContext.Provider>
   );
 }
-

@@ -134,3 +134,4 @@ export const DeviceNodeComponent: React.FC<{ node?: Node }> = ({ node }) => {
     </div>
   );
 };
+

@@ -1,13 +1,15 @@
-import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
+import { ReactNode, createContext, useContext, useEffect, useState, useMemo } from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDocumentStore } from '../store/documentStore';
+import { useSettingsStore } from '../store/settingsStore';
 import { ErrorState } from './error-state';
 import { CanvasView } from '../views/canvas/CanvasView';
 import { RackElevationView } from '../views/rack/RackElevationView';
 import { CableScheduleView } from '../views/cable-schedule/CableScheduleView';
 import { SceneView } from '../views/scene/SceneView';
 import { DsarSurface } from '../components/compliance/DsarSurface';
+import { SettingsPanel } from '../views/canvas/SettingsPanel';
 
 import fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json';
 import { readEasySchematic } from '../exchange/easyschematic/read';
@@ -16,7 +18,6 @@ import { applyElkLayout } from '../projection/layout';
 import { enhanceEdges } from '../projection/edges';
 import type { Node, Edge } from '@xyflow/react';
 
-// Placeholder Context for Session/Tenancy
 interface SessionContextType {
   tenantId: string;
   userId: string;
@@ -54,28 +55,46 @@ function Layout({ children }: { children: ReactNode }) {
 
 function ConnectedCanvasView() {
   const document = useDocumentStore(state => state.document);
+  const settings = useSettingsStore();
   const [nodes, setNodes] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
 
   useEffect(() => {
     if (!document) return;
-    const { nodes: rawNodes, edges: rawEdges } = toFlow(document);
-    applyElkLayout(rawNodes, rawEdges).then(layoutedNodes => {
-      setNodes(layoutedNodes);
-      setEdges(enhanceEdges(rawEdges));
+    const { nodes: rawNodes, edges: rawEdges } = toFlow(document, {}, {
+      terminalSpacing: settings.terminalSpacing,
+      headerHeight: settings.headerFontSize + 14 // Approximation of header height based on font
     });
-  }, [document]);
+    
+    applyElkLayout(rawNodes, rawEdges, { wireSpacing: settings.wireSpacing }).then(layoutedNodes => {
+      setNodes(layoutedNodes);
+      setEdges(enhanceEdges(rawEdges, {
+        showLabel: settings.showCableLabels,
+        labelPosition: settings.cableLabelPosition
+      }));
+    });
+  }, [document, settings.wireSpacing, settings.terminalSpacing, settings.headerFontSize, settings.showCableLabels, settings.cableLabelPosition]);
+
+  const cssVars = {
+    '--copper-terminal-spacing': `${settings.terminalSpacing}px`,
+    '--copper-terminal-font-size': `${settings.terminalFontSize}px`,
+    '--copper-header-font-size': `${settings.headerFontSize}px`,
+    '--copper-header-height': `${settings.headerFontSize + 14}px`,
+  } as React.CSSProperties;
 
   if (!document) return <div style={{padding: '2rem'}}>Loading document...</div>;
-  return <CanvasView nodes={nodes} edges={edges} enableWiring={true} />;
+  return (
+    <div style={{ width: '100%', height: '100%', position: 'relative', ...cssVars }}>
+      <SettingsPanel />
+      <CanvasView nodes={nodes} edges={edges} enableWiring={true} />
+    </div>
+  );
 }
 
 function ConnectedRackElevationView() {
   const document = useDocumentStore(state => state.document);
   if (!document) return <div style={{padding: '2rem'}}>Loading document...</div>;
-  // Use first rack as default selected
   const firstRackId = document.racks[0]?.id ?? '';
-  // Fallback empty geometry map for the view
   const geometryMap = {};
   return <RackElevationView doc={document} geometryMap={geometryMap} selectedRackId={firstRackId} />;
 }
@@ -93,7 +112,6 @@ export function AppShell() {
 
   useEffect(() => {
     if (!document) {
-      // Mock loading a document on boot
       const { document: parsedDoc } = readEasySchematic(fixtureGymmen as any);
       loadDocument(parsedDoc);
     }

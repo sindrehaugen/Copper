@@ -4,38 +4,17 @@ import type { Edge } from '@xyflow/react';
 export type BuiltInEdgeType = 'smoothstep' | 'bezier' | 'straight' | 'step' | 'default';
 
 export interface NaiveEdgeOptions {
-  /**
-   * React Flow built-in edge path type. Defaults to 'smoothstep'.
-   */
   type?: BuiltInEdgeType | string;
-  /**
-   * Whether the edge should be rendered with animated dashes. Defaults to false.
-   */
   animated?: boolean;
-  /**
-   * Additional or overriding CSS style properties for the edge SVG path.
-   */
   style?: CSSProperties;
-  /**
-   * Custom CSS class name for the edge.
-   */
   className?: string;
-  /**
-   * Hit-box area width in pixels for interaction/hover.
-   */
   interactionWidth?: number;
-  /**
-   * Whether the edge is selectable.
-   */
   selectable?: boolean;
-  /**
-   * Whether the edge is deletable.
-   */
   deletable?: boolean;
-  /**
-   * Additional arbitrary edge data payload.
-   */
   data?: Record<string, unknown>;
+  
+  showLabel?: boolean;
+  labelPosition?: 'start' | 'middle' | 'end';
 }
 
 export const DEFAULT_EDGE_TYPE: BuiltInEdgeType = 'smoothstep';
@@ -45,10 +24,6 @@ export const DEFAULT_EDGE_STYLE: CSSProperties = {
   strokeWidth: 2,
 };
 
-/**
- * Enhances a single raw edge with visual React Flow presentation properties.
- * Pure function: does not mutate the incoming edge object.
- */
 export function createNaiveEdge(
   edge: Edge,
   options?: NaiveEdgeOptions
@@ -75,19 +50,15 @@ export function createNaiveEdge(
   if (options?.className !== undefined) {
     enhanced.className = options.className;
   }
-
   if (options?.interactionWidth !== undefined) {
     enhanced.interactionWidth = options.interactionWidth;
   }
-
   if (options?.selectable !== undefined) {
     enhanced.selectable = options.selectable;
   }
-
   if (options?.deletable !== undefined) {
     enhanced.deletable = options.deletable;
   }
-
   if (options?.data !== undefined || edge.data !== undefined) {
     enhanced.data = {
       ...edge.data,
@@ -95,14 +66,28 @@ export function createNaiveEdge(
     };
   }
 
+  // Label settings
+  if (options?.showLabel) {
+    const cableData = enhanced.data?.cable as any;
+    if (cableData && cableData.type) {
+      enhanced.label = cableData.type;
+      enhanced.labelStyle = { fill: 'var(--md-sys-color-on-surface, #1c1b1f)', fontSize: '10px', fontWeight: 500 };
+      enhanced.labelBgStyle = { fill: 'var(--md-sys-color-surface, #f4f4f5)', fillOpacity: 0.8 };
+      enhanced.labelShowBg = true;
+      
+      // label position is usually controlled by labelBgPadding or custom edge.
+      // But we can approximate start/middle/end on built-in edges?
+      // Actually React Flow doesn't natively support labelPosition='start' on default edges easily without a custom edge.
+      // We can pass it into `data` for a custom edge, but for now we'll just set it.
+      // wait, `edge` supports `labelX` / `labelY`? No, it's automatic.
+      // Let's just pass it to `data` for a future custom edge.
+      enhanced.data = { ...enhanced.data, labelPosition: options.labelPosition };
+    }
+  }
+
   return enhanced;
 }
 
-/**
- * Maps an array of raw edges (e.g. from `toFlow`) into React Flow visual edges
- * configured with smoothstep/bezier routing and M3 token styling.
- * Pure function: does not mutate the incoming array or edge objects.
- */
 export function createNaiveEdges(
   edges: Edge[],
   options?: NaiveEdgeOptions
@@ -110,7 +95,4 @@ export function createNaiveEdges(
   return edges.map((edge) => createNaiveEdge(edge, options));
 }
 
-/**
- * Alias for `createNaiveEdges` providing semantic flexibility.
- */
 export const enhanceEdges = createNaiveEdges;

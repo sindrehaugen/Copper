@@ -1,7 +1,7 @@
 import type { CSSProperties, JSX } from 'react';
 import { Handle, Position, type NodeProps, type Node } from '@xyflow/react';
 import type { Device } from '../../../model/schema';
-import { CARD_WIDTH, CARD_HEADER_H, PORT_ROW_H } from '../../../model/geometry';
+import { CARD_WIDTH } from '../../../model/geometry';
 
 export interface PortItem {
   id: string;
@@ -34,15 +34,15 @@ const cardStyle: CSSProperties = {
 };
 
 const headerStyle: CSSProperties = {
-  height: `${CARD_HEADER_H}px`,
+  height: `var(--copper-header-height, 24px)`,
   boxSizing: 'border-box',
   display: 'flex',
   alignItems: 'center',
   padding: '0 16px',
   backgroundColor: 'var(--md-sys-color-surface-container-high, #ece6f0)',
   borderBottom: '1px solid var(--md-sys-color-outline-variant, #cac4d0)',
-  fontWeight: 600,
-  fontSize: '14px',
+  fontWeight: 'bold',
+  fontSize: 'var(--copper-header-font-size, 10px)',
 };
 
 const titleStyle: CSSProperties = {
@@ -65,13 +65,12 @@ const columnStyle: CSSProperties = {
 };
 
 const portRowStyle: CSSProperties = {
-  height: `${PORT_ROW_H}px`,
+  height: `var(--copper-terminal-spacing, 24px)`,
   boxSizing: 'border-box',
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
   padding: '0 8px',
-  fontSize: '11px',
 };
 
 const portNameStyle: CSSProperties = {
@@ -79,12 +78,12 @@ const portNameStyle: CSSProperties = {
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   fontWeight: 500,
+  fontSize: 'var(--copper-terminal-font-size, 8px)',
 };
 
 const portTypeStyle: CSSProperties = {
-  fontSize: '9px',
   color: 'var(--md-sys-color-on-surface-variant, #79747e)',
-  marginLeft: '4px',
+  fontSize: 'calc(var(--copper-terminal-font-size, 8px) - 1px)',
 };
 
 export function DeviceNode({ data }: NodeProps<DeviceNodeType>): JSX.Element {

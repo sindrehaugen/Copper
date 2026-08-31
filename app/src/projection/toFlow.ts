@@ -4,14 +4,23 @@ import { CARD_WIDTH, CARD_HEADER_H, CARD_PAD_Y, PORT_ROW_H } from '../model/geom
 
 export type LayoutData = Record<string, { x: number; y: number }>;
 
+export interface ToFlowOptions {
+  terminalSpacing?: number;
+  headerHeight?: number;
+}
+
 function getPortId(portRef: PortRef): string {
   return portRef.id ?? `${portRef.kind}-${portRef.name}`;
 }
 
 export function toFlow(
   document: DesignDocument,
-  layout: LayoutData = {}
+  layout: LayoutData = {},
+  options?: ToFlowOptions
 ): { nodes: Node[]; edges: Edge[] } {
+  const tSpacing = options?.terminalSpacing ?? PORT_ROW_H;
+  const hHeight = options?.headerHeight ?? CARD_HEADER_H;
+
   const edges: Edge[] = document.cables.map((cable) => {
     const sourceTerm = cable.terminations[0];
     const targetTerm = cable.terminations[1];
@@ -22,6 +31,7 @@ export function toFlow(
       sourceHandle: getPortId(sourceTerm.portRef),
       target: targetTerm.deviceId,
       targetHandle: getPortId(targetTerm.portRef),
+      data: { cable },
     };
   });
 
@@ -29,7 +39,6 @@ export function toFlow(
   const targetHandleIds = new Set(edges.map(e => e.targetHandle));
 
   const nodes: Node[] = document.devices.map((device) => {
-    // Extract all ports
     const allPorts: Array<{id: string, name: string, label?: string, kind: string, type?: string}> = [];
     
     const addPorts = (list: any[] | undefined, kind: string) => {
@@ -61,19 +70,17 @@ export function toFlow(
       } else if (sourceHandleIds.has(p.id)) {
         outputPorts.push(p);
       } else {
-        // Guess based on name
         const n = p.name.toUpperCase();
         if (n.includes('IN') || n.includes('RX')) {
           inputPorts.push(p);
         } else {
-          // Default to output for unassigned
           outputPorts.push(p);
         }
       }
     }
 
     const totalRows = Math.max(inputPorts.length, outputPorts.length);
-    const initialHeight = CARD_HEADER_H + CARD_PAD_Y + totalRows * PORT_ROW_H;
+    const initialHeight = hHeight + CARD_PAD_Y + (totalRows * tSpacing);
     const position = layout[device.id] ?? { x: 0, y: 0 };
 
     return {

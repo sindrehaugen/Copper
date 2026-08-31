@@ -5,11 +5,18 @@ import { CARD_WIDTH, CARD_HEADER_H } from '../model/geometry';
 
 const elk = new ELK();
 
+export interface ElkLayoutOptions {
+  wireSpacing?: number;
+}
+
 export async function applyElkLayout(
   nodes: Node[],
-  edges: Edge[]
+  edges: Edge[],
+  options?: ElkLayoutOptions
 ): Promise<Node[]> {
   if (nodes.length === 0) return [];
+
+  const wSpacing = (options?.wireSpacing ?? 10).toString();
 
   const elkNodes: ElkNode[] = nodes.map((node) => ({
     id: node.id,
@@ -38,9 +45,10 @@ export async function applyElkLayout(
     layoutOptions: {
       'elk.algorithm': 'layered',
       'elk.direction': 'RIGHT',
-      'elk.layered.spacing.nodeNodeBetweenLayers': '150', // Spacing between columns
-      'elk.layered.spacing.edgeNodeBetweenLayers': '50',
-      'elk.spacing.nodeNode': '80', // Vertical spacing
+      'elk.layered.spacing.nodeNodeBetweenLayers': '150',
+      'elk.layered.spacing.edgeNodeBetweenLayers': wSpacing,
+      'elk.spacing.edgeEdge': wSpacing,
+      'elk.spacing.nodeNode': '80',
       'elk.edgeRouting': 'ORTHOGONAL',
       'elk.layered.nodePlacement.strategy': 'NETWORK_SIMPLEX'
     },

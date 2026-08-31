@@ -4,10 +4,10 @@ Copper is a private Bravo project. These rules are contractual for every contrib
 
 ## 1. Clean-room policy (AGPL firewall)
 
-EasySchematic (`C:\Claude\EasySchematic`, upstream AGPL-3.0) is **study material only**.
+ProjectSchema (`C:\Claude\ProjectSchema`, upstream AGPL-3.0) is **study material only**.
 
-- **Never copy code, comments, JSON structures, device definitions, or port-type tables from EasySchematic into this repo.** Its device catalogue and community submissions have no clear licence grant; its source is AGPL-3.0, and network use of derived code would trigger AGPL §13 source-offer obligations toward every user of a Bravo-facing service.
-- Reading EasySchematic to understand *approaches* (e.g. trunk-nested routing, patch-bay modelling) is permitted **for humans and the orchestrator only**. Coder-agent briefs must never contain EasySchematic file paths or excerpts. If a brief needs the idea, the orchestrator restates the idea in its own words in the brief.
+- **Never copy code, comments, JSON structures, device definitions, or port-type tables from ProjectSchema into this repo.** Its device catalogue and community submissions have no clear licence grant; its source is AGPL-3.0, and network use of derived code would trigger AGPL §13 source-offer obligations toward every user of a Bravo-facing service.
+- Reading ProjectSchema to understand *approaches* (e.g. trunk-nested routing, patch-bay modelling) is permitted **for humans and the orchestrator only**. Coder-agent briefs must never contain ProjectSchema file paths or excerpts. If a brief needs the idea, the orchestrator restates the idea in its own words in the brief.
 - If you are unsure whether something crosses the line, it does. Stop and ask.
 
 ## 2. Dependency licence policy

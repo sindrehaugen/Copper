@@ -1,13 +1,13 @@
 /* global console */
 import { test, vi, expect, afterAll } from 'vitest';
-import { runImport } from './es-import.js';
-import * as read from '../app/src/exchange/easyschematic/read.js';
+import { runImport } from './import.js';
+import * as read from '../app/src/exchange/projectschema/read.js';
 import * as nceClient from '../bff/src/nce-client/index.js';
 import fs from 'fs';
 import path from 'path';
 
-vi.mock('../app/src/exchange/easyschematic/read.js', () => ({
-    readEasySchematic: vi.fn(),
+vi.mock('../app/src/exchange/projectschema/read.js', () => ({
+    readProjectSchema: vi.fn(),
 }));
 
 vi.mock('../bff/src/nce-client/index.js', () => ({
@@ -21,12 +21,12 @@ afterAll(() => {
     fs.unlinkSync(dummyPath);
 });
 
-test('es-import CLI missing args', async () => {
-    await expect(runImport([])).rejects.toThrow('Usage: tsx es-import.ts <file_path> <namespace>');
+test('import CLI missing args', async () => {
+    await expect(runImport([])).rejects.toThrow('Usage: tsx import.ts <file_path> <namespace>');
 });
 
-test('es-import success flow', async () => {
-    vi.mocked(read.readEasySchematic).mockReturnValue({
+test('import success flow', async () => {
+    vi.mocked(read.readProjectSchema).mockReturnValue({
         document: {
             designLabel: 'test-design',
             sites: [],
@@ -53,7 +53,7 @@ test('es-import success flow', async () => {
 
     await runImport(['dummy-test-import.json', 'ns']);
 
-    expect(read.readEasySchematic).toHaveBeenCalled();
+    expect(read.readProjectSchema).toHaveBeenCalled();
     expect(mockAuthor).toHaveBeenCalledWith('ns', expect.objectContaining({
         status: 'planned',
         designLabel: 'test-design'

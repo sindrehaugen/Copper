@@ -1,5 +1,5 @@
 /**
- * EasySchematic File Format Specification & Verification (Batch 005 F.Wave 5)
+ * ProjectSchema File Format Specification & Verification (Batch 005 F.Wave 5)
  * ============================================================================
  * Format Shape as Verified from the Fixtures (AV_U1A21 and AV_H3B19):
  *
@@ -59,14 +59,14 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import fixtureGymmen from '../../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json';
-import fixtureStudio from '../../../tests/fixtures/av-fasit/AV_H3B19.easyschematic.json';
-import { readEasySchematic } from './read';
+import fixtureGymmen from '../../../tests/fixtures/av-fasit/AV_U1A21.projectschema.json';
+import fixtureStudio from '../../../tests/fixtures/av-fasit/AV_H3B19.projectschema.json';
+import { readProjectSchema } from './read';
 import { DesignDocumentSchema } from '../../model/schema';
 
-describe('EasySchematic Reader (readEasySchematic)', () => {
-  describe('Fixture 1: AV_U1A21.easyschematic.json (Gymmen)', () => {
-    // Hand-counted numbers from AV_U1A21.easyschematic.json:
+describe('ProjectSchema Reader (readProjectSchema)', () => {
+  describe('Fixture 1: AV_U1A21.projectschema.json (Gymmen)', () => {
+    // Hand-counted numbers from AV_U1A21.projectschema.json:
     // - Total Nodes: 14 (2 rooms, 12 devices, 0 notes)
     // - Rooms (Locations): 2 ("room-U1A36", "room-U1A21")
     // - Devices: 12 (UM003, UM006, UM008, UM009, UM010..UM017)
@@ -76,7 +76,7 @@ describe('EasySchematic Reader (readEasySchematic)', () => {
     // - Skipped Objects: 0
 
     it('parses AV_U1A21 into a valid Copper DesignDocument matching hand-counted metrics', () => {
-      const { document, report } = readEasySchematic(fixtureGymmen);
+      const { document, report } = readProjectSchema(fixtureGymmen);
 
       // Validate that the output document strictly conforms to Copper's DesignDocumentSchema
       expect(DesignDocumentSchema.safeParse(document).success).toBe(true);
@@ -98,7 +98,7 @@ describe('EasySchematic Reader (readEasySchematic)', () => {
     });
 
     it('spot-checks known devices and ports in AV_U1A21', () => {
-      const { document } = readEasySchematic(fixtureGymmen);
+      const { document } = readProjectSchema(fixtureGymmen);
 
       // Spot-check switch UM003
       const sw = document.devices.find((d) => d.id === 'device-U1-UM003');
@@ -133,7 +133,7 @@ describe('EasySchematic Reader (readEasySchematic)', () => {
     });
 
     it('tracks distinct signalTypes and unmapped fields for AV_U1A21 in report', () => {
-      const { report } = readEasySchematic(fixtureGymmen);
+      const { report } = readProjectSchema(fixtureGymmen);
 
       // Signal types checked
       expect(report.signalTypes['ethernet']).toBe(9); // 7 ports + 2 cables
@@ -151,8 +151,8 @@ describe('EasySchematic Reader (readEasySchematic)', () => {
     });
   });
 
-  describe('Fixture 2: AV_H3B19.easyschematic.json (Studio)', () => {
-    // Hand-counted numbers from AV_H3B19.easyschematic.json:
+  describe('Fixture 2: AV_H3B19.projectschema.json (Studio)', () => {
+    // Hand-counted numbers from AV_H3B19.projectschema.json:
     // - Total Nodes: 11 (2 rooms, 8 devices, 1 note)
     // - Rooms (Locations): 2 ("room-H3B19", "room-U1A36")
     // - Devices: 8 (UM001..UM005, UM021, U1-UM001, U1-UM002)
@@ -162,7 +162,7 @@ describe('EasySchematic Reader (readEasySchematic)', () => {
     // - Skipped Objects: 1 ("note-open", kind: "note")
 
     it('parses AV_H3B19 into a valid Copper DesignDocument matching hand-counted metrics', () => {
-      const { document, report } = readEasySchematic(fixtureStudio);
+      const { document, report } = readProjectSchema(fixtureStudio);
 
       // Validate that the output document strictly conforms to Copper's DesignDocumentSchema
       expect(DesignDocumentSchema.safeParse(document).success).toBe(true);
@@ -191,7 +191,7 @@ describe('EasySchematic Reader (readEasySchematic)', () => {
     });
 
     it('spot-checks known devices and ports in AV_H3B19', () => {
-      const { document } = readEasySchematic(fixtureStudio);
+      const { document } = readProjectSchema(fixtureStudio);
 
       // Spot-check audio DSP UM001 (NV-21-HU)
       const dsp = document.devices.find((d) => d.id === 'device-03-UM001');
@@ -223,7 +223,7 @@ describe('EasySchematic Reader (readEasySchematic)', () => {
     });
 
     it('tracks distinct signalTypes and unmapped fields for AV_H3B19 in report', () => {
-      const { report } = readEasySchematic(fixtureStudio);
+      const { report } = readProjectSchema(fixtureStudio);
 
       expect(report.signalTypes['ethernet']).toBe(44); // 37 ports + 7 cables
       expect(report.signalTypes['hdmi']).toBe(8); // 8 ports
@@ -241,7 +241,7 @@ describe('EasySchematic Reader (readEasySchematic)', () => {
         customEnterpriseField: 'EnterpriseValue123',
       };
 
-      const { report } = readEasySchematic(mutatedFixture);
+      const { report } = readProjectSchema(mutatedFixture);
       expect(report.unmappedFields['customEnterpriseField']).toBe(1);
     });
 
@@ -261,7 +261,7 @@ describe('EasySchematic Reader (readEasySchematic)', () => {
         ],
       };
 
-      const { document, report } = readEasySchematic(mutatedWithDanglingCable);
+      const { document, report } = readProjectSchema(mutatedWithDanglingCable);
 
       // The valid 6 cables are imported, the dangling cable is skipped
       expect(document.cables.length).toBe(6);
@@ -292,7 +292,7 @@ describe('EasySchematic Reader (readEasySchematic)', () => {
         ],
       };
 
-      const { document, report } = readEasySchematic(mutatedWithDanglingPort);
+      const { document, report } = readProjectSchema(mutatedWithDanglingPort);
 
       expect(document.cables.length).toBe(6);
       const skippedWire = report.skippedObjects.find((s) => s.id === 'edge-dangling-port');
@@ -311,7 +311,7 @@ describe('EasySchematic Reader (readEasySchematic)', () => {
         nodes: mutatedNodes,
       };
 
-      const { document, report } = readEasySchematic(mutatedFixture);
+      const { document, report } = readProjectSchema(mutatedFixture);
 
       // 12 devices -> 11 devices
       expect(document.devices.length).toBe(11);

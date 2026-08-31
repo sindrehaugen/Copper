@@ -157,10 +157,10 @@ function extractDesignation(aux?: Array<{ text?: string | undefined }>): string 
 // ============================================================================
 
 /**
- * Parses an EasySchematic JSON document into Copper's DesignDocument model,
+ * Parses an ProjectSchema JSON document into Copper's DesignDocument model,
  * transparently tracking all unmapped fields and skipped objects in ImportReport.
  */
-export function readEasySchematic(json: unknown): {
+export function readProjectSchema(json: unknown): {
   document: DesignDocument;
   report: ImportReport;
 } {
@@ -490,7 +490,7 @@ export function readEasySchematic(json: unknown): {
   // --- 4. Assemble and Strictly Validate DesignDocument ---
   const doc: DesignDocument = {
     schemaVersion: 1,
-    designLabel: parsedFile.name?.trim() || 'Untitled EasySchematic Design',
+    designLabel: parsedFile.name?.trim() || 'Untitled ProjectSchema Design',
     revision: parsedFile.titleBlock?.revision?.trim() || undefined,
     sites: [site],
     locations: locations,

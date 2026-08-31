@@ -124,7 +124,7 @@ describe('Headless Fixtures Rig (rig/run.mjs)', () => {
       const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'copper-rig-corrupt-'));
       try {
         // Copy 1 valid fixture and 1 corrupted fixture into tempDir
-        const validSource = path.resolve(__dirname, '../app/tests/fixtures/av-fasit/AV_U1A21.easyschematic.json');
+        const validSource = path.resolve(__dirname, '../app/tests/fixtures/av-fasit/AV_U1A21.projectschema.json');
         fs.copyFileSync(validSource, path.join(tempDir, 'AV_U1A21.json'));
         fs.writeFileSync(path.join(tempDir, 'AV_CORRUPT.json'), '{ "invalidJson": missingQuote }', 'utf8');
 

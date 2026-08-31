@@ -91,15 +91,12 @@ export function CanvasView({
 
     const x6Edges = edges.map(e => ({
       ...e,
+      tools: ['vertices', 'segments'],
       attrs: {
         line: {
           stroke: 'var(--md-sys-color-outline, #79747e)',
           strokeWidth: 2,
           targetMarker: { name: 'block', width: 6, height: 6 }
-        },
-        tools: [
-          { name: 'vertices' }
-        ]
         }
       }
     }));
@@ -115,6 +112,7 @@ export function CanvasView({
     </div>
   );
 }
+
 
 
 

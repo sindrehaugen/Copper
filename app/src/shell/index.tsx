@@ -11,8 +11,8 @@ import { SceneView } from '../views/scene/SceneView';
 import { DsarSurface } from '../components/compliance/DsarSurface';
 import { SettingsPanel } from '../views/canvas/SettingsPanel';
 
-import fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json';
-import { readEasySchematic } from '../exchange/easyschematic/read';
+import fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.projectschema.json';
+import { readProjectSchema } from '../exchange/projectschema/read';
 import { toX6 } from '../projection/toX6';
 import { applyElkLayoutX6 } from '../projection/layout';
 
@@ -117,7 +117,7 @@ export function AppShell() {
 
   useEffect(() => {
     if (!document) {
-      const { document: parsedDoc } = readEasySchematic(fixtureGymmen as any);
+      const { document: parsedDoc } = readProjectSchema(fixtureGymmen as any);
       loadDocument(parsedDoc);
     }
   }, [document, loadDocument]);

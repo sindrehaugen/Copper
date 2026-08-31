@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { readEasySchematic } from '../app/src/exchange/easyschematic/read.js';
+import { readProjectSchema } from '../app/src/exchange/projectschema/read.js';
 import { createNceClient } from '../bff/src/nce-client/index.js';
 
 function loadConfig() {
@@ -12,14 +12,14 @@ function loadConfig() {
 
 export async function runImport(args: string[]) {
     if (args.length < 2) {
-        throw new Error('Usage: tsx es-import.ts <file_path> <namespace>');
+        throw new Error('Usage: tsx import.ts <file_path> <namespace>');
     }
     
     const filePath = resolve(process.cwd(), args[0]);
     const namespace = args[1];
     
     const content = JSON.parse(readFileSync(filePath, 'utf-8'));
-    const { document, report } = readEasySchematic(content);
+    const { document, report } = readProjectSchema(content);
     
     const client = createNceClient(loadConfig());
     
@@ -41,7 +41,7 @@ export async function runImport(args: string[]) {
 }
 
 // Ensure the script runs when called directly
-const isMain = typeof process !== 'undefined' && process.argv && process.argv[1] && process.argv[1].endsWith('es-import.ts');
+const isMain = typeof process !== 'undefined' && process.argv && process.argv[1] && process.argv[1].endsWith('import.ts');
 if (isMain) {
     runImport(process.argv.slice(2)).catch(console.error);
 }

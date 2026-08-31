@@ -69,5 +69,5 @@ Rule: every plugin reads/writes through the same API and the same reference desi
 
 - No database, no save files, no offline mode (ADR-0001).
 - No NetBox runtime, no NetBox REST emulation, no background sync (ADR-0006 keeps the schema compatible so the one-shot doors stay near-mechanical).
-- No code from EasySchematic or the three AGPL-derived steps-ai files, ever (ADR-0005 FORBIDDEN list).
+- No code from ProjectSchema or the three AGPL-derived steps-ai files, ever (ADR-0005 FORBIDDEN list).
 - No autonomy: every world-write is human-confirmed (Contract B posture); promote and BOM emission ship confirm-first.

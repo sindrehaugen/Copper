@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.easyschematic.json';
-import fixtureStudio from '../../tests/fixtures/av-fasit/AV_H3B19.easyschematic.json';
-import fixtureAuditorium from '../../tests/fixtures/av-fasit/AV_H1A04.easyschematic.json';
-import { readEasySchematic } from '../exchange/easyschematic/read';
+import fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.projectschema.json';
+import fixtureStudio from '../../tests/fixtures/av-fasit/AV_H3B19.projectschema.json';
+import fixtureAuditorium from '../../tests/fixtures/av-fasit/AV_H1A04.projectschema.json';
+import { readProjectSchema } from '../exchange/projectschema/read';
 import { toFlow } from './toFlow';
 import { applyElkLayout } from './layout';
 import { enhanceEdges, DEFAULT_EDGE_STYLE, DEFAULT_EDGE_TYPE } from './edges';
@@ -13,7 +13,7 @@ import { CARD_WIDTH } from '../model/geometry';
  * Batch 025 - P.W7 the-premise-proof
  * ============================================================================
  * End-to-end integration test proving the core premise:
- * External schematic JSON -> readEasySchematic (B5)
+ * External schematic JSON -> readProjectSchema (B5)
  *                         -> toFlow (B21)
  *                         -> applyElkLayout (B23)
  *                         -> enhanceEdges (B24)
@@ -25,7 +25,7 @@ describe('Projection Pipeline E2E Integration (Batch 025 P.W7 the-premise-proof)
   describe('Pipeline Proof 1: AV_U1A21 (Gymmen) Fixture', () => {
     it('successfully processes full pipeline: read -> toFlow -> applyElkLayout -> enhanceEdges', async () => {
       // Step 1: Ingest foreign schematic into Copper DesignDocument
-      const { document, report } = readEasySchematic(fixtureGymmen);
+      const { document, report } = readProjectSchema(fixtureGymmen);
 
       // Verify lossless ingestion conforming strictly to DesignDocumentSchema
       expect(DesignDocumentSchema.safeParse(document).success).toBe(true);
@@ -125,7 +125,7 @@ describe('Projection Pipeline E2E Integration (Batch 025 P.W7 the-premise-proof)
   describe('Pipeline Proof 2: AV_H3B19 (Studio) Fixture', () => {
     it('successfully processes full pipeline for multi-room studio topology', async () => {
       // Step 1: Read fixture
-      const { document, report } = readEasySchematic(fixtureStudio);
+      const { document, report } = readProjectSchema(fixtureStudio);
 
       expect(DesignDocumentSchema.safeParse(document).success).toBe(true);
       expect(document.devices).toHaveLength(8);
@@ -167,7 +167,7 @@ describe('Projection Pipeline E2E Integration (Batch 025 P.W7 the-premise-proof)
   describe('Pipeline Proof 3: AV_H1A04 (Auditorium) Complex Fixture', () => {
     it('successfully processes full pipeline on complex auditorium schematic with high port count', async () => {
       // Step 1: Ingest large fixture
-      const { document, report } = readEasySchematic(fixtureAuditorium);
+      const { document, report } = readProjectSchema(fixtureAuditorium);
 
       expect(DesignDocumentSchema.safeParse(document).success).toBe(true);
       expect(document.devices.length).toBeGreaterThan(10);
@@ -205,7 +205,7 @@ describe('Projection Pipeline E2E Integration (Batch 025 P.W7 the-premise-proof)
 
   describe('Pipeline Immutability & Purity', () => {
     it('does not mutate raw nodes or raw edges during layout and edge enhancement', async () => {
-      const { document } = readEasySchematic(fixtureGymmen);
+      const { document } = readProjectSchema(fixtureGymmen);
       const { nodes: rawNodes, edges: rawEdges } = toFlow(document);
 
       // Deep freeze the raw nodes and raw edges before running pipeline steps
@@ -236,7 +236,7 @@ describe('Projection Pipeline E2E Integration (Batch 025 P.W7 the-premise-proof)
 
   describe('§6.4 Mutation Scenario: Broken / Bypassed Layout Detection', () => {
     it('verifies that without ELK layout all nodes remain stuck at (0,0)', () => {
-      const { document } = readEasySchematic(fixtureGymmen);
+      const { document } = readProjectSchema(fixtureGymmen);
       const { nodes: rawNodes } = toFlow(document);
 
       // If layout step is broken or omitted, all positions are stuck at { x: 0, y: 0 }
@@ -248,7 +248,7 @@ describe('Projection Pipeline E2E Integration (Batch 025 P.W7 the-premise-proof)
     });
 
     it('verifies that ELK layout breaks the (0,0) singularity and spreads nodes apart', async () => {
-      const { document } = readEasySchematic(fixtureGymmen);
+      const { document } = readProjectSchema(fixtureGymmen);
       const { nodes: rawNodes, edges: rawEdges } = toFlow(document);
 
       const layoutedNodes = await applyElkLayout(rawNodes, rawEdges);

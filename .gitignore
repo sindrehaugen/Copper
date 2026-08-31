@@ -44,7 +44,7 @@ lerna-debug.log*
 .vite/
 
 # Application Specific
-app/tests/fixtures/av-fasit/*.easyschematic.json
+app/tests/fixtures/av-fasit/*.projectschema.json
 
 # Planning / Orchestration (Internal)
 orchestration/

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.projectschema.json';
-import fixtureStudio from '../../tests/fixtures/av-fasit/AV_H3B19.projectschema.json';
-import fixtureAuditorium from '../../tests/fixtures/av-fasit/AV_H1A04.projectschema.json';
+import fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.project.json';
+import fixtureStudio from '../../tests/fixtures/av-fasit/AV_H3B19.project.json';
+import fixtureAuditorium from '../../tests/fixtures/av-fasit/AV_H1A04.project.json';
 import { readProjectSchema } from '../exchange/projectschema/read';
 import { toFlow } from './toFlow';
 import { applyElkLayout } from './layout';
@@ -262,3 +262,4 @@ describe('Projection Pipeline E2E Integration (Batch 025 P.W7 the-premise-proof)
     });
   });
 });
+

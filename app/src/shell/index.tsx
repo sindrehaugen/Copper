@@ -11,7 +11,7 @@ import { SceneView } from '../views/scene/SceneView';
 import { DsarSurface } from '../components/compliance/DsarSurface';
 import { SettingsPanel } from '../views/canvas/SettingsPanel';
 
-import fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.projectschema.json';
+import fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.project.json';
 import { readProjectSchema } from '../exchange/projectschema/read';
 import { toX6 } from '../projection/toX6';
 import { applyElkLayoutX6 } from '../projection/layout';
@@ -139,4 +139,5 @@ export function AppShell() {
     </SessionContext.Provider>
   );
 }
+
 

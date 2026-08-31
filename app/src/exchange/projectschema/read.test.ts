@@ -59,14 +59,14 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import fixtureGymmen from '../../../tests/fixtures/av-fasit/AV_U1A21.projectschema.json';
-import fixtureStudio from '../../../tests/fixtures/av-fasit/AV_H3B19.projectschema.json';
+import fixtureGymmen from '../../../tests/fixtures/av-fasit/AV_U1A21.project.json';
+import fixtureStudio from '../../../tests/fixtures/av-fasit/AV_H3B19.project.json';
 import { readProjectSchema } from './read';
 import { DesignDocumentSchema } from '../../model/schema';
 
 describe('ProjectSchema Reader (readProjectSchema)', () => {
-  describe('Fixture 1: AV_U1A21.projectschema.json (Gymmen)', () => {
-    // Hand-counted numbers from AV_U1A21.projectschema.json:
+  describe('Fixture 1: AV_U1A21.project.json (Gymmen)', () => {
+    // Hand-counted numbers from AV_U1A21.project.json:
     // - Total Nodes: 14 (2 rooms, 12 devices, 0 notes)
     // - Rooms (Locations): 2 ("room-U1A36", "room-U1A21")
     // - Devices: 12 (UM003, UM006, UM008, UM009, UM010..UM017)
@@ -151,8 +151,8 @@ describe('ProjectSchema Reader (readProjectSchema)', () => {
     });
   });
 
-  describe('Fixture 2: AV_H3B19.projectschema.json (Studio)', () => {
-    // Hand-counted numbers from AV_H3B19.projectschema.json:
+  describe('Fixture 2: AV_H3B19.project.json (Studio)', () => {
+    // Hand-counted numbers from AV_H3B19.project.json:
     // - Total Nodes: 11 (2 rooms, 8 devices, 1 note)
     // - Rooms (Locations): 2 ("room-H3B19", "room-U1A36")
     // - Devices: 8 (UM001..UM005, UM021, U1-UM001, U1-UM002)
@@ -329,3 +329,4 @@ describe('ProjectSchema Reader (readProjectSchema)', () => {
     });
   });
 });
+

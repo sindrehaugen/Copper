@@ -3,5 +3,6 @@ packages:
   - "bff"
   - "catalog"
   - "rig"
+  - "packages/*"
 allowBuilds:
   esbuild: true

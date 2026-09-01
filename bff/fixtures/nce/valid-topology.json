@@ -1,0 +1,48 @@
+{
+  "design": {
+    "designLabel": "v1",
+    "revision": "rev-123",
+    "deviceTypes": [
+      {
+        "id": "dt-1",
+        "manufacturer": "Cisco",
+        "model": "C9200",
+        "slug": "c9200",
+        "uHeight": 1,
+        "isFullDepth": true
+      }
+    ],
+    "signalClasses": []
+  },
+  "functional_locations": [
+    {
+      "id": "site-1",
+      "name": "HQ",
+      "slug": "hq"
+    },
+    {
+      "id": "loc-1",
+      "name": "Room 1",
+      "slug": "room-1",
+      "siteId": "site-1"
+    }
+  ],
+  "devices": [
+    {
+      "node": {
+        "id": "dev-1",
+        "name": "SW-1",
+        "deviceTypeId": "dt-1",
+        "siteId": "site-1",
+        "status": "active"
+      },
+      "capabilities": {},
+      "ports": []
+    }
+  ],
+  "racks": [],
+  "cables": [],
+  "edges": [],
+  "geometry": {},
+  "version": 1
+}

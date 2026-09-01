@@ -33,8 +33,14 @@ jobs:
       - name: Run CI checks
         run: pnpm lint && pnpm typecheck && pnpm test
 
+      - name: Verify NCE Contract Drift
+        run: pnpm vitest run bff/src/nce-client/schema.test.ts
+
       - name: Rig Ratchet Check
         run: pnpm run check:rig
+
+      - name: Theme Token Ratchet
+        run: pnpm run check:theme
 
       - name: Catalog Validation
         run: pnpm run check:catalog

@@ -1,4 +1,3 @@
-import React from 'react';
 import type { Location } from '../../model/schema';
 interface LayoutData { x: number; y: number; width: number; height: number; }
 
@@ -21,7 +20,7 @@ export function RoomVolume({ location }: RoomVolumeProps) {
     <group position={[x, h / 2, z]} name={location.name || location.id}>
       <mesh>
         <boxGeometry args={[w, h, d]} />
-        <meshStandardMaterial color="#88aaff" opacity={0.2} transparent depthWrite={false} />
+        <meshStandardMaterial color='var(--md-sys-color-secondary-container)' opacity={0.2} transparent depthWrite={false} />
       </mesh>
     </group>
   );

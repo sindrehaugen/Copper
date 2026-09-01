@@ -1,0 +1,129 @@
+/* Material Design 3 Layout Semantics */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--md-sys-typescale-body-large-font-family, Roboto, system-ui, sans-serif);
+  background-color: var(--md-sys-color-background, #141218);
+  color: var(--md-sys-color-on-background, #E6E0E9);
+  height: 100vh;
+  overflow: hidden;
+}
+* {
+  box-sizing: border-box;
+}
+
+.m3-surface {
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+}
+
+.m3-container {
+  background-color: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
+  border-radius: var(--md-sys-shape-corner-medium, 12px);
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.m3-content-padding {
+  padding: 16px 24px;
+}
+
+/* App Shell Structure */
+.app-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: var(--md-sys-color-background);
+}
+
+.m3-nav-drawer {
+  flex: 0 0 320px; /* Standard M3 medium width instead of hardcoded 300px width */
+  background-color: var(--md-sys-color-surface-container-low);
+  display: flex;
+  flex-direction: column;
+  padding: 12px 12px;
+  border-radius: 0 16px 16px 0;
+  transition: background-color 0.2s ease;
+  z-index: 10;
+}
+
+.m3-nav-header {
+  padding: 16px 24px;
+  font-size: var(--md-sys-typescale-title-large-font-size);
+  font-weight: var(--md-sys-typescale-title-large-font-weight);
+  color: var(--md-sys-color-on-surface-variant);
+  letter-spacing: 0;
+}
+
+.m3-nav-drawer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.m3-nav-drawer ul li a {
+  text-decoration: none;
+  color: var(--md-sys-color-on-surface-variant);
+  padding: 12px 24px;
+  border-radius: 28px; /* M3 stadium shape */
+  display: block;
+  font-size: var(--md-sys-typescale-label-large-font-size);
+  font-weight: var(--md-sys-typescale-label-large-font-weight);
+  line-height: var(--md-sys-typescale-label-large-line-height);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.m3-nav-drawer ul li a:hover {
+  background-color: color-mix(in srgb, var(--md-sys-color-on-surface) calc(var(--md-sys-state-hover-opacity, 0.08) * 100%), transparent);
+}
+
+.m3-nav-drawer ul li a.active {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.session-info {
+  margin-top: auto;
+  padding: 16px 24px;
+  font-size: 0.75rem;
+  color: var(--md-sys-color-on-surface-variant);
+  opacity: 0.8;
+}
+
+.m3-main-content {
+  flex: 1;
+  min-width: 0; /* Fix for flex children overflowing horizontally */
+  min-height: 0; /* Fix for flex children overflowing vertically (double scrollbars) */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Changed from auto to hidden to let inner views manage their own scrolling */
+  position: relative;
+  background-color: var(--md-sys-color-surface);
+  border-radius: 16px 0 0 16px;
+  margin-left: 12px;
+}
+
+/* Card overrides for M3 */
+.m3-card {
+  background-color: var(--md-sys-color-surface-container);
+  border-radius: 12px;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  color: var(--md-sys-color-on-surface);
+}
+
+.copper-settings-panel {
+  background-color: var(--md-sys-color-surface-container-high) !important;
+  color: var(--md-sys-color-on-surface) !important;
+  border-radius: 16px !important;
+  border: 1px solid var(--md-sys-color-outline-variant) !important;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1) !important;
+  padding: 16px !important;
+  font-family: var(--md-sys-typescale-body-large-font-family);
+}

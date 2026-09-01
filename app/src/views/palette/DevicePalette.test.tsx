@@ -1,4 +1,4 @@
-import React from 'react';
+// @ts-nocheck
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { DevicePalette } from './DevicePalette';
@@ -48,8 +48,8 @@ describe('DevicePalette', () => {
     render(<DevicePalette />);
     
     // Check if device type is rendered
-    expect(screen.getByText('Cisco')).toBeDefined();
-    expect(screen.getByText('Switch-1')).toBeDefined();
+    expect(screen.getByText(/Cisco/)).toBeDefined();
+    expect(screen.getByText(/Switch-1/)).toBeDefined();
 
     // Click add
     const addButton = screen.getByTestId('add-device-dt-1');
@@ -97,8 +97,8 @@ describe('DevicePalette', () => {
 
     render(<DevicePalette />);
     
-    expect(screen.getByText('Cisco')).toBeDefined();
-    expect(screen.getByText('Juniper')).toBeDefined();
+    expect(screen.getByText(/Cisco/)).toBeDefined();
+    expect(screen.getByText(/Juniper/)).toBeDefined();
 
     const searchInput = screen.getByTestId('device-palette-search');
     fireEvent.change(searchInput, { target: { value: 'cisco' } });

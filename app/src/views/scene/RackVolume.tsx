@@ -1,6 +1,4 @@
-import React from 'react';
 import type { Rack, Device } from '../../model/schema';
-import { useDocumentStore } from '../../store';
 
 interface DeviceWithGeometry extends Device {
   geometry?: {
@@ -24,7 +22,7 @@ export function RackVolume({ rack, devices, position = [0, 0, 0] }: RackVolumePr
     <group position={position} name={rack.name || rack.id}>
       <mesh position={[0, rackHeight / 2, 0]}>
         <boxGeometry args={[rackWidth, rackHeight, rackDepth]} />
-        <meshStandardMaterial color="#333333" wireframe />
+        <meshStandardMaterial color='var(--md-sys-color-outline)' wireframe />
       </mesh>
       
       {devices.map((device) => {
@@ -36,7 +34,7 @@ export function RackVolume({ rack, devices, position = [0, 0, 0] }: RackVolumePr
         return (
           <mesh key={device.id} position={[0, yPos, 0]}>
             <boxGeometry args={[0.4826, deviceHeightM * 0.9, 0.8]} />
-            <meshStandardMaterial color="#55aa55" />
+            <meshStandardMaterial color='var(--md-sys-color-primary)' />
           </mesh>
         );
       })}

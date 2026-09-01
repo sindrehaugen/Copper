@@ -99,8 +99,8 @@ export const RackElevationView: React.FC<RackElevationViewProps> = ({
           e.dataTransfer.setData('text/plain', device.id);
         }}
         style={{ 
-          backgroundColor: '#4ade80', 
-          border: '1px solid #166534', 
+          backgroundColor: 'var(--md-sys-color-primary-container)', 
+          border: '1px solid var(--md-sys-color-primary)', 
           padding: '2px', 
           margin: '1px',
           fontSize: '12px',
@@ -120,12 +120,12 @@ export const RackElevationView: React.FC<RackElevationViewProps> = ({
     const halfDevices = slotHalf ? slotHalf[face] : [];
 
     return (
-      <div key={`${face}-${uNum}`} style={{ display: 'flex', borderBottom: '1px solid #ccc', minHeight: '40px' }} data-testid={`slot-${uNum}-${face}`} onDragOver={handleDragOver} onDrop={(e) => handleDrop(e, uNum, face)}>
-        <div style={{ width: '40px', borderRight: '1px solid #ccc', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f3f4f6', fontWeight: 'bold' }}>
+      <div key={`${face}-${uNum}`} style={{ display: 'flex', borderBottom: '1px solid var(--md-sys-color-outline-variant)', minHeight: '40px' }} data-testid={`slot-${uNum}-${face}`} onDragOver={handleDragOver} onDrop={(e) => handleDrop(e, uNum, face)}>
+        <div style={{ width: '40px', borderRight: '1px solid var(--md-sys-color-outline-variant)', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--md-sys-color-surface-container-high)', fontWeight: 'bold' }}>
           {uNum}U
         </div>
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <div style={{ flex: 1, display: 'flex', minHeight: '20px', borderBottom: '1px dashed #eee' }}>
+          <div style={{ flex: 1, display: 'flex', minHeight: '20px', borderBottom: '1px dashed var(--md-sys-color-outline-variant)' }}>
             {mainDevices.length > 0 
               ? mainDevices.map(d => renderDeviceBlock(d))
               : <div style={{ flex: 1 }} data-testid={`empty-${uNum}-main-${face}`} />
@@ -144,15 +144,15 @@ export const RackElevationView: React.FC<RackElevationViewProps> = ({
 
   return (
     <div style={{ display: 'flex', gap: '20px', padding: '20px', fontFamily: 'sans-serif' }}>
-      <div style={{ flex: 1, border: '2px solid #333', borderRadius: '4px', overflow: 'hidden' }}>
-        <h3 style={{ textAlign: 'center', backgroundColor: '#333', color: '#fff', margin: 0, padding: '10px' }}>Unassigned Devices</h3>
+      <div style={{ flex: 1, border: '2px solid var(--md-sys-color-outline)', borderRadius: '4px', overflow: 'hidden' }}>
+        <h3 style={{ textAlign: 'center', backgroundColor: 'var(--md-sys-color-inverse-surface)', color: 'var(--md-sys-color-inverse-on-surface)', margin: 0, padding: '10px' }}>Unassigned Devices</h3>
         <div style={{ display: 'flex', flexDirection: 'column', padding: '10px', gap: '5px' }} data-testid="unassigned-list">
           {unassignedDevices.map(device => (
              <div 
                key={device.id} 
                draggable
                onDragStart={(e) => e.dataTransfer.setData('text/plain', device.id)}
-               style={{ backgroundColor: '#4ade80', border: '1px solid #166534', padding: '5px', fontSize: '12px', cursor: 'grab' }}
+               style={{ backgroundColor: 'var(--md-sys-color-primary-container)', border: '1px solid var(--md-sys-color-primary)', padding: '5px', fontSize: '12px', cursor: 'grab' }}
                data-testid={`unassigned-${device.id}`}
              >
                {device.name || device.id}
@@ -161,15 +161,15 @@ export const RackElevationView: React.FC<RackElevationViewProps> = ({
         </div>
       </div>
 
-      <div style={{ flex: 1, border: '2px solid #333', borderRadius: '4px', overflow: 'hidden' }}>
-        <h3 style={{ textAlign: 'center', backgroundColor: '#333', color: '#fff', margin: 0, padding: '10px' }}>Front Face</h3>
+      <div style={{ flex: 1, border: '2px solid var(--md-sys-color-outline)', borderRadius: '4px', overflow: 'hidden' }}>
+        <h3 style={{ textAlign: 'center', backgroundColor: 'var(--md-sys-color-inverse-surface)', color: 'var(--md-sys-color-inverse-on-surface)', margin: 0, padding: '10px' }}>Front Face</h3>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {uNumbers.map(u => renderSlot(u, 'front'))}
         </div>
       </div>
       
-      <div style={{ flex: 1, border: '2px solid #333', borderRadius: '4px', overflow: 'hidden' }}>
-        <h3 style={{ textAlign: 'center', backgroundColor: '#333', color: '#fff', margin: 0, padding: '10px' }}>Rear Face</h3>
+      <div style={{ flex: 1, border: '2px solid var(--md-sys-color-outline)', borderRadius: '4px', overflow: 'hidden' }}>
+        <h3 style={{ textAlign: 'center', backgroundColor: 'var(--md-sys-color-inverse-surface)', color: 'var(--md-sys-color-inverse-on-surface)', margin: 0, padding: '10px' }}>Rear Face</h3>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {uNumbers.map(u => renderSlot(u, 'rear'))}
         </div>

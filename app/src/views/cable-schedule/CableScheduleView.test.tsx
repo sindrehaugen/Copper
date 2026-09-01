@@ -27,12 +27,12 @@ describe('CableScheduleView', () => {
           ],
         }
       ],
-      sites: [], locations: [], racks: [], deviceTypes: [], signalClasses: []
+      sites: [], locations: [], racks: [], deviceTypes: [], signalClasses: [], zones: []
     };
 
     render(<CableScheduleView document={doc} />);
     
-    expect(screen.getByText('Source Device')).toBeDefined();
+    expect(screen.getByText('Source')).toBeDefined();
     expect(screen.getByText('Device 1')).toBeDefined();
     expect(screen.getByText('port1')).toBeDefined();
     expect(screen.getByText('Device 2')).toBeDefined();

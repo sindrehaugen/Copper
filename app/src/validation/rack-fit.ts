@@ -11,7 +11,7 @@ export function validateRackFit(
   devices: Device[],
   deviceTypeMap: Map<string, DeviceType>,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-  geometryMap: Record<string, any>
+  _geometryMap: Record<string, any>
 ): RackFitError[] {
   const errors: RackFitError[] = [];
 
@@ -38,6 +38,8 @@ export function validateRackFit(
       const d1 = placedDevices[i];
       const d2 = placedDevices[j];
       
+      if (!d1 || !d2) continue;
+
       const t1 = deviceTypeMap.get(d1.deviceTypeId);
       const t2 = deviceTypeMap.get(d2.deviceTypeId);
       

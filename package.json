@@ -10,7 +10,8 @@
     "licences": "node scripts/check-licences.mjs",
     "forbidden": "node scripts/forbidden-sources.mjs",
     "check:rig": "tsx scripts/rig-ratchet.mjs",
-    "check:catalog": "node catalog/scripts/validate.mjs catalog/bravo"
+    "check:catalog": "node catalog/scripts/validate.mjs",
+    "check:theme": "node scripts/check-hex-literals.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

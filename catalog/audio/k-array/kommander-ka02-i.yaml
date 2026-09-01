@@ -1,0 +1,14 @@
+---
+manufacturer: "K-Array"
+model: "Kommander-KA02 I"
+slug: "k-array-kommander-ka02-i"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 50
+    watt_4: 50
+    watt_bridge_4: 28.3

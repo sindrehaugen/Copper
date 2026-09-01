@@ -1,0 +1,17 @@
+---
+manufacturer: "Bose"
+model: "FS3-Bass"
+slug: "bose-fs3-bass"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 6
+    z_min: 4.8
+    wattage_rms: 200.0
+    wattage_peak: 800
+    max_spl: 102
+    taps: [25, 50, 100, 200]
+    type: "Both"
+    category: "subwoofer"

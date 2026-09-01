@@ -1,0 +1,17 @@
+---
+manufacturer: "RCF"
+model: "ART 910-A"
+slug: "rcf-art-910-a"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 1050
+    wattage_peak: 2100
+    max_spl: 130
+    taps: []
+    type: "Active"
+    category: "small_fullrange"

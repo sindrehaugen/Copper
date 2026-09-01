@@ -1,0 +1,16 @@
+---
+manufacturer: "Wharfedale Pro"
+model: "XR3500"
+slug: "wharfedale-pro-xr3500"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 1000
+    watt_4: 1350
+    min_load_bridge: 8
+    watt_bridge_8: 2700
+    max_voltage_peak: 126.5

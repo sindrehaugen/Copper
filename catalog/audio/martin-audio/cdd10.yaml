@@ -1,0 +1,17 @@
+---
+manufacturer: "Martin Audio"
+model: "CDD10"
+slug: "martin-audio-cdd10"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 300.0
+    wattage_peak: 1200
+    max_spl: 120
+    taps: []
+    type: "Lo-Z"
+    category: "large_fullrange"

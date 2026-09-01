@@ -1,0 +1,17 @@
+---
+manufacturer: "Blaze Audio"
+model: "C12S"
+slug: "blaze-audio-c12s"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 450.0
+    wattage_peak: 1500
+    max_spl: 126
+    taps: []
+    type: "Lo-Z"
+    category: "subwoofer"

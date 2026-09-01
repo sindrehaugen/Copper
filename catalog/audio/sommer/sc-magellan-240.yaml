@@ -1,0 +1,12 @@
+---
+manufacturer: "Sommer"
+model: "SC-Magellan 240"
+slug: "sommer-sc-magellan-240"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 4.9
+    capacitance: 130
+    inductance: 0.35

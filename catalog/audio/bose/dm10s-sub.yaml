@@ -1,0 +1,17 @@
+---
+manufacturer: "Bose"
+model: "DM10S-SUB"
+slug: "bose-dm10s-sub"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 250.0
+    wattage_peak: 1000
+    max_spl: 114
+    taps: [40, 80, 150]
+    type: "Both"
+    category: "subwoofer"

@@ -1,0 +1,17 @@
+---
+manufacturer: "Bose"
+model: "302A"
+slug: "bose-302a"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 6
+    z_min: 4.8
+    wattage_rms: 100.0
+    wattage_peak: 400
+    max_spl: 102
+    taps: [25, 50, 100, 200]
+    type: "Both"
+    category: "small_fullrange"

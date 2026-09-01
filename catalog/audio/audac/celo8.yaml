@@ -1,0 +1,17 @@
+---
+manufacturer: "Audac"
+model: "CELO8"
+slug: "audac-celo8"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 80.0
+    wattage_peak: 160
+    max_spl: 108
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

@@ -1,0 +1,17 @@
+---
+manufacturer: "LD Systems"
+model: "SAT 42 G2"
+slug: "ld-systems-sat-42-g2"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 60.0
+    wattage_peak: 120
+    max_spl: 103
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

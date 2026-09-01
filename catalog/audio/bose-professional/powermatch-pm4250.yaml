@@ -1,0 +1,20 @@
+---
+manufacturer: "Bose Professional"
+model: "PowerMatch PM4250"
+slug: "bose-professional-powermatch-pm4250"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">1000"
+    df_rated_at: 4
+    min_load: 2
+    watt_8: 250
+    watt_4: 250
+    watt_2: 250
+    watt_100v: 250
+    min_load_bridge: 4
+    watt_bridge_8: 500
+    watt_bridge_4: 250
+    max_voltage_peak: 50.0

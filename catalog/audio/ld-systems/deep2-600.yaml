@@ -1,0 +1,17 @@
+---
+manufacturer: "LD Systems"
+model: "DEEP2 600"
+slug: "ld-systems-deep2-600"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">400"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 300
+    watt_4: 450
+    min_load_bridge: 4
+    watt_bridge_8: 900
+    max_voltage_peak: 69.3

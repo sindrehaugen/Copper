@@ -1,0 +1,17 @@
+---
+manufacturer: "HK Audio"
+model: "LINEAR 5 MK II 115 FA"
+slug: "hk-audio-linear-5-mk-ii-115-fa"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 600
+    wattage_peak: 1200
+    max_spl: 138
+    taps: []
+    type: "Active"
+    category: "large_fullrange"

@@ -1,0 +1,12 @@
+---
+manufacturer: "SCP"
+model: "16/2-OFC"
+slug: "scp-16-2-ofc"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 13.2
+    capacitance: 90
+    inductance: 0.70

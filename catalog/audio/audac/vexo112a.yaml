@@ -1,0 +1,15 @@
+---
+manufacturer: "Audac"
+model: "VEXO112A"
+slug: "audac-vexo112a"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    wattage_rms: 400.0
+    wattage_peak: 1600
+    max_spl: 124
+    taps: []
+    type: "Active"
+    category: "large_fullrange"

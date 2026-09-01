@@ -1,0 +1,17 @@
+---
+manufacturer: "Bose"
+model: "402-IV"
+slug: "bose-402-iv"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 150.0
+    wattage_peak: 600
+    max_spl: 119
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

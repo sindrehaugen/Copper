@@ -1,0 +1,17 @@
+---
+manufacturer: "Audac"
+model: "ATEO6D"
+slug: "audac-ateo6d"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 60.0
+    wattage_peak: 120
+    max_spl: 106
+    taps: [50, 25, 12.5, 6.25]
+    type: "Both"
+    category: "small_fullrange"

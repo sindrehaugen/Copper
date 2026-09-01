@@ -1,0 +1,12 @@
+---
+manufacturer: "Sommer"
+model: "SC-Twincord 150"
+slug: "sommer-sc-twincord-150"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 13.30
+    capacitance: 67
+    inductance: 0.75

@@ -1,0 +1,12 @@
+---
+manufacturer: "Supra"
+model: "Rondo 4x2.5"
+slug: "supra-rondo-4x2-5"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 6.8
+    capacitance: 110
+    inductance: 0.40

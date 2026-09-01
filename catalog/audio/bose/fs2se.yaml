@@ -1,0 +1,17 @@
+---
+manufacturer: "Bose"
+model: "FS2SE"
+slug: "bose-fs2se"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 16.0
+    wattage_peak: 64
+    max_spl: 100
+    taps: [2, 4, 8, 16]
+    type: "Both"
+    category: "small_fullrange"

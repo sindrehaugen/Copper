@@ -1,0 +1,16 @@
+---
+manufacturer: "K-Array"
+model: "Kommander-KA28"
+slug: "k-array-kommander-ka28"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 150
+    watt_4: 250
+    watt_2: 250
+    watt_bridge_8: 500
+    max_voltage_peak: 49.0

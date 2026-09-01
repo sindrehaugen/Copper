@@ -1,0 +1,17 @@
+---
+manufacturer: "QSC"
+model: "AD-S8T"
+slug: "qsc-ad-s8t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 200
+    wattage_peak: 800
+    max_spl: 119
+    taps: [60, 30, 15]
+    type: "Both"
+    category: "small_fullrange"

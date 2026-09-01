@@ -1,0 +1,12 @@
+---
+manufacturer: "Sommer"
+model: "SC-Magellan 225"
+slug: "sommer-sc-magellan-225"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 7.8
+    capacitance: 130
+    inductance: 0.35

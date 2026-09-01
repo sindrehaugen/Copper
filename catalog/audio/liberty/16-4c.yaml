@@ -1,0 +1,12 @@
+---
+manufacturer: "Liberty"
+model: "16-4C"
+slug: "liberty-16-4c"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 13.19
+    capacitance: 90
+    inductance: 0.66

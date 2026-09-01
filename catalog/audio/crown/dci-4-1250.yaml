@@ -1,0 +1,20 @@
+---
+manufacturer: "Crown"
+model: "DCi 4|1250"
+slug: "crown-dci-4-1250"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">1000"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 1250
+    watt_4: 1250
+    watt_2: 625
+    watt_100v: 1250
+    min_load_bridge: 4
+    watt_bridge_8: 2500
+    watt_bridge_4: 1250
+    max_voltage_peak: 141.4

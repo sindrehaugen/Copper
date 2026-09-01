@@ -1,0 +1,16 @@
+---
+manufacturer: "Powersoft"
+model: "Mezzo 322 A"
+slug: "powersoft-mezzo-322-a"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 160
+    watt_4: 160
+    watt_2: 160
+    watt_100v: 160
+    watt_bridge_4: 50.6

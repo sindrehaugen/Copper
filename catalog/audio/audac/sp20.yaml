@@ -1,0 +1,17 @@
+---
+manufacturer: "Audac"
+model: "SP20"
+slug: "audac-sp20"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 20.0
+    wattage_peak: 40
+    max_spl: 104
+    taps: [20, 10, 5, 2.5]
+    type: "Both"
+    category: "small_fullrange"

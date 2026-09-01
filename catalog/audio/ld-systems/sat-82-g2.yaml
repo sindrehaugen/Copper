@@ -1,0 +1,17 @@
+---
+manufacturer: "LD Systems"
+model: "SAT 82 G2"
+slug: "ld-systems-sat-82-g2"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 120.0
+    wattage_peak: 240
+    max_spl: 114
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

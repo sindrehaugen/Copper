@@ -1,0 +1,19 @@
+---
+manufacturer: "QSC"
+model: "CX-Q 8K4"
+slug: "qsc-cx-q-8k4"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">150"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 1250
+    watt_4: 2000
+    watt_2: 1500
+    watt_100v: 2000
+    min_load_bridge: 4
+    watt_bridge_8: 2400
+    max_voltage_peak: 141.4

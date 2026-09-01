@@ -1,0 +1,17 @@
+---
+manufacturer: "HK Audio"
+model: "Premium PR:O 12 M"
+slug: "hk-audio-premium-pr-o-12-m"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 400
+    wattage_peak: 1200
+    max_spl: 128
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

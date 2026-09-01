@@ -1,0 +1,16 @@
+---
+manufacturer: "Powersoft"
+model: "Mezzo 602 A"
+slug: "powersoft-mezzo-602-a"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 300
+    watt_4: 300
+    watt_2: 300
+    watt_100v: 300
+    watt_bridge_4: 69.3

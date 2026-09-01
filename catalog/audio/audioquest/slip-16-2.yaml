@@ -1,0 +1,12 @@
+---
+manufacturer: "AudioQuest"
+model: "SliP 16/2"
+slug: "audioquest-slip-16-2"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 13.2
+    capacitance: 95
+    inductance: 0.70

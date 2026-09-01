@@ -1,0 +1,17 @@
+---
+manufacturer: "JBL"
+model: "Control 65P/T"
+slug: "jbl-control-65p-t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 75.0
+    wattage_peak: 300
+    max_spl: 111
+    taps: [60, 30, 15]
+    type: "Both"
+    category: "small_fullrange"

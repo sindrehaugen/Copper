@@ -1,0 +1,15 @@
+---
+manufacturer: "Audac"
+model: "ARES5A"
+slug: "audac-ares5a"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    wattage_rms: 40.0
+    wattage_peak: 80
+    max_spl: 105
+    taps: []
+    type: "Active"
+    category: "small_fullrange"

@@ -1,0 +1,17 @@
+---
+manufacturer: "FBT Audio"
+model: "Subline 118S"
+slug: "fbt-audio-subline-118s"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 4
+    z_min: 3.2
+    wattage_rms: 1200
+    wattage_peak: 2400
+    max_spl: 136
+    taps: []
+    type: "Lo-Z"
+    category: "subwoofer"

@@ -1,0 +1,12 @@
+---
+manufacturer: "Cordial"
+model: "CLS 215"
+slug: "cordial-cls-215"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 13.3
+    capacitance: 105
+    inductance: 0.68

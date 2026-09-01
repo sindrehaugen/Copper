@@ -1,0 +1,20 @@
+---
+manufacturer: "Linea Research"
+model: "88C06"
+slug: "linea-research-88c06"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">800"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 750
+    watt_4: 750
+    watt_2: 750
+    watt_100v: 750
+    min_load_bridge: 4
+    watt_bridge_8: 1500
+    watt_bridge_4: 1500
+    max_voltage_peak: 77.0

@@ -1,0 +1,18 @@
+---
+manufacturer: "Behringer"
+model: "NX3000"
+slug: "behringer-nx3000"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 440
+    watt_4: 900
+    watt_2: 1500
+    min_load_bridge: 4
+    watt_bridge_8: 1500
+    watt_bridge_4: 3000
+    max_voltage_peak: 83.9

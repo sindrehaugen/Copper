@@ -1,0 +1,17 @@
+---
+manufacturer: "QSC"
+model: "AD-C6T"
+slug: "qsc-ad-c6t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 60
+    wattage_peak: 240
+    max_spl: 112
+    taps: [60, 30, 15]
+    type: "Both"
+    category: "small_fullrange"

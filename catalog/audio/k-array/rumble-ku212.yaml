@@ -1,0 +1,17 @@
+---
+manufacturer: "K-array"
+model: "Rumble-KU212"
+slug: "k-array-rumble-ku212"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 500.0
+    wattage_peak: 1000
+    max_spl: 130
+    taps: []
+    type: "Lo-Z"
+    category: "subwoofer"

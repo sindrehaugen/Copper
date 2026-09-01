@@ -1,0 +1,17 @@
+---
+manufacturer: "Bose"
+model: "DM2C-LP"
+slug: "bose-dm2c-lp"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 16.0
+    wattage_peak: 64
+    max_spl: 96
+    taps: [2.3, 4.5, 9]
+    type: "Both"
+    category: "small_fullrange"

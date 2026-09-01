@@ -1,0 +1,17 @@
+---
+manufacturer: "Dynacord"
+model: "L-Series 1404"
+slug: "dynacord-l-series-1404"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 350
+    watt_4: 700
+    watt_2: 1300
+    watt_bridge_8: 1400
+    watt_bridge_4: 2600
+    max_voltage_peak: 74.8

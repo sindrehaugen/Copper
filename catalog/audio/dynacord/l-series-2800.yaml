@@ -1,0 +1,17 @@
+---
+manufacturer: "Dynacord"
+model: "L-Series 2800"
+slug: "dynacord-l-series-2800"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 700
+    watt_4: 1400
+    watt_2: 2300
+    watt_bridge_8: 2800
+    watt_bridge_4: 4600
+    max_voltage_peak: 105.8

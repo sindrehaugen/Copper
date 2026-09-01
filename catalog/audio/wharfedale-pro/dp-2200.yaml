@@ -1,0 +1,20 @@
+---
+manufacturer: "Wharfedale Pro"
+model: "DP-2200"
+slug: "wharfedale-pro-dp-2200"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">1000"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 2000
+    watt_4: 3400
+    watt_2: 5780
+    watt_100v: 5780
+    min_load_bridge: 4
+    watt_bridge_8: 6800
+    watt_bridge_4: 11560
+    max_voltage_peak: 178.9

@@ -1,0 +1,17 @@
+---
+manufacturer: "Sonance"
+model: "IS8"
+slug: "sonance-is8"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 6
+    z_min: 4.8
+    wattage_rms: 160.0
+    wattage_peak: 320
+    max_spl: 108
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

@@ -1,0 +1,12 @@
+---
+manufacturer: "Canare"
+model: "4S6"
+slug: "canare-4s6"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 18.7
+    capacitance: 125
+    inductance: 0.40

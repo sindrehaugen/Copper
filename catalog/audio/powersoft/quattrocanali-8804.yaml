@@ -1,0 +1,19 @@
+---
+manufacturer: "Powersoft"
+model: "Quattrocanali 8804"
+slug: "powersoft-quattrocanali-8804"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 1600
+    watt_4: 2200
+    watt_2: 1800
+    watt_100v: 1900
+    min_load_bridge: 4
+    watt_bridge_8: 4400
+    watt_bridge_4: 3600
+    max_voltage_peak: 160.0

@@ -1,0 +1,17 @@
+---
+manufacturer: "Cornered Audio"
+model: "C3"
+slug: "cornered-audio-c3"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 5.2
+    wattage_rms: 80.0
+    wattage_peak: 320
+    max_spl: 111
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

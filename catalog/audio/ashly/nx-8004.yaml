@@ -1,0 +1,18 @@
+---
+manufacturer: "Ashly"
+model: "nX 8004"
+slug: "ashly-nx-8004"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 800
+    watt_4: 800
+    watt_2: 800
+    watt_100v: 800
+    min_load_bridge: 4
+    watt_bridge_8: 1600
+    max_voltage_peak: 113.1

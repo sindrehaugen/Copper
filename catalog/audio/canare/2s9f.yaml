@@ -1,0 +1,12 @@
+---
+manufacturer: "Canare"
+model: "2S9F"
+slug: "canare-2s9f"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 8.8
+    capacitance: 70
+    inductance: 0.65

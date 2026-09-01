@@ -1,0 +1,17 @@
+---
+manufacturer: "QSC"
+model: "AD-S.SAT"
+slug: "qsc-ad-s-sat"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 25
+    wattage_peak: 100
+    max_spl: 96
+    taps: []
+    type: "Lo-Z"
+    category: "satellite"

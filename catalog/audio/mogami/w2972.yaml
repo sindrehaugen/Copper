@@ -1,0 +1,12 @@
+---
+manufacturer: "Mogami"
+model: "W2972"
+slug: "mogami-w2972"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 8.8
+    capacitance: 130
+    inductance: 0.40

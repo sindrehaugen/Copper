@@ -1,0 +1,12 @@
+---
+manufacturer: "Belden"
+model: "5002UP"
+slug: "belden-5002up"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 5.25
+    capacitance: 105
+    inductance: 0.59

@@ -1,0 +1,12 @@
+---
+manufacturer: "Klotz"
+model: "SCFR4025"
+slug: "klotz-scfr4025"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 7.50
+    capacitance: 170
+    inductance: 0.53

@@ -1,0 +1,17 @@
+---
+manufacturer: "Biamp"
+model: "Desono DX-IC6"
+slug: "biamp-desono-dx-ic6"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 60.0
+    wattage_peak: 240
+    max_spl: 110
+    taps: [60, 30, 15, 7.5]
+    type: "Both"
+    category: "small_fullrange"

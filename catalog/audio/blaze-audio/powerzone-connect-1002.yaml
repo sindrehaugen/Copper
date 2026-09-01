@@ -1,0 +1,20 @@
+---
+manufacturer: "Blaze Audio"
+model: "PowerZone Connect 1002"
+slug: "blaze-audio-powerzone-connect-1002"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: 1000
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 250
+    watt_4: 500
+    watt_2: 500
+    watt_100v: 1000
+    min_load_bridge: 4
+    watt_bridge_8: 1000
+    watt_bridge_4: 1000
+    max_voltage_peak: 63.2

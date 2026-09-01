@@ -1,0 +1,17 @@
+---
+manufacturer: "Void Acoustics"
+model: "Venu 215 V2"
+slug: "void-acoustics-venu-215-v2"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 4
+    z_min: 3.2
+    wattage_rms: 1000
+    wattage_peak: 4000
+    max_spl: 136
+    taps: []
+    type: "Lo-Z"
+    category: "subwoofer"

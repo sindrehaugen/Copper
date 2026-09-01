@@ -1,0 +1,19 @@
+---
+manufacturer: "Crown"
+model: "CDi 4|1200"
+slug: "crown-cdi-4-1200"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">1000"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 850
+    watt_4: 1200
+    watt_2: 600
+    watt_100v: 1200
+    min_load_bridge: 4
+    watt_bridge_8: 2400
+    max_voltage_peak: 116.6

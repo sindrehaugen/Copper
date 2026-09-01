@@ -1,0 +1,15 @@
+---
+manufacturer: "Dynacord"
+model: "IPX 20:4"
+slug: "dynacord-ipx-20-4"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 5000
+    watt_4: 5000
+    watt_100v: 5000
+    watt_bridge_4: 282.8

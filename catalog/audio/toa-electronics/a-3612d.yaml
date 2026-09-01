@@ -1,0 +1,15 @@
+---
+manufacturer: "TOA Electronics"
+model: "A-3612D"
+slug: "toa-electronics-a-3612d"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 120
+    watt_4: 120
+    watt_100v: 120
+    watt_bridge_4: 43.8

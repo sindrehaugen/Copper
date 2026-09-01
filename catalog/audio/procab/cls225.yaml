@@ -1,0 +1,12 @@
+---
+manufacturer: "Procab"
+model: "CLS225"
+slug: "procab-cls225"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 7.98
+    capacitance: 100
+    inductance: 0.62

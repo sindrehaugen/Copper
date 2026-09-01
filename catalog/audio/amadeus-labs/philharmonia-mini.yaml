@@ -1,0 +1,17 @@
+---
+manufacturer: "Amadeus Labs"
+model: "Philharmonia Mini"
+slug: "amadeus-labs-philharmonia-mini"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 150
+    wattage_peak: 300
+    max_spl: 118
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

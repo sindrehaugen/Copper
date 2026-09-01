@@ -1,0 +1,19 @@
+---
+manufacturer: "Ashly"
+model: "KLR 3200"
+slug: "ashly-klr-3200"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">300"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 650
+    watt_4: 1100
+    watt_2: 1600
+    min_load_bridge: 4
+    watt_bridge_8: 2200
+    watt_bridge_4: 3200
+    max_voltage_peak: 102.0

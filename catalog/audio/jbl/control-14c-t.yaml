@@ -1,0 +1,17 @@
+---
+manufacturer: "JBL"
+model: "Control 14C/T"
+slug: "jbl-control-14c-t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 30.0
+    wattage_peak: 120
+    max_spl: 108
+    taps: [25, 12.5, 6.3]
+    type: "Both"
+    category: "small_fullrange"

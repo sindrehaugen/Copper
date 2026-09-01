@@ -1,0 +1,17 @@
+---
+manufacturer: "Amadeus Labs"
+model: "ABB 12"
+slug: "amadeus-labs-abb-12"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 900.0
+    wattage_peak: 2500
+    max_spl: 127
+    taps: []
+    type: "Lo-Z"
+    category: "subwoofer"

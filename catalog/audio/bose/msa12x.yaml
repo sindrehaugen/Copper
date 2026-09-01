@@ -1,0 +1,15 @@
+---
+manufacturer: "Bose"
+model: "MSA12X"
+slug: "bose-msa12x"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    wattage_rms: 600.0
+    wattage_peak: 2400
+    max_spl: 112
+    taps: []
+    type: "Active"
+    category: "large_fullrange"

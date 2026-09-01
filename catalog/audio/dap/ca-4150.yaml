@@ -1,0 +1,17 @@
+---
+manufacturer: "DAP"
+model: "CA-4150"
+slug: "dap-ca-4150"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 250
+    watt_4: 375
+    watt_2: 500
+    min_load_bridge: 4
+    watt_bridge_8: 750
+    max_voltage_peak: 63.2

@@ -1,0 +1,19 @@
+---
+manufacturer: "Behringer"
+model: "EP4000"
+slug: "behringer-ep4000"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: 300
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 550
+    watt_4: 950
+    watt_2: 1250
+    min_load_bridge: 4
+    watt_bridge_8: 1750
+    watt_bridge_4: 2400
+    max_voltage_peak: 93.8

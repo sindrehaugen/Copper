@@ -1,0 +1,17 @@
+---
+manufacturer: "JBL"
+model: "CBT 50LA-1"
+slug: "jbl-cbt-50la-1"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 100.0
+    wattage_peak: 400
+    max_spl: 115
+    taps: [60, 30, 15]
+    type: "Both"
+    category: "small_fullrange"

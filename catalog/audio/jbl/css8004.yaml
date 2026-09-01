@@ -1,0 +1,15 @@
+---
+manufacturer: "JBL"
+model: "CSS8004"
+slug: "jbl-css8004"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    wattage_rms: 5.0
+    wattage_peak: 10
+    max_spl: 97
+    taps: [5, 2.5, 1.3]
+    type: "100V"
+    category: "small_fullrange"

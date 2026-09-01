@@ -1,0 +1,17 @@
+---
+manufacturer: "QSC"
+model: "AD-S6"
+slug: "qsc-ad-s6"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 150
+    wattage_peak: 600
+    max_spl: 116
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

@@ -1,0 +1,12 @@
+---
+manufacturer: "Crestron"
+model: "AUD-SP-14"
+slug: "crestron-aud-sp-14"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 8.5
+    capacitance: 92
+    inductance: 0.65

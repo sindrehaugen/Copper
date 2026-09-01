@@ -1,0 +1,17 @@
+---
+manufacturer: "Biamp"
+model: "KUBO5T"
+slug: "biamp-kubo5t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 30.0
+    wattage_peak: 80
+    max_spl: 106
+    taps: [30, 15, 6, 3]
+    type: "Both"
+    category: "small_fullrange"

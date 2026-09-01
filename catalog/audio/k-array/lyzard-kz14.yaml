@@ -1,0 +1,17 @@
+---
+manufacturer: "K-array"
+model: "Lyzard-KZ14"
+slug: "k-array-lyzard-kz14"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 15.0
+    wattage_peak: 30
+    max_spl: 98
+    taps: []
+    type: "Lo-Z"
+    category: "satelite"

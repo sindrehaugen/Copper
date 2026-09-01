@@ -1,0 +1,17 @@
+---
+manufacturer: "Martin Audio"
+model: "CDD8TX"
+slug: "martin-audio-cdd8tx"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 200.0
+    wattage_peak: 800
+    max_spl: 117
+    taps: [25, 12.5, 6.3]
+    type: "Both"
+    category: "large_fullrange"

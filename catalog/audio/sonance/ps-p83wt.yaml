@@ -1,0 +1,17 @@
+---
+manufacturer: "Sonance"
+model: "PS-P83WT"
+slug: "sonance-ps-p83wt"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 300.0
+    wattage_peak: 600
+    max_spl: 110
+    taps: [120, 60, 30]
+    type: "Both"
+    category: "subwoofer"

@@ -1,0 +1,16 @@
+---
+manufacturer: "Powersoft"
+model: "Mezzo 604 A"
+slug: "powersoft-mezzo-604-a"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 150
+    watt_4: 150
+    watt_2: 150
+    watt_100v: 150
+    watt_bridge_4: 49.0

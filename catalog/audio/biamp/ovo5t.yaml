@@ -1,0 +1,17 @@
+---
+manufacturer: "Biamp"
+model: "OVO5T"
+slug: "biamp-ovo5t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 80.0
+    wattage_peak: 160
+    max_spl: 109
+    taps: [30, 15, 6, 3]
+    type: "Both"
+    category: "small_fullrange"

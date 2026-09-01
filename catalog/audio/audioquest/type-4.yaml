@@ -1,0 +1,12 @@
+---
+manufacturer: "AudioQuest"
+model: "Type 4"
+slug: "audioquest-type-4"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 8.3
+    capacitance: 150
+    inductance: 0.35

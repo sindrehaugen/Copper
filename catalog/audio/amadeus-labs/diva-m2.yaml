@@ -1,0 +1,17 @@
+---
+manufacturer: "Amadeus Labs"
+model: "DIVA M2"
+slug: "amadeus-labs-diva-m2"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 420.0
+    wattage_peak: 1050
+    max_spl: 130
+    taps: []
+    type: "Lo-Z"
+    category: "large_fullrange"

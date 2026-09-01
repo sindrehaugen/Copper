@@ -1,0 +1,12 @@
+---
+manufacturer: "Draka"
+model: "RFE-HF 2x2.5"
+slug: "draka-rfe-hf-2x2-5"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 7.41
+    capacitance: 100
+    inductance: 0.62

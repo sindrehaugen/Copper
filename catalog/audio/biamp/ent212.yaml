@@ -1,0 +1,17 @@
+---
+manufacturer: "Biamp"
+model: "ENT212"
+slug: "biamp-ent212"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 325.0
+    wattage_peak: 1300
+    max_spl: 121
+    taps: [60, 30, 15, 7.5]
+    type: "Both"
+    category: "large_fullrange"

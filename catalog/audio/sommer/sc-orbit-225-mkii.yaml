@@ -1,0 +1,12 @@
+---
+manufacturer: "Sommer"
+model: "SC-Orbit 225 MKII"
+slug: "sommer-sc-orbit-225-mkii"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 7.80
+    capacitance: 60
+    inductance: 0.70

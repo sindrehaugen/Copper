@@ -1,0 +1,15 @@
+---
+manufacturer: "Bose Professional"
+model: "FreeSpace IZA 2120-LZ"
+slug: "bose-professional-freespace-iza-2120-lz"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 4
+    min_load: 4
+    watt_8: 60
+    watt_4: 120
+    watt_bridge_4: 120
+    max_voltage_peak: 31.0

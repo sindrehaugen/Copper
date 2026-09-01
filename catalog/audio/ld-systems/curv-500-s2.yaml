@@ -1,0 +1,17 @@
+---
+manufacturer: "LD Systems"
+model: "CURV 500 S2"
+slug: "ld-systems-curv-500-s2"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 40.0
+    wattage_peak: 80
+    max_spl: 104
+    taps: []
+    type: "Lo-Z"
+    category: "satelite"

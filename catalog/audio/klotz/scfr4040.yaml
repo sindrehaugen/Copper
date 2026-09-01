@@ -1,0 +1,12 @@
+---
+manufacturer: "Klotz"
+model: "SCFR4040"
+slug: "klotz-scfr4040"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 4.50
+    capacitance: 180
+    inductance: 0.50

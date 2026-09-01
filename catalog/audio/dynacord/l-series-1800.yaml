@@ -1,0 +1,17 @@
+---
+manufacturer: "Dynacord"
+model: "L-Series 1800"
+slug: "dynacord-l-series-1800"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 450
+    watt_4: 900
+    watt_2: 1600
+    watt_bridge_8: 1800
+    watt_bridge_4: 3200
+    max_voltage_peak: 84.9

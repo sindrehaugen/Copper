@@ -1,0 +1,17 @@
+---
+manufacturer: "QSC"
+model: "AD-S10T"
+slug: "qsc-ad-s10t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 250
+    wattage_peak: 1000
+    max_spl: 122
+    taps: [60, 30, 15]
+    type: "Both"
+    category: "large_fullrange"

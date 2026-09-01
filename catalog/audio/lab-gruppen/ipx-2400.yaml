@@ -1,0 +1,16 @@
+---
+manufacturer: "Lab Gruppen"
+model: "IPX 2400"
+slug: "lab-gruppen-ipx-2400"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">500"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 600
+    watt_4: 1200
+    watt_2: 800
+    watt_bridge_4: 98.0

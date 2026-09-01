@@ -1,0 +1,20 @@
+---
+manufacturer: "Linea Research"
+model: "88C10"
+slug: "linea-research-88c10"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">800"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 1250
+    watt_4: 1250
+    watt_2: 1250
+    watt_100v: 1250
+    min_load_bridge: 4
+    watt_bridge_8: 2500
+    watt_bridge_4: 2500
+    max_voltage_peak: 100.0

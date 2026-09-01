@@ -1,0 +1,19 @@
+---
+manufacturer: "Behringer"
+model: "EP2000"
+slug: "behringer-ep2000"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: 300
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 350
+    watt_4: 500
+    watt_2: 650
+    min_load_bridge: 4
+    watt_bridge_8: 1000
+    watt_bridge_4: 1300
+    max_voltage_peak: 74.8

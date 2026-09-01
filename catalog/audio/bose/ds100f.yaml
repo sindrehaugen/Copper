@@ -1,0 +1,17 @@
+---
+manufacturer: "Bose"
+model: "DS100F"
+slug: "bose-ds100f"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 100.0
+    wattage_peak: 400
+    max_spl: 105
+    taps: [12.5, 25, 50, 100]
+    type: "Both"
+    category: "small_fullrange"

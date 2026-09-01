@@ -1,0 +1,15 @@
+---
+manufacturer: "Innosonix"
+model: "MA32/LP"
+slug: "innosonix-ma32-lp"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">500"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 30
+    watt_4: 30
+    watt_bridge_4: 21.9

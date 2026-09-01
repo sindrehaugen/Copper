@@ -1,0 +1,16 @@
+---
+manufacturer: "Lab Gruppen"
+model: "LUCIA 120/1-70"
+slug: "lab-gruppen-lucia-120-1-70"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 60
+    watt_4: 60
+    watt_2: 60
+    watt_100v: 120
+    watt_bridge_4: 31.0

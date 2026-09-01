@@ -1,0 +1,12 @@
+---
+manufacturer: "Sommer"
+model: "SC-Eclipse SPQ240"
+slug: "sommer-sc-eclipse-spq240"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 4.95
+    capacitance: 136
+    inductance: 0.55

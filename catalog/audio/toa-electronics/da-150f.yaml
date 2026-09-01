@@ -1,0 +1,17 @@
+---
+manufacturer: "TOA Electronics"
+model: "DA-150F"
+slug: "toa-electronics-da-150f"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 100
+    watt_4: 150
+    watt_100v: 150
+    min_load_bridge: 8
+    watt_bridge_8: 300
+    max_voltage_peak: 40.0

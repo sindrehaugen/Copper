@@ -1,0 +1,16 @@
+---
+manufacturer: "K-GEAR"
+model: "GA46"
+slug: "k-gear-ga46"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 600
+    watt_4: 1000
+    watt_2: 1000
+    watt_bridge_8: 2000
+    max_voltage_peak: 98.0

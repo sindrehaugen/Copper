@@ -1,0 +1,16 @@
+---
+manufacturer: "RAM Audio"
+model: "V-12044"
+slug: "ram-audio-v-12044"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">500"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 2950
+    watt_4: 4400
+    watt_bridge_4: 8800
+    max_voltage_peak: 188.0

@@ -1,0 +1,17 @@
+---
+manufacturer: "Biamp"
+model: "OVO8T"
+slug: "biamp-ovo8t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 160.0
+    wattage_peak: 320
+    max_spl: 114
+    taps: [60, 30, 15, 6]
+    type: "Both"
+    category: "small_fullrange"

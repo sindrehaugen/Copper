@@ -1,0 +1,17 @@
+---
+manufacturer: "JBL"
+model: "CSS-1S/T"
+slug: "jbl-css-1s-t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 60.0
+    wattage_peak: 240
+    max_spl: 106
+    taps: [10, 5, 2.5]
+    type: "Both"
+    category: "small_fullrange"

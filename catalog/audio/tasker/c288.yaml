@@ -1,0 +1,12 @@
+---
+manufacturer: "Tasker"
+model: "C288"
+slug: "tasker-c288"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 6.4
+    capacitance: 110
+    inductance: 0.60

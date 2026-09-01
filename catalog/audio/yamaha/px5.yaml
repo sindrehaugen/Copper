@@ -1,0 +1,15 @@
+---
+manufacturer: "Yamaha"
+model: "PX5"
+slug: "yamaha-px5"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 500
+    watt_4: 800
+    watt_2: 500
+    watt_bridge_4: 89.4

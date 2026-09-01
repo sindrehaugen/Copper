@@ -1,0 +1,18 @@
+---
+manufacturer: "DAP"
+model: "HP-1500"
+slug: "dap-hp-1500"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 300
+    watt_4: 500
+    watt_2: 750
+    min_load_bridge: 4
+    watt_bridge_8: 1000
+    watt_bridge_4: 1500
+    max_voltage_peak: 69.3

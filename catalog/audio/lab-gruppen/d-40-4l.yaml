@@ -1,0 +1,19 @@
+---
+manufacturer: "Lab Gruppen"
+model: "D 40:4L"
+slug: "lab-gruppen-d-40-4l"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 1000
+    watt_4: 1000
+    watt_2: 1000
+    watt_100v: 1000
+    min_load_bridge: 4
+    watt_bridge_8: 2000
+    watt_bridge_4: 4000
+    max_voltage_peak: 126.5

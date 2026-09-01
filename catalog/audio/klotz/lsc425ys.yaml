@@ -1,0 +1,12 @@
+---
+manufacturer: "Klotz"
+model: "LSC425YS"
+slug: "klotz-lsc425ys"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 7.00
+    capacitance: 170
+    inductance: 0.53

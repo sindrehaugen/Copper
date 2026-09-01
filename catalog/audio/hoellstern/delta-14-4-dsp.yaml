@@ -1,0 +1,19 @@
+---
+manufacturer: "Hoellstern"
+model: "DELTA 14.4-DSP"
+slug: "hoellstern-delta-14-4-dsp"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">1000"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 1300
+    watt_4: 2600
+    watt_2: 5000
+    min_load_bridge: 4
+    watt_bridge_8: 5200
+    watt_bridge_4: 10000
+    max_voltage_peak: 144.2

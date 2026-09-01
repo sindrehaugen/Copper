@@ -1,0 +1,15 @@
+---
+manufacturer: "Full Fat Audio"
+model: "FFA-10000"
+slug: "full-fat-audio-ffa-10000"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 1500
+    watt_4: 3000
+    watt_2: 5000
+    watt_bridge_4: 154.9

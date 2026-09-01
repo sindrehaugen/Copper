@@ -1,0 +1,17 @@
+---
+manufacturer: "Bose"
+model: "FS3-Sat"
+slug: "bose-fs3-sat"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 6
+    z_min: 4.8
+    wattage_rms: 12.0
+    wattage_peak: 48
+    max_spl: 95
+    taps: []
+    type: "Lo-Z"
+    category: "satelite"

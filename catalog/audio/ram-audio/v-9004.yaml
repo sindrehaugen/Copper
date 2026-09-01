@@ -1,0 +1,16 @@
+---
+manufacturer: "RAM Audio"
+model: "V-9004"
+slug: "ram-audio-v-9004"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">500"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 1150
+    watt_4: 2260
+    watt_bridge_8: 4520
+    max_voltage_peak: 120.0

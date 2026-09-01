@@ -1,0 +1,17 @@
+---
+manufacturer: "Yamaha"
+model: "NS-AW592"
+slug: "yamaha-ns-aw592"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 6
+    z_min: 4.8
+    wattage_rms: 50.0
+    wattage_peak: 150
+    max_spl: 108
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

@@ -1,0 +1,12 @@
+---
+manufacturer: "Sommer"
+model: "SP260"
+slug: "sommer-sp260"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 3.3
+    capacitance: 90
+    inductance: 0.50

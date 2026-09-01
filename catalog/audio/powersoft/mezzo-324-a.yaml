@@ -1,0 +1,16 @@
+---
+manufacturer: "Powersoft"
+model: "Mezzo 324 A"
+slug: "powersoft-mezzo-324-a"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 80
+    watt_4: 80
+    watt_2: 80
+    watt_100v: 80
+    watt_bridge_4: 35.8

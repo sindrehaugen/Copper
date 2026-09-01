@@ -1,0 +1,12 @@
+---
+manufacturer: "Sommer"
+model: "SC-Twincord 400"
+slug: "sommer-sc-twincord-400"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 4.95
+    capacitance: 60
+    inductance: 0.65

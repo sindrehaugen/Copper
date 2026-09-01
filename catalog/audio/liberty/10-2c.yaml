@@ -1,0 +1,12 @@
+---
+manufacturer: "Liberty"
+model: "10-2C"
+slug: "liberty-10-2c"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 3.28
+    capacitance: 115
+    inductance: 0.52

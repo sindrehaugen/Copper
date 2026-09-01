@@ -1,0 +1,15 @@
+---
+manufacturer: "Dynacord"
+model: "IPX 10:8"
+slug: "dynacord-ipx-10-8"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 1250
+    watt_4: 1250
+    watt_100v: 1250
+    watt_bridge_4: 141.4

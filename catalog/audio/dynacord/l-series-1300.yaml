@@ -1,0 +1,17 @@
+---
+manufacturer: "Dynacord"
+model: "L-Series 1300"
+slug: "dynacord-l-series-1300"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 320
+    watt_4: 650
+    watt_2: 1100
+    watt_bridge_8: 1300
+    watt_bridge_4: 2200
+    max_voltage_peak: 71.6

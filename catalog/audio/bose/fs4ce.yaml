@@ -1,0 +1,17 @@
+---
+manufacturer: "Bose"
+model: "FS4CE"
+slug: "bose-fs4ce"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 40.0
+    wattage_peak: 160
+    max_spl: 105
+    taps: [5, 10, 20, 40]
+    type: "Both"
+    category: "small_fullrange"

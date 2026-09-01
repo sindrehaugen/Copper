@@ -1,0 +1,17 @@
+---
+manufacturer: "LD Systems"
+model: "SUB 88"
+slug: "ld-systems-sub-88"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 100.0
+    wattage_peak: 200
+    max_spl: 114
+    taps: []
+    type: "Lo-Z"
+    category: "subwoofer"

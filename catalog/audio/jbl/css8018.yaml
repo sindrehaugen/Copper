@@ -1,0 +1,15 @@
+---
+manufacturer: "JBL"
+model: "CSS8018"
+slug: "jbl-css8018"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    wattage_rms: 10.0
+    wattage_peak: 20
+    max_spl: 107
+    taps: [10, 5, 2.5]
+    type: "100V"
+    category: "small_fullrange"

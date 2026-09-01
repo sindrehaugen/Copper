@@ -1,0 +1,17 @@
+---
+manufacturer: "Cornered Audio"
+model: "Ci5"
+slug: "cornered-audio-ci5"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 7.0
+    wattage_rms: 80.0
+    wattage_peak: 320
+    max_spl: 113
+    taps: [30, 15, 7.5]
+    type: "Both"
+    category: "small_fullrange"

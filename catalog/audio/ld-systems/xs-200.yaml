@@ -1,0 +1,16 @@
+---
+manufacturer: "LD Systems"
+model: "XS 200"
+slug: "ld-systems-xs-200"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 100
+    watt_4: 200
+    min_load_bridge: 8
+    watt_bridge_8: 400
+    max_voltage_peak: 40.0

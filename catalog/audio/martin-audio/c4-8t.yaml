@@ -1,0 +1,17 @@
+---
+manufacturer: "Martin Audio"
+model: "C4.8T"
+slug: "martin-audio-c4-8t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 40.0
+    wattage_peak: 160
+    max_spl: 100
+    taps: [25, 12.5, 6]
+    type: "Both"
+    category: "small_fullrange"

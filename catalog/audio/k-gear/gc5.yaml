@@ -1,0 +1,17 @@
+---
+manufacturer: "K-gear"
+model: "GC5"
+slug: "k-gear-gc5"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 10.0
+    wattage_peak: 20
+    max_spl: 99
+    taps: [6, 3, 1.5]
+    type: "Both"
+    category: "small_fullrange"

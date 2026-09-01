@@ -1,0 +1,17 @@
+---
+manufacturer: "Audac"
+model: "BASO10"
+slug: "audac-baso10"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 225.0
+    wattage_peak: 450
+    max_spl: 120
+    taps: []
+    type: "Lo-Z"
+    category: "subwoofer"

@@ -1,0 +1,17 @@
+---
+manufacturer: "Biamp"
+model: "KUBO3T"
+slug: "biamp-kubo3t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 10.0
+    wattage_peak: 40
+    max_spl: 101
+    taps: [10, 5, 2.5, 1.25]
+    type: "Both"
+    category: "small_fullrange"

@@ -1,0 +1,15 @@
+---
+manufacturer: "Yamaha"
+model: "PX8"
+slug: "yamaha-px8"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 800
+    watt_4: 1050
+    watt_2: 600
+    watt_bridge_4: 113.1

@@ -1,0 +1,16 @@
+---
+manufacturer: "K-Array"
+model: "Thunder-KMT18 I"
+slug: "k-array-thunder-kmt18-i"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">500"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 500
+    watt_4: 1000
+    watt_2: 1000
+    watt_bridge_4: 89.4

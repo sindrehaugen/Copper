@@ -1,0 +1,17 @@
+---
+manufacturer: "Biamp"
+model: "CM60DTD"
+slug: "biamp-cm60dtd"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 60.0
+    wattage_peak: 120
+    max_spl: 110
+    taps: [60, 30, 15, 7.5]
+    type: "Both"
+    category: "small_fullrange"

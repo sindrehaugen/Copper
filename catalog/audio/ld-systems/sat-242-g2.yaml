@@ -1,0 +1,17 @@
+---
+manufacturer: "LD Systems"
+model: "SAT 242 G2"
+slug: "ld-systems-sat-242-g2"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 100.0
+    wattage_peak: 200
+    max_spl: 108
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

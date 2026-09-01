@@ -1,0 +1,18 @@
+---
+manufacturer: "LEA Professional"
+model: "Connect Series 88"
+slug: "lea-professional-connect-series-88"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 80
+    watt_4: 80
+    watt_2: 80
+    watt_100v: 80
+    min_load_bridge: 8
+    watt_bridge_8: 160
+    max_voltage_peak: 35.8

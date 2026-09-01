@@ -1,0 +1,20 @@
+---
+manufacturer: "Linea Research"
+model: "44M20"
+slug: "linea-research-44m20"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">800"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 1500
+    watt_4: 3000
+    watt_2: 5000
+    watt_100v: 3500
+    min_load_bridge: 4
+    watt_bridge_8: 6000
+    watt_bridge_4: 10000
+    max_voltage_peak: 109.0

@@ -1,0 +1,19 @@
+---
+manufacturer: "MC 2"
+model: "E25"
+slug: "mc-2-e25"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">400"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 700
+    watt_4: 1350
+    watt_2: 2400
+    min_load_bridge: 4
+    watt_bridge_8: 2700
+    watt_bridge_4: 4800
+    max_voltage_peak: 104.0

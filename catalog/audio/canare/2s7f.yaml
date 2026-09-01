@@ -1,0 +1,12 @@
+---
+manufacturer: "Canare"
+model: "2S7F"
+slug: "canare-2s7f"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 15.3
+    capacitance: 60
+    inductance: 0.70

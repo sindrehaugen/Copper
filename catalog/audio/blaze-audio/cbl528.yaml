@@ -1,0 +1,17 @@
+---
+manufacturer: "Blaze Audio"
+model: "CBL528"
+slug: "blaze-audio-cbl528"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 320.0
+    wattage_peak: 1280
+    max_spl: 121
+    taps: []
+    type: "Lo-Z"
+    category: "large_fullrange"

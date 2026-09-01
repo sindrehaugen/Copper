@@ -1,0 +1,17 @@
+---
+manufacturer: "JBL"
+model: "Control 88M"
+slug: "jbl-control-88m"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 120.0
+    wattage_peak: 480
+    max_spl: 111
+    taps: [60, 30, 15]
+    type: "Both"
+    category: "small_fullrange"

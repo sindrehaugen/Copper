@@ -1,0 +1,12 @@
+---
+manufacturer: "Supra"
+model: "Ply 3.4"
+slug: "supra-ply-3-4"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 5.1
+    capacitance: 100
+    inductance: 0.20

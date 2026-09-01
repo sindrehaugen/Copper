@@ -1,0 +1,18 @@
+---
+manufacturer: "XTA"
+model: "APA-4E8"
+slug: "xta-apa-4e8"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: 1000
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 3000
+    watt_4: 5000
+    watt_2: 5000
+    min_load_bridge: 4
+    watt_bridge_8: 10000
+    max_voltage_peak: 219.1

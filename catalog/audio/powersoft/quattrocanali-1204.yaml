@@ -1,0 +1,19 @@
+---
+manufacturer: "Powersoft"
+model: "Quattrocanali 1204"
+slug: "powersoft-quattrocanali-1204"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 300
+    watt_4: 300
+    watt_2: 400
+    watt_100v: 300
+    min_load_bridge: 4
+    watt_bridge_8: 600
+    watt_bridge_4: 800
+    max_voltage_peak: 69.3

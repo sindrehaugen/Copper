@@ -1,0 +1,17 @@
+---
+manufacturer: "K-array"
+model: "Domino-KF210"
+slug: "k-array-domino-kf210"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 320.0
+    wattage_peak: 640
+    max_spl: 123
+    taps: []
+    type: "Lo-Z"
+    category: "large_fullrange"

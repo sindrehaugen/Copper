@@ -1,0 +1,17 @@
+---
+manufacturer: "EAW"
+model: "VFR69i"
+slug: "eaw-vfr69i"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 250.0
+    wattage_peak: 1000
+    max_spl: 125
+    taps: []
+    type: "Lo-Z"
+    category: "large_fullrange"

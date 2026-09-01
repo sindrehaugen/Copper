@@ -1,0 +1,19 @@
+---
+manufacturer: "MC 2"
+model: "T2000"
+slug: "mc-2-t2000"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">400"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 625
+    watt_4: 1150
+    watt_2: 2100
+    min_load_bridge: 4
+    watt_bridge_8: 2300
+    watt_bridge_4: 4200
+    max_voltage_peak: 100.0

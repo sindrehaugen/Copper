@@ -1,0 +1,17 @@
+---
+manufacturer: "Bose"
+model: "EM180"
+slug: "bose-em180"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 125.0
+    wattage_peak: 500
+    max_spl: 117
+    taps: [5, 10, 20, 40, 80]
+    type: "Both"
+    category: "small_fullrange"

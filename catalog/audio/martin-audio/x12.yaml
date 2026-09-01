@@ -1,0 +1,17 @@
+---
+manufacturer: "Martin Audio"
+model: "X12"
+slug: "martin-audio-x12"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 300.0
+    wattage_peak: 1200
+    max_spl: 122
+    taps: []
+    type: "Lo-Z"
+    category: "large_fullrange"

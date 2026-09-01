@@ -1,0 +1,17 @@
+---
+manufacturer: "LD Systems"
+model: "MAUI i1"
+slug: "ld-systems-maui-i1"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 120.0
+    wattage_peak: 480
+    max_spl: 116
+    taps: [60, 30, 15, 7.5]
+    type: "Both"
+    category: "small_fullrange"

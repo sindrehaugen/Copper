@@ -1,0 +1,12 @@
+---
+manufacturer: "Sommer"
+model: "SP225"
+slug: "sommer-sp225"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 7.5
+    capacitance: 100
+    inductance: 0.62

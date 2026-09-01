@@ -1,0 +1,17 @@
+---
+manufacturer: "QSC"
+model: "AC-C8T"
+slug: "qsc-ac-c8t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 80
+    wattage_peak: 320
+    max_spl: 114
+    taps: [60, 30, 15, 7.5]
+    type: "Both"
+    category: "small_fullrange"

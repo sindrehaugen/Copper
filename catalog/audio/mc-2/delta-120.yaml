@@ -1,0 +1,16 @@
+---
+manufacturer: "MC 2"
+model: "Delta 120"
+slug: "mc-2-delta-120"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">400"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 2400
+    watt_4: 4600
+    watt_2: 6800
+    max_voltage_peak: 190.0

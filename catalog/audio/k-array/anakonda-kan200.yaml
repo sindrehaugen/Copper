@@ -1,0 +1,17 @@
+---
+manufacturer: "K-array"
+model: "Anakonda-KAN200+"
+slug: "k-array-anakonda-kan200"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 64
+    z_min: 51.2
+    wattage_rms: 150.0
+    wattage_peak: 300
+    max_spl: 102
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

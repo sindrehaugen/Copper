@@ -1,0 +1,20 @@
+---
+manufacturer: "MC 2"
+model: "Delta 20"
+slug: "mc-2-delta-20"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">400"
+    df_rated_at: 8
+    min_load: 2.7
+    watt_8: 175
+    watt_4: 350
+    watt_2: 480
+    watt_100v: 200
+    min_load_bridge: 4
+    watt_bridge_8: 700
+    watt_bridge_4: 660
+    max_voltage_peak: 53.0

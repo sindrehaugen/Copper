@@ -1,0 +1,17 @@
+---
+manufacturer: "LD Systems"
+model: "DQOR 8 T"
+slug: "ld-systems-dqor-8-t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 120.0
+    wattage_peak: 240
+    max_spl: 109
+    taps: [120, 70, 30, 15, 7.5, 3]
+    type: "Both"
+    category: "small_fullrange"

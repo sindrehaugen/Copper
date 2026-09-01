@@ -1,0 +1,17 @@
+---
+manufacturer: "LD Systems"
+model: "DSP 45 K"
+slug: "ld-systems-dsp-45-k"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 1200
+    watt_4: 1200
+    watt_2: 1200
+    min_load_bridge: 4
+    watt_bridge_8: 2400
+    max_voltage_peak: 138.6

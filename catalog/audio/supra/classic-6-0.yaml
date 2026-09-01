@@ -1,0 +1,12 @@
+---
+manufacturer: "Supra"
+model: "Classic 6.0"
+slug: "supra-classic-6-0"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 2.9
+    capacitance: 80
+    inductance: 0.40

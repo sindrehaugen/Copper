@@ -1,0 +1,12 @@
+---
+manufacturer: "Tasker"
+model: "C279"
+slug: "tasker-c279"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 2.8
+    capacitance: 100
+    inductance: 0.50

@@ -1,0 +1,17 @@
+---
+manufacturer: "EAW"
+model: "CIS400"
+slug: "eaw-cis400"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 30.0
+    wattage_peak: 120
+    max_spl: 107
+    taps: [30, 15, 7.5, 3.7]
+    type: "Both"
+    category: "small_fullrange"

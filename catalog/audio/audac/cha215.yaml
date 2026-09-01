@@ -1,0 +1,17 @@
+---
+manufacturer: "Audac"
+model: "CHA215"
+slug: "audac-cha215"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 20
+    z_min: 16.0
+    wattage_rms: 15.0
+    wattage_peak: 25
+    max_spl: 107
+    taps: [15, 7.5, 3.75, 1.9]
+    type: "Both"
+    category: "small_fullrange"

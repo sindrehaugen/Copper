@@ -1,0 +1,17 @@
+---
+manufacturer: "LD Systems"
+model: "CICS 62"
+slug: "ld-systems-cics-62"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 60.0
+    wattage_peak: 120
+    max_spl: 106
+    taps: [24, 12, 6]
+    type: "Both"
+    category: "small_fullrange"

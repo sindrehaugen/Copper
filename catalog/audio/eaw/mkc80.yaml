@@ -1,0 +1,17 @@
+---
+manufacturer: "EAW"
+model: "MKC80"
+slug: "eaw-mkc80"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 450.0
+    wattage_peak: 1800
+    max_spl: 132
+    taps: [60, 30, 15]
+    type: "Both"
+    category: "large_fullrange"

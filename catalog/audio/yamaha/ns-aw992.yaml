@@ -1,0 +1,17 @@
+---
+manufacturer: "Yamaha"
+model: "NS-AW992"
+slug: "yamaha-ns-aw992"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 6
+    z_min: 4.8
+    wattage_rms: 60.0
+    wattage_peak: 180
+    max_spl: 111
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

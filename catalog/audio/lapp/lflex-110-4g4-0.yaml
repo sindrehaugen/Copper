@@ -1,0 +1,12 @@
+---
+manufacturer: "LAPP"
+model: "ÖLFLEX 110 4G4.0"
+slug: "lapp-lflex-110-4g4-0"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 4.95
+    capacitance: 140
+    inductance: 0.55

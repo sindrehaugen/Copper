@@ -1,0 +1,15 @@
+---
+manufacturer: "Audac"
+model: "EPA104"
+slug: "audac-epa104"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">200"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 100
+    watt_4: 100
+    max_voltage_peak: 40.0

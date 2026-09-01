@@ -1,0 +1,18 @@
+---
+manufacturer: "LEA Professional"
+model: "Connect 704D"
+slug: "lea-professional-connect-704d"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 700
+    watt_4: 700
+    watt_2: 700
+    watt_100v: 700
+    min_load_bridge: 4
+    watt_bridge_8: 1400
+    max_voltage_peak: 105.8

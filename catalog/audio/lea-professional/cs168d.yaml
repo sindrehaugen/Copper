@@ -1,0 +1,18 @@
+---
+manufacturer: "LEA Professional"
+model: "CS168D"
+slug: "lea-professional-cs168d"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 160
+    watt_4: 160
+    watt_2: 160
+    watt_100v: 160
+    min_load_bridge: 8
+    watt_bridge_8: 320
+    max_voltage_peak: 50.6

@@ -1,0 +1,12 @@
+---
+manufacturer: "Eurocable"
+model: "LK02N40"
+slug: "eurocable-lk02n40"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 4.95
+    capacitance: 95
+    inductance: 0.55

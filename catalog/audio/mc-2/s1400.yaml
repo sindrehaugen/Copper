@@ -1,0 +1,19 @@
+---
+manufacturer: "MC 2"
+model: "S1400"
+slug: "mc-2-s1400"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">400"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 775
+    watt_4: 1500
+    watt_2: 1800
+    min_load_bridge: 4
+    watt_bridge_8: 3000
+    watt_bridge_4: 3600
+    max_voltage_peak: 110.0

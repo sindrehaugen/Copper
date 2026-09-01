@@ -1,0 +1,17 @@
+---
+manufacturer: "Audac"
+model: "CAP424"
+slug: "audac-cap424"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">200"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 240
+    watt_4: 240
+    min_load_bridge: 8
+    watt_bridge_8: 480
+    max_voltage_peak: 62.0

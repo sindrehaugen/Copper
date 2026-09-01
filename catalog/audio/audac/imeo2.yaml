@@ -1,0 +1,15 @@
+---
+manufacturer: "Audac"
+model: "IMEO2"
+slug: "audac-imeo2"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    wattage_rms: 60.0
+    wattage_peak: 120
+    max_spl: 90
+    taps: []
+    type: "Active"
+    category: "small_fullrange"

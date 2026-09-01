@@ -1,0 +1,20 @@
+---
+manufacturer: "Crown"
+model: "DCi 8|300N"
+slug: "crown-dci-8-300n"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">1000"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 300
+    watt_4: 300
+    watt_2: 150
+    watt_100v: 300
+    min_load_bridge: 4
+    watt_bridge_8: 600
+    watt_bridge_4: 300
+    max_voltage_peak: 69.3

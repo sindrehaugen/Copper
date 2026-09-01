@@ -1,0 +1,19 @@
+---
+manufacturer: "Ashly"
+model: "KLR 2000"
+slug: "ashly-klr-2000"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">300"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 350
+    watt_4: 600
+    watt_2: 1000
+    min_load_bridge: 4
+    watt_bridge_8: 1200
+    watt_bridge_4: 2000
+    max_voltage_peak: 74.8

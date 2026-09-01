@@ -1,0 +1,12 @@
+---
+manufacturer: "Sommer"
+model: "SC-Quadra Blue"
+slug: "sommer-sc-quadra-blue"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 4.95
+    capacitance: 65
+    inductance: 0.55

@@ -1,0 +1,17 @@
+---
+manufacturer: "QSC"
+model: "AD-S.SUB"
+slug: "qsc-ad-s-sub"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 4
+    z_min: 3.2
+    wattage_rms: 100
+    wattage_peak: 400
+    max_spl: 111
+    taps: [100, 50, 25]
+    type: "Both"
+    category: "subwoofer"

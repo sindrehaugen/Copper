@@ -1,0 +1,12 @@
+---
+manufacturer: "Adam Hall"
+model: "K3LS425"
+slug: "adam-hall-k3ls425"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 7.8
+    capacitance: 110
+    inductance: 0.65

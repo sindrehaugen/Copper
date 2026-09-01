@@ -1,0 +1,17 @@
+---
+manufacturer: "Audac"
+model: "XENO8"
+slug: "audac-xeno8"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 120.0
+    wattage_peak: 240
+    max_spl: 110
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

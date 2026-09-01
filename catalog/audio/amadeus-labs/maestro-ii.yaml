@@ -1,0 +1,17 @@
+---
+manufacturer: "Amadeus Labs"
+model: "MAESTRO II"
+slug: "amadeus-labs-maestro-ii"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 4
+    z_min: 3.2
+    wattage_rms: 2000.0
+    wattage_peak: 5600
+    max_spl: 147
+    taps: []
+    type: "Lo-Z"
+    category: "subwoofer"

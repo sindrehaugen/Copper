@@ -1,0 +1,17 @@
+---
+manufacturer: "LD Systems"
+model: "Stinger 12 G3"
+slug: "ld-systems-stinger-12-g3"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 400.0
+    wattage_peak: 800
+    max_spl: 125
+    taps: []
+    type: "Lo-Z"
+    category: "large_fullrange"

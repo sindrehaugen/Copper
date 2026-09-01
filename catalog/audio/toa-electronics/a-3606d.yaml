@@ -1,0 +1,15 @@
+---
+manufacturer: "TOA Electronics"
+model: "A-3606D"
+slug: "toa-electronics-a-3606d"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 60
+    watt_4: 60
+    watt_100v: 60
+    watt_bridge_4: 31.0

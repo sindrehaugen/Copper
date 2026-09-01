@@ -1,0 +1,17 @@
+---
+manufacturer: "K-array"
+model: "Python-KP52"
+slug: "k-array-python-kp52"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 32
+    z_min: 25.6
+    wattage_rms: 300.0
+    wattage_peak: 600
+    max_spl: 122
+    taps: []
+    type: "Lo-Z"
+    category: "large_fullrange"

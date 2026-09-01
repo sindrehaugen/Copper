@@ -1,0 +1,17 @@
+---
+manufacturer: "JBL"
+model: "Control 25-1"
+slug: "jbl-control-25-1"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 100.0
+    wattage_peak: 400
+    max_spl: 116
+    taps: [30, 15, 7.5]
+    type: "Both"
+    category: "small_fullrange"

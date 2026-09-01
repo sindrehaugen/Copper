@@ -1,0 +1,19 @@
+---
+manufacturer: "RAM Audio"
+model: "XTR-12K"
+slug: "ram-audio-xtr-12k"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">5000"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 2100
+    watt_4: 4000
+    watt_2: 6000
+    min_load_bridge: 4
+    watt_bridge_8: 8000
+    watt_bridge_4: 12000
+    max_voltage_peak: 183.3

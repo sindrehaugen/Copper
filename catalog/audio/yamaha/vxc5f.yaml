@@ -1,0 +1,17 @@
+---
+manufacturer: "Yamaha"
+model: "VXC5F"
+slug: "yamaha-vxc5f"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 80.0
+    wattage_peak: 160
+    max_spl: 111
+    taps: [30, 15, 7.5]
+    type: "Both"
+    category: "small_fullrange"

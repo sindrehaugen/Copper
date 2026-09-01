@@ -1,0 +1,19 @@
+---
+manufacturer: "MC 2"
+model: "E15"
+slug: "mc-2-e15"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">400"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 450
+    watt_4: 850
+    watt_2: 1550
+    min_load_bridge: 4
+    watt_bridge_8: 1700
+    watt_bridge_4: 3100
+    max_voltage_peak: 80.0

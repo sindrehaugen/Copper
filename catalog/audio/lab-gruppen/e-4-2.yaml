@@ -1,0 +1,17 @@
+---
+manufacturer: "Lab Gruppen"
+model: "E 4:2"
+slug: "lab-gruppen-e-4-2"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: 320
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 200
+    watt_4: 200
+    watt_2: 200
+    watt_100v: 200
+    watt_bridge_4: 56.6

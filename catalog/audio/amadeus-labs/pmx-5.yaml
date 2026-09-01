@@ -1,0 +1,17 @@
+---
+manufacturer: "Amadeus Labs"
+model: "PMX 5"
+slug: "amadeus-labs-pmx-5"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 130.0
+    wattage_peak: 350
+    max_spl: 117
+    taps: []
+    type: "Lo-Z"
+    category: "small_fullrange"

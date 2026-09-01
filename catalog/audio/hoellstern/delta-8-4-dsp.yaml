@@ -1,0 +1,17 @@
+---
+manufacturer: "Hoellstern"
+model: "DELTA 8.4-DSP"
+slug: "hoellstern-delta-8-4-dsp"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">1000"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 1300
+    watt_4: 1700
+    min_load_bridge: 8
+    watt_bridge_8: 3400
+    max_voltage_peak: 144.2

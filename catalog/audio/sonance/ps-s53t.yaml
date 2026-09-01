@@ -1,0 +1,17 @@
+---
+manufacturer: "Sonance"
+model: "PS-S53T"
+slug: "sonance-ps-s53t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 90.0
+    wattage_peak: 180
+    max_spl: 106
+    taps: [30, 15, 7.5]
+    type: "Both"
+    category: "small_fullrange"

@@ -1,0 +1,17 @@
+---
+manufacturer: "K-gear"
+model: "GC6"
+slug: "k-gear-gc6"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 20.0
+    wattage_peak: 40
+    max_spl: 103
+    taps: [10, 5, 2.5]
+    type: "Both"
+    category: "small_fullrange"

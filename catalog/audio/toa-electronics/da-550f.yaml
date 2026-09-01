@@ -1,0 +1,17 @@
+---
+manufacturer: "TOA Electronics"
+model: "DA-550F"
+slug: "toa-electronics-da-550f"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 350
+    watt_4: 550
+    watt_100v: 500
+    min_load_bridge: 8
+    watt_bridge_8: 1100
+    max_voltage_peak: 74.8

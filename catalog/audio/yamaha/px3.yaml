@@ -1,0 +1,15 @@
+---
+manufacturer: "Yamaha"
+model: "PX3"
+slug: "yamaha-px3"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 300
+    watt_4: 500
+    watt_2: 300
+    watt_bridge_4: 69.3

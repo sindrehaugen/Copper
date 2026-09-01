@@ -1,0 +1,12 @@
+---
+manufacturer: "LAPP"
+model: "ÖLFLEX 110 2x1.5"
+slug: "lapp-lflex-110-2x1-5"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 13.3
+    capacitance: 140
+    inductance: 0.70

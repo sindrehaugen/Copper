@@ -1,0 +1,12 @@
+---
+manufacturer: "Sommer"
+model: "SC-Twincord 250"
+slug: "sommer-sc-twincord-250"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 7.98
+    capacitance: 64
+    inductance: 0.70

@@ -1,0 +1,12 @@
+---
+manufacturer: "Van Damme"
+model: "278-515-080"
+slug: "van-damme-278-515-080"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 12.5
+    capacitance: 120
+    inductance: 0.70

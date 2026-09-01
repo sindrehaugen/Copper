@@ -1,0 +1,15 @@
+---
+manufacturer: "TOA Electronics"
+model: "A-3248DM"
+slug: "toa-electronics-a-3248dm"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 480
+    watt_4: 480
+    watt_100v: 480
+    watt_bridge_4: 87.6

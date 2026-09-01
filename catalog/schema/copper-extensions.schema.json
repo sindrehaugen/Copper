@@ -17,6 +17,37 @@
               }
             }
           }
+        },
+        "acoustics": {
+          "type": "object",
+          "properties": {
+            "device_class": { "type": "string" },
+            "impedance": { "type": "number" },
+            "z_min": { "type": "number" },
+            "wattage_rms": { "type": "number" },
+            "wattage_peak": { "type": "number" },
+            "max_spl": { "type": "number" },
+            "taps": {
+              "type": "array",
+              "items": { "type": "number" }
+            },
+            "type": { "type": "string" },
+            "category": { "type": "string" },
+            "df": { "type": ["number", "string"] },
+            "df_rated_at": { "type": "number" },
+            "min_load": { "type": "number" },
+            "watt_8": { "type": "number" },
+            "watt_4": { "type": "number" },
+            "watt_2": { "type": "number" },
+            "watt_100v": { "type": "number" },
+            "min_load_bridge": { "type": "number" },
+            "watt_bridge_8": { "type": "number" },
+            "watt_bridge_4": { "type": "number" },
+            "max_voltage_peak": { "type": "number" },
+            "resistance": { "type": "number" },
+            "capacitance": { "type": "number" },
+            "inductance": { "type": "number" }
+          }
         }
       }
     }

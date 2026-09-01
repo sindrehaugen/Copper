@@ -1,0 +1,17 @@
+---
+manufacturer: "Void Acoustics"
+model: "Venu 14 V2"
+slug: "void-acoustics-venu-14-v2"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 400
+    wattage_peak: 1600
+    max_spl: 130
+    taps: []
+    type: "Lo-Z"
+    category: "large_fullrange"

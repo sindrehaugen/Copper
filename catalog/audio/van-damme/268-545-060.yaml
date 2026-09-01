@@ -1,0 +1,12 @@
+---
+manufacturer: "Van Damme"
+model: "268-545-060"
+slug: "van-damme-268-545-060"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 4.6
+    capacitance: 105
+    inductance: 0.55

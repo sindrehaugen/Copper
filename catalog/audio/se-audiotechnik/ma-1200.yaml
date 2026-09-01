@@ -1,0 +1,19 @@
+---
+manufacturer: "SE Audiotechnik"
+model: "MA 1200"
+slug: "se-audiotechnik-ma-1200"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">280"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 850
+    watt_4: 1500
+    watt_2: 2000
+    min_load_bridge: 4
+    watt_bridge_8: 3000
+    watt_bridge_4: 4000
+    max_voltage_peak: 82.0

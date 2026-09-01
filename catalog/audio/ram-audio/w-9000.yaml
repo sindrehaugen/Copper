@@ -1,0 +1,19 @@
+---
+manufacturer: "RAM Audio"
+model: "W-9000"
+slug: "ram-audio-w-9000"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">500"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 1200
+    watt_4: 2300
+    watt_2: 4400
+    min_load_bridge: 4
+    watt_bridge_8: 4600
+    watt_bridge_4: 8800
+    max_voltage_peak: 133.0

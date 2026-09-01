@@ -1,0 +1,17 @@
+---
+manufacturer: "LD Systems"
+model: "DQOR 5 T"
+slug: "ld-systems-dqor-5-t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 16
+    z_min: 12.8
+    wattage_rms: 70.0
+    wattage_peak: 140
+    max_spl: 104
+    taps: [70, 30, 15, 7.5, 3]
+    type: "Both"
+    category: "small_fullrange"

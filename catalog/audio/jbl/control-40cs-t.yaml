@@ -1,0 +1,17 @@
+---
+manufacturer: "JBL"
+model: "Control 40CS/T"
+slug: "jbl-control-40cs-t"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 100.0
+    wattage_peak: 400
+    max_spl: 109
+    taps: [60, 30, 15]
+    type: "Both"
+    category: "subwoofer"

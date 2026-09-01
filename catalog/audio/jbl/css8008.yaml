@@ -1,0 +1,15 @@
+---
+manufacturer: "JBL"
+model: "CSS8008"
+slug: "jbl-css8008"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    wattage_rms: 5.0
+    wattage_peak: 10
+    max_spl: 103
+    taps: [5, 2.5, 1.3]
+    type: "100V"
+    category: "small_fullrange"

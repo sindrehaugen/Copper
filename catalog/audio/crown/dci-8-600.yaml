@@ -1,0 +1,20 @@
+---
+manufacturer: "Crown"
+model: "DCi 8|600"
+slug: "crown-dci-8-600"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">1000"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 600
+    watt_4: 600
+    watt_2: 300
+    watt_100v: 600
+    min_load_bridge: 4
+    watt_bridge_8: 1200
+    watt_bridge_4: 600
+    max_voltage_peak: 98.0

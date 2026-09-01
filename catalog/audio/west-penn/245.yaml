@@ -1,0 +1,12 @@
+---
+manufacturer: "West Penn"
+model: "245"
+slug: "west-penn-245"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 13.45
+    capacitance: 90
+    inductance: 0.70

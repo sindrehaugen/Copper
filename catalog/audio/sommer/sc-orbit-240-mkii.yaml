@@ -1,0 +1,12 @@
+---
+manufacturer: "Sommer"
+model: "SC-Orbit 240 MKII"
+slug: "sommer-sc-orbit-240-mkii"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 4.50
+    capacitance: 55
+    inductance: 0.65

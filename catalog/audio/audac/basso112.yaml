@@ -1,0 +1,17 @@
+---
+manufacturer: "Audac"
+model: "BASSO112"
+slug: "audac-basso112"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "speaker"
+    impedance: 8
+    z_min: 6.4
+    wattage_rms: 1000.0
+    wattage_peak: 4000
+    max_spl: 124
+    taps: []
+    type: "Lo-Z"
+    category: "subwoofer"

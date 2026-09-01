@@ -1,0 +1,18 @@
+---
+manufacturer: "LEA Professional"
+model: "Connect 352D"
+slug: "lea-professional-connect-352d"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df_rated_at: 8
+    min_load: 2
+    watt_8: 350
+    watt_4: 350
+    watt_2: 350
+    watt_100v: 350
+    min_load_bridge: 4
+    watt_bridge_8: 700
+    max_voltage_peak: 74.8

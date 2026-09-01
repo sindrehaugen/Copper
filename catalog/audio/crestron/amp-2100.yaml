@@ -1,0 +1,17 @@
+---
+manufacturer: "Crestron"
+model: "AMP-2100"
+slug: "crestron-amp-2100"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">400"
+    df_rated_at: 8
+    min_load: 4
+    watt_8: 100
+    watt_4: 100
+    min_load_bridge: 8
+    watt_bridge_8: 200
+    max_voltage_peak: 40.0

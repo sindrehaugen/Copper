@@ -1,0 +1,20 @@
+---
+manufacturer: "Bose Professional"
+model: "PowerMatch PM8500"
+slug: "bose-professional-powermatch-pm8500"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "amplifier"
+    df: ">1000"
+    df_rated_at: 4
+    min_load: 2
+    watt_8: 500
+    watt_4: 500
+    watt_2: 500
+    watt_100v: 500
+    min_load_bridge: 4
+    watt_bridge_8: 1000
+    watt_bridge_4: 500
+    max_voltage_peak: 71.0

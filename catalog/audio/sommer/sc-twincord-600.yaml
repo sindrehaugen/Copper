@@ -1,0 +1,12 @@
+---
+manufacturer: "Sommer"
+model: "SC-Twincord 600"
+slug: "sommer-sc-twincord-600"
+u_height: 1
+is_full_depth: false
+copper_extensions:
+  acoustics:
+    device_class: "cable"
+    resistance: 3.30
+    capacitance: 58
+    inductance: 0.60

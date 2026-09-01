@@ -49,7 +49,7 @@ function DraggableDevice({ device, geometry, updateGeometry }: { device: any, ge
         justifyContent: 'center',
         cursor: isDragging ? 'grabbing' : 'grab',
         userSelect: 'none',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.3)',
+        boxShadow: 'var(--md-sys-elevation-level-1)',
         zIndex: isDragging ? 10 : 1,
         fontSize: '0.75rem',
         fontWeight: 'bold'

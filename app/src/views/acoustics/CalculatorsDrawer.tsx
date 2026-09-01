@@ -79,7 +79,7 @@ export const CalculatorsDrawer: React.FC = () => {
   }
 
   return (
-    <div style={{ position: 'absolute', right: 16, bottom: 60, width: 400, height: 600, overflow: 'auto', zIndex: 10, background: 'var(--copper-surface)', border: '1px solid var(--copper-outline)', padding: 16, borderRadius: 8, boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+    <div style={{ position: 'absolute', right: 16, bottom: 60, width: 400, height: 600, overflow: 'auto', zIndex: 10, background: 'var(--copper-surface)', border: '1px solid var(--copper-outline)', padding: 16, borderRadius: 8, boxShadow: 'var(--md-sys-elevation-level-3)' }}>
       <button className="m3-button m3-button-text" onClick={() => setIsOpen(false)} style={{ float: 'right' }}>X</button>
       <div className="m3-content-padding" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div className="m3-card m3-content-padding">

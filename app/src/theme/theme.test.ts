@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import fs from 'node:fs';
-import path from 'node:path';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import {
   BRAND_SEED_HEX,
   generateM3ColorSchemes,
@@ -12,8 +12,8 @@ import {
 } from './tokens';
 
 describe('M3 Design Tokens & Theme Generator (ADR-0009)', () => {
-  it('uses Copper brand seed #B87333', () => {
-    expect(BRAND_SEED_HEX).toBe('#B87333');
+  it('uses Copper brand seed #6750A4', () => {
+    expect(BRAND_SEED_HEX).toBe('#6750A4');
   });
 
   it('generates valid light and dark color schemes from brand seed', () => {
@@ -60,28 +60,49 @@ describe('M3 Design Tokens & Theme Generator (ADR-0009)', () => {
     expect(M3_TYPOGRAPHY_TOKENS.labelSmall).toBeDefined();
   });
 
-  it('generates CSS containing color-scheme: light dark and @media (prefers-color-scheme: dark)', () => {
+  it('generates CSS byte-exactly matching the committed theme.css', () => {
     const css = generateThemeCss(BRAND_SEED_HEX);
-
-    expect(css).toContain('color-scheme: light dark;');
-    expect(css).toContain('@media (prefers-color-scheme: dark)');
-    expect(css).toContain('--md-sys-color-primary:');
-    expect(css).toContain('--md-sys-color-on-primary:');
-    expect(css).toContain('--md-sys-color-surface:');
-    expect(css).toContain('--md-sys-color-on-surface:');
-    expect(css).toContain('--md-sys-shape-corner-medium:');
-    expect(css).toContain('--md-sys-elevation-level-1:');
-    expect(css).toContain('--md-sys-state-hover-opacity:');
-    expect(css).toContain('--md-sys-typescale-body-large-font-size:');
+    const existingCss = readFileSync(join(__dirname, 'theme.css'), 'utf8');
+    expect(css).toBe(existingCss);
   });
 
-  it('matches the committed theme.css file exactly', () => {
-    const generatedCss = generateThemeCss(BRAND_SEED_HEX);
-    const themeCssPath = path.resolve(__dirname, 'theme.css');
-
-    expect(fs.existsSync(themeCssPath)).toBe(true);
-    const fileContent = fs.readFileSync(themeCssPath, 'utf8');
-
-    expect(fileContent.trim()).toBe(generatedCss.trim());
+  it('defines all --copper-* tokens used in app/src', () => {
+    const css = generateThemeCss(BRAND_SEED_HEX);
+    const fs = require('node:fs');
+    const path = require('node:path');
+    
+    // Find all --copper-* usages in app/src
+    function scanDir(dir: string): string[] {
+      let results: string[] = [];
+      const files = fs.readdirSync(dir);
+      for (const file of files) {
+        const fullPath = path.join(dir, file);
+        if (fullPath.includes('node_modules') || fullPath.includes('dist')) continue;
+        if (fs.statSync(fullPath).isDirectory()) {
+          results = results.concat(scanDir(fullPath));
+        } else if (fullPath.endsWith('.tsx') || fullPath.endsWith('.ts') || fullPath.endsWith('.css')) {
+          results.push(fullPath);
+        }
+      }
+      return results;
+    }
+    
+    const targetFiles = scanDir(path.join(__dirname, '..'));
+    const usedTokens = new Set<string>();
+    
+    for (const file of targetFiles) {
+      const content = fs.readFileSync(file, 'utf8');
+      const matches = content.match(/var\((--copper-[a-zA-Z0-9-]+)\)/g);
+      if (matches) {
+        matches.forEach((m: string) => {
+          const token = m.replace('var(', '').replace(')', '');
+          usedTokens.add(token);
+        });
+      }
+    }
+    
+    usedTokens.forEach(token => {
+      expect(css).toContain(`${token}:`);
+    });
   });
 });

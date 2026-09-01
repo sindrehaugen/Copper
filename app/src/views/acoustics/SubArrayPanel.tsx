@@ -119,7 +119,7 @@ export function SubArrayPanel() {
       position: 'absolute', bottom: 16, left: 16, zIndex: 20, 
       background: 'var(--copper-surface)', border: '1px solid var(--copper-outline)',
       padding: '16px', borderRadius: '8px', width: '400px',
-      boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+      boxShadow: 'var(--md-sys-elevation-level-3)'
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
         <h3 style={{ margin: 0 }}>Sub Array Designer</h3>
@@ -199,8 +199,8 @@ export function SubArrayPanel() {
                 const rad = p.angle * Math.PI / 180;
                 return `${Math.cos(rad) * r},${Math.sin(rad) * r}`;
               }).join(' ')}
-              fill="rgba(0, 120, 212, 0.2)"
-              stroke="#0078d4"
+              fill="var(--md-sys-color-primary-container)"
+              stroke="var(--md-sys-color-primary)"
               strokeWidth="0.02"
             />
           </svg>

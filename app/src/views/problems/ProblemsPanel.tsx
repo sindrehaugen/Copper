@@ -29,7 +29,7 @@ export function ProblemsPanel() {
     <div style={{
       position: 'absolute', right: 140, bottom: 60, width: 350, maxHeight: 400, overflow: 'auto',
       background: 'var(--copper-surface)', border: '1px solid var(--copper-outline)', 
-      padding: '16px', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', zIndex: 10
+      padding: '16px', borderRadius: '8px', boxShadow: 'var(--md-sys-elevation-level-3)', zIndex: 10
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
         <h3 style={{ margin: 0 }}>{t('problems.title', 'Design Problems')}</h3>

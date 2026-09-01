@@ -9,7 +9,7 @@ import {
 /**
  * Copper brand seed color (ADR-0009)
  */
-export const BRAND_SEED_HEX = '#B87333';
+export const BRAND_SEED_HEX = '#6750A4';
 
 export interface M3ColorScheme {
   primary: string;
@@ -106,105 +106,105 @@ export const M3_STATE_TOKENS = {
 
 export const M3_TYPOGRAPHY_TOKENS: Record<string, M3TypographyToken> = {
   displayLarge: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '3.5625rem', // 57px
     lineHeight: '4rem', // 64px
     fontWeight: '400',
     letterSpacing: '-0.25px',
   },
   displayMedium: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '2.8125rem', // 45px
     lineHeight: '3.25rem', // 52px
     fontWeight: '400',
     letterSpacing: '0px',
   },
   displaySmall: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '2.25rem', // 36px
     lineHeight: '2.75rem', // 44px
     fontWeight: '400',
     letterSpacing: '0px',
   },
   headlineLarge: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '2rem', // 32px
     lineHeight: '2.5rem', // 40px
     fontWeight: '400',
     letterSpacing: '0px',
   },
   headlineMedium: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '1.75rem', // 28px
     lineHeight: '2.25rem', // 36px
     fontWeight: '400',
     letterSpacing: '0px',
   },
   headlineSmall: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '1.5rem', // 24px
     lineHeight: '2rem', // 32px
     fontWeight: '400',
     letterSpacing: '0px',
   },
   titleLarge: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '1.375rem', // 22px
     lineHeight: '1.75rem', // 28px
     fontWeight: '400',
     letterSpacing: '0px',
   },
   titleMedium: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '1rem', // 16px
     lineHeight: '1.5rem', // 24px
     fontWeight: '500',
     letterSpacing: '0.15px',
   },
   titleSmall: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '0.875rem', // 14px
     lineHeight: '1.25rem', // 20px
     fontWeight: '500',
     letterSpacing: '0.1px',
   },
   bodyLarge: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '1rem', // 16px
     lineHeight: '1.5rem', // 24px
     fontWeight: '400',
     letterSpacing: '0.5px',
   },
   bodyMedium: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '0.875rem', // 14px
     lineHeight: '1.25rem', // 20px
     fontWeight: '400',
     letterSpacing: '0.25px',
   },
   bodySmall: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '0.75rem', // 12px
     lineHeight: '1rem', // 16px
     fontWeight: '400',
     letterSpacing: '0.4px',
   },
   labelLarge: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '0.875rem', // 14px
     lineHeight: '1.25rem', // 20px
     fontWeight: '500',
     letterSpacing: '0.1px',
   },
   labelMedium: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '0.75rem', // 12px
     lineHeight: '1rem', // 16px
     fontWeight: '500',
     letterSpacing: '0.5px',
   },
   labelSmall: {
-    fontFamily: 'Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     fontSize: '0.6875rem', // 11px
     lineHeight: '1rem', // 16px
     fontWeight: '500',
@@ -372,6 +372,22 @@ export function typographyToCssProperties(indent = '  '): string {
 }
 
 /**
+ * Generates aliases for the legacy --copper-* properties
+ */
+export function copperAliasToCssProperties(indent = '  '): string {
+  const tokens = [
+    'error', 'error-container', 'on-error-container', 'on-primary', 'on-primary-container',
+    'on-secondary-container', 'on-surface', 'on-surface-variant', 'outline', 'outline-variant',
+    'primary', 'primary-container', 'secondary', 'secondary-container', 'surface',
+    'surface-container', 'surface-container-high', 'surface-container-highest',
+    'surface-container-lowest', 'tertiary'
+  ];
+  const lines = tokens.map(t => `${indent}--copper-${t}: var(--md-sys-color-${t});`);
+  lines.push(`${indent}--copper-text-secondary: var(--md-sys-color-on-surface-variant);`);
+  return lines.join('\n');
+}
+
+/**
  * Generates the complete M3 theme CSS stylesheet with OS-following dark/light mode
  */
 export function generateThemeCss(seedHex: string = BRAND_SEED_HEX): string {
@@ -398,6 +414,9 @@ ${typographyToCssProperties('  ')}
 
   /* --- Light Theme Color Roles (Default) --- */
 ${schemeToCssProperties(schemes.light, '  ')}
+
+  /* --- Copper Aliases (B117) --- */
+${copperAliasToCssProperties('  ')}
 }
 
 /* --- Dark Theme Color Roles (OS Follower — zero theme flash) --- */

@@ -198,7 +198,7 @@ export function CanvasView({
         <div style={{
           position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
           background: 'var(--copper-surface-container-high)', border: '1px solid var(--copper-outline)', padding: 24, borderRadius: 12,
-          boxShadow: '0 8px 24px rgba(0,0,0,0.2)', zIndex: 10000, color: 'var(--copper-on-surface)'
+          boxShadow: 'var(--md-sys-elevation-level-4)', zIndex: 10000, color: 'var(--copper-on-surface)'
         }}>
           <h3 style={{ margin: '0 0 16px 0', color: 'var(--copper-error)' }}>Incompatible Connection</h3>
           <p style={{ margin: '0 0 16px 0' }}>

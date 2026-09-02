@@ -49,4 +49,12 @@ export default defineWorkspace([
       include: ['src/**/*.{test,spec}.{ts,tsx}'],
     },
   }
+  ,{
+    test: {
+      name: "design",
+      root: "packages/design",
+      environment: "node",
+      include: ["src/**/*.{test,spec}.{ts,tsx}"],
+    },
+  }
 ])

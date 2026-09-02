@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMasking } from './masking/index.js';
+import { AsOfControl, useAsOfStore } from './as-of';
 
 export interface GlobalBarProps {
   tenantId?: string;
@@ -21,19 +22,29 @@ export function GlobalBar({
   onOpenCommand,
 }: GlobalBarProps) {
   const { t } = useTranslation();
-  const [asOfMode, setAsOfMode] = React.useState(false);
   const { isMasked: customerView, toggleMasked: toggleCustomerView } = useMasking();
 
-  const toggleAsOfMode = () => {
-    setAsOfMode((prev) => !prev);
-  };
-
+  const asOf = useAsOfStore((state) => state.asOf);
+  const isAsOfActive = asOf !== null && asOf.trim().length > 0;
   return (
-    <header role="banner" className="copper-global-bar">
+    <header
+      role="banner"
+      className={`copper-global-bar ${isAsOfActive ? 'as-of-mode' : ''}`}
+    >
       <div className="copper-brand-section">
         <span aria-hidden="true">{'⚡'}</span>
         <span>{t('nav.brandName')}</span>
       </div>
+
+      {isAsOfActive && (
+        <div
+          className="copper-as-of-historical-badge"
+          data-testid="as-of-historical-badge"
+        >
+          <span aria-hidden="true">{'⏳'}</span>
+          <span>{`${t('nav.asOf', 'Historical View')}: ${asOf}`}</span>
+        </div>
+      )}
 
       <button
         type="button"
@@ -47,16 +58,7 @@ export function GlobalBar({
       </button>
 
       <div className="copper-global-controls">
-        <button
-          type="button"
-          className={`copper-control-chip ${asOfMode ? 'active' : ''}`}
-          onClick={toggleAsOfMode}
-          aria-label={t('nav.asOf')}
-          aria-pressed={asOfMode}
-          data-testid="as-of-toggle"
-        >
-          <span>{`${t('nav.asOf')}: ${t('nav.asOfNow')} ▾`}</span>
-        </button>
+        <AsOfControl />
 
         <button
           type="button"
@@ -90,9 +92,9 @@ export function GlobalBar({
         {onSave && (
           <button
             type="button"
-            disabled={isSaving || syncConflict}
+            disabled={isSaving || syncConflict || isAsOfActive}
             onClick={onSave}
-            className="copper-control-chip active"
+            className={`copper-control-chip ${isAsOfActive ? 'disabled' : 'active'}`}
             data-testid="save-design-btn"
           >
             {isSaving ? t('nav.saving') : t('nav.saveDesign')}

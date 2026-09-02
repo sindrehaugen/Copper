@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { produce } from 'immer';
 import type { DesignDocument } from '../model/schema';
 import { validateDocument } from '../validation/registry';
+import { useAsOfStore, assertNotAsOfMode } from '../shell/as-of';
 
 export interface StoreApiClient {
   authorTopology: (namespace: string, payload: unknown) => Promise<void>;
@@ -48,6 +49,7 @@ export const useDocumentStore = create<DocumentState>((set, get) => ({
   }),
 
   updateDocument: (updater) => set((state) => {
+    if (useAsOfStore.getState().isAsOfActive()) return state;
     if (!state.document) return state;
     const nextDoc = produce(state.document, updater);
     const nextHistory = state.history.slice(0, state.historyIndex + 1);
@@ -60,6 +62,7 @@ export const useDocumentStore = create<DocumentState>((set, get) => ({
   }),
 
   undo: () => set((state) => {
+    if (useAsOfStore.getState().isAsOfActive()) return state;
     if (state.historyIndex > 0) {
       const nextIndex = state.historyIndex - 1;
       return { document: state.history[nextIndex]!, historyIndex: nextIndex };
@@ -68,6 +71,7 @@ export const useDocumentStore = create<DocumentState>((set, get) => ({
   }),
 
   redo: () => set((state) => {
+    if (useAsOfStore.getState().isAsOfActive()) return state;
     if (state.historyIndex < state.history.length - 1) {
       const nextIndex = state.historyIndex + 1;
       return { document: state.history[nextIndex]!, historyIndex: nextIndex };
@@ -76,6 +80,7 @@ export const useDocumentStore = create<DocumentState>((set, get) => ({
   }),
 
   saveDocument: async (client: StoreApiClient, namespace: string, actor: string) => {
+    assertNotAsOfMode('saveDocument');
     const { document } = get();
     if (!document) return;
     
@@ -111,6 +116,7 @@ export const useDocumentStore = create<DocumentState>((set, get) => ({
   },
 
   promoteDocument: async (client: StoreApiClient, namespace: string, actor: string, targetStatus: 'quoted' | 'active') => {
+    assertNotAsOfMode('promoteDocument');
     const { document, setRemoteFindings } = get();
     if (!document) return;
 

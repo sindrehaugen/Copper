@@ -40,7 +40,6 @@ export function NamespaceSwitcher({
     };
   }, [isOpen]);
 
-
   const handleToggle = () => {
     setIsOpen((prev) => {
       const next = !prev;
@@ -53,7 +52,6 @@ export function NamespaceSwitcher({
     });
   };
 
-
   const handleSelect = (ns: string) => {
     if (onSwitchNamespace) {
       onSwitchNamespace(ns);
@@ -63,7 +61,6 @@ export function NamespaceSwitcher({
     setIsOpen(false);
     buttonRef.current?.focus();
   };
-
 
   const handleButtonKeyDown = (e: React.KeyboardEvent) => {
     if (!isOpen) {
@@ -98,7 +95,6 @@ export function NamespaceSwitcher({
     }
   };
 
-
   return (
     <div
       ref={containerRef}
@@ -119,7 +115,6 @@ export function NamespaceSwitcher({
         <span>{`ns:${currentNamespace} ${isOpen ? '▋' : '₵'}`}</span>
       </button>
 
-
       {isOpen && (
         <div
           ref={menuRef}
@@ -133,11 +128,10 @@ export function NamespaceSwitcher({
             top: 'calc(100% + 4px)',
             right: 0,
             minWidth: '180px',
-            backgroundColor: 'var(--md-sys-color-surface-container-high, #2b2b2b)',
-            color: 'var(--md-sys-color-on-surface, #e0e0e0)',
-            borderRadius: '8px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
-            border: '1px solid var(--md-sys-color-outline-variant, #444)',
+            backgroundColor: 'var(--md-sys-color-surface-container-high)',
+            color: 'var(--md-sys-color-on-surface)',
+            borderRadius: 'var(--md-sys-shape-corner-small, 8px)',
+            border: '1px solid var(--md-sys-color-outline-variant)',
             padding: '4px',
             zIndex: 1100,
             display: 'flex',
@@ -151,18 +145,16 @@ export function NamespaceSwitcher({
               fontSize: '11px',
               textTransform: 'uppercase',
               letterSpacing: '0.05em',
-              color: 'var(--md-sys-color-on-surface-variant, #888)',
+              color: 'var(--md-sys-color-on-surface-variant)',
               fontWeight: 600,
             }}
           >
             {t('nav.namespace', 'Tenant Namespace')}
           </div>
 
-
           {allowedNamespaces.map((ns, idx) => {
             const isCurrent = ns === currentNamespace;
             const isFocused = idx === focusedIndex;
-
 
             return (
               <button
@@ -179,18 +171,18 @@ export function NamespaceSwitcher({
                   alignItems: 'center',
                   justifyContent: 'space-between',
                   padding: '8px 12px',
-                  borderRadius: '6px',
+                  borderRadius: 'var(--md-sys-shape-corner-extra-small, 6px)',
                   border: 'none',
                   textAlign: 'left',
                   fontFamily: 'inherit',
                   fontSize: '13px',
                   cursor: 'pointer',
                   backgroundColor: isFocused
-                    ? 'var(--md-sys-color-surface-container-highest, #3a3a3a)'
+                    ? 'var(--md-sys-color-surface-container-highest)'
                     : 'transparent',
                   color: isCurrent
-                    ? 'var(--copper-accent, #B87333)'
-                    : 'var(--md-sys-color-on-surface, #e0e0e0)',
+                    ? 'var(--copper-accent, var(--md-sys-color-primary))'
+                    : 'var(--md-sys-color-on-surface)',
                   fontWeight: isCurrent ? 600 : 400,
                 }}
               >
@@ -200,7 +192,7 @@ export function NamespaceSwitcher({
                     aria-hidden="true"
                     style={{
                       fontSize: '12px',
-                      color: 'var(--copper-accent, #B87333)',
+                      color: 'var(--copper-accent, var(--md-sys-color-primary))',
                     }}
                   >
                     {'\u2713'}

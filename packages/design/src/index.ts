@@ -1,3 +1,4 @@
+export * from "./layout";
 /**
  * @copper/design — Copper Design System & M3 Expression Tokens (ADR-0009 / Batch 129)
  */

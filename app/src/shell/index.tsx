@@ -1,5 +1,6 @@
-import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { createContext, useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { useDocumentStore } from '../store/documentStore';
 import { useSettingsStore } from '../store/settingsStore';
@@ -11,7 +12,7 @@ import { SceneView } from '../views/scene/SceneView';
 import { DsarSurface } from '../components/compliance/DsarSurface';
 import { LedWallDesigner } from '../views/led/LedWallDesigner';
 import { SettingsPanel } from '../views/canvas/SettingsPanel';
-import { BOMView } from '../views/bom/BOMView';
+import { BOMView } from '../views/bom/BomView';
 
 import fixtureReferenceProject from '../../tests/fixtures/reference-projects/AV_U1A21.project.json';
 import { bffClient } from '../api/client';
@@ -21,78 +22,20 @@ import { toX6 } from '../projection/toX6';
 import { applyElkLayoutX6 } from '../projection/layout';
 import { exportToDxf } from '../export/dxf';
 
+import { ShellLayout } from './ShellLayout';
+import { GlobalBar } from './GlobalBar';
+import { ContextRail } from './ContextRail';
+import { IntelligenceRail } from './IntelligenceRail';
+import { FindingsTray } from './FindingsTray';
+
+export { ShellLayout, GlobalBar, ContextRail, IntelligenceRail, FindingsTray };
+
 interface SessionContextType {
   tenantId: string;
   userId: string;
 }
 
-const SessionContext = createContext<SessionContextType | null>(null);
-
-function NavItem({ to, label }: { to: string; label: string }) {
-  const location = useLocation();
-  const isActive = location.pathname === to;
-  return (
-    <li>
-      <Link to={to} className={isActive ? 'active' : ''}>
-        {label}
-      </Link>
-    </li>
-  );
-}
-
-import { useTranslation } from 'react-i18next';
-
-function Layout({ children }: { children: ReactNode }) {
-  const { t } = useTranslation();
-  const session = useContext(SessionContext);
-  const isSaving = useDocumentStore(state => state.isSaving);
-  const syncConflict = useDocumentStore(state => state.syncConflict);
-  const saveDocument = useDocumentStore(state => state.saveDocument);
-  const document = useDocumentStore(state => state.document);
-
-  const handleSave = async () => {
-    if (!session || !document) return;
-    await saveDocument(bffClient, session.tenantId, session.userId);
-  };
-
-  const handleReload = () => {
-    window.location.reload();
-  };
-
-  return (
-    <div className="app-layout">
-      <nav className="m3-nav-drawer">
-        <div className="m3-nav-header">Copper</div>
-        <ul>
-          <NavItem to="/" label={t('nav.canvas')} />
-          <NavItem to="/rack" label={t('nav.rack')} />
-          <NavItem to="/schedule" label={t('nav.schedule')} />
-          <NavItem to="/3d" label={t('nav.walkthrough')} />
-          <NavItem to="/bom" label={t('nav.bom')} />
-          <NavItem to="/compliance" label={t('nav.compliance')} />
-          <NavItem to="/ledwall" label={t('nav.ledwall')} />
-        </ul>
-        <div className="session-info">
-          {session?.tenantId} • {session?.userId}
-        </div>
-      </nav>
-      <main className="m3-main-content">
-        <header style={{ padding: '8px 16px', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '16px', borderBottom: '1px solid var(--md-sys-color-outline-variant)', backgroundColor: 'var(--md-sys-color-surface)' }}>
-          {syncConflict && (
-            <div style={{ color: 'var(--md-sys-color-error)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span>Version Conflict!</span>
-              <button onClick={handleReload} className="m3-button">Reload & Reapply</button>
-            </div>
-          )}
-          <button disabled={isSaving || syncConflict || !document} onClick={handleSave} className="m3-button">
-            {isSaving ? 'Saving...' : 'Save Design'}
-          </button>
-        </header>
-        {children}
-      </main>
-    </div>
-  );
-}
+export const SessionContext = createContext<SessionContextType | null>(null);
 
 export function ConnectedCanvasView() {
   const { t } = useTranslation();
@@ -161,7 +104,7 @@ export function ConnectedCanvasView() {
   );
 }
 
-function ConnectedRackElevationView() {
+export function ConnectedRackElevationView() {
   const { t } = useTranslation();
 
   const document = useDocumentStore(state => state.document);
@@ -171,7 +114,7 @@ function ConnectedRackElevationView() {
   return <RackElevationView doc={document} geometryMap={geometryMap} selectedRackId={firstRackId} />;
 }
 
-function ConnectedCableScheduleView() {
+export function ConnectedCableScheduleView() {
   const { t } = useTranslation();
 
   const document = useDocumentStore(state => state.document);
@@ -179,18 +122,31 @@ function ConnectedCableScheduleView() {
   return <CableScheduleView document={document} />;
 }
 
-export function AppShell() {
+function ContextViewPlaceholder({ titleKey, descKey }: { titleKey: string; descKey: string }) {
+  const { t } = useTranslation();
+  return (
+    <div style={{ padding: '2rem' }}>
+      <h2>{t(titleKey)}</h2>
+      <p style={{ color: 'var(--md-sys-color-on-surface-variant)' }}>{t(descKey)}</p>
+    </div>
+  );
+}
 
+export function AppShell() {
+  const { t } = useTranslation();
   const [session, setSession] = useState<SessionContextType | null>(null);
   const [error, setError] = useState<any>(null);
   const loadDocument = useDocumentStore(state => state.loadDocument);
   const document = useDocumentStore(state => state.document);
+  const isSaving = useDocumentStore(state => state.isSaving);
+  const syncConflict = useDocumentStore(state => state.syncConflict);
+  const saveDocument = useDocumentStore(state => state.saveDocument);
 
   const boot = async () => {
     try {
       setError(null);
       let sess = { tenantId: 'offline', userId: 'offline' };
-      let useFixture = (import.meta as any).env.VITE_COPPER_FIXTURE === '1';
+      let useFixture = (import.meta as any).env?.VITE_COPPER_FIXTURE === '1';
 
       try {
         const sessionRes = await fetch('/api/session');
@@ -228,27 +184,62 @@ export function AppShell() {
     }
   }, [document, loadDocument]);
 
+  const handleSave = async () => {
+    if (!session || !document) return;
+    await saveDocument(bffClient, session.tenantId, session.userId);
+  };
+
+  const handleReload = () => {
+    window.location.reload();
+  };
+
   if (error) return <ErrorState error={error} onRetry={boot} />;
   if (!session || !document) return <LoadingState />;
+
+  const globalBarProps = {
+    tenantId: session.tenantId,
+    userId: session.userId,
+    isSaving,
+    syncConflict,
+    onSave: handleSave,
+    onReload: handleReload,
+  };
 
   return (
     <SessionContext.Provider value={session}>
       <BrowserRouter>
-        <Layout>
+        <ShellLayout globalBarProps={globalBarProps}>
           <Routes>
+            {/* Direct Context Group Routes */}
+            <Route path="/now" element={<ContextViewPlaceholder titleKey="nav.now" descKey="nav.nowDesc" />} />
+            <Route path="/rooms" element={<ContextViewPlaceholder titleKey="nav.rooms" descKey="nav.roomsDesc" />} />
+            <Route path="/commerce" element={<ContextViewPlaceholder titleKey="nav.commerce" descKey="nav.commerceDesc" />} />
+            <Route path="/supply" element={<ContextViewPlaceholder titleKey="nav.supply" descKey="nav.supplyDesc" />} />
+            <Route path="/service" element={<ContextViewPlaceholder titleKey="nav.service" descKey="nav.serviceDesc" />} />
+            <Route path="/insight" element={<ContextViewPlaceholder titleKey="nav.insight" descKey="nav.insightDesc" />} />
+            <Route path="/ops" element={<ContextViewPlaceholder titleKey="nav.ops" descKey="nav.opsDesc" />} />
+
+            {/* Design Context Routes & Sub-views */}
             <Route path="/" element={<ConnectedCanvasView />} />
+            <Route path="/design" element={<ConnectedCanvasView />} />
+            <Route path="/design/canvas" element={<ConnectedCanvasView />} />
             <Route path="/rack" element={<ConnectedRackElevationView />} />
+            <Route path="/design/rack" element={<ConnectedRackElevationView />} />
             <Route path="/schedule" element={<ConnectedCableScheduleView />} />
+            <Route path="/design/schedule" element={<ConnectedCableScheduleView />} />
             <Route path="/3d" element={<SceneView />} />
+            <Route path="/design/3d" element={<SceneView />} />
             <Route path="/bom" element={<BOMView />} />
+            <Route path="/design/bom" element={<BOMView />} />
             <Route path="/compliance" element={<div style={{padding: '2rem'}}><DsarSurface /></div>} />
-              <Route path="/ledwall" element={<LedWallDesigner />} />
-            <Route path="*" element={<div style={{padding: '2rem'}}>404 Not Found</div>} />
+            <Route path="/design/compliance" element={<div style={{padding: '2rem'}}><DsarSurface /></div>} />
+            <Route path="/ledwall" element={<LedWallDesigner />} />
+            <Route path="/design/ledwall" element={<LedWallDesigner />} />
+
+            <Route path="*" element={<div style={{padding: '2rem'}}>{t('nav.notFound')}</div>} />
           </Routes>
-        </Layout>
+        </ShellLayout>
       </BrowserRouter>
     </SessionContext.Provider>
   );
 }
-
-

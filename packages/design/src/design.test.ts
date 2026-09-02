@@ -5,7 +5,6 @@ import {
   BRAND_SEED_HEX,
   generateM3ColorSchemes,
   generateSemanticRamp,
-  SEMANTIC_RAMP,
   DENSITIES,
   DEFAULT_DENSITY,
   M3_ELEVATION_TOKENS,

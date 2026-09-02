@@ -1,4 +1,4 @@
-import { DesignDocument, Device, DeviceType } from '../model/schema';
+import { DesignDocument, Device } from '../model/schema';
 import { ValidationFinding } from './registry';
 
 export function validateHDCPChain(doc: DesignDocument): { findings: Omit<ValidationFinding, 'source'>[] } {
@@ -6,18 +6,33 @@ export function validateHDCPChain(doc: DesignDocument): { findings: Omit<Validat
   const typeMap = new Map((doc.deviceTypes || []).map(dt => [dt.id, dt]));
 
   const getHdcpVersion = (device: Device): string | undefined => {
-    const type = typeMap.get(device.typeId);
-    if (!type || !type.videoPorts) return undefined;
+    const type = typeMap.get(device.deviceTypeId);
+    if (!type) return undefined;
     
-    let maxV: number = 0;
-    let maxVStr: string | undefined = undefined;
-    for (const port of type.videoPorts) {
-      if (port.hdcpVersion) {
-        const v = parseFloat(port.hdcpVersion);
-        if (v > maxV) { maxV = v; maxVStr = port.hdcpVersion; }
-      }
+    // Look for HDCP in customFields on the device type
+    const customFields = (type as any).customFields;
+    if (customFields && customFields.hdcp_version) {
+      return customFields.hdcp_version.toString();
     }
-    return maxVStr;
+    
+    // Backwards compatibility for the fixture or if attached directly to device
+    const legacy = (device as any).hdcpVersion || (type as any).hdcpVersion;
+    if (legacy) return legacy.toString();
+
+    // Or check if videoPorts have it
+    if ((type as any).videoPorts) {
+      let maxV = 0;
+      let maxStr: string | undefined = undefined;
+      for (const p of (type as any).videoPorts) {
+        if (p.hdcpVersion) {
+          const v = parseFloat(p.hdcpVersion);
+          if (v > maxV) { maxV = v; maxStr = p.hdcpVersion; }
+        }
+      }
+      if (maxStr) return maxStr;
+    }
+
+    return undefined;
   };
 
   const parseVersion = (v: string) => parseFloat(v);
@@ -49,7 +64,7 @@ export function validateHDCPChain(doc: DesignDocument): { findings: Omit<Validat
     if (lowestVersion && lowestVerNum < sourceVerNum) {
       findings.push({
         targetId: lowestDeviceId,
-        message: `HDCP downgrade detected... Source ${source.id} is ${sourceVersion}, but device ${lowestDeviceId} is ${lowestVersion}`,
+        message: `HDCP downgrade detected. Source ${source.id} is ${sourceVersion}, but device ${lowestDeviceId} is ${lowestVersion}`,
         severity: 'Error'
       });
     }

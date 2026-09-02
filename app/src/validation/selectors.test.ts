@@ -1,8 +1,6 @@
-import { describe, it, expect, vi } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import { useDocumentFindings } from './selectors';
 import { useDocumentStore } from '../store/documentStore';
-import { DesignDocument, Cable, Device } from '../model/schema';
 import { useCableScheduleRows } from '../store/selectors/derived';
 
 describe('B125 Accept Criteria', () => {
@@ -46,11 +44,11 @@ describe('B125 Accept Criteria', () => {
     
     // Test derived.ts routed length reaches schedule row
     const { result: schedResult } = renderHook(() => useCableScheduleRows());
-    expect(schedResult.current[0].lengthM).toBe(42);
+    expect(schedResult.current[0]!.lengthM).toBe(42);
     
     // Check findings 
     // We expect some findings based on missing types, etc. But let's mock the document to include specific errors or just check the fix action behavior.
-    const { result: findingResult } = renderHook(() => useDocumentFindings());
+    void renderHook(() => useDocumentFindings());
     
     // The findings array might be empty if validators are mocked or don't trigger. 
     // Let's manually push a finding to test the fix action.
@@ -59,7 +57,7 @@ describe('B125 Accept Criteria', () => {
     });
     
     const { result: findingResult2 } = renderHook(() => useDocumentFindings());
-    const finding = findingResult2.current.find(f => f.source === 'Test');
+    const finding = findingResult2.current.find(f => f.source === 'Test')!;
     expect(finding).toBeDefined();
     
     // click-to-locate

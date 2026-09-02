@@ -143,10 +143,15 @@ export function buildChainInput(input: AdapterInput): ChainInput {
     const isSpeaker = !!db.speakers[typeId];
     if (!isAmp && !isSpeaker) return null;
     visitedNodes.add(deviceId);
-    let cableType = (cableFromParent?.type && db.cables[cableFromParent.type]) ? cableFromParent.type : (cableFromParent?.customFields?.acoustics?.device_class === 'cable' ? cableFromParent.id : undefined);
+    let cableType: string = '';
+    if (cableFromParent?.type && db.cables[cableFromParent.type]) {
+      cableType = cableFromParent.type;
+    } else if (cableFromParent?.customFields?.acoustics?.device_class === 'cable') {
+      cableType = cableFromParent.id;
+    }
     if (!cableType && cableFromParent) {
       const dbCableKeys = Object.keys(db.cables);
-      if (dbCableKeys.length > 0) cableType = dbCableKeys[0];
+      if (dbCableKeys.length > 0) cableType = dbCableKeys[0] as string;
     }
     const node: SignalNode = {
       slug: dev.id,
@@ -155,7 +160,7 @@ export function buildChainInput(input: AdapterInput): ChainInput {
       ampInstanceId: ampInstanceId,
       ampChannel: 1,
       useBridgeMode: false,
-      speakerId: isSpeaker ? dev.deviceTypeId : '',
+      speakerId: isSpeaker ? (dev.typeId as string) || (dev.deviceTypeId as string) || '' : '',
       parallelCount: 1,
       tapPower: dev.customFields?.acoustics?.taps?.[0] || 0,
       cableId: cableType || '',

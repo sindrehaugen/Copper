@@ -6,19 +6,19 @@ export function validateRackFit(doc: DesignDocument): { findings: Omit<Validatio
   const deviceTypeMap = new Map((doc.deviceTypes || []).map(dt => [dt.id, dt]));
 
   for (const rack of (doc.racks || [])) {
-    const placedDevices = (doc.devices || []).filter(d => d.rackMount?.rackId === rack.id && d.rackMount?.ruPosition !== undefined);
+    const placedDevices = (doc.devices || []).filter(d => d.rackId === rack.id && d.position !== undefined);
 
     for (const device of placedDevices) {
-      const deviceType = deviceTypeMap.get(device.typeId);
+      const deviceType = deviceTypeMap.get(device.deviceTypeId);
       if (!deviceType) continue; 
 
-      const uHeight = deviceType.heightRu ?? 1;
-      const position = device.rackMount!.ruPosition;
-      
-      if (position < 1 || (position + uHeight - 1) > rack.ruCount) {
+      const pos = device.position as number;
+      const rackRu = (rack as any).ruCount || (rack as any).uHeight || 42; 
+
+      if (pos + deviceType.uHeight - 1 > rackRu) {
         findings.push({
           targetId: device.id,
-          message: 'Device ' + device.id + ' at position ' + position + ' with height ' + uHeight + ' exceeds rack ' + rack.id + ' height ' + rack.ruCount,
+          message: `Device ${device.name || device.id} (RU ${pos}-${pos + deviceType.uHeight - 1}) exceeds rack height of ${rackRu} RU`,
           severity: 'Error'
         });
       }
@@ -26,42 +26,32 @@ export function validateRackFit(doc: DesignDocument): { findings: Omit<Validatio
 
     for (let i = 0; i < placedDevices.length; i++) {
       for (let j = i + 1; j < placedDevices.length; j++) {
-        const d1 = placedDevices[i];
-        const d2 = placedDevices[j];
+        const d1 = placedDevices[i]!;
+        const d2 = placedDevices[j]!;
         
-        if (!d1 || !d2) continue;
+        const dt1 = deviceTypeMap.get(d1.deviceTypeId);
+        const dt2 = deviceTypeMap.get(d2.deviceTypeId);
+        if (!dt1 || !dt2) continue;
 
-        const t1 = deviceTypeMap.get(d1.typeId);
-        const t2 = deviceTypeMap.get(d2.typeId);
-        
-        if (!t1 || !t2) continue;
-        
-        const p1 = d1.rackMount!.ruPosition;
-        const h1 = t1.heightRu ?? 1;
-        const end1 = p1 + h1 - 1;
-        
-        const p2 = d2.rackMount!.ruPosition;
-        const h2 = t2.heightRu ?? 1;
-        const end2 = p2 + h2 - 1;
-        
-        const overlapU = p1 <= end2 && p2 <= end1;
-        
-        if (overlapU) {
-          const face1 = d1.rackMount!.mountSide || 'front';
-          const face2 = d2.rackMount!.mountSide || 'front';
-          
-          const isSameFace = face1 === face2;
-          const fullDepthCollision = ((t1.depthMm || 0) > 400 || (t2.depthMm || 0) > 400); // Approximation
-          
-          if (isSameFace || fullDepthCollision) {
+        const pos1 = d1.position as number;
+        const pos2 = d2.position as number;
+
+        const top1 = pos1 + dt1.uHeight - 1;
+        const top2 = pos2 + dt2.uHeight - 1;
+
+        if (pos1 <= top2 && pos2 <= top1) {
+          const side1 = d1.face || 'front';
+          const side2 = d2.face || 'front';
+
+          if (side1 === side2 || dt1.isFullDepth || dt2.isFullDepth) {
             findings.push({
               targetId: d1.id,
-              message: 'Device ' + d1.id + ' collides with ' + d2.id,
+              message: `Rack overlap detected between ${d1.name || d1.id} (RU ${pos1}-${top1}) and ${d2.name || d2.id} (RU ${pos2}-${top2})`,
               severity: 'Error'
             });
             findings.push({
               targetId: d2.id,
-              message: 'Device ' + d2.id + ' collides with ' + d1.id,
+              message: `Rack overlap detected between ${d2.name || d2.id} (RU ${pos2}-${top2}) and ${d1.name || d1.id} (RU ${pos1}-${top1})`,
               severity: 'Error'
             });
           }

@@ -1,0 +1,357 @@
+/* Three-Zone Shell Styles (Batch 130 / SH.W2) */
+
+.copper-shell-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  font-family: var(--md-sys-typescale-body-medium-font-family);
+}
+
+.copper-skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  padding: 8px 16px;
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border-radius: var(--md-sys-shape-corner-small);
+  z-index: 9999;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.copper-skip-link:focus {
+  top: 8px;
+}
+
+/* Global Bar */
+.copper-global-bar {
+  height: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background-color: var(--md-sys-color-surface-container);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  z-index: 100;
+  gap: 12px;
+}
+
+.copper-brand-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--copper-primary, var(--md-sys-color-primary));
+}
+
+.copper-command-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--md-sys-shape-corner-medium);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  background-color: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: var(--md-sys-typescale-body-small-font-size);
+  cursor: pointer;
+}
+
+.copper-command-btn:focus-visible {
+  outline: 2px solid var(--copper-primary, var(--md-sys-color-primary));
+}
+
+.copper-global-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.copper-control-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--md-sys-shape-corner-small);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  font-size: var(--md-sys-typescale-label-medium-font-size);
+  cursor: pointer;
+}
+
+.copper-control-chip:focus-visible {
+  outline: 2px solid var(--copper-primary, var(--md-sys-color-primary));
+}
+
+.copper-control-chip.active {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  border-color: var(--md-sys-color-primary);
+}
+
+/* Three-Zone Workspace Layout */
+.copper-workspace-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Context Rail */
+.copper-context-rail {
+  width: 220px;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--md-sys-color-surface-container-low);
+  border-right: 1px solid var(--md-sys-color-outline-variant);
+  overflow-y: auto;
+  z-index: 50;
+  transition: width 0.2s ease;
+}
+
+.copper-context-rail.collapsed {
+  width: 56px;
+  min-width: 56px;
+}
+
+.copper-context-rail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.copper-nav-group-list {
+  list-style: none;
+  padding: 8px 6px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.copper-nav-group-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--md-sys-shape-corner-small);
+  color: var(--md-sys-color-on-surface-variant);
+  text-decoration: none;
+  font-size: var(--md-sys-typescale-label-large-font-size);
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.copper-nav-group-item:focus-visible {
+  outline: 2px solid var(--copper-primary, var(--md-sys-color-primary));
+  outline-offset: -2px;
+}
+
+.copper-nav-group-item.active {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  font-weight: 600;
+}
+
+.copper-nav-group-icon {
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.copper-nav-sub-list {
+  list-style: none;
+  padding: 4px 0 4px 28px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.copper-nav-sub-item {
+  padding: 4px 8px;
+  border-radius: var(--md-sys-shape-corner-extra-small);
+  color: var(--md-sys-color-on-surface-variant);
+  text-decoration: none;
+  font-size: var(--md-sys-typescale-body-small-font-size);
+  display: block;
+}
+
+.copper-nav-sub-item:focus-visible {
+  outline: 2px solid var(--copper-primary, var(--md-sys-color-primary));
+}
+
+.copper-nav-sub-item.active {
+  color: var(--copper-primary, var(--md-sys-color-primary));
+  font-weight: 600;
+}
+
+/* Stage */
+.copper-stage {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--md-sys-color-surface);
+  overflow: auto;
+  position: relative;
+}
+
+.copper-stage:focus {
+  outline: none;
+}
+
+/* Intelligence Rail */
+.copper-intelligence-rail {
+  width: 300px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--md-sys-color-surface-container-low);
+  border-left: 1px solid var(--md-sys-color-outline-variant);
+  overflow-y: auto;
+  z-index: 50;
+  transition: width 0.2s ease;
+}
+
+.copper-intelligence-rail.collapsed {
+  width: 40px;
+  min-width: 40px;
+}
+
+.copper-intelligence-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  font-size: var(--md-sys-typescale-label-large-font-size);
+  font-weight: 600;
+}
+
+.copper-intelligence-section {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.copper-intelligence-section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--md-sys-typescale-label-medium-font-size);
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface-variant);
+  margin-bottom: 6px;
+}
+
+.copper-intelligence-item {
+  padding: 8px;
+  margin-bottom: 6px;
+  border-radius: var(--md-sys-shape-corner-small);
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.copper-intelligence-ask-btn {
+  margin: 12px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--md-sys-shape-corner-medium);
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.copper-intelligence-ask-btn:focus-visible {
+  outline: 2px solid var(--copper-primary, var(--md-sys-color-primary));
+}
+
+/* Findings Tray */
+.copper-findings-tray {
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  background-color: var(--md-sys-color-surface-container-high);
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+}
+
+.copper-findings-tray-header {
+  height: 36px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background-color: var(--md-sys-color-surface-container);
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: var(--md-sys-typescale-label-medium-font-size);
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+}
+
+.copper-findings-tray-header:focus-visible {
+  outline: 2px solid var(--copper-primary, var(--md-sys-color-primary));
+}
+
+.copper-findings-tray-content {
+  height: 144px;
+  overflow-y: auto;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.copper-finding-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-radius: var(--md-sys-shape-corner-small);
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  font-size: var(--md-sys-typescale-body-small-font-size);
+}
+
+.copper-severity-badge {
+  padding: 2px 6px;
+  border-radius: var(--md-sys-shape-corner-extra-small);
+  font-size: var(--md-sys-typescale-label-small-font-size);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.copper-severity-blocker {
+  background-color: var(--md-sys-color-error-container);
+  color: var(--md-sys-color-on-error-container);
+}
+
+.copper-severity-risk {
+  background-color: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+
+.copper-severity-advice {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}

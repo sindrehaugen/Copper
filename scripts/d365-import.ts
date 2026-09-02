@@ -1,5 +1,5 @@
 import { createNceClient } from '../bff/src/nce-client/index.js';
-import { Site, Location, DesignDocument } from '../app/src/model/schema.js';
+import { Site, Location, DesignDocument } from '@copper/schema';
 
 export interface D365FL {
   id: string;
@@ -66,3 +66,4 @@ export async function importD365ToNce(namespace: string, fls: D365FL[], apiKey: 
   const client = createNceClient({ nceApiKey: apiKey, nceBaseUrl: baseUrl, port: 3001, devMode: true, devIdentity: { upn: "dev", allowedNamespaces: ["default"], isDev: true } });
   await client.authorTopology(namespace, doc);
 }
+

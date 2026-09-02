@@ -32,5 +32,21 @@ export default defineWorkspace([
       environment: 'node',
       include: ['src/**/*.{test,spec}.{ts,tsx}'],
     },
+  },
+  {
+    test: {
+      name: 'acoustics',
+      root: 'packages/acoustics',
+      environment: 'node',
+      include: ['src/**/*.{test,spec}.{ts,tsx}'],
+    },
+  }
+  ,{
+    test: {
+      name: 'av-physics',
+      root: 'packages/av-physics',
+      environment: 'node',
+      include: ['src/**/*.{test,spec}.{ts,tsx}'],
+    },
   }
 ])

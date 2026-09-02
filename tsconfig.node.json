@@ -14,7 +14,6 @@
     "allowSyntheticDefaultImports": true
   },
   "include": [
-    
     "eslint.config.js"
   ]
 }

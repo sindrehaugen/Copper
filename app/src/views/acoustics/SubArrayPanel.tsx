@@ -12,6 +12,8 @@ export function SubArrayPanel() {
   const [preset, setPreset] = useState<ArrayPreset>('Endfire');
   const [count, setCount] = useState<number>(4);
   const [freq, setFreq] = useState<number>(60);
+  const [amplitudeShading, setAmplitudeShading] = useState(false);
+  const [delayTapering, setDelayTapering] = useState<number | ''>('');
   const [spacing, setSpacing] = useState<number | ''>(''); // empty means auto
   const [selectedSubId, setSelectedSubId] = useState<string>('');
 
@@ -35,7 +37,7 @@ export function SubArrayPanel() {
 
   const sources = useMemo(() => {
     const s = spacing === '' ? undefined : spacing;
-    return generateArrayPreset(preset, count, freq, s);
+    return generateArrayPreset(preset, count, freq, s, { amplitudeShading, ...(delayTapering ? { delayTaperingSplayDeg: delayTapering } : {}) });
   }, [preset, count, freq, spacing]);
 
   const polarData = useMemo(() => {
@@ -127,10 +129,8 @@ export function SubArrayPanel() {
       </div>
 
       <div style={{ marginBottom: '12px' }}>
-        <label style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Subwoofer Model</label>
-        <select 
-          className="m3-input" 
-          value={selectedSubId} 
+        <label htmlFor="sub-model" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Subwoofer Model</label>
+        <select id="sub-model" className="m3-input" value={selectedSubId} 
           onChange={e => setSelectedSubId(e.target.value)}
           style={{ width: '100%' }}
         >
@@ -142,10 +142,8 @@ export function SubArrayPanel() {
 
       <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Preset</label>
-          <select 
-            className="m3-input" 
-            value={preset} 
+          <label htmlFor="preset" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Preset</label>
+          <select id="preset" className="m3-input" value={preset} 
             onChange={e => setPreset(e.target.value as ArrayPreset)}
             style={{ width: '100%' }}
           >
@@ -153,29 +151,39 @@ export function SubArrayPanel() {
             <option value="Broadside">Broadside</option>
             <option value="Cardioid">Cardioid</option>
             <option value="Arc">Arc</option>
+            <option value="Gradient">Gradient</option>
           </select>
         </div>
         <div style={{ width: '80px' }}>
-          <label style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Units</label>
-          <input 
-            type="number" className="m3-input" 
-            value={count} onChange={e => setCount(Math.max(2, parseInt(e.target.value) || 2))}
+          <label htmlFor="count" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Units</label>
+          <input id="count" type="number" className="m3-input" value={count} onChange={e => setCount(Math.max(2, parseInt(e.target.value) || 2))}
             style={{ width: '100%' }}
           />
         </div>
       </div>
 
+      
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', alignItems: 'center' }}>
+        <label style={{ display: 'flex', alignItems: 'center', fontSize: '12px', gap: '4px', cursor: 'pointer' }}>
+          <input type="checkbox" checked={amplitudeShading} onChange={e => setAmplitudeShading(e.target.checked)} />
+          Amplitude Shading
+        </label>
+        
+        <div style={{ flex: 1, marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <label htmlFor="delayTapering" style={{ fontSize: '12px' }}>Delay Taper (deg):</label>
+          <input id="delayTapering" type="number" className="m3-input" value={delayTapering} onChange={e => setDelayTapering(e.target.value === '' ? '' : parseInt(e.target.value))} style={{ width: '60px' }} />
+        </div>
+      </div>
+      
       <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Frequency (Hz)</label>
-          <input 
-            type="number" className="m3-input" 
-            value={freq} onChange={e => setFreq(parseInt(e.target.value) || 60)}
+          <label htmlFor="freq" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Frequency (Hz)</label>
+          <input id="freq" type="number" className="m3-input" value={freq} onChange={e => setFreq(parseInt(e.target.value) || 60)}
             style={{ width: '100%' }}
           />
         </div>
         <div style={{ flex: 1 }}>
-          <label style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Spacing (m)</label>
+          <label htmlFor="spacing" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Spacing (m)</label>
           <input 
             type="number" className="m3-input" placeholder="Auto"
             value={spacing} onChange={e => setSpacing(e.target.value === '' ? '' : parseFloat(e.target.value))}
@@ -221,3 +229,6 @@ export function SubArrayPanel() {
     </div>
   );
 }
+
+
+

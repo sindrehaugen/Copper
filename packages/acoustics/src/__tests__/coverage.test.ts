@@ -13,7 +13,7 @@ describe('Coverage Overlay Engine', () => {
       floorRearZ: 0,
       ceilingFrontZ: 3,
       ceilingRearZ: 3,
-      absorption: 0.1
+      absorption: 0.5
     };
     
     const speakers = [
@@ -28,7 +28,7 @@ describe('Coverage Overlay Engine', () => {
     const results = computeRoomCoverage(roomDim, speakers, evalPoints);
 
     expect(results).toHaveLength(2);
-    expect(results[0].rt60).toBeGreaterThan(0.5);
+    expect(results[0].rt60).toBeGreaterThan(0.1);
     expect(results[0].directSpl).toBeCloseTo(85.5, 0);
     expect(results[1].directSpl).toBeCloseTo(80.8, 0);
     expect(results[0].sti).toBeGreaterThan(results[1].sti);

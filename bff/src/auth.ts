@@ -1,6 +1,9 @@
 import type { Context, Next } from 'hono';
 import { getSignedCookie } from 'hono/cookie';
 
+if (!process.env.COOKIE_SECRET && process.env.NODE_ENV !== 'development' && process.env.NODE_ENV !== 'test') {
+  throw new Error('COOKIE_SECRET must be set in production');
+}
 const COOKIE_SECRET = process.env.COOKIE_SECRET || 'fallback-secret-for-dev';
 const SESSION_COOKIE_NAME = 'copper_session';
 
@@ -37,7 +40,7 @@ export async function requireAuth(c: Context, next: Next) {
     sessionCookie = undefined;
   }
 
-  if (!sessionCookie && process.env.NODE_ENV === 'development') {
+  if (!sessionCookie && process.env.NODE_ENV === 'development' && process.env.DEV_AUTO_SESSION === '1') {
     c.set('session', {
       actor: 'agent@local',
       namespace: 'default',
@@ -63,4 +66,6 @@ export async function requireAuth(c: Context, next: Next) {
 
   await next();
 }
+
+
 

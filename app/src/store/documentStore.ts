@@ -3,6 +3,10 @@ import { produce } from 'immer';
 import type { DesignDocument } from '../model/schema';
 
 
+export interface StoreApiClient {
+  authorTopology: (namespace: string, payload: unknown) => Promise<void>;
+}
+
 export interface DocumentState {
   document: DesignDocument | null;
   history: DesignDocument[];
@@ -10,21 +14,27 @@ export interface DocumentState {
   selectedIds: string[];
   isSaving: boolean;
   syncConflict: boolean;
+  remoteFindings: any[];
+  setRemoteFindings: (findings: any[]) => void;
   loadDocument: (doc: DesignDocument) => void;
   updateDocument: (updater: (draft: DesignDocument) => void) => void;
   undo: () => void;
   redo: () => void;
-  saveDocument: (client: any, namespace: string, actor: string) => Promise<void>;
+  saveDocument: (client: StoreApiClient, namespace: string, actor: string) => Promise<void>;
   resolveConflict: (doc: DesignDocument) => void;
-  promoteDocument: (client: any, namespace: string, targetStatus: string) => Promise<void>;
+  setSelectedIds: (ids: string[]) => void;
 }
 
 export const useDocumentStore = create<DocumentState>((set, get) => ({
   document: null,
   history: [],
   historyIndex: -1,
+  selectedIds: [],
   isSaving: false,
   syncConflict: false,
+  remoteFindings: [],
+
+  setRemoteFindings: (findings) => set({ remoteFindings: findings }),
 
   loadDocument: (doc) => set({
     document: doc,
@@ -49,7 +59,7 @@ export const useDocumentStore = create<DocumentState>((set, get) => ({
   undo: () => set((state) => {
     if (state.historyIndex > 0) {
       const nextIndex = state.historyIndex - 1;
-      return { document: state.history[nextIndex], historyIndex: nextIndex };
+      return { document: state.history[nextIndex]!, historyIndex: nextIndex };
     }
     return state;
   }),
@@ -57,12 +67,12 @@ export const useDocumentStore = create<DocumentState>((set, get) => ({
   redo: () => set((state) => {
     if (state.historyIndex < state.history.length - 1) {
       const nextIndex = state.historyIndex + 1;
-      return { document: state.history[nextIndex], historyIndex: nextIndex };
+      return { document: state.history[nextIndex]!, historyIndex: nextIndex };
     }
     return state;
   }),
 
-  saveDocument: async (client, namespace, actor) => {
+  saveDocument: async (client: StoreApiClient, namespace: string, actor: string) => {
     const { document } = get();
     if (!document) return;
     
@@ -89,38 +99,6 @@ export const useDocumentStore = create<DocumentState>((set, get) => ({
       set({ isSaving: false });
     } catch (e: any) {
       if (e.message && e.message.includes('409')) { // Version conflict
-        set({ isSaving: false, syncConflict: true });
-      } else {
-        set({ isSaving: false });
-        throw e;
-      }
-    }
-  },
-
-    promoteDocument: async (client: any, namespace: string, targetStatus: string) => {
-    const { document } = get();
-    if (!document) return;
-    
-    set({ isSaving: true, syncConflict: false });
-    try {
-      const res = await client.promoteTopology(namespace, targetStatus, document.revision || '');
-      set((state) => {
-        if (!state.document) return state;
-        const nextDoc = produce(state.document, draft => {
-          // B17: revision bumping on active state
-          draft.revision = res.revision;
-        });
-        const nextHistory = state.history.slice(0, state.historyIndex + 1);
-        nextHistory.push(nextDoc);
-        return {
-          document: nextDoc,
-          history: nextHistory,
-          historyIndex: nextHistory.length - 1,
-          isSaving: false
-        };
-      });
-    } catch (e: any) {
-      if (e.message && e.message.includes('409')) {
         set({ isSaving: false, syncConflict: true });
       } else {
         set({ isSaving: false });

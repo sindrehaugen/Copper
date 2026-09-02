@@ -1,6 +1,6 @@
 import { NceTopologyResponseSchema } from './schema.js';
 import { BffConfig } from '../index.js';
-import { DesignDocument, DesignDocumentSchema } from '../../../app/src/model/schema.js';
+import { DesignDocument, DesignDocumentSchema } from '@copper/schema';
 import { computeHmacSignature } from './hmac.js';
 import { z } from 'zod';
 
@@ -93,37 +93,19 @@ export class NceClient {
     return DesignDocumentSchema.parse(doc);
   }
 
-  
-  async promoteTopology(namespace: string, targetStatus: string, expectedVersion: string): Promise<{ revision: string }> {
-    const body = JSON.stringify({ namespace, target_status: targetStatus, expected_version: expectedVersion });
-    const res = await this.fetchNce('POST', '/api/system-design/promote', body);
-    const data = await res.json();
-    if (data.error && data.error.code === -32005) {
-      throw new GovernanceDisabledError('Governance disabled (-32005)');
-    }
-    return data as { revision: string };
-  }
 
   async authorTopology(namespaceId: string, payload: unknown): Promise<void> {
     const body = JSON.stringify(payload);
     const params = new URLSearchParams({ namespace_id: namespaceId });
     const res = await this.fetchNce('POST', `/api/system-design/topology?${params.toString()}`, body);
-    
-    if (!res.ok) {
-      if (res.status === 403) {
-        throw new GovernanceDisabledError(`Governance disabled: ${res.statusText}`);
-      }
-      throw new Error(`NCE API error: ${res.status} ${res.statusText}`);
-    }
+  
     
     const text = await res.text();
     if (text) {
-        try {
-            const data = JSON.parse(text);
-            if (data.error && data.error.code === -32005) {
-              throw new GovernanceDisabledError('Governance disabled (-32005)');
-            }
-        } catch { /* ignore */ }
+        const data = JSON.parse(text);
+        if (data.error && data.error.code === -32005) {
+          throw new GovernanceDisabledError('Governance disabled (-32005)');
+        }
     }
   }
 
@@ -131,22 +113,14 @@ export class NceClient {
     const body = JSON.stringify(payload);
     const params = new URLSearchParams({ namespace_id: namespaceId });
     const res = await this.fetchNce('POST', `/api/system-design/functional-location?${params.toString()}`, body);
-    
-    if (!res.ok) {
-      if (res.status === 403) {
-        throw new GovernanceDisabledError(`Governance disabled: ${res.statusText}`);
-      }
-      throw new Error(`NCE API error: ${res.status} ${res.statusText}`);
-    }
+  
     
     const text = await res.text();
     if (text) {
-        try {
-            const data = JSON.parse(text);
-            if (data.error && data.error.code === -32005) {
-              throw new GovernanceDisabledError('Governance disabled (-32005)');
-            }
-        } catch { /* ignore */ }
+        const data = JSON.parse(text);
+        if (data.error && data.error.code === -32005) {
+          throw new GovernanceDisabledError('Governance disabled (-32005)');
+        }
     }
   }
 
@@ -173,12 +147,10 @@ export class NceClient {
     
     const text = await res.text();
     if (text) {
-        try {
-            const data = JSON.parse(text);
-            if (data.error && data.error.code === -32005) {
-              throw new GovernanceDisabledError('Governance disabled (-32005)');
-            }
-        } catch { /* ignore */ }
+        const data = JSON.parse(text);
+        if (data.error && data.error.code === -32005) {
+          throw new GovernanceDisabledError('Governance disabled (-32005)');
+        }
     }
   }
 }
@@ -186,3 +158,5 @@ export class NceClient {
 export function createNceClient(config: BffConfig): NceClient {
   return new NceClient(config);
 }
+
+

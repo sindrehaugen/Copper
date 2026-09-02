@@ -138,6 +138,8 @@ export async function sessionStubMiddleware(c: Context, next: Next): Promise<voi
   await next();
 }
 
+import { designRoutes } from './routes/design.js';
+
 /**
  * Factory function to create and configure the Hono BFF application.
  */
@@ -147,10 +149,14 @@ export function createBffApp(): Hono {
   // Auth middleware
   app.use('*', requireAuth);
 
+  app.get('/api/session', (c: any) => c.json(c.get('session')));
+
   // Health check endpoint
   app.get('/healthz', (c) => {
     return c.json({ status: 'ok' }, 200);
   });
+
+  app.route('/api/design', designRoutes);
 
   return app;
 }
@@ -168,3 +174,4 @@ if (process.env.NODE_ENV !== 'test' && !process.env.VITEST && process.env.BFF_SE
     port,
   });
 }
+

@@ -5,7 +5,8 @@ import {
   delayFromDistance, distanceFromDelay,
   phaseFromDelay, delayFromPhase,
   airAbsorption, airAbsorptionDb,
-  floorBounce, logFrequencyGrid
+  floorBounce, logFrequencyGrid,
+  getLR24, evaluateCascade
 } from '@copper/acoustics';
 
 const fmt = (n: number, digits: number) => n.toFixed(digits);
@@ -31,6 +32,19 @@ export const CalculatorsDrawer: React.FC = () => {
   const [delayInput, setDelayInput] = useState(10);
   const distFromDelay = useMemo(() => distanceFromDelay(delayInput / 1000, c), [delayInput, c]);
 
+  
+  // DSP
+  const [xoFreq, setXoFreq] = useState(100);
+  const [xoEvalFreq, setXoEvalFreq] = useState(100);
+  const xoAtten = useMemo(() => {
+    try {
+      const cascade = getLR24('lpf', xoFreq, 48000);
+      const h = evaluateCascade(cascade, xoEvalFreq, 48000);
+      const mag = Math.sqrt(h.re*h.re + h.im*h.im);
+      return mag > 0 ? 20 * Math.log10(mag) : -100;
+    } catch { return 0; }
+  }, [xoFreq, xoEvalFreq]);
+  
   // Phase / delay
   const [phaseFreq, setPhaseFreq] = useState(1000);
   const [phaseDelayMs, setPhaseDelayMs] = useState(1);
@@ -235,7 +249,25 @@ export const CalculatorsDrawer: React.FC = () => {
           <path d={fbPath} fill="none" stroke="var(--md-sys-color-primary)" strokeWidth="2" />
         </svg>
       </div>
+      <div className="m3-card m3-content-padding">
+        <h3>DSP & Crossovers (LR-24)</h3>
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginBottom: '16px' }}>
+          <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            Cutoff Freq (Hz)
+            <input className="m3-input" type="number" value={xoFreq} onChange={e => setXoFreq(Number(e.target.value) || 100)} />
+          </label>
+          <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            Eval Freq (Hz)
+            <input className="m3-input" type="number" value={xoEvalFreq} onChange={e => setXoEvalFreq(Number(e.target.value) || 100)} />
+          </label>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', justifyContent: 'flex-end' }}>
+            <strong style={{ display: 'block', paddingBottom: '4px' }}>{fmt(xoAtten, 2)} dB</strong>
+          </div>
+        </div>
+      </div>
     </div>
     </div>
   );
 };
+
+

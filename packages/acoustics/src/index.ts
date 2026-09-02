@@ -15,3 +15,4 @@ export * from './wizard';
 export { computePressure, computePolar, computeHeatmap, generateArrayPreset } from './nearfield';
 export type { ArrayPreset, ArrayPointSource } from './nearfield';
 export * from './coverage';
+export * from './dsp';

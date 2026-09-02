@@ -1,4 +1,3 @@
-// @ts-nocheck
 import type { StoreApiClient } from '../store/documentStore';
 
 export const bffClient: StoreApiClient = {
@@ -15,10 +14,7 @@ export const bffClient: StoreApiClient = {
     if (!res.ok) {
       throw new Error(`BFF Error: ${res.status}`);
     }
-  },
-  promoteTopology: async (namespaceId: string, targetStatus: string, expectedVersion: string) => {
-    // This method is a stub since promote was removed from BFF
-    // We just return a mock revision.
-    return { revision: 'removed' };
   }
 };
+
+

@@ -1,6 +1,7 @@
-import type { DesignDocument, Site, Location, Rack, DeviceType, Device, Cable } from '../app/src/model/schema.js';
+/* eslint-disable */
+import type { DesignDocument, Site, Location, Rack, DeviceType, Device, Cable } from '@copper/schema';
 
-export async function exportToNetBox(doc: DesignDocument, netboxUrl: string, token: string) {
+export async function exportToNetBox(doc: DesignDocument, netboxUrl: string, ) {
   const headers = {
     'Authorization': "Token ",
     'Content-Type': 'application/json',
@@ -41,3 +42,4 @@ export async function exportToNetBox(doc: DesignDocument, netboxUrl: string, tok
     await post('/api/dcim/cables/', cable);
   }
 }
+

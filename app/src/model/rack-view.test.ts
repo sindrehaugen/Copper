@@ -22,7 +22,9 @@ describe('computeRackElevations', () => {
       sites: [],
       locations: [],
       cables: [],
-      signalClasses: []
+    
+    signalClasses: [], zones: [],
+    
     };
 
     const geometryMap = {
@@ -35,26 +37,29 @@ describe('computeRackElevations', () => {
 
     expect(elevations.length).toBe(1);
     const rack1 = elevations[0];
-    expect(rack1.rackId).toBe('rack-1');
+    expect(rack1!.rackId).toBe('rack-1');
     
     // dev-1 occupies U 1, 1.5
     // dev-2 occupies U 2, 2.5, 3.0, 3.5
     // dev-collision occupies U 1, 1.5
     
-    const slot1 = rack1.slots.find(s => s.uNumber === 1);
+    const slot1 = rack1!.slots.find(s => s.uNumber === 1);
     expect(slot1?.front.length).toBe(2);
     expect(slot1?.front.map(d => d.id)).toContain('dev-1');
     expect(slot1?.front.map(d => d.id)).toContain('dev-collision');
 
-    const slot1_5 = rack1.slots.find(s => s.uNumber === 1.5);
+    const slot1_5 = rack1!.slots.find(s => s.uNumber === 1.5);
     expect(slot1_5?.front.length).toBe(2);
 
-    const slot2 = rack1.slots.find(s => s.uNumber === 2);
+    const slot2 = rack1!.slots.find(s => s.uNumber === 2);
     expect(slot2?.rear.length).toBe(1);
-    expect(slot2?.rear[0].id).toBe('dev-2');
+    expect(slot2?.rear[0]?.id).toBe('dev-2');
 
-    const slot3_5 = rack1.slots.find(s => s.uNumber === 3.5);
+    const slot3_5 = rack1!.slots.find(s => s.uNumber === 3.5);
     expect(slot3_5?.rear.length).toBe(1);
-    expect(slot3_5?.rear[0].id).toBe('dev-2');
+    expect(slot3_5?.rear[0]?.id).toBe('dev-2');
   });
 });
+
+
+

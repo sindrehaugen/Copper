@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { importConnectCAD } from './connectcad-import.ts';
-import { DesignDocumentSchema } from '../app/src/model/schema.js';
+import { DesignDocumentSchema } from '@copper/schema';
 
 describe('importConnectCAD', () => {
     it('should parse valid CSVs and return a valid DesignDocument', () => {
@@ -32,3 +32,4 @@ SW1,Eth2,PC2,Eth1`;
         }
     });
 });
+

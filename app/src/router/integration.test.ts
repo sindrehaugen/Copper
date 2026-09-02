@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { Node } from '@xyflow/react';
-import { routeEdge, getObstaclesFromNodes } from './integration';
+import { routeEdge, getObstaclesFromNodes, type RoutingNode as Node } from './integration';
 
 describe('router integration', () => {
     const gridParams = {
@@ -14,7 +13,7 @@ describe('router integration', () => {
         position: { x: 50, y: 50 },
         width: 100,
         height: 100,
-        data: {}
+        
     };
 
     const targetNode: Node = {
@@ -22,7 +21,7 @@ describe('router integration', () => {
         position: { x: 250, y: 50 },
         width: 100,
         height: 100,
-        data: {}
+        
     };
 
     const obstacleNode: Node = {
@@ -30,7 +29,7 @@ describe('router integration', () => {
         position: { x: 170, y: 50 },
         width: 50,
         height: 100,
-        data: {}
+        
     };
 
     it('extracts obstacles from nodes', () => {
@@ -66,7 +65,7 @@ describe('router integration', () => {
             position: { x: 240, y: 40 },
             width: 120,
             height: 120,
-            data: {}
+            
         };
         const sourceHandle = { x: 150, y: 100, direction: 'RIGHT' as const };
         const targetHandle = { x: 250, y: 100, direction: 'LEFT' as const };

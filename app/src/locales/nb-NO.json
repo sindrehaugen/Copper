@@ -2,7 +2,15 @@
   "nav": {
     "home": "Hjem",
     "dashboard": "Oversikt",
-    "settings": "Innstillinger"
+    "settings": "Innstillinger",
+    "canvas": "Lerretsvisning",
+    "rack": "Rackoppsett",
+    "schedule": "Kabelliste",
+    "walkthrough": "3D-visning",
+    "calculators": "Akustikkalkulatorer",
+    "analyser": "Kjedeanalysator",
+    "subarray": "Subwoofer-Array",
+    "compliance": "Samsvar (DSAR)"
   },
   "common": {
     "loading": "Laster...",
@@ -12,5 +20,29 @@
   },
   "errors": {
     "-32005": "Serverfeil (-32005): Metoden ble ikke funnet eller er ikke tilgjengelig."
+  },
+  "acoustics": {
+    "title": "Akustikkalkulatorer",
+    "credit": "Disse kalkulatorene er basert på arbeidet til <1>Merlijn van Veen</1>. De originale Excel-arkene er fritt tilgjengelige på hans nettside; dette panelet reimplementerer de samme formlene i TypeScript slik at de kan mate designverktøyet og enhetstestes. Æren for å samle disse formlene i tilgjengelige kalkulatorer tilhører Merlijn van Veen.",
+    "environment": "Miljø",
+    "temp": "Temperatur (°C)",
+    "rh": "Relativ fuktighet (%)",
+    "pressure": "Atmosfærisk trykk (Pa)",
+    "speed": "Lydhastighet",
+    "wavelength_period": "Bølgelengde og periode",
+    "frequency": "Frekvens (Hz)",
+    "dist_delay": "Avstand ↔ forsinkelse",
+    "distance": "Avstand (m)",
+    "delay": "Forsinkelse (ms)",
+    "phase_delay": "Fase ↔ forsinkelse",
+    "phase": "Fase (°)",
+    "phase_sign": "Fortegnkonvensjon: en positiv forsinkelse gir et negativt (etterslepende) faseskift.",
+    "air_absorption": "Luftabsorpsjon (ISO 9613-1)",
+    "prop_distance": "Forplantningsavstand (m)",
+    "floor_bounce": "Gulvrefleksjon (kamfilter)",
+    "hz_dist": "Horisontal avstand (m)",
+    "src_height": "Kildehøyde (m)",
+    "mic_height": "Mikkhøyde (m)",
+    "reflection": "Refleksjonskoeffisient"
   }
 }

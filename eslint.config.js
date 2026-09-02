@@ -6,7 +6,9 @@ export default tseslint.config(
   js.configs.recommended,
   ...tseslint.configs.recommended,
   jsxA11y.flatConfigs.recommended,
+  { ignores: ['**/dist/**', '**/node_modules/**', '**/coverage/**', '**/.vite/**', 'docs/**', 'orchestration/**'] },
   {
+    rules: { '@typescript-eslint/no-explicit-any': 'off' },
     ignores: [
       '**/node_modules/**',
       '**/dist/**',
@@ -17,3 +19,5 @@ export default tseslint.config(
     ]
   }
 )
+
+

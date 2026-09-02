@@ -81,7 +81,7 @@ export function CableRoutingMode() {
         setComputing(false);
         worker.terminate();
       };
-    } catch (e) {
+    } catch {
       setComputing(false);
     }
   };
@@ -129,3 +129,5 @@ export function CableRoutingMode() {
     </div>
   );
 }
+
+

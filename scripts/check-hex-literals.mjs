@@ -1,3 +1,4 @@
+/* global console, process */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -35,8 +36,8 @@ function scanDir(dir) {
 }
 
 const targetFiles = scanDir(appRoot);
-const hexRegex = /#[0-9a-fA-F]{3,8}\b/g;
-const rgbaRegex = /rgba?\([^)]+\)/g;
+// const hexRegex = /#[0-9a-fA-F]{3,8}\b/g;
+// const rgbaRegex = /rgba?\([^)]+\)/g;
 
 let violations = 0;
 

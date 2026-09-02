@@ -1,3 +1,5 @@
+
+/* eslint-disable */
 import { test, expect, vi } from 'vitest';
 
 import { exportToNetBox } from './netbox-export.ts';

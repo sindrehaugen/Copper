@@ -42,23 +42,15 @@ export const RackElevationView: React.FC<RackElevationViewProps> = ({
     const rack = doc.racks.find(r => r.id === selectedRackId);
     if (!rack) return;
 
-    const proposedGeometryMap = {
-      ...geometryMap,
-      [deviceId]: {
-        ...(geometryMap[deviceId] as Record<string, unknown> || {}),
-        rack_position: uNum,
-        rack_face: face,
-      }
-    };
-
-    const deviceTypeMap = new Map(doc.deviceTypes.map(dt => [dt.id, dt]));
+    
+    
     const tempDevices = doc.devices.map(d => 
       d.id === deviceId 
         ? { ...d, rackId: rack.id, position: uNum, face } 
         : d
     );
 
-    const errors = validateRackFit(rack, tempDevices, deviceTypeMap, proposedGeometryMap);
+    const errors = validateRackFit({ ...doc, devices: tempDevices } as any).findings;
 
     if (errors.length > 0) {
       return;

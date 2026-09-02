@@ -1,5 +1,6 @@
-import type { Node } from '@xyflow/react';
 import { findPath, Point } from './core';
+
+export type RoutingNode = { id: string, width?: number, height?: number, measured?: { width?: number, height?: number }, position: { x: number, y: number } };
 
 export interface GridParams {
     gridSize: number;
@@ -18,7 +19,7 @@ function getGridPoint(val: number, gridSize: number): number {
 }
 
 export function getObstaclesFromNodes(
-    nodes: Node[], 
+    nodes: RoutingNode[], 
     gridParams: GridParams, 
     skipNodeIds: string[] = [],
     expansionBudget: number = 0
@@ -73,11 +74,11 @@ function applyUTurn(pos: HandlePosition, budget: number, gridParams: GridParams)
 }
 
 export function routeEdge(
-    sourceNode: Node,
-    targetNode: Node,
+    sourceNode: RoutingNode,
+    targetNode: RoutingNode,
     sourceHandle: HandlePosition,
     targetHandle: HandlePosition,
-    allNodes: Node[],
+    allNodes: RoutingNode[],
     gridParams: GridParams,
     options?: {
         uTurnBudget?: number;

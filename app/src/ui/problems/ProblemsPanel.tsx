@@ -31,7 +31,7 @@ export function ProblemsPanel() {
           boxShadow: 'var(--md-sys-elevation-level-2)',
           zIndex: 9999,
         }}
-        onClick={() => setMinimized(false)}
+        role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') setMinimized(false); }} onClick={() => setMinimized(false)}
       >
         <span style={{ color: 'var(--copper-error)' }}> E: {errors.length}</span>
         <span style={{ color: 'var(--copper-tertiary)' }}> W: {warnings.length}</span>
@@ -145,3 +145,4 @@ export function ProblemsPanel() {
     </div>
   );
 }
+

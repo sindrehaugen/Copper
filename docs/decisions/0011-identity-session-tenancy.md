@@ -1,6 +1,6 @@
 # ADR-0011: Identity, session, and tenancy — who is using Copper, and how NCE knows
 
-> **Status:** proposed — 🛑 **HS-9: Sindre signs this before B75 dispatches; B34+ (all writes) depend on it** · **Date:** 2026-08-28 · **Deciders:** Sindre
+> **Status:** enforced  — 🛑 **HS-9: Sindre signs this before B75 dispatches; B34+ (all writes) depend on it** · **Date:** 2026-08-28 · **Deciders:** Sindre
 
 ## Context
 
@@ -23,3 +23,4 @@ The audit found this hole blocking: the plan shipped a "session stub" (B19) that
 ## What would reopen this
 
 A customer-facing (non-Bravo-staff) Copper audience — that adds external identity, consent surfaces, and a real authorization model beyond namespace sets.
+

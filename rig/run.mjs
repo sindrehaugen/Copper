@@ -15,11 +15,11 @@ const __dirname = path.dirname(__filename);
  * Dynamically resolves path and symbol to preserve clean-room separation.
  */
 async function loadFormatReader() {
-  const exchangeSubdir = ['easy', 'schematic'].join('');
+  const exchangeSubdir = 'projectschema';
   const readerPath = path.resolve(__dirname, '../app/src/exchange', exchangeSubdir, 'read.ts');
   const fileUrl = pathToFileURL(readerPath).href;
   const mod = await tsImport(fileUrl, import.meta.url);
-  const fnKey = ['read', 'Easy', 'Schematic'].join('');
+  const fnKey = 'readProjectSchema';
   const readerFn = mod[fnKey] || mod.default || Object.values(mod).find((v) => typeof v === 'function');
   if (typeof readerFn !== 'function') {
     throw new Error(`Failed to load format reader function from ${readerPath}`);

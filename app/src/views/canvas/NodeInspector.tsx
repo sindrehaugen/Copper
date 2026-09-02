@@ -19,8 +19,8 @@ export const NodeInspector: React.FC = () => {
 
   // B98 Audio Line validation (only applies to amplifiers)
   const isAmp = deviceType.customFields?.acoustics?.device_class === 'amplifier';
-  const audioRes = isAmp ? validateAudioLines(document.devices, document.deviceTypes, document.cables) : null;
-  const finding = audioRes?.findings.find(f => f.nodeSlug === device.id && f.severity !== 'OK');
+  const audioRes = isAmp ? validateAudioLines(document) : null;
+  const finding = audioRes?.findings.find(f => f.targetId === device.id && f.severity !== 'OK');
 
   const suggestions = useMemo(() => {
     if (!finding || !isAmp) return [];

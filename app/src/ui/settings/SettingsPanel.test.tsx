@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { SettingsPanel } from './SettingsPanel';
-import { LocaleProvider } from '../../locale/context';
+import { LocaleProvider } from '../../locales/i18n';
 import { describe, it, expect } from 'vitest';
 
 describe('SettingsPanel', () => {
@@ -24,3 +24,4 @@ describe('SettingsPanel', () => {
     expect((tzInput as HTMLInputElement).value).toBe('Europe/Paris');
   });
 });
+

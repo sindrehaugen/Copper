@@ -15,8 +15,8 @@ export const EdgeInspector: React.FC = () => {
   if (!cable) return null;
 
   // In a real app with B101, this would come from the memoized universal validation selector.
-  const audioRes = validateAudioLines(document.devices, document.deviceTypes, document.cables);
-  const edgeData = audioRes.edgeData[cable.id];
+  const audioRes = validateAudioLines(document);
+  const edgeData = (audioRes as any).edgeData ? (audioRes as any).edgeData[cable.id] : undefined;
 
   // B98 Wizard
   const suggestions = useMemo(() => {

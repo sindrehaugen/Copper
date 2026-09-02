@@ -1,10 +1,12 @@
 import Drawing from 'dxf-writer';
-import type { Node, Edge } from '@xyflow/react';
 
-export function exportToDxf(nodes: Node[], edges: Edge[]): string {
+export type DxfNode = { id: string, position: { x: number, y: number }, initialWidth?: number, initialHeight?: number };
+export type DxfEdge = { source: string, target: string };
+
+export function exportToDxf(nodes: DxfNode[], edges: DxfEdge[]): string {
   const d = new Drawing();
   
-  const nodeMap = new Map<string, Node>();
+  const nodeMap = new Map<string, DxfNode>();
   for (const node of nodes) {
     nodeMap.set(node.id, node);
   }

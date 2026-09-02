@@ -2,7 +2,15 @@
   "nav": {
     "home": "Home",
     "dashboard": "Dashboard",
-    "settings": "Settings"
+    "settings": "Settings",
+    "canvas": "Canvas",
+    "rack": "Rack Elevation",
+    "schedule": "Cable Schedule",
+    "walkthrough": "3D Walkthrough",
+    "calculators": "Acoustics Calculators",
+    "analyser": "Chain Analyser",
+    "subarray": "Sub Array Designer",
+    "compliance": "Compliance (DSAR)"
   },
   "common": {
     "loading": "Loading...",
@@ -12,5 +20,29 @@
   },
   "errors": {
     "-32005": "Server error (-32005): Method not found or unavailable."
+  },
+  "acoustics": {
+    "title": "Acoustics calculators",
+    "credit": "These calculators are based on the work of <1>Merlijn van Veen</1>. The original Excel spreadsheets are freely available on his website; this panel re-implements the same formulae in TypeScript so they can feed the design tool and be unit-tested. Credit for pulling these formulae together into accessible calculators belongs to Merlijn van Veen.",
+    "environment": "Environment",
+    "temp": "Temperature (°C)",
+    "rh": "Relative humidity (%)",
+    "pressure": "Atmospheric pressure (Pa)",
+    "speed": "Speed of sound",
+    "wavelength_period": "Wavelength & period",
+    "frequency": "Frequency (Hz)",
+    "dist_delay": "Distance ↔ delay",
+    "distance": "Distance (m)",
+    "delay": "Delay (ms)",
+    "phase_delay": "Phase ↔ delay",
+    "phase": "Phase (°)",
+    "phase_sign": "Sign convention: a positive delay produces a negative (lagging) phase shift.",
+    "air_absorption": "Air absorption (ISO 9613-1)",
+    "prop_distance": "Propagation distance (m)",
+    "floor_bounce": "Floor bounce (comb filter)",
+    "hz_dist": "Horizontal distance (m)",
+    "src_height": "Source height (m)",
+    "mic_height": "Mic height (m)",
+    "reflection": "Reflection coeff"
   }
 }

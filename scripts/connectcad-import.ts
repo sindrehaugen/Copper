@@ -1,4 +1,4 @@
-import { DesignDocument, Device, DeviceType, Site, Location, Cable } from '../app/src/model/schema.js';
+import { DesignDocument, Device, DeviceType, Site, Location, Cable } from '@copper/schema';
 import crypto from 'crypto';
 
 function uuid() {
@@ -137,3 +137,4 @@ export function importConnectCAD(devicesCsv: string, circuitsCsv: string): Desig
 
     return doc;
 }
+

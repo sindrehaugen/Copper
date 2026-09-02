@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 import { CableScheduleView } from './CableScheduleView';
+import { useDocumentStore } from '../../store/documentStore';
 import type { DesignDocument } from '../../model/schema';
 
 vi.mock('../../export/csv', () => ({
@@ -30,6 +31,7 @@ describe('CableScheduleView', () => {
       sites: [], locations: [], racks: [], deviceTypes: [], signalClasses: [], zones: []
     };
 
+    useDocumentStore.getState().loadDocument(doc);
     render(<CableScheduleView document={doc} />);
     
     expect(screen.getByText('Source')).toBeDefined();
@@ -48,3 +50,5 @@ describe('CableScheduleView', () => {
     expect(global.URL.createObjectURL).toHaveBeenCalled();
   });
 });
+
+

@@ -65,7 +65,7 @@ export function useCableScheduleRows(): CableScheduleRow[] {
       sourcePort: e.terminations[0].portRef.name,
       targetDev: deviceMap.get(e.terminations[1].deviceId) || e.terminations[1].deviceId,
       targetPort: e.terminations[1].portRef.name,
-      lengthM: e.lengthMeters ?? 10, // will be overridden by B109
+      lengthM: e.lengthM, // will be overridden by B109
       type: e.type,
       signal: e.signalType
     }));

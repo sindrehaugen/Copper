@@ -1,5 +1,5 @@
 import ELK from 'elkjs/lib/elk.bundled.js';
-import type { ElkNode, ElkExtendedEdge, ElkPort } from 'elkjs';
+import type { ElkNode, ElkExtendedEdge } from 'elkjs';
 import { CARD_WIDTH, CARD_HEADER_H } from '../model/geometry';
 
 const elk = new ELK();
@@ -12,7 +12,7 @@ export interface ElkLayoutOptions {
 export async function applyElkLayoutX6(
   nodes: any[],
   edges: any[],
-  options?: ElkLayoutOptions
+  options: { wireSpacing?: number; portPadding?: number } = {}
 ): Promise<{ nodes: any[]; edges: any[] }> {
   if (nodes.length === 0) return { nodes, edges };
 
@@ -65,21 +65,21 @@ export async function applyElkLayoutX6(
   const edgePositionMap = new Map<string, Array<{ x: number; y: number }>>();
 
   for (const child of layoutedGraph.children ?? []) {
-    if (child.x !== undefined && child.y !== undefined) {
+    if (child?.x !== undefined && child?.y !== undefined) {
       positionMap.set(child.id, { x: child.x, y: child.y });
     }
   }
 
   for (const edge of layoutedGraph.edges ?? []) {
-    if (edge.sections && edge.sections.length > 0) {
-      const bends = edge.sections[0].bendPoints ?? [];
+    if (edge?.sections && edge.sections.length > 0) {
+      const bends = edge!.sections![0]!.bendPoints ?? [];
       
       const allPoints = [];
-      if (edge.sections[0].startPoint) allPoints.push(edge.sections[0].startPoint);
+      if (edge!.sections![0]!.startPoint) allPoints.push(edge!.sections![0]!.startPoint);
       allPoints.push(...bends);
-      if (edge.sections[0].endPoint) allPoints.push(edge.sections[0].endPoint);
+      if (edge!.sections![0]!.endPoint) allPoints.push(edge!.sections![0]!.endPoint);
       
-      edgePositionMap.set(edge.id, allPoints.map(b => ({ x: b.x, y: b.y })));
+      edgePositionMap.set(edge.id, allPoints.map((b: any) => ({ x: b.x, y: b.y })));
     }
   }
 

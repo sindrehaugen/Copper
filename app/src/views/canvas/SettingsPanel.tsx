@@ -24,7 +24,7 @@ export const SettingsPanel: React.FC = () => {
           Wire Spacing: {settings.wireSpacing}px
         </label>
         <input 
-          type="range" min="2" max="40" value={settings.wireSpacing}
+          type="range" aria-label="Canvas setting parameter" min="2" max="40" value={settings.wireSpacing}
           onChange={(e) => settings.setWireSpacing(Number(e.target.value))}
           style={{ width: '100%', accentColor: 'var(--md-sys-color-primary)' }}
         />
@@ -35,7 +35,7 @@ export const SettingsPanel: React.FC = () => {
           Terminal Padding: {settings.portPadding}px
         </label>
         <input 
-          type="range" min="10" max="100" value={settings.portPadding}
+          type="range" aria-label="Canvas setting parameter" min="10" max="100" value={settings.portPadding}
           onChange={(e) => settings.setPortPadding(Number(e.target.value))}
           style={{ width: '100%', accentColor: 'var(--md-sys-color-primary)' }}
         />
@@ -46,7 +46,7 @@ export const SettingsPanel: React.FC = () => {
           Terminal Spacing: {settings.terminalSpacing}px
         </label>
         <input 
-          type="range" min="10" max="40" value={settings.terminalSpacing}
+          type="range" aria-label="Canvas setting parameter" min="10" max="40" value={settings.terminalSpacing}
           onChange={(e) => settings.setTerminalSpacing(Number(e.target.value))}
           style={{ width: '100%', accentColor: 'var(--md-sys-color-primary)' }}
         />
@@ -57,7 +57,7 @@ export const SettingsPanel: React.FC = () => {
           Terminal Font Size: {settings.terminalFontSize}px
         </label>
         <input 
-          type="range" min="6" max="16" value={settings.terminalFontSize}
+          type="range" aria-label="Canvas setting parameter" min="6" max="16" value={settings.terminalFontSize}
           onChange={(e) => settings.setTerminalFontSize(Number(e.target.value))}
           style={{ width: '100%', accentColor: 'var(--md-sys-color-primary)' }}
         />
@@ -68,7 +68,7 @@ export const SettingsPanel: React.FC = () => {
           Header Font Size: {settings.headerFontSize}px
         </label>
         <input 
-          type="range" min="8" max="20" value={settings.headerFontSize}
+          type="range" aria-label="Canvas setting parameter" min="8" max="20" value={settings.headerFontSize}
           onChange={(e) => settings.setHeaderFontSize(Number(e.target.value))}
           style={{ width: '100%', accentColor: 'var(--md-sys-color-primary)' }}
         />
@@ -117,5 +117,6 @@ export const SettingsPanel: React.FC = () => {
     </div>
   );
 };
+
 
 

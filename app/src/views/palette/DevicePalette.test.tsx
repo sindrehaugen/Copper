@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { DevicePalette } from './DevicePalette';
@@ -25,7 +24,7 @@ describe('DevicePalette', () => {
     const mockDoc: DesignDocument = {
       schemaVersion: 1,
       designLabel: 'Test Design',
-      sites: [{ id: 'site-1', name: 'Site 1' }],
+      sites: [{ id: 'site-1', name: 'Site 1', slug: 'site-1' }],
       locations: [],
       racks: [],
       deviceTypes: [
@@ -40,7 +39,9 @@ describe('DevicePalette', () => {
       ],
       devices: [],
       cables: [],
-      signalClasses: []
+    
+    signalClasses: [], zones: [],
+    
     };
 
     useDocumentStore.getState().loadDocument(mockDoc);
@@ -52,15 +53,15 @@ describe('DevicePalette', () => {
     expect(screen.getByText(/Switch-1/)).toBeDefined();
 
     // Click add
-    const addButton = screen.getByTestId('add-device-dt-1');
+    const addButton = screen.getByText(/Switch-1/);
     fireEvent.click(addButton);
 
     // Verify store was updated
     const state = useDocumentStore.getState();
     expect(state.document?.devices.length).toBe(1);
-    expect(state.document?.devices[0].deviceTypeId).toBe('dt-1');
-    expect(state.document?.devices[0].id).toBe('12345678-1234-1234-1234-123456789abc');
-    expect(state.document?.devices[0].siteId).toBe('site-1');
+    expect(state.document?.devices[0]?.deviceTypeId).toBe('dt-1');
+    expect(state.document?.devices[0]?.id).toMatch(/^dev-/);
+    expect(state.document?.devices[0]?.siteId).toBe('site-1');
   });
 
   it('filters device types based on search', () => {
@@ -90,7 +91,9 @@ describe('DevicePalette', () => {
       ],
       devices: [],
       cables: [],
-      signalClasses: []
+    
+    signalClasses: [], zones: [],
+    
     };
 
     useDocumentStore.getState().loadDocument(mockDoc);
@@ -100,10 +103,14 @@ describe('DevicePalette', () => {
     expect(screen.getByText(/Cisco/)).toBeDefined();
     expect(screen.getByText(/Juniper/)).toBeDefined();
 
-    const searchInput = screen.getByTestId('device-palette-search');
+    const searchInput = screen.getByPlaceholderText(/Search/);
     fireEvent.change(searchInput, { target: { value: 'cisco' } });
 
-    expect(screen.getByText('Cisco')).toBeDefined();
+    expect(screen.getByText(/Cisco/)).toBeDefined();
     expect(screen.queryByText('Juniper')).toBeNull();
   });
 });
+
+
+
+

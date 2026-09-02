@@ -373,7 +373,7 @@ export function readProjectSchema(json: unknown): {
         locationId: validLocationId,
         status: 'active',
         designation: designation,
-          physicalLocation: dData.physicalLocation ? String(dData.physicalLocation) : undefined,
+          physicalLocation: data?.physicalLocation ? String(data?.physicalLocation) : undefined,
         interfaces: interfaces.length > 0 ? interfaces : undefined,
       };
 
@@ -500,6 +500,7 @@ export function readProjectSchema(json: unknown): {
     devices: devices,
     cables: cables,
     signalClasses: [],
+    zones: [],
   };
 
   const validatedDocument = DesignDocumentSchema.parse(doc);
@@ -509,4 +510,7 @@ export function readProjectSchema(json: unknown): {
     report,
   };
 }
+
+
+
 

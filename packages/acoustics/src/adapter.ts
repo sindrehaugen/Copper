@@ -15,7 +15,8 @@ export interface CopperDeviceType {
 export interface CopperDevice {
   id: string;
   name?: string;
-  deviceTypeId: string;
+  typeId?: string;
+  deviceTypeId?: string;
   interfaces?: { id: string; name: string }[];
   frontPorts?: { id: string; name: string }[];
   rearPorts?: { id: string; name: string }[];
@@ -114,8 +115,9 @@ export function buildChainInput(input: AdapterInput): ChainInput {
   const deviceMap = new Map<string, CopperDevice>();
   for (const d of input.devices) {
     deviceMap.set(d.id, d);
-    if (db.amplifiers[d.deviceTypeId]) {
-      ampRack[d.id] = { slug: d.name || d.id, modelId: d.deviceTypeId, channelsUsed: [] };
+    const typeId = d.typeId || d.deviceTypeId || '';
+    if (db.amplifiers[typeId]) {
+      ampRack[d.id] = { slug: d.name || d.id, modelId: typeId, channelsUsed: [] };
     }
   }
 
@@ -136,8 +138,9 @@ export function buildChainInput(input: AdapterInput): ChainInput {
     if (visitedNodes.has(deviceId)) return null;
     const dev = deviceMap.get(deviceId);
     if (!dev) return null;
-    const isAmp = !!db.amplifiers[dev.deviceTypeId];
-    const isSpeaker = !!db.speakers[dev.deviceTypeId];
+    const typeId = dev.typeId || dev.deviceTypeId || '';
+    const isAmp = !!db.amplifiers[typeId];
+    const isSpeaker = !!db.speakers[typeId];
     if (!isAmp && !isSpeaker) return null;
     visitedNodes.add(deviceId);
     let cableType = (cableFromParent?.type && db.cables[cableFromParent.type]) ? cableFromParent.type : (cableFromParent?.customFields?.acoustics?.device_class === 'cable' ? cableFromParent.id : undefined);

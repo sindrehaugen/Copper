@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import {
   DesignDocument,
   DesignDocumentSchema,
@@ -9,7 +9,7 @@ import {
   Device,
   Cable,
   CableTermination,
-} from '../app/src/model/schema.js';
+} from '@copper/schema';
 
 export async function importFromNetBox(netboxUrl: string, token: string): Promise<DesignDocument> {
   const headers = {
@@ -176,3 +176,4 @@ export async function importFromNetBox(netboxUrl: string, token: string): Promis
 
   return DesignDocumentSchema.parse(doc);
 }
+

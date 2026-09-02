@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* global console */
 import { test, vi, expect, afterAll } from 'vitest';
 import { runImport } from './import.js';

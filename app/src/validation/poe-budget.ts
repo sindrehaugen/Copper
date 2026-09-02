@@ -1,21 +1,8 @@
-import { Device, Cable } from '../model/schema';
-
-export interface PoEBudgetResult {
-  valid: boolean;
-  totalDrawWatts: number;
-  budgetWatts?: number;
-  errors: string[];
-}
+import { DesignDocument, Device } from '../model/schema';
+import { ValidationFinding } from './registry';
 
 const POE_CLASSES: Record<number, number> = {
-  1: 4.0,
-  2: 7.0,
-  3: 15.4,
-  4: 30.0,
-  5: 45.0,
-  6: 60.0,
-  7: 75.0,
-  8: 90.0,
+  1: 4.0, 2: 7.0, 3: 15.4, 4: 30.0, 5: 45.0, 6: 60.0, 7: 75.0, 8: 90.0,
 };
 
 function extractClassFromText(text: string): number | undefined {
@@ -29,7 +16,6 @@ function extractClassFromText(text: string): number | undefined {
 function getDeviceDraw(device: Device): number {
   let totalAllocated = 0;
   let hasDraw = false;
-
   if (device.powerPorts) {
     for (const port of device.powerPorts) {
       if (port.allocatedDrawWatts !== undefined) {
@@ -44,8 +30,6 @@ function getDeviceDraw(device: Device): number {
       }
     }
   }
-
-  // If no power ports provided a draw, try to find class in device description
   if (!hasDraw && device.description) {
     const cls = extractClassFromText(device.description);
     if (cls && POE_CLASSES[cls]) {
@@ -53,14 +37,12 @@ function getDeviceDraw(device: Device): number {
       hasDraw = true;
     }
   }
-
   return totalAllocated;
 }
 
 function getSwitchBudget(switchDevice: Device): number | undefined {
   let budget = 0;
   let hasBudget = false;
-
   if (switchDevice.powerPorts) {
     for (const port of switchDevice.powerPorts) {
       if (port.maximumDrawWatts !== undefined) {
@@ -69,39 +51,34 @@ function getSwitchBudget(switchDevice: Device): number | undefined {
       }
     }
   }
-
   return hasBudget ? budget : undefined;
 }
 
-export function validatePoEBudget(
-  switchDevice: Device,
-  connectedDevices: Device[],
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _cables: Cable[]
-): PoEBudgetResult {
-  const errors: string[] = [];
-  let totalDrawWatts = 0;
+export function validatePoEBudget(doc: DesignDocument): { findings: Omit<ValidationFinding, 'source'>[] } {
+  const findings: Omit<ValidationFinding, 'source'>[] = [];
+  const switches = doc.devices.filter(d => 
+    d.powerPorts && d.powerPorts.some(p => p.maximumDrawWatts !== undefined)
+  );
+  
+  for (const sw of switches) {
+    const budgetWatts = getSwitchBudget(sw);
+    if (budgetWatts === undefined) continue;
 
-  for (const device of connectedDevices) {
-    const draw = getDeviceDraw(device);
-    totalDrawWatts += draw;
+    let totalDrawWatts = 0;
+    for (const device of doc.devices) {
+      if (device.id !== sw.id) {
+        totalDrawWatts += getDeviceDraw(device);
+      }
+    }
+    
+    if (totalDrawWatts > budgetWatts) {
+      findings.push({
+        targetId: sw.id,
+        message: `Total PoE draw (${totalDrawWatts}W) exceeds switch budget (${budgetWatts}W).`,
+        severity: 'Error'
+      });
+    }
   }
 
-  const budgetWatts = getSwitchBudget(switchDevice);
-
-  let valid = true;
-  if (budgetWatts !== undefined && totalDrawWatts > budgetWatts) {
-    valid = false;
-    errors.push(`Total PoE draw (${totalDrawWatts}W) exceeds switch budget (${budgetWatts}W).`);
-  }
-
-  const result: PoEBudgetResult = {
-    valid,
-    totalDrawWatts,
-    errors,
-  };
-  if (budgetWatts !== undefined) {
-    result.budgetWatts = budgetWatts;
-  }
-  return result;
+  return { findings };
 }

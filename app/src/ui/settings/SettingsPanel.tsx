@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocale } from '../../locale/context';
+import { useLocale } from '../../locales/i18n';
 
 export const SettingsPanel: React.FC = () => {
   const { language, region, timezone, setLanguage, setRegion, setTimezone } = useLocale();
@@ -37,3 +37,4 @@ export const SettingsPanel: React.FC = () => {
     </div>
   );
 };
+

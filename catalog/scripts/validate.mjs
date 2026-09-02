@@ -1,4 +1,4 @@
-/* global process, console */
+/* global console, process */
 import fs from 'fs';
 import path from 'path';
 import * as yaml from 'js-yaml';
@@ -21,48 +21,53 @@ export function validateFile(filePath) {
   } catch {
     return { valid: false, errors: [{ message: 'Invalid YAML format' }] };
   }
-
   const valid = validate(parsed);
   return { valid, errors: validate.errors };
 }
 
-export function validateString(content) {
-  let parsed;
-  try {
-    parsed = yaml.load(content);
-  } catch {
-    return { valid: false, errors: [{ message: 'Invalid YAML format' }] };
-  }
-
-  const valid = validate(parsed);
-  return { valid, errors: validate.errors };
+function walkSync(dir, fileList = []) {
+  if (!fs.existsSync(dir)) return fileList;
+  fs.readdirSync(dir).forEach(file => {
+    const dirFile = path.join(dir, file);
+    if (fs.statSync(dirFile).isDirectory()) {
+      fileList = walkSync(dirFile, fileList);
+    } else {
+      if (file.endsWith('.yaml') || file.endsWith('.yml')) {
+        fileList.push(dirFile);
+      }
+    }
+  });
+  return fileList;
 }
 
 export function validateDirectory(dirPath) {
-  if (!fs.existsSync(dirPath)) {
-    return true;
-  }
+  if (!fs.existsSync(dirPath)) return true;
   let allValid = true;
-  const files = fs.readdirSync(dirPath).filter(f => f.endsWith('.yaml') || f.endsWith('.yml'));
-  for (const file of files) {
-    const filePath = path.join(dirPath, file);
+  const files = walkSync(dirPath);
+  for (const filePath of files) {
     const result = validateFile(filePath);
     if (!result.valid) {
-      console.error(`Validation failed for ${filePath}:`, result.errors);
+      console.error('Validation failed for ' + filePath + ':', result.errors);
       allValid = false;
     } else {
-      console.log(`Validated ${filePath}`);
+      console.log('Validated ' + filePath);
     }
   }
   return allValid;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
-  let targetDir = process.argv[2] || path.join(process.cwd(), 'catalog/bravo');
-  if (!path.isAbsolute(targetDir)) {
-    targetDir = path.join(process.cwd(), targetDir);
+if (import.meta.url.endsWith('validate.mjs')) {
+  const dirs = process.argv.slice(2);
+  if (dirs.length === 0) {
+    dirs.push('catalog/bravo', 'catalog/audio');
   }
-  const success = validateDirectory(targetDir);
+  let success = true;
+  for (const d of dirs) {
+    let targetDir = path.isAbsolute(d) ? d : path.join(process.cwd(), d);
+    if (!validateDirectory(targetDir)) {
+      success = false;
+    }
+  }
   if (!success) {
     process.exit(1);
   } else {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { calculateBDMMaxDistance, calculateFOV, calculateThrowDistance, calculatePAGNAGMargin } from '../src';
+import { calculateBDMMaxDistance, calculateFOV, calculateThrowDistance } from '../src';
 
 describe('AV Physics', () => {
   it('DISCAS BDM max distance is 6x height', () => {

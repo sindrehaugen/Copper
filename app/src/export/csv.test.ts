@@ -22,7 +22,7 @@ describe('exportCablesToCsv', () => {
           ],
         }
       ],
-      sites: [], locations: [], racks: [], deviceTypes: [], signalClasses: []
+      sites: [], locations: [], racks: [], deviceTypes: [], signalClasses: [], zones: []
     };
 
     const csv = exportCablesToCsv(doc);

@@ -1,0 +1,213 @@
+/* M3 Compliance Components Styles */
+
+.m3-dialog-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--md-sys-color-scrim);
+  opacity: 0.8;
+}
+
+.m3-dialog {
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  border-radius: var(--md-sys-shape-corner-extra-large);
+  box-shadow: var(--md-sys-elevation-level-3);
+  width: 100%;
+  max-width: 480px;
+  padding: 24px;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  font-family: var(--md-sys-typescale-body-large-font-family);
+}
+
+.m3-dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.m3-dialog-title {
+  font-size: var(--md-sys-typescale-title-large-font-size);
+  font-weight: var(--md-sys-typescale-title-large-font-weight);
+  color: var(--md-sys-color-on-surface);
+  margin: 0;
+}
+
+.m3-badge {
+  padding: 4px 8px;
+  font-size: var(--md-sys-typescale-label-small-font-size);
+  font-weight: var(--md-sys-typescale-label-small-font-weight);
+  border-radius: var(--md-sys-shape-corner-small);
+  background-color: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.m3-dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.m3-panel {
+  padding: 12px;
+  background-color: var(--md-sys-color-surface-container);
+  border-radius: var(--md-sys-shape-corner-medium);
+  border: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.m3-panel-info {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  border-color: var(--md-sys-color-secondary);
+}
+
+.m3-panel-title {
+  font-size: var(--md-sys-typescale-label-large-font-size);
+  font-weight: var(--md-sys-typescale-label-large-font-weight);
+  margin: 0 0 4px 0;
+}
+
+.m3-panel-content {
+  margin: 0;
+  font-size: var(--md-sys-typescale-body-medium-font-size);
+}
+
+.m3-confidence {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--md-sys-typescale-label-large-font-size);
+}
+
+.m3-confidence-high { color: var(--md-sys-color-primary); }
+.m3-confidence-medium { color: var(--md-sys-color-secondary); }
+.m3-confidence-low { color: var(--md-sys-color-error); }
+
+.m3-checkbox-row {
+  display: flex;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.m3-checkbox-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--md-sys-color-primary);
+  margin-right: 8px;
+}
+
+.m3-checkbox-row label {
+  font-size: var(--md-sys-typescale-label-large-font-size);
+  color: var(--md-sys-color-on-surface);
+}
+
+.m3-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.m3-btn {
+  padding: 10px 24px;
+  border-radius: var(--md-sys-shape-corner-full);
+  font-size: var(--md-sys-typescale-label-large-font-size);
+  font-weight: var(--md-sys-typescale-label-large-font-weight);
+  font-family: var(--md-sys-typescale-label-large-font-family);
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+}
+
+.m3-btn:hover {
+  opacity: 0.9;
+}
+
+.m3-btn-outlined {
+  background-color: transparent;
+  color: var(--md-sys-color-primary);
+  border: 1px solid var(--md-sys-color-outline);
+}
+
+.m3-btn-filled {
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+}
+
+/* Provenance Viewer */
+.m3-provenance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.m3-provenance-record {
+  padding: 16px;
+  background-color: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-medium);
+  box-shadow: var(--md-sys-elevation-level-1);
+}
+
+.m3-provenance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.m3-provenance-actor {
+  font-size: var(--md-sys-typescale-label-large-font-size);
+  font-weight: var(--md-sys-typescale-label-large-font-weight);
+  color: var(--md-sys-color-on-surface);
+}
+
+.m3-provenance-time {
+  font-size: var(--md-sys-typescale-body-small-font-size);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.m3-provenance-action {
+  font-size: var(--md-sys-typescale-body-medium-font-size);
+  color: var(--md-sys-color-on-surface);
+  margin-bottom: 8px;
+}
+
+.m3-provenance-diff {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 8px;
+  margin-bottom: 8px;
+  background-color: var(--md-sys-color-surface-container-lowest);
+  border-radius: var(--md-sys-shape-corner-small);
+}
+
+.m3-provenance-diff-label {
+  display: block;
+  font-size: var(--md-sys-typescale-label-small-font-size);
+  color: var(--md-sys-color-on-surface-variant);
+  text-transform: uppercase;
+}
+
+.m3-provenance-diff-old {
+  color: var(--md-sys-color-error);
+  text-decoration: line-through;
+}
+
+.m3-provenance-diff-new {
+  color: var(--md-sys-color-primary);
+}
+
+.m3-provenance-citation {
+  font-size: var(--md-sys-typescale-body-small-font-size);
+  color: var(--md-sys-color-on-surface-variant);
+  border-top: 1px solid var(--md-sys-color-outline-variant);
+  padding-top: 8px;
+  margin-top: 8px;
+}

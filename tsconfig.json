@@ -2,6 +2,9 @@
   "files": [],
   "references": [
     { "path": "./tsconfig.node.json" },
-    { "path": "./app" }
+    { "path": "./app" },
+    { "path": "./bff" },
+    { "path": "./packages/acoustics" },
+    { "path": "./packages/av-physics" }
   ]
 }

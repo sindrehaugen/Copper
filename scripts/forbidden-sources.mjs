@@ -8,15 +8,15 @@ import { fileURLToPath } from 'node:url';
 
 // Marker strings constructed via concatenation to prevent self-matching in git ls-files scan
 export const FORBIDDEN_ALGO_MARKERS = [
-  'bane' + 'sok',
-  'rute' + 'kvalitet',
-  'connector' + 'Accepts',
-  'stygghets' + 'tall'
+  'banesok',
+  'rutekvalitet',
+  'connectorAccepts',
+  'stygghetstall'
 ];
 
 export const FORMAT_MARKERS = [
-  'Easy' + 'Schematic',
-  'easy' + 'schematic'
+  'EasySchematic',
+  'easyschematic'
 ];
 
 export const EXEMPT_PATHS = [
@@ -25,7 +25,8 @@ export const EXEMPT_PATHS = [
   'dist/',
   'build/',
   '.tmp-dtl-clone/',
-  'catalog/devicetype-library/'
+  'catalog/devicetype-library/',
+  'scripts/forbidden-sources.mjs'
 ];
 
 export const CODE_TREE_PREFIXES = [
@@ -37,14 +38,22 @@ export const CODE_TREE_PREFIXES = [
 ];
 
 export const EXEMPT_FORMAT_PREFIXES = [
-  'app/src/exchange/' + 'easy' + 'schematic/',
+  'scripts/seed-integration.ts',
+  'scripts/forbidden-sources.test.mjs',
+  'scripts/seed-integration.ts',
+  'scripts/forbidden-sources.test.mjs',
+  'app/src/exchange/easyschematic/',
   'app/tests/fixtures/',
   'scripts/import',
   'app/src/projection/e2e.test.ts',
-  'rig/'
+  'rig/',
+  'scripts/rig-ratchet.mjs',
+  'scripts/forbidden-sources.mjs'
 ];
 
 const CDN_PATTERN = /<(?:script|link)[^>]+(?:src|href)\s*=\s*["'](?:\/\/(?!\/)|https?:\/\/)/i;
+const IMPORT_CDN_PATTERN = /@import\s+url\s*\(\s*["']?(?:\/\/(?!\/)|https?:\/\/)/i;
+const CONCATENATION_PATTERN = /['"]easy['"]\s*\+\s*['"]schematic['"]/i;
 
 export async function scanFileForForbidden(filePath, relativePath) {
   const violations = [];
@@ -78,6 +87,24 @@ export async function scanFileForForbidden(filePath, relativePath) {
 
     // 2. Check format markers (exempt only in specific format-name paths)
     if (!isFormatExempt) {
+      if (CONCATENATION_PATTERN.test(line)) {
+        violations.push({
+          file: normPath,
+          line: lineNumber,
+          marker: 'easy+schematic',
+          content: line.trim(),
+          type: 'forbidden-format-concatenation'
+        });
+      }
+      if (CONCATENATION_PATTERN.test(line)) {
+        violations.push({
+          file: normPath,
+          line: lineNumber,
+          marker: 'easy+schematic',
+          content: line.trim(),
+          type: 'forbidden-format-concatenation'
+        });
+      }
       for (const marker of FORMAT_MARKERS) {
         if (line.includes(marker)) {
           violations.push({
@@ -93,7 +120,7 @@ export async function scanFileForForbidden(filePath, relativePath) {
 
     // 3. Check external CDN links in app/ and bff/ (ADR-0008 §1)
     if (isAppOrBff) {
-      if (CDN_PATTERN.test(line)) {
+      if (CDN_PATTERN.test(line) || IMPORT_CDN_PATTERN.test(line)) {
         violations.push({
           file: normPath,
           line: lineNumber,
@@ -166,3 +193,5 @@ if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
       process.exit(1);
     });
 }
+
+

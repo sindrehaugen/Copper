@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import type { RouteRequest } from './worker';
-import type { Node, Edge } from '@xyflow/react';
+import type { RouteRequest, RoutingEdge as Edge } from './worker';
+import type { RoutingNode as Node } from './integration';
 
 vi.mock('./integration', () => ({
     routeEdge: vi.fn((_src, _tgt, _srcHandle, _tgtHandle, _nodes, _grid, v: unknown) => {

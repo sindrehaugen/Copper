@@ -35,7 +35,7 @@ export function DevicePalette() {
       const siteId = draft.sites?.[0]?.id || 'default-site';
       const dt = (draft.deviceTypes || []).find(d => d.id === deviceTypeId);
       
-      let baseName = dt ? (dt.model || deviceTypeId) : deviceTypeId;
+      const baseName = dt ? (dt.model || deviceTypeId) : deviceTypeId;
       const newId = 'dev-' + Math.random().toString(36).substring(2, 9);
       
       draft.devices.push({
@@ -74,7 +74,7 @@ export function DevicePalette() {
           {filteredTypes.map(dt => (
             <div 
               key={dt.id}
-              onClick={() => handleAddDevice(dt.id)}
+              role="button" tabIndex={0} onKeyDown={(e) => { if (e.key === 'Enter') handleAddDevice(dt.id); }} onClick={() => handleAddDevice(dt.id)}
               style={{
                 padding: 12,
                 borderRadius: 8,
@@ -99,3 +99,5 @@ export function DevicePalette() {
     </div>
   );
 }
+
+

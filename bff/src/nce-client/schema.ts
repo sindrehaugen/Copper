@@ -15,7 +15,7 @@ import {
   PowerOutletSchema,
   ModuleBaySchema,
   DeviceBaySchema
-} from '../../../app/src/model/schema.js';
+} from '@copper/schema';
 
 export const NceGeometryNodeSchema = z.object({
   x: z.number().optional(),
@@ -76,3 +76,4 @@ export const NceTopologyResponseSchema = z.object({
   geometry: z.record(z.string(), NceGeometryNodeSchema).optional(),
   version: z.number().int().optional(),
 });
+

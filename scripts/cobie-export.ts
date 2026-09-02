@@ -1,11 +1,11 @@
-import type { DesignDocument, Site, Location, Device, Rack, DeviceType, SignalClass } from '../app/src/model/schema.js';
+import type { DesignDocument, Site, Location, Device, Rack, DeviceType, } from '@copper/schema';
 
 export function exportCOBie(doc: DesignDocument): Record<string, string> {
   const createdBy = 'Copper';
   const createdOn = new Date().toISOString();
   
   const toCSV = (headers: string[], rows: (string | number | undefined | null)[][]) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     const escapeCsv = (val: any) => {
       if (val === null || val === undefined) return '';
       const str = String(val);
@@ -56,7 +56,7 @@ export function exportCOBie(doc: DesignDocument): Record<string, string> {
   };
   
   const floorHeaders = ['Name', 'CreatedBy', 'CreatedOn', 'Category', 'ExtSystem', 'ExtObject', 'ExtIdentifier', 'Description', 'Elevation', 'Height'];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   const floorRows: any[][] = [];
   
   for (const site of doc.sites || []) {
@@ -73,7 +73,7 @@ export function exportCOBie(doc: DesignDocument): Record<string, string> {
   }
 
   const spaceHeaders = ['Name', 'CreatedBy', 'CreatedOn', 'Category', 'FloorName', 'Description', 'ExtSystem', 'ExtObject', 'ExtIdentifier', 'RoomTag', 'UsableHeight', 'GrossArea', 'NetArea'];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   const spaceRows: any[][] = [];
   
   const locMap = new Map<string, Location | Site>();
@@ -95,7 +95,7 @@ export function exportCOBie(doc: DesignDocument): Record<string, string> {
   }
 
   const typeHeaders = ['Name', 'CreatedBy', 'CreatedOn', 'Category', 'Description', 'AssetType', 'Manufacturer', 'ModelNumber', 'WarrantyGuarantorParts', 'WarrantyDurationParts', 'WarrantyGuarantorLabor', 'WarrantyDurationLabor', 'WarrantyDurationUnit', 'ExtSystem', 'ExtObject', 'ExtIdentifier'];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   const typeRows: any[][] = [];
   
   for (const dt of doc.deviceTypes || []) {
@@ -105,7 +105,7 @@ export function exportCOBie(doc: DesignDocument): Record<string, string> {
   }
 
   const componentHeaders = ['Name', 'CreatedBy', 'CreatedOn', 'Space', 'TypeName', 'ExtSystem', 'ExtObject', 'ExtIdentifier', 'Description', 'SerialNumber', 'InstallationDate', 'WarrantyStartDate', 'AssetIdentifier'];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   const componentRows: any[][] = [];
   
   const typeMap = new Map<string, DeviceType>();
@@ -140,7 +140,7 @@ export function exportCOBie(doc: DesignDocument): Record<string, string> {
   }
 
   const systemHeaders = ['Name', 'CreatedBy', 'CreatedOn', 'Category', 'ComponentNames', 'ExtSystem', 'ExtObject', 'ExtIdentifier', 'Description'];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+   
   const systemRows: any[][] = [];
   
   for (const sc of doc.signalClasses || []) {
@@ -177,3 +177,4 @@ export function exportCOBie(doc: DesignDocument): Record<string, string> {
     'System': toCSV(systemHeaders, systemRows),
   };
 }
+

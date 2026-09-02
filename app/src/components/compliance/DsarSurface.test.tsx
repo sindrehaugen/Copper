@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { DsarSurface } from './DsarSurface';
@@ -40,6 +39,8 @@ describe('DsarSurface', () => {
     const deleteBtn = screen.getByTestId('delete-btn');
     fireEvent.click(deleteBtn);
 
+    const confirmBtn = screen.getByText('Approve AI Action');
+    fireEvent.click(confirmBtn);
     expect(screen.getByTestId('delete-status').textContent).toContain('Request Pending');
     
     await waitFor(() => {
@@ -49,5 +50,6 @@ describe('DsarSurface', () => {
     expect(global.fetch).toHaveBeenCalledWith('/api/me/dsar/erase', { method: 'POST' });
   });
 });
+
 
 

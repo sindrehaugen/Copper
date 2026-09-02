@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -68,8 +70,8 @@ describe('M3 Design Tokens & Theme Generator (ADR-0009)', () => {
 
   it('defines all --copper-* tokens used in app/src', () => {
     const css = generateThemeCss(BRAND_SEED_HEX);
-    const fs = require('node:fs');
-    const path = require('node:path');
+    
+    
     
     // Find all --copper-* usages in app/src
     function scanDir(dir: string): string[] {

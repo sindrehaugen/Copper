@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { RackElevationView } from './RackElevationView';
@@ -24,7 +23,7 @@ describe('RackElevationView', () => {
       ],
       devices: [],
       cables: [],
-      signalClasses: []
+      signalClasses: [], zones: []
     };
     
     render(<RackElevationView doc={doc} geometryMap={{}} selectedRackId="rack-1" />);
@@ -56,7 +55,7 @@ describe('RackElevationView', () => {
         { id: 'd-2', name: 'Half U Patch', deviceTypeId: 'dt-2', rackId: 'rack-1', siteId: 'site-1', status: 'active' }
       ],
       cables: [],
-      signalClasses: []
+      signalClasses: [], zones: []
     };
     
     const geometryMap = {
@@ -68,17 +67,17 @@ describe('RackElevationView', () => {
     
     const switchEls = screen.getAllByTestId('device-d-1-front');
     expect(switchEls.length).toBeGreaterThan(0);
-    expect(switchEls[0].textContent).toBe('Core Switch');
+    expect(switchEls[0]?.textContent).toBe('Core Switch');
 
     const patchEls = screen.getAllByTestId('device-d-2-rear');
     expect(patchEls.length).toBeGreaterThan(0);
-    expect(patchEls[0].textContent).toBe('Half U Patch');
+    expect(patchEls[0]?.textContent).toBe('Half U Patch');
   });
 
   it('renders rack not found', () => {
     const doc: DesignDocument = {
       schemaVersion: 1, designLabel: 'Test', 
-      sites: [], locations: [], deviceTypes: [], racks: [], devices: [], cables: [], signalClasses: []
+      sites: [], locations: [], deviceTypes: [], racks: [], devices: [], cables: [], signalClasses: [], zones: []
     };
     render(<RackElevationView doc={doc} geometryMap={{}} selectedRackId="nonexistent" />);
     expect(screen.getByTestId('rack-not-found')).toBeDefined();
@@ -101,7 +100,7 @@ describe('RackElevationView', () => {
         { id: 'd-1', name: 'Unassigned Switch', deviceTypeId: 'dt-1', siteId: 'site-1', status: 'active' },
       ],
       cables: [],
-      signalClasses: []
+      signalClasses: [], zones: []
     };
     
     useDocumentStore.setState({ document: doc, history: [doc], historyIndex: 0 });

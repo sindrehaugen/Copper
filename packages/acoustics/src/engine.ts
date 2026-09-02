@@ -1,4 +1,3 @@
-// @ts-nocheck
 /** High-level physics orchestrator — takes a signal-chain tree and produces
  *  per-node spectral results. This replaces the monolithic calculateAll()
  *  god function from the legacy codebase with a pure, testable function.
@@ -16,6 +15,7 @@ import { cableImpedance, seriesImpedance } from './cable'
 import { speakerImpedance } from './driver'
 import { reflectedImpedance } from './transformer'
 import { transmission, ratioToDb } from './transmission'
+import { getLR24, evaluateCascade } from './dsp'
 import { nearestIndex } from './grid'
 import type {
   SignalNode,
@@ -120,7 +120,7 @@ function analyzeNode(
   srcVoltage: number,
   input: ChainInput,
 ): { branch: BranchAnalysis; tipVoltage: SpectralMagnitude } {
-  const { db, grid, tempC, mode, quality } = input
+  const { db, grid, tempC, mode } = input
 
   const cable = db.cables[node.cableId]
   let cableZ: SpectralImpedance = cable
@@ -144,7 +144,26 @@ function analyzeNode(
     loadImpedance: loadZ,
     transmission: tx,
   }
-  return { branch, tipVoltage: tx.voltageAtLoad }
+  
+  // Apply DSP
+  const tipVoltage = [...tx.voltageAtLoad];
+  if (node.dsp && node.dsp.length > 0) {
+    const cascade = [];
+    for (const filter of node.dsp) {
+      if (filter.slope === 24) {
+        cascade.push(...getLR24(filter.type, filter.freq, 48000));
+      }
+    }
+    if (cascade.length > 0) {
+      for (let i = 0; i < grid.length; i++) {
+        const h = evaluateCascade(cascade, grid[i]!, 48000);
+        const mag = Math.sqrt(h.re * h.re + h.im * h.im);
+        tipVoltage[i] = (tipVoltage[i] ?? 0) * mag;
+      }
+    }
+  }
+
+  return { branch, tipVoltage }
 }
 
 /** Judge status against the quality profile. */
@@ -263,3 +282,5 @@ function deriveScalar(branch: BranchAnalysis, input: ChainInput, srcV: number): 
     elecLossDb: ratioToDb(srcV, vLoad),
   }
 }
+
+

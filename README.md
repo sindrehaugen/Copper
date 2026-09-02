@@ -49,7 +49,7 @@ Built with modern web technologies, it features an automated orthogonal routing 
 
 ## Data Model
 
-Copper is designed to act as a pure UI layer over standard infrastructure schemas. It uses the `EasySchematic` format internally and is designed to be compatible with industry standards like NetBox (devices, interfaces, front/rear ports, cables) and the CC0 `devicetype-library`. 
+Copper is designed to act as a pure UI layer over standard infrastructure schemas. It uses the `ProjectSchema` format internally and is designed to be compatible with industry standards like NetBox (devices, interfaces, front/rear ports, cables) and the CC0 `devicetype-library`. 
 
 ## Architecture
 

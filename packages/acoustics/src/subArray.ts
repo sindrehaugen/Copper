@@ -185,3 +185,65 @@ export function arcArray(n: number, spacing: number, splayDeg: number): SubUnit[
   }
   return units
 }
+
+/** 
+ * Gradient Subwoofer Array (Inline)
+ * N units spaced by `spacing`. The array operates on the gradient principle.
+ * E.g., for cardioid-like directivity: rear elements are inverted and delayed.
+ * Formula: delay = distance/c. Each successive unit going backward adds delay and flips polarity.
+ */
+export function gradientArray(n: number, spacing: number, c: number = 343): SubUnit[] {
+  const units: SubUnit[] = []
+  for (let i = 0; i < n; i++) {
+    units.push({
+      x: -i * spacing,
+      y: 0,
+      delay: (i * spacing) / c,
+      polarity: i % 2 === 1 ? -1 : 1,
+      label: `Gradient Sub ${i + 1}`,
+    })
+  }
+  return units
+}
+
+/**
+ * Amplitude Shading (Hann Window)
+ * Formula: gain = 0.5 * (1 - cos(2 * PI * i / (N - 1)))
+ * Reduces side lobes at the expense of a wider main lobe.
+ */
+export function applyAmplitudeShading(units: SubUnit[]): SubUnit[] {
+  const n = units.length
+  if (n <= 1) return units
+  return units.map((u, i) => {
+    const windowGain = 0.5 * (1 - Math.cos((2 * Math.PI * i) / (n - 1)))
+    return { ...u, gain: (u.gain ?? 1) * windowGain }
+  })
+}
+
+/**
+ * Delay Tapering (Electronic Delay to form an arc)
+ * Formula: delay_i = maxDist/c - dist_i/c
+ * Creates a virtual arc from a straight line array.
+ */
+export function applyDelayTapering(units: SubUnit[], splayDeg: number, spacing: number, c: number = 343): SubUnit[] {
+  const n = units.length
+  const offset = (n - 1) / 2
+  const splay = (splayDeg * Math.PI) / 180
+  
+  // Calculate the physical offset required for each element if it were an arc
+  // and convert that distance offset into a time delay.
+  // The center elements need to be delayed more than the outer elements.
+  const delays = units.map((_, i) => {
+    const s = i - offset
+    const xDist = Math.abs(s) * spacing * (1 - Math.cos(splay))
+    return xDist / c
+  })
+
+  const maxDelay = Math.max(...delays)
+  
+  return units.map((u, i) => ({
+    ...u,
+    delay: (u.delay ?? 0) + (maxDelay - (delays[i] ?? 0))
+  }))
+}
+

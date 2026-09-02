@@ -1,4 +1,4 @@
-import type { DesignDocument, PortRef, Device } from '../model/schema';
+import type { DesignDocument, PortRef } from '../model/schema';
 import { CARD_WIDTH, CARD_HEADER_H, CARD_PAD_Y, PORT_ROW_H } from '../model/geometry';
 
 export type LayoutData = Record<string, { x: number; y: number }>;
@@ -35,7 +35,7 @@ export function toX6(
   const sourceHandleIds = new Set(edges.map(e => e.source.port));
   const targetHandleIds = new Set(edges.map(e => e.target.port));
 
-  const nodes = document.devices.map((device) => {
+  const nodes: any[] = document.devices.map((device) => {
     const allPorts: Array<{id: string, name: string, label?: string, kind: string, type?: string}> = [];
     
     const addPorts = (list: any[] | undefined, kind: string) => {
@@ -135,7 +135,7 @@ export function toX6(
       y: 0,
       width: 300,
       height: 250,
-      data: {}
+      data: {} as any
     });
 
     return { nodes, edges };

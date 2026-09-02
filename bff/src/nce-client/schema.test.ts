@@ -1,3 +1,4 @@
+import { ZoneSchema, CopperExtensionsSchema } from '@copper/schema';
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'fs';
 import { join } from 'path';
@@ -14,4 +15,10 @@ describe('NCE Schema Contract Drift Gate', () => {
     expect(parsed.version).toBe(1);
     expect(parsed.devices?.[0]?.node.status).toBe('active');
   });
+
+  it('asserts ZoneSchema and CopperExtensionsSchema are visible to the BFF', () => {
+    expect(ZoneSchema).toBeDefined();
+    expect(CopperExtensionsSchema).toBeDefined();
+  });
 });
+

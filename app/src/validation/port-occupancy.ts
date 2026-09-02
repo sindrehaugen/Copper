@@ -1,18 +1,34 @@
-import { Cable } from '../model/schema.js';
+import { DesignDocument } from '../model/schema';
+import { ValidationFinding } from './registry';
 
-export function validatePortOccupancy(
-  newCable: { sourceId: string; sourcePort: string; targetId: string; targetPort: string },
-  existingCables: Cable[]
-): boolean {
-  return !existingCables.some(cable => {
-    if (!cable.terminations || cable.terminations.length < 2) return false;
-    const [t1, t2] = cable.terminations;
-    if (!t1 || !t2) return false;
-    const p1id = t1.portRef.id ?? t1.portRef.name;
-    const p2id = t2.portRef.id ?? t2.portRef.name;
-    const match = (deviceId: string, portId: string) => 
-      (deviceId === newCable.sourceId && portId === newCable.sourcePort) ||
-      (deviceId === newCable.targetId && portId === newCable.targetPort);
-    return match(t1.deviceId, p1id) || match(t2.deviceId, p2id);
-  });
+export function validatePortOccupancy(doc: DesignDocument): { findings: Omit<ValidationFinding, 'source'>[] } {
+  const findings: Omit<ValidationFinding, 'source'>[] = [];
+  
+  const portUsage = new Map<string, string[]>();
+  
+  for (const cable of doc.cables) {
+    if (!cable.terminations || cable.terminations.length < 2) continue;
+    
+    for (const t of cable.terminations) {
+      const portId = t.portRef.id ?? t.portRef.name;
+      const key = t.deviceId + '::' + portId;
+      
+      const usedBy = portUsage.get(key) || [];
+      usedBy.push(cable.id);
+      portUsage.set(key, usedBy);
+    }
+  }
+  
+  for (const [key, cables] of portUsage.entries()) {
+    if (cables.length > 1) {
+      const [deviceId, portId] = key.split('::');
+      findings.push({
+        targetId: deviceId as string,
+        message: `Port ${portId} on device ${deviceId} is occupied by multiple cables: ${cables.join(', ')}`,
+        severity: 'Error'
+      });
+    }
+  }
+
+  return { findings };
 }

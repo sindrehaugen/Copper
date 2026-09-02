@@ -144,6 +144,7 @@ export interface SignalNode {
   cable2Id: string
   length2: number
   children: SignalNode[]
+  dsp?: { type: 'lpf' | 'hpf'; freq: number; slope: 12 | 24 }[]
   results: NodeResults
 }
 
@@ -170,3 +171,4 @@ export interface QualityProfile {
   minDamping: number
   hfCheckHz: number
 }
+

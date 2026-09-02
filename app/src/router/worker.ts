@@ -1,6 +1,7 @@
-import type { Node, Edge } from '@xyflow/react';
-import { routeEdge, GridParams, HandlePosition } from './integration';
+import { routeEdge, GridParams, HandlePosition, type RoutingNode as Node } from './integration';
 import { evaluateQuality, Rect, Point } from './quality';
+
+export type RoutingEdge = { id?: string, source: string, target: string, sourceHandle?: string | null, targetHandle?: string | null };
 
 export interface RouteStrategy {
     gridSize: number;
@@ -10,7 +11,7 @@ export interface RouteStrategy {
 
 export interface RouteRequest {
     nodes: Node[];
-    edges: Edge[];
+    edges: RoutingEdge[];
     bounds: Rect[];
     strategyParams?: unknown;
 }

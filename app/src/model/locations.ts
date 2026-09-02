@@ -1,25 +1,39 @@
+import { argbFromHex, Hct, hexFromArgb } from '@material/material-color-utilities';
+import { BRAND_SEED_HEX } from '../theme/tokens';
+
+const seedHct = Hct.fromInt(argbFromHex(BRAND_SEED_HEX));
+
+function getLocColors(hueOffset: number) {
+  const h = (seedHct.hue + hueOffset) % 360;
+  const c = Math.max(seedHct.chroma, 40);
+  return {
+    color: hexFromArgb(Hct.from(h, c, 30).toInt()),
+    bgColor: hexFromArgb(Hct.from(h, c, 90).toInt())
+  };
+}
+
 export const PHYSICAL_LOCATIONS: Record<string, { code: string; color: string; bgColor: string }> = {
-  'Mobile': { code: 'MBL', color: '#4A148C', bgColor: '#E1BEE7' },
-  'Desktop': { code: 'DSK', color: '#E65100', bgColor: '#FFE0B2' },
-  'In-Desk': { code: 'IND', color: '#E65100', bgColor: '#FFCC80' },
-  'Under-Desk': { code: 'UND', color: '#E65100', bgColor: '#FFB74D' },
-  'In-Floor': { code: 'INF', color: '#3E2723', bgColor: '#D7CCC8' },
-  'On-Floor': { code: 'ONF', color: '#3E2723', bgColor: '#BCAAA4' },
-  'In-Wall': { code: 'INW', color: '#1B5E20', bgColor: '#C8E6C9' },
-  'On-Wall': { code: 'ONW', color: '#1B5E20', bgColor: '#A5D6A7' },
-  'In-Ceiling': { code: 'INC', color: '#0D47A1', bgColor: '#BBDEFB' },
-  'On-Ceiling': { code: 'ONC', color: '#0D47A1', bgColor: '#90CAF9' },
-  'Above Ceiling': { code: 'ABC', color: '#0D47A1', bgColor: '#64B5F6' },
-  'In-Rack': { code: 'INR', color: '#263238', bgColor: '#CFD8DC' },
-  'Top of rack': { code: 'TOR', color: '#263238', bgColor: '#B0BEC5' },
-  'Behind Parent Device': { code: 'BPD', color: '#F57F17', bgColor: '#FFF9C4' },
-  'DIN-Rail': { code: 'DIN', color: '#212121', bgColor: '#E0E0E0' },
-  'In-Furniture': { code: 'INU', color: '#BF360C', bgColor: '#FFCCBC' },
-  'Under-Furniture': { code: 'UNF', color: '#BF360C', bgColor: '#FFAB91' },
-  'In-Cabinet': { code: 'CAB', color: '#827717', bgColor: '#F0F4C3' },
-  'Under-Cabinet': { code: 'UCB', color: '#827717', bgColor: '#E6EE9C' },
-  'On-Pole': { code: 'POL', color: '#880E4F', bgColor: '#F8BBD0' },
-  'On-Truss': { code: 'TRU', color: '#880E4F', bgColor: '#F48FB1' },
-  'On-Cable Ladder': { code: 'OCL', color: '#004D40', bgColor: '#B2DFDB' },
-  'In-Channel': { code: 'ICH', color: '#004D40', bgColor: '#80CBC4' }
+  'Mobile': { code: 'MBL', ...getLocColors(0) },
+  'Desktop': { code: 'DSK', ...getLocColors(15) },
+  'In-Desk': { code: 'IND', ...getLocColors(30) },
+  'Under-Desk': { code: 'UND', ...getLocColors(45) },
+  'In-Floor': { code: 'INF', ...getLocColors(60) },
+  'On-Floor': { code: 'ONF', ...getLocColors(75) },
+  'In-Wall': { code: 'INW', ...getLocColors(90) },
+  'On-Wall': { code: 'ONW', ...getLocColors(105) },
+  'In-Ceiling': { code: 'INC', ...getLocColors(120) },
+  'On-Ceiling': { code: 'ONC', ...getLocColors(135) },
+  'Above Ceiling': { code: 'ABC', ...getLocColors(150) },
+  'In-Rack': { code: 'INR', ...getLocColors(165) },
+  'Top of rack': { code: 'TOR', ...getLocColors(180) },
+  'Behind Parent Device': { code: 'BPD', ...getLocColors(195) },
+  'DIN-Rail': { code: 'DIN', ...getLocColors(210) },
+  'In-Furniture': { code: 'INU', ...getLocColors(225) },
+  'Under-Furniture': { code: 'UNF', ...getLocColors(240) },
+  'In-Cabinet': { code: 'CAB', ...getLocColors(255) },
+  'Under-Cabinet': { code: 'UCB', ...getLocColors(270) },
+  'On-Pole': { code: 'POL', ...getLocColors(285) },
+  'On-Truss': { code: 'TRU', ...getLocColors(300) },
+  'On-Cable Ladder': { code: 'OCL', ...getLocColors(315) },
+  'In-Channel': { code: 'ICH', ...getLocColors(330) }
 };

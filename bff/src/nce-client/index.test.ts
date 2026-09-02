@@ -26,9 +26,9 @@ describe('NceClient', () => {
     const mockDoc = {
       version: 1,
       design: { designLabel: 'v1' },
-      functional_locations: {},
-      devices: {},
-      racks: {},
+      functional_locations: [],
+      devices: [],
+      racks: [],
       cables: [],
       edges: [],
       geometry: {}
@@ -107,4 +107,21 @@ describe('NceClient', () => {
     vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ error: { code: -32005 } }), { status: 200 }));
     await expect(client.validateDesign('123', 'v1')).rejects.toThrow(GovernanceDisabledError);
   });
+
+  it('throws GovernanceDisabledError on -32005 json error across write paths', async () => {
+    const uuid = '123';
+    // Test authorTopology
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ error: { code: -32005 } }), { status: 200 }));
+    await expect(client.authorTopology(uuid, {})).rejects.toThrow(GovernanceDisabledError);
+
+    // Test authorFunctionalLocation
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ error: { code: -32005 } }), { status: 200 }));
+    await expect(client.authorFunctionalLocation(uuid, {})).rejects.toThrow(GovernanceDisabledError);
+
+    // Test deletePlanned
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ error: { code: -32005 } }), { status: 200 }));
+    await expect(client.deletePlanned(uuid)).rejects.toThrow(GovernanceDisabledError);
+  });
 });
+
+

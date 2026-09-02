@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 import * as yaml from 'js-yaml';
 import { DeviceType } from '../../app/src/model/schema';
 

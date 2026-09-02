@@ -1,5 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
-import { requireAuth } from './auth';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import type { Context, Next } from 'hono';
 
 // Mock getSignedCookie
@@ -15,7 +14,15 @@ vi.mock('hono/cookie', () => {
 });
 
 describe('auth middleware', () => {
+  beforeEach(() => {
+    vi.resetModules();
+  });
+
   it('allows request with valid origin on mutation', async () => {
+    process.env.COOKIE_SECRET = 'test-secret';
+    process.env.NODE_ENV = 'test';
+    const { requireAuth } = await import('./auth');
+
     const c = {
       req: {
         method: 'POST',
@@ -38,6 +45,10 @@ describe('auth middleware', () => {
   });
 
   it('rejects request with invalid origin on mutation', async () => {
+    process.env.COOKIE_SECRET = 'test-secret';
+    process.env.NODE_ENV = 'test';
+    const { requireAuth } = await import('./auth');
+
     const c = {
       req: {
         method: 'POST',
@@ -57,8 +68,9 @@ describe('auth middleware', () => {
   });
 
   it('rejects request with no cookie in production', async () => {
-    const prevEnv = process.env.NODE_ENV;
+    process.env.COOKIE_SECRET = 'test-secret'; // We set this so the module doesn't throw on import for this test
     process.env.NODE_ENV = 'production';
+    const { requireAuth } = await import('./auth');
     
     const c = {
       req: {
@@ -72,8 +84,11 @@ describe('auth middleware', () => {
     await requireAuth(c, next);
     expect(c.text).toHaveBeenCalledWith('Unauthorized', 401);
     expect(next).not.toHaveBeenCalled();
-    
-    process.env.NODE_ENV = prevEnv;
+  });
+
+  it('throws on boot when COOKIE_SECRET is unset in production', async () => {
+    delete process.env.COOKIE_SECRET;
+    process.env.NODE_ENV = 'production';
+    await expect(import('./auth')).rejects.toThrow('COOKIE_SECRET must be set in production');
   });
 });
-

@@ -51,3 +51,34 @@ export {
   type UseBulkGovernedActionsResult,
   type GridBulkActionsProps,
 } from './bulk/GridBulkActions';
+
+export {
+  GridEditor,
+  useGridEditor,
+  type EditorType,
+  type SelectOption,
+  type EditorRenderProps,
+  type EditableColumnDef,
+  type SaveCommitParams,
+  type CommitErrorParams,
+  type CommitSuccessParams,
+  type ActiveEditState,
+  type UseGridEditorOptions,
+  type GridEditorProps,
+} from './edit/GridEditor';
+
+export {
+  exportGrid,
+  exportGridToCsv,
+  exportGridToTsv,
+  exportGridData,
+  downloadGridExport,
+  prepareGridExportPayload,
+  formatCsvValue,
+  isSensitiveColumn,
+  type ExportMaskBehavior,
+  type ExportColumnDef,
+  type ExportFormat,
+  type GridExportOptions,
+  type ExportGridResult,
+} from './export/exportGrid';

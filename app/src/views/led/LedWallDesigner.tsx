@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDocumentStore } from '../../store/documentStore';
@@ -96,56 +97,62 @@ export const LedWallDesigner: React.FC = () => {
     alert('Added to design! Check BOM.');
   };
 
-  return (    <div style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto', fontFamily: 'sans-serif' }}>
-      <h1>{t('nav.ledwall')} <button onClick={handleAddToDesign} style={{ marginLeft: 16, padding: '8px 16px', background: 'var(--md-sys-color-primary)', color: 'var(--md-sys-color-on-primary)', border: 'none', borderRadius: 8, cursor: 'pointer', fontSize: '1rem' }}>Add to Design</button></h1>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '2rem' }}>
-        <div style={{ padding: '1rem', border: '1px solid var(--md-sys-color-outline)', borderRadius: '8px' }}>
-          <h3>Configuration</h3>
+  return (
+    <div style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto', color: 'var(--copper-on-surface)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
+        <h1 style={{ margin: 0 }}>{t('nav.ledwall')}</h1>
+        <button onClick={handleAddToDesign} style={{ padding: '8px 16px', background: 'var(--copper-primary)', color: 'var(--copper-on-primary)', border: 'none', borderRadius: 8, cursor: 'pointer', fontSize: '1rem', fontWeight: 500 }}>
+          Add to Design
+        </button>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginBottom: '2rem' }}>
+        <div style={{ padding: '1.5rem', border: '1px solid var(--copper-outline-variant)', borderRadius: '8px', backgroundColor: 'var(--copper-surface-container)' }}>
+          <h3 style={{ marginTop: 0 }}>Configuration</h3>
           <label style={{ display: 'block', marginBottom: '1rem' }}>
             Model / Preset:
-            <select value={presetName} onChange={handlePresetChange} style={{ display: 'block', width: '100%', marginTop: '4px' }}>
+            <select value={presetName} onChange={handlePresetChange} style={{ display: 'block', width: '100%', marginTop: '4px', padding: '6px 8px', borderRadius: 4, border: '1px solid var(--copper-outline-variant)', background: 'var(--copper-surface)', color: 'var(--copper-on-surface)' }}>
               {Object.keys(PRESETS).map(k => <option key={k} value={k}>{k}</option>)}
             </select>
           </label>
           <div style={{ display: 'flex', gap: '1rem' }}>
-            <label>
+            <label style={{ flex: 1 }}>
               Columns:
-              <input type="number" min="1" value={cols} onChange={e => setCols(parseInt(e.target.value) || 1)} style={{ width: '100%' }} />
+              <input type="number" min="1" value={cols} onChange={e => setCols(parseInt(e.target.value) || 1)} style={{ width: '100%', padding: '6px 8px', boxSizing: 'border-box', borderRadius: 4, border: '1px solid var(--copper-outline-variant)', background: 'var(--copper-surface)', color: 'var(--copper-on-surface)' }} />
             </label>
-            <label>
+            <label style={{ flex: 1 }}>
               Rows:
-              <input type="number" min="1" value={rows} onChange={e => setRows(parseInt(e.target.value) || 1)} style={{ width: '100%' }} />
+              <input type="number" min="1" value={rows} onChange={e => setRows(parseInt(e.target.value) || 1)} style={{ width: '100%', padding: '6px 8px', boxSizing: 'border-box', borderRadius: 4, border: '1px solid var(--copper-outline-variant)', background: 'var(--copper-surface)', color: 'var(--copper-on-surface)' }} />
             </label>
           </div>
-          <hr style={{ margin: '1rem 0' }} />
+          <hr style={{ margin: '1rem 0', borderColor: 'var(--copper-outline-variant)', borderStyle: 'solid', borderWidth: '1px 0 0 0' }} />
           <h4>Cabinet Specs</h4>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.9rem' }}>
-            <label>Width (mm): <input type="number" value={cabinet.widthMm} onChange={e => setCabinet({...cabinet, widthMm: Number(e.target.value)})} style={{width:'100%'}} /></label>
-            <label>Height (mm): <input type="number" value={cabinet.heightMm} onChange={e => setCabinet({...cabinet, heightMm: Number(e.target.value)})} style={{width:'100%'}} /></label>
-            <label>Res X: <input type="number" value={cabinet.resX} onChange={e => setCabinet({...cabinet, resX: Number(e.target.value)})} style={{width:'100%'}} /></label>
-            <label>Res Y: <input type="number" value={cabinet.resY} onChange={e => setCabinet({...cabinet, resY: Number(e.target.value)})} style={{width:'100%'}} /></label>
-            <label>Max Power (W): <input type="number" value={cabinet.maxPowerW} onChange={e => setCabinet({...cabinet, maxPowerW: Number(e.target.value)})} style={{width:'100%'}} /></label>
-            <label>Typ Power (W): <input type="number" value={cabinet.typPowerW} onChange={e => setCabinet({...cabinet, typPowerW: Number(e.target.value)})} style={{width:'100%'}} /></label>
-            <label>Weight (kg): <input type="number" value={cabinet.weightKg} onChange={e => setCabinet({...cabinet, weightKg: Number(e.target.value)})} style={{width:'100%'}} /></label>
+            <label>Width (mm): <input type="number" value={cabinet.widthMm} onChange={e => setCabinet({...cabinet, widthMm: Number(e.target.value)})} style={{width:'100%', padding: '4px 6px', boxSizing: 'border-box', borderRadius: 4, border: '1px solid var(--copper-outline-variant)', background: 'var(--copper-surface)', color: 'var(--copper-on-surface)'}} /></label>
+            <label>Height (mm): <input type="number" value={cabinet.heightMm} onChange={e => setCabinet({...cabinet, heightMm: Number(e.target.value)})} style={{width:'100%', padding: '4px 6px', boxSizing: 'border-box', borderRadius: 4, border: '1px solid var(--copper-outline-variant)', background: 'var(--copper-surface)', color: 'var(--copper-on-surface)'}} /></label>
+            <label>Res X: <input type="number" value={cabinet.resX} onChange={e => setCabinet({...cabinet, resX: Number(e.target.value)})} style={{width:'100%', padding: '4px 6px', boxSizing: 'border-box', borderRadius: 4, border: '1px solid var(--copper-outline-variant)', background: 'var(--copper-surface)', color: 'var(--copper-on-surface)'}} /></label>
+            <label>Res Y: <input type="number" value={cabinet.resY} onChange={e => setCabinet({...cabinet, resY: Number(e.target.value)})} style={{width:'100%', padding: '4px 6px', boxSizing: 'border-box', borderRadius: 4, border: '1px solid var(--copper-outline-variant)', background: 'var(--copper-surface)', color: 'var(--copper-on-surface)'}} /></label>
+            <label>Max Power (W): <input type="number" value={cabinet.maxPowerW} onChange={e => setCabinet({...cabinet, maxPowerW: Number(e.target.value)})} style={{width:'100%', padding: '4px 6px', boxSizing: 'border-box', borderRadius: 4, border: '1px solid var(--copper-outline-variant)', background: 'var(--copper-surface)', color: 'var(--copper-on-surface)'}} /></label>
+            <label>Typ Power (W): <input type="number" value={cabinet.typPowerW} onChange={e => setCabinet({...cabinet, typPowerW: Number(e.target.value)})} style={{width:'100%', padding: '4px 6px', boxSizing: 'border-box', borderRadius: 4, border: '1px solid var(--copper-outline-variant)', background: 'var(--copper-surface)', color: 'var(--copper-on-surface)'}} /></label>
+            <label>Weight (kg): <input type="number" value={cabinet.weightKg} onChange={e => setCabinet({...cabinet, weightKg: Number(e.target.value)})} style={{width:'100%', padding: '4px 6px', boxSizing: 'border-box', borderRadius: 4, border: '1px solid var(--copper-outline-variant)', background: 'var(--copper-surface)', color: 'var(--copper-on-surface)'}} /></label>
           </div>
         </div>
         
-        <div style={{ padding: '1rem', backgroundColor: 'var(--md-sys-color-surface-variant)', borderRadius: '8px' }}>
-          <h3>Specification Output</h3>
+        <div style={{ padding: '1.5rem', backgroundColor: 'var(--copper-surface-container-high)', border: '1px solid var(--copper-outline-variant)', borderRadius: '8px' }}>
+          <h3 style={{ marginTop: 0 }}>Specification Output</h3>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem' }}>
             <tbody>
-              <tr><td style={{ padding: '4px 0', borderBottom: '1px solid #ccc' }}><strong>Dimensions</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid #ccc' }}>{totalWidthM.toFixed(2)} m  {totalHeightM.toFixed(2)} m</td></tr>
-              <tr><td style={{ padding: '4px 0', borderBottom: '1px solid #ccc' }}><strong>Total Cabinets</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid #ccc' }}>{cols * rows}</td></tr>
-              <tr><td style={{ padding: '4px 0', borderBottom: '1px solid #ccc' }}><strong>Total Weight</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid #ccc' }}>{stats.totalWeightKg.toFixed(1)} kg</td></tr>
-              <tr><td style={{ padding: '4px 0', borderBottom: '1px solid #ccc' }}><strong>Resolution</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid #ccc' }}>{cols * cabinet.resX}  {rows * cabinet.resY} ({stats.totalPixels.toLocaleString()} px)</td></tr>
-              <tr><td style={{ padding: '4px 0', borderBottom: '1px solid #ccc' }}><strong>Normal Power Load</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid #ccc' }}>{stats.totalTypPowerW.toLocaleString()} W</td></tr>
-              <tr><td style={{ padding: '4px 0', borderBottom: '1px solid #ccc' }}><strong>Max Power Load</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid #ccc' }}>{stats.totalMaxPowerW.toLocaleString()} W</td></tr>
-              <tr><td style={{ padding: '4px 0', borderBottom: '1px solid #ccc' }}><strong>Thermal (Typ / Max)</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid #ccc' }}>{stats.thermalTypBtu.toLocaleString(undefined, {maximumFractionDigits:0})} / {stats.thermalMaxBtu.toLocaleString(undefined, {maximumFractionDigits:0})} BTU/h</td></tr>
-              <tr><td style={{ padding: '4px 0', borderBottom: '1px solid #ccc' }}><strong>Req. 16A/230V Circuits</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid #ccc', fontWeight: 'bold', color: 'var(--md-sys-color-primary)' }}>{stats.requiredCircuits16A230V}</td></tr>
-              <tr><td style={{ padding: '4px 0', borderBottom: '1px solid #ccc' }}><strong>NovaStar 1G Ports</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid #ccc', fontWeight: 'bold', color: 'var(--md-sys-color-primary)' }}>{stats.requiredNovaStarPorts}</td></tr>
+              <tr><td style={{ padding: '6px 0', borderBottom: '1px solid var(--copper-outline-variant)' }}><strong>Dimensions</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid var(--copper-outline-variant)' }}>{totalWidthM.toFixed(2)} m  {totalHeightM.toFixed(2)} m</td></tr>
+              <tr><td style={{ padding: '6px 0', borderBottom: '1px solid var(--copper-outline-variant)' }}><strong>Total Cabinets</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid var(--copper-outline-variant)' }}>{cols * rows}</td></tr>
+              <tr><td style={{ padding: '6px 0', borderBottom: '1px solid var(--copper-outline-variant)' }}><strong>Total Weight</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid var(--copper-outline-variant)' }}>{stats.totalWeightKg.toFixed(1)} kg</td></tr>
+              <tr><td style={{ padding: '6px 0', borderBottom: '1px solid var(--copper-outline-variant)' }}><strong>Resolution</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid var(--copper-outline-variant)' }}>{cols * cabinet.resX}  {rows * cabinet.resY} ({stats.totalPixels.toLocaleString()} px)</td></tr>
+              <tr><td style={{ padding: '6px 0', borderBottom: '1px solid var(--copper-outline-variant)' }}><strong>Normal Power Load</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid var(--copper-outline-variant)' }}>{stats.totalTypPowerW.toLocaleString()} W</td></tr>
+              <tr><td style={{ padding: '6px 0', borderBottom: '1px solid var(--copper-outline-variant)' }}><strong>Max Power Load</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid var(--copper-outline-variant)' }}>{stats.totalMaxPowerW.toLocaleString()} W</td></tr>
+              <tr><td style={{ padding: '6px 0', borderBottom: '1px solid var(--copper-outline-variant)' }}><strong>Thermal (Typ / Max)</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid var(--copper-outline-variant)' }}>{stats.thermalTypBtu.toLocaleString(undefined, {maximumFractionDigits:0})} / {stats.thermalMaxBtu.toLocaleString(undefined, {maximumFractionDigits:0})} BTU/h</td></tr>
+              <tr><td style={{ padding: '6px 0', borderBottom: '1px solid var(--copper-outline-variant)' }}><strong>Req. 16A/230V Circuits</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid var(--copper-outline-variant)', fontWeight: 'bold', color: 'var(--copper-primary)' }}>{stats.requiredCircuits16A230V}</td></tr>
+              <tr><td style={{ padding: '6px 0', borderBottom: '1px solid var(--copper-outline-variant)' }}><strong>NovaStar 1G Ports</strong></td><td style={{ textAlign: 'right', borderBottom: '1px solid var(--copper-outline-variant)', fontWeight: 'bold', color: 'var(--copper-primary)' }}>{stats.requiredNovaStarPorts}</td></tr>
             </tbody>
           </table>
-          <p style={{ marginTop: '1rem', fontSize: '0.8rem', opacity: 0.8 }}>
+          <p style={{ marginTop: '1.25rem', fontSize: '0.8rem', opacity: 0.8, lineHeight: 1.4 }}>
             Note: Circuits calculated at 16A 230V with 80% safety margin (2944W usable per circuit). NovaStar ports calculated at ~650k pixels per Gigabit Ethernet link.
           </p>
         </div>

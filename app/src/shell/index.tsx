@@ -189,13 +189,26 @@ export function AppShell() {
   const boot = async () => {
     try {
       setError(null);
-      const sessionRes = await fetch('/api/session');
-      if (!sessionRes.ok) throw new Error(`Auth failed: ${sessionRes.status}`);
-      const sessionData = await sessionRes.json();
-      const sess = { tenantId: sessionData.namespace, userId: sessionData.actor };
+      let sess = { tenantId: 'offline', userId: 'offline' };
+      let useFixture = (import.meta as any).env.VITE_COPPER_FIXTURE === '1';
+
+      try {
+        const sessionRes = await fetch('/api/session');
+        if (sessionRes.ok) {
+          const sessionData = await sessionRes.json();
+          sess = { tenantId: sessionData.namespace, userId: sessionData.actor };
+        } else {
+          useFixture = true;
+          console.warn(`Auth failed: ${sessionRes.status}, falling back to offline fixture.`);
+        }
+      } catch (err) {
+        useFixture = true;
+        console.warn("BFF unreachable, falling back to offline fixture.", err);
+      }
+
       setSession(sess);
 
-      if ((import.meta as any).env.VITE_COPPER_FIXTURE === '1') {
+      if (useFixture) {
         const { document: parsedDoc } = readProjectSchema(fixtureReferenceProject as any);
         loadDocument(parsedDoc);
       } else {

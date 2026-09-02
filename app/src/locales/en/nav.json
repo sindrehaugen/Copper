@@ -10,5 +10,6 @@
   "analyser": "Chain Analyser",
   "subarray": "Sub Array Designer",
   "compliance": "Compliance (DSAR)",
+  "bom": "Bill of Materials",
   "ledwall": "LED Wall Designer"
 }

@@ -9,5 +9,7 @@
   "calculators": "Akustikkalkulatorer",
   "analyser": "Kjedeanalysator",
   "subarray": "Subwoofer-Array",
-  "compliance": "Samsvar (DSAR)"
+  "compliance": "Samsvar (DSAR)",
+  "bom": "Materielliste (BOM)",
+  "ledwall": "LED-vegg designer"
 }

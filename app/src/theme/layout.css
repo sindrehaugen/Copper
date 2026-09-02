@@ -127,3 +127,57 @@ html, body {
   padding: 16px !important;
   font-family: var(--md-sys-typescale-body-large-font-family);
 }
+
+/* --- M3 Button System --- */
+.m3-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 20px;
+  border-radius: 20px;
+  border: 1px solid var(--md-sys-color-outline);
+  background-color: transparent;
+  color: var(--md-sys-color-primary);
+  font-family: var(--md-sys-typescale-label-large-font-family, inherit);
+  font-size: var(--md-sys-typescale-label-large-font-size, 0.875rem);
+  font-weight: var(--md-sys-typescale-label-large-font-weight, 500);
+  line-height: var(--md-sys-typescale-label-large-line-height, 1.25rem);
+  letter-spacing: var(--md-sys-typescale-label-large-letter-spacing, 0.1px);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+}
+
+.m3-button:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--md-sys-color-primary) calc(var(--md-sys-state-hover-opacity, 0.08) * 100%), transparent);
+}
+
+.m3-button:active:not(:disabled) {
+  background-color: color-mix(in srgb, var(--md-sys-color-primary) calc(var(--md-sys-state-pressed-opacity, 0.12) * 100%), transparent);
+}
+
+.m3-button:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  border-color: var(--md-sys-color-outline-variant);
+}
+
+.m3-button-filled {
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border: none;
+  box-shadow: var(--md-sys-elevation-level-0);
+}
+
+.m3-button-filled:hover:not(:disabled) {
+  box-shadow: var(--md-sys-elevation-level-1);
+  background-color: color-mix(in srgb, var(--md-sys-color-on-primary) 8%, var(--md-sys-color-primary));
+}
+
+.m3-button-filled:active:not(:disabled) {
+  box-shadow: var(--md-sys-elevation-level-0);
+  background-color: color-mix(in srgb, var(--md-sys-color-on-primary) 12%, var(--md-sys-color-primary));
+}

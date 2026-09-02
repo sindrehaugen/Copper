@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import { useEffect, useRef, CSSProperties, useState } from 'react';
 import { Graph } from '@antv/x6';
 import { register, getProvider } from '@antv/x6-react-shape';
@@ -63,7 +64,7 @@ export function CanvasView({
     const graph = new Graph({
       container: containerRef.current,
       autoResize: true,
-      background: { color: 'var(--md-sys-color-surface-container-lowest)' },
+      background: { color: 'var(--copper-surface-container-lowest)' },
       panning: true,
       mousewheel: { enabled: true, modifiers: ['ctrl', 'meta'] },
       interacting: { nodeMovable: enableWiring, edgeMovable: enableWiring },
@@ -157,13 +158,13 @@ export function CanvasView({
           in: {
             position: 'absolute',
             attrs: {
-              circle: { r: 4, magnet: true, stroke: 'var(--md-sys-color-outline)', fill: 'var(--md-sys-color-surface)', strokeWidth: 1 }
+              circle: { r: 4, magnet: true, stroke: 'var(--copper-outline)', fill: 'var(--copper-surface)', strokeWidth: 1 }
             }
           },
           out: {
             position: 'absolute',
             attrs: {
-              circle: { r: 4, magnet: true, stroke: 'var(--md-sys-color-outline)', fill: 'var(--md-sys-color-surface)', strokeWidth: 1 }
+              circle: { r: 4, magnet: true, stroke: 'var(--copper-outline)', fill: 'var(--copper-surface)', strokeWidth: 1 }
             }
           }
         }
@@ -175,7 +176,7 @@ export function CanvasView({
       tools: ['vertices', 'segments'],
       attrs: {
         line: {
-          stroke: 'var(--md-sys-color-outline)',
+          stroke: 'var(--copper-outline)',
           strokeWidth: 2,
           targetMarker: { name: 'block', width: 6, height: 6 }
         }
@@ -309,25 +310,28 @@ export function CanvasView({
       {rejectedDrop && (
         <div style={{
           position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
-          background: 'var(--md-sys-color-surface-container-high)', border: '1px solid var(--md-sys-color-outline)', padding: 24, borderRadius: 12,
-          boxShadow: 'var(--md-sys-elevation-level-4)', zIndex: 10000, color: 'var(--md-sys-color-on-surface)'
+          background: 'var(--copper-surface-container-high)', border: '1px solid var(--copper-outline)', padding: 24, borderRadius: 12,
+          boxShadow: 'var(--md-sys-elevation-level-4)', zIndex: 10000, color: 'var(--copper-on-surface)',
+          maxWidth: 'min(480px, 90vw)', boxSizing: 'border-box'
         }}>
-          <h3 style={{ margin: '0 0 16px 0', color: 'var(--md-sys-color-error)' }}>Incompatible Connection</h3>
-          <p style={{ margin: '0 0 16px 0' }}>
+          <h3 style={{ margin: '0 0 16px 0', color: 'var(--copper-error)' }}>Incompatible Connection</h3>
+          <p style={{ margin: '0 0 16px 0', lineHeight: 1.5 }}>
             Cannot connect <b>{rejectedDrop.srcPortType}</b> ({rejectedDrop.srcDevice}) to <b>{rejectedDrop.tgtPortType}</b> ({rejectedDrop.tgtDevice}).
           </p>
           {rejectedDrop.suggestedAdapters.length > 0 && (
             <div style={{ marginBottom: 16 }}>
               <strong style={{ display: 'block', marginBottom: 8 }}>Suggested Adapters:</strong>
-              {rejectedDrop.suggestedAdapters.map((a: string, i: number) => (
-                <button key={i} onClick={() => handleInsertAdapter(a)} style={{ padding: '4px 12px', background: 'var(--md-sys-color-primary-container)', color: 'var(--md-sys-color-on-primary-container)', border: 'none', borderRadius: 4, marginRight: 8, cursor: 'pointer' }}>
-                  {a}
-                </button>
-              ))}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                {rejectedDrop.suggestedAdapters.map((a: string, i: number) => (
+                  <button key={i} onClick={() => handleInsertAdapter(a)} style={{ padding: '6px 14px', background: 'var(--copper-primary-container)', color: 'var(--copper-on-primary-container)', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 500 }}>
+                    {a}
+                  </button>
+                ))}
+              </div>
             </div>
           )}
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <button onClick={() => setRejectedDrop(null)} style={{ padding: '8px 16px', background: 'var(--md-sys-color-primary)', color: 'var(--md-sys-color-on-primary)', border: 'none', borderRadius: 8, cursor: 'pointer' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
+            <button onClick={() => setRejectedDrop(null)} style={{ padding: '8px 16px', background: 'var(--copper-primary)', color: 'var(--copper-on-primary)', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 500 }}>
               Dismiss
             </button>
           </div>

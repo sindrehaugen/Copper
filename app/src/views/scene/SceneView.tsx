@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls, Html } from '@react-three/drei';
 import { useDocumentStore } from '../../store';
@@ -39,7 +40,7 @@ function ExportButton() {
         onClick={handleExport}
         className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm shadow-md"
       >
-        Download glTF
+        {t(\'common.downloadGltf\')}
       </button>
     </Html>
   );

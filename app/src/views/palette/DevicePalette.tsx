@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useState, useMemo } from 'react';
 import { useDocumentStore } from '../../store/documentStore';
 
@@ -49,13 +50,13 @@ export function DevicePalette() {
   };
 
   if (!document) {
-    return <div data-testid="device-palette-empty">No document loaded</div>;
+    return <div data-testid="device-palette-empty">{t('common.noDocumentLoaded')}</div>;
   }
 
   return (
     <div style={{ width: 280, borderRight: '1px solid var(--md-sys-color-outline-variant)', background: 'var(--md-sys-color-surface)', display: 'flex', flexDirection: 'column', zIndex: 10 }}>
       <div style={{ padding: 16, borderBottom: '1px solid var(--md-sys-color-outline-variant)' }}>
-        <h3 className="m3-title-medium" style={{ margin: '0 0 16px 0' }}>Device Palette</h3>
+        <h3 className="m3-title-medium" style={{ margin: '0 0 16px 0' }}>{t('common.devicePalette')}</h3>
         <input 
           type="text"
           className="m3-text-field"
@@ -68,7 +69,7 @@ export function DevicePalette() {
       
       <div style={{ flex: 1, overflowY: 'auto', padding: 8 }}>
         <p className="m3-label-small" style={{ margin: '0 8px 8px 8px', color: 'var(--md-sys-color-on-surface-variant)' }}>
-          {filteredTypes.length} types found
+          {filteredTypes.length} {t(\'common.typesFound\')}
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {filteredTypes.map(dt => (

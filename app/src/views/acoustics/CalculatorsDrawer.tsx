@@ -97,7 +97,7 @@ export const CalculatorsDrawer: React.FC = () => {
       <button className="m3-button m3-button-text" onClick={() => setIsOpen(false)} style={{ float: 'right' }}>X</button>
       <div className="m3-content-padding" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       <div className="m3-card m3-content-padding">
-        <h2>{t('acoustics.title', 'Acoustics calculators')}</h2>
+        <h2>{t('acoustics.title')}</h2>
         <p>
           <Trans i18nKey="acoustics.credit">
             These calculators are based on the work of <a href="https://www.merlijnvanveen.nl/en/calculators" target="_blank" rel="noopener">Merlijn van Veen</a>.
@@ -107,31 +107,31 @@ export const CalculatorsDrawer: React.FC = () => {
       </div>
 
       <div className="m3-card m3-content-padding">
-        <h3>{t('acoustics.environment', 'Environment')}</h3>
+        <h3>{t('acoustics.environment')}</h3>
         <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
           <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            {t('acoustics.temp', 'Temperature (°C)')}
+            {t('acoustics.temp')}
             <input type="number" step="0.5" value={T_C} onChange={(e) => setT_C(Number(e.target.value))} />
           </label>
           <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            {t('acoustics.rh', 'Relative humidity (%)')}
+            {t('acoustics.rh')}
             <input type="number" step="1" min="0" max="100" value={RH} onChange={(e) => setRH(Number(e.target.value))} />
           </label>
           <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            {t('acoustics.pressure', 'Atmospheric pressure (Pa)')}
+            {t('acoustics.pressure')}
             <input type="number" step="100" value={p_atm} onChange={(e) => setP_atm(Number(e.target.value))} />
           </label>
         </div>
         <p style={{ marginTop: '16px', fontWeight: 'bold' }}>
-          {t('acoustics.speed', 'Speed of sound')} c = {fmt(c, 2)} m/s
+          {t('acoustics.speed')} c = {fmt(c, 2)} m/s
         </p>
       </div>
 
       <div className="m3-card m3-content-padding">
-        <h3>{t('acoustics.wavelength_period', 'Wavelength & period')}</h3>
+        <h3>{t('acoustics.wavelength_period')}</h3>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
           <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            {t('acoustics.frequency', 'Frequency (Hz)')}
+            {t('acoustics.frequency')}
             <input type="number" step="1" value={freq} onChange={(e) => setFreq(Number(e.target.value))} />
           </label>
           <div>
@@ -143,18 +143,18 @@ export const CalculatorsDrawer: React.FC = () => {
       </div>
 
       <div className="m3-card m3-content-padding">
-        <h3>{t('acoustics.dist_delay', 'Distance ↔ delay')}</h3>
+        <h3>{t('acoustics.dist_delay')}</h3>
         <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
             <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              {t('acoustics.distance', 'Distance (m)')}
+              {t('acoustics.distance')}
               <input type="number" step="0.1" value={distM} onChange={(e) => setDistM(Number(e.target.value))} />
             </label>
             <div>delay = <strong>{fmt(delayMs, 2)} ms</strong></div>
           </div>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
             <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              {t('acoustics.delay', 'Delay (ms)')}
+              {t('acoustics.delay')}
               <input type="number" step="0.1" value={delayInput} onChange={(e) => setDelayInput(Number(e.target.value))} />
             </label>
             <div>dist = <strong>{fmt(distFromDelay, 2)} m</strong></div>
@@ -163,41 +163,41 @@ export const CalculatorsDrawer: React.FC = () => {
       </div>
 
       <div className="m3-card m3-content-padding">
-        <h3>{t('acoustics.phase_delay', 'Phase ↔ delay')}</h3>
+        <h3>{t('acoustics.phase_delay')}</h3>
         <div style={{ display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
             <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              {t('acoustics.frequency', 'Frequency (Hz)')}
+              {t('acoustics.frequency')}
               <input type="number" step="1" value={phaseFreq} onChange={(e) => setPhaseFreq(Number(e.target.value))} />
             </label>
             <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              {t('acoustics.delay', 'Delay (ms)')}
+              {t('acoustics.delay')}
               <input type="number" step="0.1" value={phaseDelayMs} onChange={(e) => setPhaseDelayMs(Number(e.target.value))} />
             </label>
             <div>phase = <strong>{fmt(phaseDeg, 1)}°</strong></div>
           </div>
           <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
             <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              {t('acoustics.frequency', 'Frequency (Hz)')}
+              {t('acoustics.frequency')}
               <input type="number" step="1" value={phaseFreq} onChange={(e) => setPhaseFreq(Number(e.target.value))} />
             </label>
             <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-              {t('acoustics.phase', 'Phase (°)')}
+              {t('acoustics.phase')}
               <input type="number" step="5" value={phaseInputDeg} onChange={(e) => setPhaseInputDeg(Number(e.target.value))} />
             </label>
             <div>delay = <strong>{fmt(delayFromPhaseMs, 3)} ms</strong></div>
           </div>
         </div>
         <p style={{ opacity: 0.7, marginTop: '8px', fontSize: '0.875rem' }}>
-          {t('acoustics.phase_sign', 'Sign convention: a positive delay produces a negative (lagging) phase shift.')}
+          {t('acoustics.phase_sign')}
         </p>
       </div>
 
       <div className="m3-card m3-content-padding">
-        <h3>{t('acoustics.air_absorption', 'Air absorption (ISO 9613-1)')}</h3>
+        <h3>{t('acoustics.air_absorption')}</h3>
         <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginBottom: '16px' }}>
           <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            {t('acoustics.prop_distance', 'Propagation distance (m)')}
+            {t('acoustics.prop_distance')}
             <input type="number" step="1" value={absorbDist} onChange={(e) => setAbsorbDist(Number(e.target.value))} />
           </label>
           <div style={{ opacity: 0.7, fontSize: '0.875rem' }}>
@@ -225,22 +225,22 @@ export const CalculatorsDrawer: React.FC = () => {
       </div>
 
       <div className="m3-card m3-content-padding">
-        <h3>{t('acoustics.floor_bounce', 'Floor bounce (comb filter)')}</h3>
+        <h3>{t('acoustics.floor_bounce')}</h3>
         <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginBottom: '16px' }}>
           <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            {t('acoustics.hz_dist', 'Horizontal distance (m)')}
+            {t('acoustics.hz_dist')}
             <input type="number" step="0.1" value={fbDist} onChange={(e) => setFbDist(Number(e.target.value))} />
           </label>
           <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            {t('acoustics.src_height', 'Source height (m)')}
+            {t('acoustics.src_height')}
             <input type="number" step="0.1" value={fbSrcH} onChange={(e) => setFbSrcH(Number(e.target.value))} />
           </label>
           <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            {t('acoustics.mic_height', 'Mic height (m)')}
+            {t('acoustics.mic_height')}
             <input type="number" step="0.1" value={fbMicH} onChange={(e) => setFbMicH(Number(e.target.value))} />
           </label>
           <label style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            {t('acoustics.reflection', 'Reflection coeff')}
+            {t('acoustics.reflection')}
             <input type="number" step="0.1" min="0" max="1" value={fbReflect} onChange={(e) => setFbReflect(Number(e.target.value))} />
           </label>
         </div>

@@ -38,8 +38,10 @@ function NavItem({ to, label }: { to: string; label: string }) {
   );
 }
 
+import { useTranslation } from 'react-i18next';
+
 function Layout({ children }: { children: ReactNode }) {
-  
+  const { t } = useTranslation();
   const session = useContext(SessionContext);
   const isSaving = useDocumentStore(state => state.isSaving);
   const syncConflict = useDocumentStore(state => state.syncConflict);
@@ -60,12 +62,12 @@ function Layout({ children }: { children: ReactNode }) {
       <nav className="m3-nav-drawer">
         <div className="m3-nav-header">Copper</div>
         <ul>
-          <NavItem to="/" label="Canvas" />
-          <NavItem to="/rack" label="Rack Elevation" />
-          <NavItem to="/schedule" label="Cable Schedule" />
-          <NavItem to="/3d" label="3D Walkthrough" />
-          <NavItem to="/bom" label="BOM & Designators" />
-          <NavItem to="/compliance" label="Compliance (DSAR)" />
+          <NavItem to="/" label={t('nav.canvas')} />
+          <NavItem to="/rack" label={t('nav.rack')} />
+          <NavItem to="/schedule" label={t('nav.schedule')} />
+          <NavItem to="/3d" label={t('nav.walkthrough')} />
+          <NavItem to="/bom" label={t('nav.bom')} />
+          <NavItem to="/compliance" label={t('nav.compliance')} />
         </ul>
         <div className="session-info">
           {session?.tenantId} • {session?.userId}
@@ -115,7 +117,7 @@ export function ConnectedCanvasView() {
     '--copper-header-height': `${settings.headerFontSize + 14}px`,
   } as React.CSSProperties;
 
-  if (!document) return <div style={{padding: '2rem'}}>Loading document...</div>;
+  if (!document) return <div style={{padding: '2rem'}}>{t(\'common.loadingDocument\')}</div>;
   return (
     <div style={{ width: '100%', height: '100%', position: 'relative', ...cssVars }}>
       <SettingsPanel />
@@ -126,7 +128,7 @@ export function ConnectedCanvasView() {
 
 function ConnectedRackElevationView() {
   const document = useDocumentStore(state => state.document);
-  if (!document) return <div style={{padding: '2rem'}}>Loading document...</div>;
+  if (!document) return <div style={{padding: '2rem'}}>{t(\'common.loadingDocument\')}</div>;
   const firstRackId = document.racks[0]?.id ?? '';
   const geometryMap = {};
   return <RackElevationView doc={document} geometryMap={geometryMap} selectedRackId={firstRackId} />;
@@ -134,7 +136,7 @@ function ConnectedRackElevationView() {
 
 function ConnectedCableScheduleView() {
   const document = useDocumentStore(state => state.document);
-  if (!document) return <div style={{padding: '2rem'}}>Loading document...</div>;
+  if (!document) return <div style={{padding: '2rem'}}>{t(\'common.loadingDocument\')}</div>;
   return <CableScheduleView document={document} />;
 }
 

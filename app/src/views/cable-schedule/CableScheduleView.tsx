@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React from 'react';
 import type { DesignDocument } from '../../model/schema';
 import { exportCablesToCsv } from '../../export/csv';
@@ -25,18 +26,18 @@ export const CableScheduleView: React.FC<CableScheduleViewProps> = ({ document }
   return (
     <div className="cable-schedule-view m3-content-padding" style={{ overflowY: 'auto', height: '100%' }}>
       <div className="header-actions" style={{ marginBottom: 16 }}>
-        <button className="m3-button" onClick={handleExport}>Export to CSV</button>
+        <button className="m3-button" onClick={handleExport}>{t('common.exportToCSV')}</button>
       </div>
       <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', background: 'var(--copper-surface)' }}>
         <thead>
           <tr style={{ borderBottom: '2px solid var(--copper-outline)' }}>
-            <th style={{ padding: 8 }}>Cable ID</th>
-            <th style={{ padding: 8 }}>Source</th>
-            <th style={{ padding: 8 }}>Port</th>
-            <th style={{ padding: 8 }}>Target</th>
-            <th style={{ padding: 8 }}>Port</th>
-            <th style={{ padding: 8 }}>Type</th>
-            <th style={{ padding: 8 }}>Length (m)</th>
+            <th style={{ padding: 8 }}>{t('common.cableID')}</th>
+            <th style={{ padding: 8 }}>{t('common.source')}</th>
+            <th style={{ padding: 8 }}>{t('common.port')}</th>
+            <th style={{ padding: 8 }}>{t('common.target')}</th>
+            <th style={{ padding: 8 }}>{t('common.port')}</th>
+            <th style={{ padding: 8 }}>{t('common.type')}</th>
+            <th style={{ padding: 8 }}>{t('common.lengthM')}</th>
           </tr>
         </thead>
         <tbody>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React, { useState, useRef } from 'react';
 import { useDocumentStore } from '../../store/documentStore';
 
@@ -133,10 +134,10 @@ export function FloorplanMode() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div style={{ padding: '8px', borderBottom: '1px solid var(--md-sys-color-outline-variant)', background: 'var(--md-sys-color-surface)' }}>
-        <button onClick={() => setMode('select')} style={{ fontWeight: mode === 'select' ? 'bold' : 'normal', marginRight: 8 }}>Select / Move</button>
-        <button onClick={() => setMode('viewer')} style={{ fontWeight: mode === 'viewer' ? 'bold' : 'normal', marginRight: 8 }}>+ Viewer Zone</button>
-        <button onClick={() => setMode('participant')} style={{ fontWeight: mode === 'participant' ? 'bold' : 'normal', marginRight: 8 }}>+ Participant Zone</button>
-        <button onClick={() => setMode('task')} style={{ fontWeight: mode === 'task' ? 'bold' : 'normal', marginRight: 8 }}>+ Task Zone</button>
+        <button onClick={() => setMode('select')} style={{ fontWeight: mode === 'select' ? 'bold' : 'normal', marginRight: 8 }}>{t(\'common.selectMove\')}</button>
+        <button onClick={() => setMode('viewer')} style={{ fontWeight: mode === 'viewer' ? 'bold' : 'normal', marginRight: 8 }}>{t(\'common.addViewerZone\')}</button>
+        <button onClick={() => setMode('participant')} style={{ fontWeight: mode === 'participant' ? 'bold' : 'normal', marginRight: 8 }}>{t(\'common.addParticipantZone\')}</button>
+        <button onClick={() => setMode('task')} style={{ fontWeight: mode === 'task' ? 'bold' : 'normal', marginRight: 8 }}>{t(\'common.addTaskZone\')}</button>
       </div>
       
       <div 

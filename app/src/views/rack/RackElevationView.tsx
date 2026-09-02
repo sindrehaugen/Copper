@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { DesignDocument, Device } from '../../model/schema';
 import { computeRackElevations } from '../../model/rack-view';
@@ -23,7 +24,7 @@ export const RackElevationView: React.FC<RackElevationViewProps> = ({
   const elevation = elevations.find((e) => e.rackId === selectedRackId);
 
   if (!elevation) {
-    return <div data-testid="rack-not-found">Rack not found</div>;
+    return <div data-testid="rack-not-found">{t(\'common.rackNotFound\')}</div>;
   }
 
   
@@ -137,7 +138,7 @@ export const RackElevationView: React.FC<RackElevationViewProps> = ({
   return (
     <div style={{ display: 'flex', gap: '20px', padding: '20px', fontFamily: 'sans-serif' }}>
       <div style={{ flex: 1, border: '2px solid var(--md-sys-color-outline)', borderRadius: '4px', overflow: 'hidden' }}>
-        <h3 style={{ textAlign: 'center', backgroundColor: 'var(--md-sys-color-inverse-surface)', color: 'var(--md-sys-color-inverse-on-surface)', margin: 0, padding: '10px' }}>Unassigned Devices</h3>
+        <h3 style={{ textAlign: 'center', backgroundColor: 'var(--md-sys-color-inverse-surface)', color: 'var(--md-sys-color-inverse-on-surface)', margin: 0, padding: '10px' }}>{t(\'common.unassignedDevices\')}</h3>
         <div style={{ display: 'flex', flexDirection: 'column', padding: '10px', gap: '5px' }} data-testid="unassigned-list">
           {unassignedDevices.map(device => (
              <div 
@@ -154,14 +155,14 @@ export const RackElevationView: React.FC<RackElevationViewProps> = ({
       </div>
 
       <div style={{ flex: 1, border: '2px solid var(--md-sys-color-outline)', borderRadius: '4px', overflow: 'hidden' }}>
-        <h3 style={{ textAlign: 'center', backgroundColor: 'var(--md-sys-color-inverse-surface)', color: 'var(--md-sys-color-inverse-on-surface)', margin: 0, padding: '10px' }}>Front Face</h3>
+        <h3 style={{ textAlign: 'center', backgroundColor: 'var(--md-sys-color-inverse-surface)', color: 'var(--md-sys-color-inverse-on-surface)', margin: 0, padding: '10px' }}>{t(\'common.frontFace\')}</h3>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {uNumbers.map(u => renderSlot(u, 'front'))}
         </div>
       </div>
       
       <div style={{ flex: 1, border: '2px solid var(--md-sys-color-outline)', borderRadius: '4px', overflow: 'hidden' }}>
-        <h3 style={{ textAlign: 'center', backgroundColor: 'var(--md-sys-color-inverse-surface)', color: 'var(--md-sys-color-inverse-on-surface)', margin: 0, padding: '10px' }}>Rear Face</h3>
+        <h3 style={{ textAlign: 'center', backgroundColor: 'var(--md-sys-color-inverse-surface)', color: 'var(--md-sys-color-inverse-on-surface)', margin: 0, padding: '10px' }}>{t(\'common.rearFace\')}</h3>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           {uNumbers.map(u => renderSlot(u, 'rear'))}
         </div>

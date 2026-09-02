@@ -25,20 +25,20 @@ export const DsarSurface: React.FC = () => {
   }, []);
 
   const requestExport = async () => {
-    setExportStatus(t('compliance.exportPending', 'Request Pending'));
+    setExportStatus(t('compliance.exportPending'));
     try {
       const res = await fetch('/api/me/dsar/export');
       if (!res.ok) {
         if (res.status === 404) {
-          setExportStatus(t('compliance.unavailable', 'Temporarily Unavailable (HS-13)'));
+          setExportStatus(t('compliance.unavailable'));
         } else {
-          setExportStatus(t('compliance.exportFailed', 'Export Failed'));
+          setExportStatus(t('compliance.exportFailed'));
         }
         return;
       }
-      setExportStatus(t('compliance.exportSuccess', 'Data Ready to Download'));
+      setExportStatus(t('compliance.exportSuccess'));
     } catch {
-      setExportStatus(t('compliance.exportFailed', 'Export Failed'));
+      setExportStatus(t('compliance.exportFailed'));
     }
   };
 
@@ -48,7 +48,7 @@ export const DsarSurface: React.FC = () => {
 
   const executeDeletion = async (override: boolean) => {
     setShowConfirm(false);
-    setDeleteStatus(t('compliance.deletePending', 'Request Pending'));
+    setDeleteStatus(t('compliance.deletePending'));
     try {
       const res = await fetch('/api/me/dsar/erase', { 
         method: 'POST',
@@ -57,45 +57,45 @@ export const DsarSurface: React.FC = () => {
       });
       if (!res.ok) {
         if (res.status === 404) {
-          setDeleteStatus(t('compliance.unavailable', 'Temporarily Unavailable (HS-13)'));
+          setDeleteStatus(t('compliance.unavailable'));
         } else {
-          setDeleteStatus(t('compliance.deleteFailed', 'Deletion Failed'));
+          setDeleteStatus(t('compliance.deleteFailed'));
         }
         return;
       }
-      setDeleteStatus(t('compliance.deleteSuccess', 'Deletion Request Received'));
+      setDeleteStatus(t('compliance.deleteSuccess'));
     } catch {
-      setDeleteStatus(t('compliance.deleteFailed', 'Deletion Failed'));
+      setDeleteStatus(t('compliance.deleteFailed'));
     }
   };
 
   return (
     <div className="dsar-surface">
-      <h2>{t('compliance.title', 'Data Subject Access Request (DSAR) & Compliance')}</h2>
+      <h2>{t('compliance.title')}</h2>
       
       <div className="dsar-section">
-        <h3>{t('compliance.exportTitle', 'Request Your Data')}</h3>
-        <button onClick={requestExport} data-testid="export-btn" className="m3-btn m3-btn-outlined">{t('compliance.exportButton', 'Request Data Export')}</button>
+        <h3>{t('compliance.exportTitle')}</h3>
+        <button onClick={requestExport} data-testid="export-btn" className="m3-btn m3-btn-outlined">{t('compliance.exportButton')}</button>
         {exportStatus && <p data-testid="export-status">{exportStatus}</p>}
       </div>
 
       <div className="dsar-section" style={{ marginTop: '24px' }}>
-        <h3>{t('compliance.deleteTitle', 'Request Account Deletion')}</h3>
-        <button onClick={handleDeletionAttempt} data-testid="delete-btn" className="m3-btn m3-btn-filled" style={{ backgroundColor: 'var(--md-sys-color-error)' }}>{t('compliance.deleteButton', 'Request Deletion')}</button>
+        <h3>{t('compliance.deleteTitle')}</h3>
+        <button onClick={handleDeletionAttempt} data-testid="delete-btn" className="m3-btn m3-btn-filled" style={{ backgroundColor: 'var(--md-sys-color-error)' }}>{t('compliance.deleteButton')}</button>
         {deleteStatus && <p data-testid="delete-status">{deleteStatus}</p>}
       </div>
 
       <div className="dsar-section" style={{ marginTop: '32px' }}>
-        <h3>{t('compliance.provenanceTitle', 'System Provenance')}</h3>
+        <h3>{t('compliance.provenanceTitle')}</h3>
         <ProvenanceViewer records={provenanceRecords} />
       </div>
 
       {showConfirm && (
         <AiConfirmDialog
-          title={t('compliance.confirmTitle', 'Confirm Account Deletion')}
-          proposedAction={t('compliance.confirmAction', 'Erase all PII and design documents associated with this tenant.')}
-          confidenceString={t('compliance.confirmConfidence', 'High')}
-          provenance={t('compliance.confirmProvenance', 'GDPR Article 17 Right to Erasure.')}
+          title={t('compliance.confirmTitle')}
+          proposedAction={t('compliance.confirmAction')}
+          confidenceString={t('compliance.confirmConfidence')}
+          provenance={t('compliance.confirmProvenance')}
           onConfirm={executeDeletion}
           onReject={() => setShowConfirm(false)}
         />

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ConnectedCanvasView } from '../../shell/index';
 import { SceneView } from '../scene/SceneView';
@@ -43,7 +44,7 @@ export function DesignWorkspace() {
   ];
 
   if (!document) {
-    return <div className="m3-content-padding">Loading document...</div>;
+    return <div className="m3-content-padding">{t('common.loadingDocument')}</div>;
   }
 
   return (
@@ -76,7 +77,7 @@ export function DesignWorkspace() {
             onClick={handleExportDXF}
             style={{ padding: '8px 16px', background: 'var(--copper-primary)', color: 'var(--copper-on-primary)', border: 'none', borderRadius: 8, cursor: 'pointer' }}
           >
-            Export DXF
+            {t('common.exportDXF')}
           </button>
         </div>
       </div>
@@ -88,16 +89,16 @@ export function DesignWorkspace() {
             background: 'var(--copper-surface-container-lowest)', zIndex: 100,
             display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'
           }}>
-            <h2 style={{ color: 'var(--copper-on-surface)' }}>Design from Intent</h2>
-            <p style={{ color: 'var(--copper-on-surface-variant)', marginBottom: 32 }}>Choose a generative starting point</p>
+            <h2 style={{ color: 'var(--copper-on-surface)' }}>{t('common.designFromIntent')}</h2>
+            <p style={{ color: 'var(--copper-on-surface-variant)', marginBottom: 32 }}>{t('common.chooseAGenerativeStartingPoint')}</p>
             <div style={{ display: 'flex', gap: 16 }}>
               <div style={{ padding: 24, background: 'var(--copper-surface-container)', borderRadius: 12, border: '1px solid var(--copper-outline)', cursor: 'pointer' }}>
-                <h3>100V Paging Zone</h3>
-                <p style={{ color: 'var(--copper-on-surface-variant)' }}>Amp + 8 Ceiling Speakers</p>
+                <h3>{t('common.100VPagingZone')}</h3>
+                <p style={{ color: 'var(--copper-on-surface-variant)' }}>{t('common.amp8CeilingSpeakers')}</p>
               </div>
               <div style={{ padding: 24, background: 'var(--copper-surface-container)', borderRadius: 12, border: '1px solid var(--copper-outline)', cursor: 'pointer' }}>
-                <h3>Boardroom VC</h3>
-                <p style={{ color: 'var(--copper-on-surface-variant)' }}>DSP, Amps, PTZ Camera, Mics</p>
+                <h3>{t('common.boardroomVC')}</h3>
+                <p style={{ color: 'var(--copper-on-surface-variant)' }}>{t('common.dSPAmpsPTZCameraMics')}</p>
               </div>
             </div>
           </div>

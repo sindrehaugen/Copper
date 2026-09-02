@@ -111,7 +111,7 @@ export function SubArrayPanel() {
         className="m3-button"
         onClick={() => setIsOpen(true)}
       >
-        {t('subarray.open', '⚡ Sub Array Designer')}
+        {t('subarray.open')}
       </button>
     );
   }
@@ -223,7 +223,7 @@ export function SubArrayPanel() {
           Math by <a href="https://www.merlijnvanveen.nl/" target="_blank" rel="noreferrer" style={{ color: 'inherit' }}>Merlijn van Veen</a>
         </div>
         <button className="m3-button m3-button-primary" onClick={handlePlace} disabled={!selectedSubId}>
-          {t('subarray.place', 'Place in Project')}
+          {t('subarray.place')}
         </button>
       </div>
     </div>

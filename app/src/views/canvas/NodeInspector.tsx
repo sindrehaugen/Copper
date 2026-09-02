@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React, { useMemo } from 'react';
 import { useDocumentStore } from '../../store/documentStore';
 import { validateAudioLines, suggestAmpsForNode } from '../../validation/audio-line';
@@ -61,7 +62,7 @@ export const NodeInspector: React.FC = () => {
           <strong>{finding.severity}:</strong> {finding.message}
           {suggestions.length > 0 && (
             <div style={{ marginTop: 8 }}>
-              <div className="m3-label-small">Suggested fixes:</div>
+              <div className="m3-label-small">{t('common.suggestedFixes')}</div>
               {suggestions.map(s => (
                 <button
                   key={s.suggestedAmpId as string}
@@ -79,7 +80,7 @@ export const NodeInspector: React.FC = () => {
 
       {alternatives.length > 0 && (
         <div style={{ marginTop: 16 }}>
-          <h4 className="m3-label-medium" style={{ marginBottom: 8 }}>Alternatives by Capability</h4>
+          <h4 className="m3-label-medium" style={{ marginBottom: 8 }}>{t('common.alternativesByCapability')}</h4>
           {alternatives.map((alt: any) => (
             <div key={alt.id as string} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--copper-surface-container)', padding: '8px 12px', borderRadius: 4, marginBottom: 4 }}>
               <span className="m3-body-small">{alt.manufacturer} {alt.model}</span>
@@ -88,7 +89,7 @@ export const NodeInspector: React.FC = () => {
                 className="m3-button m3-button-text"
                 style={{ padding: '0 8px', minWidth: 'auto', height: 24, fontSize: '0.75rem' }}
               >
-                Swap
+                {t('common.swap')}
               </button>
             </div>
           ))}

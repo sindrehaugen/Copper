@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { PHYSICAL_LOCATIONS } from '../../../model/locations';
 
@@ -26,7 +27,7 @@ export const LegendNodeComponent: React.FC = () => {
         fontWeight: 'bold',
         textAlign: 'center'
       }}>
-        Physical Locations Legend
+        {t(\'common.physicalLocationsLegend\')}
       </div>
       <div style={{
         display: 'grid',

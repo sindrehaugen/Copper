@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { useLocale } from '../../locales/i18n';
 
@@ -6,9 +7,9 @@ export const SettingsPanel: React.FC = () => {
 
   return (
     <div>
-      <h2>Settings</h2>
+      <h2>{t('common.settings')}</h2>
       <div>
-        <label>Language:
+        <label>{t('common.language')}
           <input 
             data-testid="language-input"
             value={language} 
@@ -17,7 +18,7 @@ export const SettingsPanel: React.FC = () => {
         </label>
       </div>
       <div>
-        <label>Region:
+        <label>{t('common.region')}
           <input 
             data-testid="region-input"
             value={region} 
@@ -26,7 +27,7 @@ export const SettingsPanel: React.FC = () => {
         </label>
       </div>
       <div>
-        <label>Timezone:
+        <label>{t('common.timezone')}
           <input 
             data-testid="timezone-input"
             value={timezone} 

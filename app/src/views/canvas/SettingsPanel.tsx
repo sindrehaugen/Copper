@@ -1,8 +1,10 @@
 import React from 'react';
 import { useSettingsStore } from '../../store/settingsStore';
+import { useTranslation } from 'react-i18next';
 
 export const SettingsPanel: React.FC = () => {
   const settings = useSettingsStore();
+  const { t } = useTranslation();
 
   return (
     <div className="copper-settings-panel" style={{
@@ -16,12 +18,12 @@ export const SettingsPanel: React.FC = () => {
       width: '280px'
     }}>
       <h3 style={{ margin: 0, fontSize: 'var(--md-sys-typescale-title-small-font-size)', borderBottom: '1px solid var(--md-sys-color-outline-variant)', paddingBottom: '8px' }}>
-        Canvas Settings
+        {t('common.canvasSettings')}
       </h3>
       
       <div>
         <label style={{ display: 'block', marginBottom: '8px', fontSize: 'var(--md-sys-typescale-label-medium-font-size)', color: 'var(--md-sys-color-on-surface-variant)' }}>
-          Wire Spacing: {settings.wireSpacing}px
+          {t('common.wireSpacing')} {settings.wireSpacing}px
         </label>
         <input 
           type="range" aria-label="Canvas setting parameter" min="2" max="40" value={settings.wireSpacing}
@@ -32,7 +34,7 @@ export const SettingsPanel: React.FC = () => {
 
       <div>
         <label style={{ display: 'block', marginBottom: '8px', fontSize: 'var(--md-sys-typescale-label-medium-font-size)', color: 'var(--md-sys-color-on-surface-variant)' }}>
-          Terminal Padding: {settings.portPadding}px
+          {t('common.terminalPadding')} {settings.portPadding}px
         </label>
         <input 
           type="range" aria-label="Canvas setting parameter" min="10" max="100" value={settings.portPadding}
@@ -43,7 +45,7 @@ export const SettingsPanel: React.FC = () => {
 
       <div>
         <label style={{ display: 'block', marginBottom: '8px', fontSize: 'var(--md-sys-typescale-label-medium-font-size)', color: 'var(--md-sys-color-on-surface-variant)' }}>
-          Terminal Spacing: {settings.terminalSpacing}px
+          {t('common.terminalSpacing')} {settings.terminalSpacing}px
         </label>
         <input 
           type="range" aria-label="Canvas setting parameter" min="10" max="40" value={settings.terminalSpacing}
@@ -54,7 +56,7 @@ export const SettingsPanel: React.FC = () => {
 
       <div>
         <label style={{ display: 'block', marginBottom: '8px', fontSize: 'var(--md-sys-typescale-label-medium-font-size)', color: 'var(--md-sys-color-on-surface-variant)' }}>
-          Terminal Font Size: {settings.terminalFontSize}px
+          {t('common.terminalFontSize')} {settings.terminalFontSize}px
         </label>
         <input 
           type="range" aria-label="Canvas setting parameter" min="6" max="16" value={settings.terminalFontSize}
@@ -65,7 +67,7 @@ export const SettingsPanel: React.FC = () => {
 
       <div>
         <label style={{ display: 'block', marginBottom: '8px', fontSize: 'var(--md-sys-typescale-label-medium-font-size)', color: 'var(--md-sys-color-on-surface-variant)' }}>
-          Header Font Size: {settings.headerFontSize}px
+          {t('common.headerFontSize')} {settings.headerFontSize}px
         </label>
         <input 
           type="range" aria-label="Canvas setting parameter" min="8" max="20" value={settings.headerFontSize}
@@ -82,7 +84,7 @@ export const SettingsPanel: React.FC = () => {
             onChange={(e) => settings.setShowCableLabels(e.target.checked)}
             style={{ accentColor: 'var(--md-sys-color-primary)' }}
           />
-          Show Cable Labels
+          {t('common.showCableLabels')}
         </label>
 
         {settings.showCableLabels && (
@@ -93,7 +95,7 @@ export const SettingsPanel: React.FC = () => {
                 checked={settings.cableLabelPosition === 'start'}
                 onChange={() => settings.setCableLabelPosition('start')}
                 style={{ accentColor: 'var(--md-sys-color-primary)' }}
-              /> Start
+              /> {t('common.start')}
             </label>
             <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <input 
@@ -101,7 +103,7 @@ export const SettingsPanel: React.FC = () => {
                 checked={settings.cableLabelPosition === 'middle'}
                 onChange={() => settings.setCableLabelPosition('middle')}
                 style={{ accentColor: 'var(--md-sys-color-primary)' }}
-              /> Middle
+              /> {t('common.middle')}
             </label>
             <label style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <input 
@@ -109,7 +111,7 @@ export const SettingsPanel: React.FC = () => {
                 checked={settings.cableLabelPosition === 'end'}
                 onChange={() => settings.setCableLabelPosition('end')}
                 style={{ accentColor: 'var(--md-sys-color-primary)' }}
-              /> End
+              /> {t('common.end')}
             </label>
           </div>
         )}

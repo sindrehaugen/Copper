@@ -1,0 +1,5 @@
+{
+  "map((s: string) => s": {
+    "replace('M": ""
+  }
+}

@@ -2,15 +2,43 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import en from './en.json';
-import nbNO from './nb-NO.json';
+import en_nav from './en/nav.json';
+import nbNO_nav from './nb-NO/nav.json';
+import en_common from './en/common.json';
+import nbNO_common from './nb-NO/common.json';
+import en_errors from './en/errors.json';
+import nbNO_errors from './nb-NO/errors.json';
+import en_acoustics from './en/acoustics.json';
+import nbNO_acoustics from './nb-NO/acoustics.json';
+import en_compliance from './en/compliance.json';
+import nbNO_compliance from './nb-NO/compliance.json';
+import en_problems from './en/problems.json';
+import nbNO_problems from './nb-NO/problems.json';
+import en_subarray from './en/subarray.json';
+import nbNO_subarray from './nb-NO/subarray.json';
 
 const resources = {
   en: {
-    translation: en,
+    translation: {
+      nav: en_nav,
+      common: en_common,
+      errors: en_errors,
+      acoustics: en_acoustics,
+      compliance: en_compliance,
+      problems: en_problems,
+      subarray: en_subarray
+    }
   },
   'nb-NO': {
-    translation: nbNO,
+    translation: {
+      nav: nbNO_nav,
+      common: nbNO_common,
+      errors: nbNO_errors,
+      acoustics: nbNO_acoustics,
+      compliance: nbNO_compliance,
+      problems: nbNO_problems,
+      subarray: nbNO_subarray
+    }
   },
 };
 

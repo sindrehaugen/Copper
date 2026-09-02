@@ -2,9 +2,10 @@ import { create } from 'zustand';
 import { produce } from 'immer';
 import type { DesignDocument } from '../model/schema';
 import { validateDocument } from '../validation/registry';
+
 export interface StoreApiClient {
   authorTopology: (namespace: string, payload: unknown) => Promise<void>;
-  validateDesignGraph: (namespace: string, payload: unknown) => Promise<{ valid: boolean, findings: any[] }>;
+  validateDesignGraph: (namespace: string, payload: unknown) => Promise<{ valid: boolean; findings: any[] }>;
 }
 
 export interface DocumentState {
@@ -24,6 +25,7 @@ export interface DocumentState {
   promoteDocument: (client: StoreApiClient, namespace: string, actor: string, targetStatus: 'quoted' | 'active') => Promise<void>;
   resolveConflict: (doc: DesignDocument) => void;
   setSelectedIds: (ids: string[]) => void;
+  reset: () => void;
 }
 
 export const useDocumentStore = create<DocumentState>((set, get) => ({
@@ -169,6 +171,14 @@ export const useDocumentStore = create<DocumentState>((set, get) => ({
     historyIndex: 0,
     selectedIds: [],
     syncConflict: false
+  }),
+  reset: () => set({
+    document: null,
+    history: [],
+    historyIndex: -1,
+    selectedIds: [],
+    isSaving: false,
+    syncConflict: false,
+    remoteFindings: []
   })
 }));
-

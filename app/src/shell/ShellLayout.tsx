@@ -4,6 +4,7 @@ import { GlobalBar, GlobalBarProps } from './GlobalBar';
 import { ContextRail } from './ContextRail';
 import { IntelligenceRail } from './IntelligenceRail';
 import { FindingsTray } from './FindingsTray';
+import { CommandPalette } from './command';
 import { IntelligenceSection, ShellFinding } from './layout';
 import './shell.css';
 
@@ -24,6 +25,7 @@ export function ShellLayout({
   const [contextRailCollapsed, setContextRailCollapsed] = useState(false);
   const [intelligenceRailCollapsed, setIntelligenceRailCollapsed] = useState(false);
   const [findingsTrayOpen, setFindingsTrayOpen] = useState(false);
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
 
   const toggleContextRail = useCallback(() => {
     setContextRailCollapsed(prev => !prev);
@@ -38,8 +40,7 @@ export function ShellLayout({
   }, []);
 
   const handleCommandOpen = useCallback(() => {
-    const searchBtn = document.querySelector<HTMLButtonElement>('[data-testid="global-search-btn"]');
-    searchBtn?.focus();
+    setCommandPaletteOpen(true);
   }, []);
 
   const handleAskAboutThis = useCallback(() => {
@@ -103,6 +104,12 @@ export function ShellLayout({
         findings={findings}
         isOpen={findingsTrayOpen}
         onToggle={toggleFindingsTray}
+      />
+
+      <CommandPalette
+        isOpen={commandPaletteOpen}
+        onClose={() => setCommandPaletteOpen(false)}
+        namespace={globalBarProps?.tenantId}
       />
     </div>
   );

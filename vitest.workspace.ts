@@ -57,5 +57,13 @@ export default defineWorkspace([
       environment: "node",
       include: ["src/**/*.{test,spec}.{ts,tsx}"],
     },
+  }  ,{
+    test: {
+      name: "spine",
+      root: "packages/spine",
+      environment: "jsdom",
+      include: ["src/**/*.{test,spec}.{ts,tsx}"],
+    },
   }
 ])
+

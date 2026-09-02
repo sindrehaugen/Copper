@@ -1,0 +1,68 @@
+# Multi-stage build for Copper Web SPA
+FROM node:22-alpine AS builder
+
+WORKDIR /app
+
+# Enable pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Copy workspace configuration and dependency manifests for layer caching
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY app/package.json ./app/
+COPY bff/package.json ./bff/
+COPY catalog/package.json ./catalog/
+COPY rig/package.json ./rig/
+COPY packages/acoustics/package.json ./packages/acoustics/
+COPY packages/av-physics/package.json ./packages/av-physics/
+COPY packages/schema/package.json ./packages/schema/
+
+# Install workspace dependencies
+RUN pnpm install --frozen-lockfile
+
+# Copy root configs and required directories
+COPY tsconfig.json tsconfig.node.json ./
+COPY catalog/ ./catalog/
+COPY rig/ ./rig/
+COPY bff/ ./bff/
+
+# Copy packages source trees and configs
+COPY packages/acoustics/src/ ./packages/acoustics/src/
+COPY packages/acoustics/tsconfig.json ./packages/acoustics/
+COPY packages/av-physics/src/ ./packages/av-physics/src/
+COPY packages/av-physics/tsconfig.json ./packages/av-physics/
+COPY packages/schema/src/ ./packages/schema/src/
+COPY packages/schema/tsconfig.json ./packages/schema/
+
+# Copy app source tree, fixtures and configs
+COPY app/src/ ./app/src/
+COPY app/tests/ ./app/tests/
+COPY app/index.html app/vite.config.ts app/tsconfig.json ./app/
+
+# Build required workspace packages and app bundle
+RUN (cd packages/schema && /app/node_modules/.bin/tsc) && \
+    (cd packages/av-physics && /app/node_modules/.bin/tsc) && \
+    (cp /app/app/src/views/bom/BomView.tsx /app/app/src/views/bom/BOMView.tsx 2>/dev/null || true) && \
+    pnpm --filter app exec vite build
+
+# Production static file server
+FROM caddy:2.9.1-alpine AS runner
+
+# Create non-privileged user and directory structure
+RUN addgroup -g 10001 -S appgroup && \
+    adduser -u 10001 -S appuser -G appgroup && \
+    mkdir -p /config/caddy /data/caddy /srv && \
+    chown -R appuser:appgroup /config /data /srv /etc/caddy
+
+# Copy Caddy configuration and compiled web bundle
+COPY Caddyfile /etc/caddy/Caddyfile
+COPY --from=builder --chown=appuser:appgroup /app/app/dist /srv
+
+USER appuser
+
+EXPOSE 80
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:80/ || exit 1
+
+ENTRYPOINT ["caddy"]
+CMD ["run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]

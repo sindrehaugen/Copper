@@ -1,8 +1,9 @@
-import { useTranslation } from 'react-i18next';
 import React from 'react';
 import { useLocale } from '../../locales/i18n';
+import { useTranslation } from 'react-i18next';
 
 export const SettingsPanel: React.FC = () => {
+  const { t } = useTranslation();
   const { language, region, timezone, setLanguage, setRegion, setTimezone } = useLocale();
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import '@testing-library/jest-dom';
@@ -52,7 +52,7 @@ describe('B127 Accept Criteria - Compliance Truth', () => {
     // Toggle the override checkbox
     const checkbox = screen.getByLabelText('compliance.humanOverride');
     fireEvent.click(checkbox);
-    expect(checkbox).toBeChecked();
+    expect((checkbox as HTMLInputElement).checked).toBe(true);
 
     // Click confirm
     const confirmBtn = screen.getByText('compliance.confirmOverrideBtn');
@@ -77,7 +77,7 @@ describe('B127 Accept Criteria - Compliance Truth', () => {
 
     render(<ProvenanceViewer records={records} data-testid="pv" />);
     
-    expect(screen.getByText('shred_memory')).toBeInTheDocument();
-    expect(screen.getByText('redacted')).toBeInTheDocument();
+    expect(screen.getByText('shred_memory')).not.toBeNull();
+    expect(screen.getByText('redacted')).not.toBeNull();
   });
 });

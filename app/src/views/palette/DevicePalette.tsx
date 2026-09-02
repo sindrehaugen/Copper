@@ -3,6 +3,8 @@ import { useState, useMemo } from 'react';
 import { useDocumentStore } from '../../store/documentStore';
 
 export function DevicePalette() {
+  const { t } = useTranslation();
+
   const [searchTerm, setSearchTerm] = useState('');
   const document = useDocumentStore((state) => state.document);
   const updateDocument = useDocumentStore((state) => state.updateDocument);
@@ -69,7 +71,7 @@ export function DevicePalette() {
       
       <div style={{ flex: 1, overflowY: 'auto', padding: 8 }}>
         <p className="m3-label-small" style={{ margin: '0 8px 8px 8px', color: 'var(--md-sys-color-on-surface-variant)' }}>
-          {filteredTypes.length} {t(\'common.typesFound\')}
+          {filteredTypes.length} {t('common.typesFound')}
         </p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
           {filteredTypes.map(dt => (

@@ -92,6 +92,8 @@ function Layout({ children }: { children: ReactNode }) {
 }
 
 export function ConnectedCanvasView() {
+  const { t } = useTranslation();
+
   const document = useDocumentStore(state => state.document);
   const settings = useSettingsStore();
   const [nodes, setNodes] = useState<any[]>([]);
@@ -117,7 +119,7 @@ export function ConnectedCanvasView() {
     '--copper-header-height': `${settings.headerFontSize + 14}px`,
   } as React.CSSProperties;
 
-  if (!document) return <div style={{padding: '2rem'}}>{t(\'common.loadingDocument\')}</div>;
+  if (!document) return <div style={{padding: '2rem'}}>{t('common.loadingDocument')}</div>;
   return (
     <div style={{ width: '100%', height: '100%', position: 'relative', ...cssVars }}>
       <SettingsPanel />
@@ -127,20 +129,25 @@ export function ConnectedCanvasView() {
 }
 
 function ConnectedRackElevationView() {
+  const { t } = useTranslation();
+
   const document = useDocumentStore(state => state.document);
-  if (!document) return <div style={{padding: '2rem'}}>{t(\'common.loadingDocument\')}</div>;
+  if (!document) return <div style={{padding: '2rem'}}>{t('common.loadingDocument')}</div>;
   const firstRackId = document.racks[0]?.id ?? '';
   const geometryMap = {};
   return <RackElevationView doc={document} geometryMap={geometryMap} selectedRackId={firstRackId} />;
 }
 
 function ConnectedCableScheduleView() {
+  const { t } = useTranslation();
+
   const document = useDocumentStore(state => state.document);
-  if (!document) return <div style={{padding: '2rem'}}>{t(\'common.loadingDocument\')}</div>;
+  if (!document) return <div style={{padding: '2rem'}}>{t('common.loadingDocument')}</div>;
   return <CableScheduleView document={document} />;
 }
 
 export function AppShell() {
+
   const [session, setSession] = useState<SessionContextType | null>(null);
   const [error, setError] = useState<any>(null);
   const loadDocument = useDocumentStore(state => state.loadDocument);

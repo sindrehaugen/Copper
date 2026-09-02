@@ -4,6 +4,7 @@ import { useDocumentStore } from '../../store/documentStore';
 import { validateAudioLines, suggestAmpsForNode } from '../../validation/audio-line';
 
 export const NodeInspector: React.FC = () => {
+  const { t } = useTranslation();
   const selectedIds = useDocumentStore(state => state.selectedIds);
   const document = useDocumentStore(state => state.document);
   const updateDocument = useDocumentStore(state => state.updateDocument);

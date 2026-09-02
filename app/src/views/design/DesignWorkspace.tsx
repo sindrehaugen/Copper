@@ -9,6 +9,8 @@ import { ProblemsPanel } from '../../ui/problems/ProblemsPanel';
 import { exportToDxf } from '../../export/dxf';
 
 export function DesignWorkspace() {
+  const { t } = useTranslation();
+
   const { mode } = useParams();
   const navigate = useNavigate();
   const document = useDocumentStore(state => state.document);

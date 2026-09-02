@@ -62,6 +62,8 @@ function DraggableDevice({ device, geometry, updateGeometry }: { device: any, ge
 }
 
 export function FloorplanMode() {
+  const { t } = useTranslation();
+
   const document = useDocumentStore(state => state.document);
   const updateDocument = useDocumentStore(state => state.updateDocument);
   const [mode, setMode] = useState<'select' | 'viewer' | 'participant' | 'task'>('select');
@@ -134,10 +136,10 @@ export function FloorplanMode() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div style={{ padding: '8px', borderBottom: '1px solid var(--md-sys-color-outline-variant)', background: 'var(--md-sys-color-surface)' }}>
-        <button onClick={() => setMode('select')} style={{ fontWeight: mode === 'select' ? 'bold' : 'normal', marginRight: 8 }}>{t(\'common.selectMove\')}</button>
-        <button onClick={() => setMode('viewer')} style={{ fontWeight: mode === 'viewer' ? 'bold' : 'normal', marginRight: 8 }}>{t(\'common.addViewerZone\')}</button>
-        <button onClick={() => setMode('participant')} style={{ fontWeight: mode === 'participant' ? 'bold' : 'normal', marginRight: 8 }}>{t(\'common.addParticipantZone\')}</button>
-        <button onClick={() => setMode('task')} style={{ fontWeight: mode === 'task' ? 'bold' : 'normal', marginRight: 8 }}>{t(\'common.addTaskZone\')}</button>
+        <button onClick={() => setMode('select')} style={{ fontWeight: mode === 'select' ? 'bold' : 'normal', marginRight: 8 }}>{t('common.selectMove')}</button>
+        <button onClick={() => setMode('viewer')} style={{ fontWeight: mode === 'viewer' ? 'bold' : 'normal', marginRight: 8 }}>{t('common.addViewerZone')}</button>
+        <button onClick={() => setMode('participant')} style={{ fontWeight: mode === 'participant' ? 'bold' : 'normal', marginRight: 8 }}>{t('common.addParticipantZone')}</button>
+        <button onClick={() => setMode('task')} style={{ fontWeight: mode === 'task' ? 'bold' : 'normal', marginRight: 8 }}>{t('common.addTaskZone')}</button>
       </div>
       
       <div 

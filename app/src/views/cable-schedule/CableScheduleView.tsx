@@ -9,6 +9,7 @@ interface CableScheduleViewProps {
 }
 
 export const CableScheduleView: React.FC<CableScheduleViewProps> = ({ document }) => {
+  const { t } = useTranslation();
   const rows = useCableScheduleRows();
 
   const handleExport = () => {

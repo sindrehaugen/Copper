@@ -3,6 +3,7 @@ import React from 'react';
 import { PHYSICAL_LOCATIONS } from '../../../model/locations';
 
 export const LegendNodeComponent: React.FC = () => {
+  const { t } = useTranslation();
   const locations = Object.entries(PHYSICAL_LOCATIONS).filter(([name]) => name !== 'Unknown');
 
   return (
@@ -27,7 +28,7 @@ export const LegendNodeComponent: React.FC = () => {
         fontWeight: 'bold',
         textAlign: 'center'
       }}>
-        {t(\'common.physicalLocationsLegend\')}
+        {t('common.physicalLocationsLegend')}
       </div>
       <div style={{
         display: 'grid',

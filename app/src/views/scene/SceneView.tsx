@@ -9,6 +9,8 @@ import { CoverageOverlay } from './CoverageOverlay';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 
 function ExportButton() {
+  
+
   const { scene } = useThree();
 
   const handleExport = () => {
@@ -40,13 +42,15 @@ function ExportButton() {
         onClick={handleExport}
         className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm shadow-md"
       >
-        {t(\'common.downloadGltf\')}
+        {t('common.downloadGltf')}
       </button>
     </Html>
   );
 }
 
 export function SceneView() {
+  
+
   const document = useDocumentStore((state) => state.document);
   const locations = document?.locations;
   const racks = document?.racks;

@@ -1,22 +1,8 @@
 import React from "react";
+import type { EntityType as SchemaEntityType } from "@copper/schema";
+import { getEntityMetadata, ENTITY_METADATA, type EntityDesignMetadata } from "@copper/design";
 
-export type EntityType =
-  | "FUNCTIONAL_LOCATION"
-  | "ROOM"
-  | "ASSET"
-  | "QUOTE"
-  | "TICKET"
-  | "CUSTOMER"
-  | "PRODUCT"
-  | "VENDOR"
-  | "AGREEMENT"
-  | "DESIGN"
-  | "WORK_ORDER"
-  | "PO_LINE"
-  | "GOODS_RECEIPT"
-  | "ACTION"
-  | "NAV"
-  | string;
+export type EntityType = SchemaEntityType | string;
 
 export interface EntityChipProps {
   type: EntityType;
@@ -33,100 +19,10 @@ export interface EntityChipProps {
   "data-testid"?: string | undefined;
 }
 
-export const ENTITY_TYPE_CONFIG: Record<
-  string,
-  { label: string; icon: string; bgVar: string; textVar: string; borderVar?: string }
-> = {
-  FUNCTIONAL_LOCATION: {
-    label: "Location",
-    icon: "🏢",
-    bgVar: "var(--md-sys-color-secondary-container)",
-    textVar: "var(--md-sys-color-on-secondary-container)",
-  },
-  ROOM: {
-    label: "Room",
-    icon: "🏢",
-    bgVar: "var(--md-sys-color-secondary-container)",
-    textVar: "var(--md-sys-color-on-secondary-container)",
-  },
-  ASSET: {
-    label: "Asset",
-    icon: "📦",
-    bgVar: "var(--md-sys-color-primary-container)",
-    textVar: "var(--md-sys-color-on-primary-container)",
-  },
-  QUOTE: {
-    label: "Quote",
-    icon: "📄",
-    bgVar: "var(--md-sys-color-tertiary-container)",
-    textVar: "var(--md-sys-color-on-tertiary-container)",
-  },
-  TICKET: {
-    label: "Ticket",
-    icon: "🎫",
-    bgVar: "var(--copper-semantic-advice-container)",
-    textVar: "var(--copper-semantic-on-advice-container)",
-  },
-  CUSTOMER: {
-    label: "Customer",
-    icon: "👤",
-    bgVar: "var(--md-sys-color-surface-variant)",
-    textVar: "var(--md-sys-color-on-surface-variant)",
-  },
-  PRODUCT: {
-    label: "Product",
-    icon: "🏷️",
-    bgVar: "var(--md-sys-color-surface-container-high)",
-    textVar: "var(--md-sys-color-on-surface)",
-  },
-  VENDOR: {
-    label: "Vendor",
-    icon: "🤝",
-    bgVar: "var(--md-sys-color-surface-container)",
-    textVar: "var(--md-sys-color-on-surface)",
-  },
-  AGREEMENT: {
-    label: "Agreement",
-    icon: "📜",
-    bgVar: "var(--md-sys-color-tertiary-container)",
-    textVar: "var(--md-sys-color-on-tertiary-container)",
-  },
-  DESIGN: {
-    label: "Design",
-    icon: "📐",
-    bgVar: "var(--md-sys-color-primary-container)",
-    textVar: "var(--md-sys-color-on-primary-container)",
-  },
-  WORK_ORDER: {
-    label: "Work Order",
-    icon: "🔧",
-    bgVar: "var(--copper-semantic-risk-container)",
-    textVar: "var(--copper-semantic-on-risk-container)",
-  },
-  ACTION: {
-    label: "Action",
-    icon: "⚡",
-    bgVar: "var(--md-sys-color-surface-container-highest)",
-    textVar: "var(--md-sys-color-on-surface)",
-  },
-  NAV: {
-    label: "Navigation",
-    icon: "🧭",
-    bgVar: "var(--md-sys-color-surface-container-highest)",
-    textVar: "var(--md-sys-color-on-surface)",
-  },
-};
+export const ENTITY_TYPE_CONFIG = ENTITY_METADATA;
 
-export function getEntityTypeConfig(type: string) {
-  const norm = type.toUpperCase().replace(/-/g, "_");
-  return (
-    ENTITY_TYPE_CONFIG[norm] || {
-      label: type,
-      icon: "🔹",
-      bgVar: "var(--md-sys-color-surface-container-high)",
-      textVar: "var(--md-sys-color-on-surface)",
-    }
-  );
+export function getEntityTypeConfig(type: string): EntityDesignMetadata {
+  return getEntityMetadata(type);
 }
 
 export function EntityChip({

@@ -665,6 +665,8 @@ export function copperAliasToCssProperties(indent = "  "): string {
   ];
   const lines = tokens.map(t => `${indent}--copper-${t}: var(--md-sys-color-${t});`);
   lines.push(`${indent}--copper-text-secondary: var(--md-sys-color-on-surface-variant);`);
+  lines.push(`${indent}--copper-accent-primary: var(--md-sys-color-primary);`);
+  lines.push(`${indent}--copper-accent-secondary: var(--md-sys-color-secondary);`);
   return lines.join("\n");
 }
 
@@ -737,3 +739,4 @@ ${semanticToCssProperties(semanticRamp.dark, "    ")}
 }
 `;
 }
+

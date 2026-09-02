@@ -19,6 +19,8 @@ export function BaseLens({
   dataTestId,
   headerSlot,
   lensKind,
+  "data-entity-type": dataEntityType,
+  "data-entity-id": dataEntityId,
 }: BaseLensProps) {
   const kindClass = lensKind ? `copper-lens-${lensKind}` : "";
   const testId = dataTestId || (lensKind ? `lens-${lensKind}` : "lens-container");
@@ -28,6 +30,8 @@ export function BaseLens({
       className={`copper-lens ${kindClass} ${className}`.trim()}
       data-lens-kind={lensKind}
       data-testid={testId}
+      {...(dataEntityType !== undefined ? { "data-entity-type": dataEntityType } : {})}
+      {...(dataEntityId !== undefined ? { "data-entity-id": dataEntityId } : {})}
     >
       <LensHeader
         title={title}

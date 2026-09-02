@@ -9,7 +9,6 @@ import {
   PATINA_SECONDARY_HEX,
   generateM3ColorSchemes,
   generateSemanticRamp,
-  SEMANTIC_RAMP,
   generateThemeCss,
   DENSITIES,
   DEFAULT_DENSITY,
@@ -189,3 +188,4 @@ describe("M3 Design Tokens & Copper Theme Generator (ADR-0009 / Batch 129)", () 
     });
   });
 });
+

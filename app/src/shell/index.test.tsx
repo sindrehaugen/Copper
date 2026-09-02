@@ -255,5 +255,15 @@ describe('AppShell — Three Zones & Operator Console (Batch 130 / SH.W2)', () =
       expect(screen.getByTestId('findings-tray-content')).toBeDefined();
     });
   });
-});
 
+  describe('Universal Route /e/:type/:id (Batch 139 / OB.W1)', () => {
+    it('mounts EntityLens when navigating to /e/:type/:id route', async () => {
+      window.history.pushState({}, 'Entity Page', '/e/FUNCTIONAL_LOCATION/auditorium-01');
+      render(<AppShell />);
+      const entityLens = await screen.findByTestId('lens-entity');
+      expect(entityLens).toBeDefined();
+      expect(entityLens.getAttribute('data-entity-type')).toBe('FUNCTIONAL_LOCATION');
+      expect(entityLens.getAttribute('data-entity-id')).toBe('auditorium-01');
+    });
+  });
+});

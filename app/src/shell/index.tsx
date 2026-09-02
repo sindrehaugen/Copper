@@ -17,6 +17,7 @@ import { BOMView } from '../views/bom/BomView';
 import fixtureReferenceProject from '../../tests/fixtures/reference-projects/AV_U1A21.project.json';
 import { bffClient } from '../api/client';
 import { LoadingState } from './loading-state';
+import { EntityLens } from './lens';
 import { readProjectSchema } from '../exchange/projectschema/read';
 import { toX6 } from '../projection/toX6';
 import { applyElkLayoutX6 } from '../projection/layout';
@@ -237,6 +238,7 @@ export function AppShell() {
             <Route path="/ledwall" element={<LedWallDesigner />} />
             <Route path="/design/ledwall" element={<LedWallDesigner />} />
 
+            <Route path="/e/:type/:id" element={<EntityLens />} />
             <Route path="*" element={<div style={{padding: '2rem'}}>{t('nav.notFound')}</div>} />
           </Routes>
         </ShellLayout>
@@ -244,4 +246,6 @@ export function AppShell() {
     </SessionContext.Provider>
   );
 }
+
+
 

@@ -1,6 +1,10 @@
 import { Hono } from 'hono';
 
+import { customerViewMaskingMiddleware } from "./redaction.js";
+
 export const meRoutes = new Hono();
+
+meRoutes.use("*", customerViewMaskingMiddleware());
 
 const DSAR_ENABLED = process.env.ENABLE_DSAR === 'true';
 

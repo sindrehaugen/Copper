@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useMasking } from './masking/index.js';
 
 export interface GlobalBarProps {
   tenantId?: string;
@@ -21,22 +22,10 @@ export function GlobalBar({
 }: GlobalBarProps) {
   const { t } = useTranslation();
   const [asOfMode, setAsOfMode] = React.useState(false);
-  const [customerView, setCustomerView] = React.useState(false);
-
-  const toggleCustomerView = () => {
-    const next = !customerView;
-    setCustomerView(next);
-    if (typeof document !== 'undefined' && document.body) {
-      if (next) {
-        document.body.setAttribute('data-customer-view', 'true');
-      } else {
-        document.body.removeAttribute('data-customer-view');
-      }
-    }
-  };
+  const { isMasked: customerView, toggleMasked: toggleCustomerView } = useMasking();
 
   const toggleAsOfMode = () => {
-    setAsOfMode(prev => !prev);
+    setAsOfMode((prev) => !prev);
   };
 
   return (

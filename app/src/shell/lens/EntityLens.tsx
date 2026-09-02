@@ -1,17 +1,55 @@
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getEntityMetadata } from "@copper/spine";
 import { BaseLens } from "./BaseLens";
 import type { EntityLensProps } from "./types";
 import { FacetContainer } from "../facet";
 import { useFindings, FindingsTray } from "../finding";
+import { RoomSurface, type RoomSurfaceData } from "../../views/room/RoomSurface";
 
-export function EntityLens(props: EntityLensProps) {
+export interface ExtendedEntityLensProps extends EntityLensProps {
+  level?: string | undefined;
+  isRoom?: boolean | undefined;
+  roomData?: RoomSurfaceData | null | undefined;
+}
+
+function useSafeLocationSearch(): string {
+  try {
+    const loc = useLocation();
+    return loc?.search || "";
+  } catch {
+    if (typeof window !== "undefined" && window.location?.search) {
+      return window.location.search;
+    }
+    return "";
+  }
+}
+
+export function EntityLens(props: ExtendedEntityLensProps) {
   const { t } = useTranslation();
-  const routeParams = useParams<{ type?: string; id?: string }>();
+  let routeParams: { type?: string; id?: string } = {};
+  try {
+    routeParams = useParams<{ type?: string; id?: string }>();
+  } catch {
+    routeParams = {};
+  }
+
+  const searchStr = useSafeLocationSearch();
+  const searchParams = new URLSearchParams(searchStr);
+
   const entityType = props.entityType ?? routeParams.type ?? "UNKNOWN";
   const entityId = props.entityId ?? routeParams.id ?? "";
   const metadata = getEntityMetadata(entityType);
+
+  const level = props.level ?? searchParams.get("level");
+  const isRoom =
+    entityType.toUpperCase() === "ROOM" ||
+    (entityType.toUpperCase() === "FUNCTIONAL_LOCATION" &&
+      (level?.toLowerCase() === "room" ||
+        props.isRoom === true ||
+        searchParams.get("level") === "room" ||
+        entityId.toLowerCase().startsWith("room-") ||
+        entityId.toLowerCase().includes("room")));
 
   const { findings, blockers, risks, advice } = useFindings({
     entityType,
@@ -72,7 +110,14 @@ export function EntityLens(props: EntityLensProps) {
         </div>
       )}
       {props.children}
-      <FacetContainer entityType={entityType} entityId={entityId} />
+      {isRoom ? (
+        <RoomSurface
+          roomId={entityId}
+          data={props.roomData}
+        />
+      ) : (
+        <FacetContainer entityType={entityType} entityId={entityId} />
+      )}
     </BaseLens>
   );
 }

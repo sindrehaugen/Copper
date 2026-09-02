@@ -1,15 +1,30 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { SettingsPanel } from './SettingsPanel';
-import { LocaleProvider } from '../../locales/i18n';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
+import * as i18nModule from '../../locales/i18n';
+import React, { useState } from 'react';
+
+vi.mock('../../locales/i18n', async () => {
+  const actual = await vi.importActual<any>('../../locales/i18n');
+  return {
+    ...actual,
+    useLocale: vi.fn()
+  };
+});
 
 describe('SettingsPanel', () => {
   it('updates language, region, and timezone on input change', () => {
-    render(
-      <LocaleProvider>
-        <SettingsPanel />
-      </LocaleProvider>
-    );
+    const Wrapper = () => {
+      const [language, setLanguage] = useState('en');
+      const [region, setRegion] = useState('US');
+      const [timezone, setTimezone] = useState('UTC');
+      vi.mocked(i18nModule.useLocale).mockReturnValue({
+        language, region, timezone, setLanguage, setRegion, setTimezone
+      });
+      return <SettingsPanel />;
+    };
+
+    render(<Wrapper />);
 
     const langInput = screen.getByTestId('language-input');
     const regionInput = screen.getByTestId('region-input');
@@ -24,4 +39,3 @@ describe('SettingsPanel', () => {
     expect((tzInput as HTMLInputElement).value).toBe('Europe/Paris');
   });
 });
-

@@ -380,7 +380,7 @@ export function copperAliasToCssProperties(indent = '  '): string {
     'on-secondary-container', 'on-surface', 'on-surface-variant', 'outline', 'outline-variant',
     'primary', 'primary-container', 'secondary', 'secondary-container', 'surface',
     'surface-container', 'surface-container-high', 'surface-container-highest',
-    'surface-container-lowest', 'tertiary'
+    'surface-container-lowest', 'tertiary', 'on-tertiary', 'tertiary-container', 'on-tertiary-container'
   ];
   const lines = tokens.map(t => `${indent}--copper-${t}: var(--md-sys-color-${t});`);
   lines.push(`${indent}--copper-text-secondary: var(--md-sys-color-on-surface-variant);`);

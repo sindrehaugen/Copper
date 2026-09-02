@@ -177,6 +177,9 @@
   --copper-surface-container-highest: var(--md-sys-color-surface-container-highest);
   --copper-surface-container-lowest: var(--md-sys-color-surface-container-lowest);
   --copper-tertiary: var(--md-sys-color-tertiary);
+  --copper-on-tertiary: var(--md-sys-color-on-tertiary);
+  --copper-tertiary-container: var(--md-sys-color-tertiary-container);
+  --copper-on-tertiary-container: var(--md-sys-color-on-tertiary-container);
   --copper-text-secondary: var(--md-sys-color-on-surface-variant);
 }
 

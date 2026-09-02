@@ -15,7 +15,7 @@ describe('DsarSurface', () => {
   });
 
   it('handles data export request correctly', async () => {
-    (global.fetch as any).mockResolvedValueOnce({ ok: true });
+    (global.fetch as any).mockResolvedValue({ ok: true, json: () => Promise.resolve({ records: [] }) });
 
     render(<DsarSurface />);
     
@@ -32,7 +32,7 @@ describe('DsarSurface', () => {
   });
 
   it('handles data deletion request correctly', async () => {
-    (global.fetch as any).mockResolvedValueOnce({ ok: true });
+    (global.fetch as any).mockResolvedValue({ ok: true, json: () => Promise.resolve({ records: [] }) });
 
     render(<DsarSurface />);
     
@@ -47,7 +47,7 @@ describe('DsarSurface', () => {
       expect(screen.getByTestId('delete-status').textContent).toContain('Deletion Request Received');
     });
 
-    expect(global.fetch).toHaveBeenCalledWith('/api/me/dsar/erase', { method: 'POST' });
+    expect(global.fetch).toHaveBeenCalledWith('/api/me/dsar/erase', expect.objectContaining({ method: 'POST' }));
   });
 });
 

@@ -72,7 +72,7 @@ export function suggestAmpsForNode(nodeId: string, devices: Device[], deviceType
     const testDevices = devices.map(d => d.id === nodeId ? { ...d, deviceTypeId: candidate.id } : d);
     const doc = { devices: testDevices, deviceTypes, cables } as DesignDocument;
     const result = validateAudioLines(doc);
-    if (!result.findings.some((f: any) => f.targetId === nodeId && f.severity === "Error")) {
+    if (!result.findings.some((f: any) => f.severity === "Error")) {
       suggestions.push(candidate);
     }
   }

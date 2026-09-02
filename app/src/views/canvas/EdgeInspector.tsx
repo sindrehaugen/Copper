@@ -9,22 +9,27 @@ export const EdgeInspector: React.FC = () => {
   const document = useDocumentStore(state => state.document);
   const updateDocument = useDocumentStore(state => state.updateDocument);
 
-  if (!document || selectedIds.length !== 1) return null;
-
   const selectedId = selectedIds[0];
-  const cable = document.cables.find(c => c.id === selectedId);
-
-  if (!cable) return null;
+  const cable = document?.cables.find(c => c.id === selectedId);
 
   // In a real app with B101, this would come from the memoized universal validation selector.
-  const audioRes = validateAudioLines(document);
-  const edgeData = (audioRes as any).edgeData ? (audioRes as any).edgeData[cable.id] : undefined;
+  const audioRes = document ? validateAudioLines(document) : { findings: [] };
+  const nodeIds = cable?.terminations?.map(t => t.deviceId) || [cable?.sourceId, cable?.targetId];
+  const finding = audioRes.findings.find(f => nodeIds.includes(f.targetId as string) && f.severity !== 'OK');
+  const edgeData = finding ? {
+    status: finding.severity,
+    dropPercent: (finding.details as any)?.dropPercent ?? 0,
+    minLoad: (finding.details as any)?.minLoad ?? 0,
+    cableImpedanceRe: 0 // Legacy field
+  } : undefined;
 
   // B98 Wizard
   const suggestions = useMemo(() => {
-    if (!edgeData || edgeData.status === 'OK') return [];
+    if (!edgeData || edgeData.status === 'OK' || !cable || !document) return [];
     return suggestCablesForEdge(cable.id, document.devices, document.deviceTypes, document.cables);
-  }, [edgeData?.status, cable.id, document]);
+  }, [edgeData?.status, cable?.id, document]);
+
+  if (!document || selectedIds.length !== 1 || !cable) return null;
 
   const applyCable = (typeId: string) => {
     updateDocument((draft) => {

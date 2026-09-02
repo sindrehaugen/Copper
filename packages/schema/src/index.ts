@@ -555,7 +555,7 @@ export const CopperExtensionsSchema = z.object({
   microphone: MicrophoneExtensionSchema.optional(), // extension: test fix
   luminaire: LuminaireExtensionSchema.optional(), // extension: test fix
   ports: z.record(z.object({ signal_class: z.string().optional() })).optional(),
-}).passthrough();
+}).strict();
 export type CopperExtensions = z.infer<typeof CopperExtensionsSchema>;
 
 export const DeviceTypeSchema = z
@@ -579,7 +579,7 @@ export const DeviceTypeSchema = z
     deviceBayTemplates: z.array(DeviceBayTemplateSchema).optional(), // netbox: devicetype.device_bays
     customFields: CopperExtensionsSchema.optional(), // extension:
   })
-  .passthrough();
+  .strict();
 
 export type DeviceType = z.infer<typeof DeviceTypeSchema>;
 
@@ -610,7 +610,7 @@ export const DeviceSchema = z
     deviceBays: z.array(DeviceBaySchema).optional(), // netbox: device.device_bays
     customFields: CopperExtensionsSchema.optional(), // extension:
   })
-  .passthrough()
+  .strict()
   .refine(
     (device) => {
       if (!device.frontPorts || device.frontPorts.length === 0) return true;
@@ -711,7 +711,7 @@ export const CableSchema = z
     description: z.string().optional(), // netbox: cable.description
     customFields: CopperExtensionsSchema.optional(), // extension:
   })
-  .passthrough();
+  .strict();
 
 export type Cable = z.infer<typeof CableSchema>;
 

@@ -9,29 +9,24 @@ export const NodeInspector: React.FC = () => {
   const document = useDocumentStore(state => state.document);
   const updateDocument = useDocumentStore(state => state.updateDocument);
 
-  if (!document || selectedIds.length !== 1) return null;
-
   const selectedId = selectedIds[0];
-  const device = document.devices.find(d => d.id === selectedId);
+  const device = document?.devices.find(d => d.id === selectedId);
 
-  if (!device) return null;
-
-  const deviceType = document.deviceTypes.find(dt => dt.id === device.deviceTypeId);
-  if (!deviceType) return null;
+  const deviceType = document?.deviceTypes.find(dt => dt.id === device?.deviceTypeId);
 
   // B98 Audio Line validation (only applies to amplifiers)
-  const isAmp = deviceType.customFields?.acoustics?.device_class === 'amplifier';
-  const audioRes = isAmp ? validateAudioLines(document) : null;
-  const finding = audioRes?.findings.find(f => f.targetId === device.id && f.severity !== 'OK');
+  const isAmp = deviceType?.customFields?.acoustics?.device_class === 'amplifier';
+  const audioRes = isAmp && document ? validateAudioLines(document) : null;
+  const finding = audioRes?.findings.find(f => f.severity !== 'OK');
 
   const suggestions = useMemo(() => {
-    if (!finding || !isAmp) return [];
+    if (!finding || !isAmp || !device || !document) return [];
     return suggestAmpsForNode(device.id, document.devices, document.deviceTypes, document.cables);
-  }, [finding, isAmp, device.id, document.devices, document.deviceTypes, document.cables]);
+  }, [finding, isAmp, device?.id, document]);
 
   // B104 Capability Alternatives
   const alternatives = useMemo(() => {
-    if (!deviceType.customFields?.acoustics) return [];
+    if (!deviceType?.customFields?.acoustics || !document) return [];
     const { category, type, impedance } = deviceType.customFields.acoustics;
     
     return document.deviceTypes
@@ -42,7 +37,9 @@ export const NodeInspector: React.FC = () => {
         dt.customFields?.acoustics?.impedance === impedance
       )
       .slice(0, 3);
-  }, [deviceType, document.deviceTypes]);
+  }, [deviceType, document]);
+
+  if (!document || selectedIds.length !== 1 || !device || !deviceType) return null;
 
   const handleApplyAlternative = (altTypeId: string) => {
     updateDocument(draft => {
@@ -66,12 +63,12 @@ export const NodeInspector: React.FC = () => {
               <div className="m3-label-small">{t('common.suggestedFixes')}</div>
               {suggestions.map(s => (
                 <button
-                  key={s.suggestedAmpId as string}
-                  onClick={() => handleApplyAlternative(s.suggestedAmpId as string)}
+                  key={s.id as string}
+                  onClick={() => handleApplyAlternative(s.id as string)}
                   className="m3-button m3-button-filled m3-button-small"
                   style={{ display: 'block', marginTop: 4, width: '100%' }}
                 >
-                  Swap to {document.deviceTypes.find(d => d.id === s.suggestedAmpId)?.model}
+                  Swap to {s.model}
                 </button>
               ))}
             </div>

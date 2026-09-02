@@ -1,14 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { vi, describe, it, expect } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { CalculatorsDrawer } from './CalculatorsDrawer';
-
-vi.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: (_key: any, fallback: string) => fallback
-  }),
-  Trans: ({ children }: any) => <>{children}</>
-}));
 
 describe('CalculatorsDrawer', () => {
   it('renders environment fields and initial speed of sound', async () => {

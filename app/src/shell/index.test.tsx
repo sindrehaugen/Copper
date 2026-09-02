@@ -4,6 +4,7 @@ import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe, toHaveNoViolations } from 'jest-axe';
 import { AppShell } from './index';
+import { useDocumentStore } from '../store/documentStore';
 import { expect, it, describe, afterEach, beforeEach, vi } from 'vitest';
 vi.mock('@antv/x6', () => ({ Graph: vi.fn() }));
 vi.mock('../views/acoustics/CalculatorsDrawer', () => ({ CalculatorsDrawer: () => <div data-testid="calculators-drawer"></div> }));
@@ -14,6 +15,7 @@ expect.extend(toHaveNoViolations);
 
 
 beforeEach(() => {
+  useDocumentStore.setState({ document: null });
   vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
     ok: true,
     json: async () => ({

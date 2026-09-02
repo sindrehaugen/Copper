@@ -2,7 +2,11 @@ import { Hono } from 'hono';
 import { loadConfig } from '../index.js';
 import { createNceClient, GovernanceDisabledError } from '../nce-client/index.js';
 
+import { customerViewMaskingMiddleware } from "./redaction.js";
+
 export const designRoutes = new Hono<{ Variables: { session: { actor: string; namespace: string } } }>();
+
+designRoutes.use("*", customerViewMaskingMiddleware());
 
 const config = loadConfig();
 const client = createNceClient(config);

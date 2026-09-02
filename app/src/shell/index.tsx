@@ -226,7 +226,7 @@ export function AppShell() {
             <Route path="/3d" element={<SceneView />} />
             <Route path="/bom" element={<BOMView />} />
             <Route path="/compliance" element={<div style={{padding: '2rem'}}><DsarSurface /></div>} />
-            <Route path="*" element={<ErrorState error={{ code: -32005 }} />} />
+            <Route path="*" element={<div style={{padding: '2rem'}}>404 Not Found</div>} />
           </Routes>
         </Layout>
       </BrowserRouter>

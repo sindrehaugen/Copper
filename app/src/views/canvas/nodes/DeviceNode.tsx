@@ -20,6 +20,7 @@ export interface DeviceNodeData {
   deviceType?: DeviceType;
   inputPorts: PortItemNode[];
   outputPorts: PortItemNode[];
+  isSelected?: boolean;
 }
 
 const cardStyle: CSSProperties = {
@@ -91,7 +92,7 @@ export const DeviceNodeComponent: React.FC<{ node?: Node }> = ({ node }) => {
   const data = node?.getData<DeviceNodeData>();
   if (!data) return null;
 
-  const { device, deviceType, inputPorts = [], outputPorts = [] } = data;
+  const { device, deviceType, inputPorts = [], outputPorts = [], isSelected } = data;
   
   const designation = device?.designation ?? device?.name?.split(' ')[0] ?? '';
   const brand = deviceType?.manufacturer ?? 'Unknown';
@@ -129,7 +130,11 @@ export const DeviceNodeComponent: React.FC<{ node?: Node }> = ({ node }) => {
   };
 
   return (
-    <div className="copper-device-node" style={cardStyle}>
+    <div className="copper-device-node" style={{
+      ...cardStyle,
+      border: isSelected ? '2px solid var(--copper-tertiary)' : cardStyle.border,
+      boxShadow: isSelected ? '0 0 0 4px var(--copper-tertiary-container)' : cardStyle.boxShadow
+    }}>
       <header className="copper-device-header" style={{
         ...headerStyle,
         backgroundColor: loc ? loc.bgColor : headerStyle.backgroundColor,

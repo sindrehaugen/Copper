@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import React, { useState, useRef } from 'react';
 import { useDocumentStore } from '../../store/documentStore';
 
-function DraggableDevice({ device, geometry, updateGeometry }: { device: any, geometry: any, updateGeometry: (id: string, pos: {x: number, y: number}) => void }) {
+function DraggableDevice({ device, geometry, updateGeometry, isSelected, onClick }: { device: any, geometry: any, updateGeometry: (id: string, pos: {x: number, y: number}) => void, isSelected?: boolean, onClick: (e: React.MouseEvent) => void }) {
   const [isDragging, setIsDragging] = useState(false);
   const pos = geometry?.position || { x: 0, y: 0 };
   const ref = useRef<HTMLDivElement>(null);
@@ -35,6 +35,7 @@ function DraggableDevice({ device, geometry, updateGeometry }: { device: any, ge
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
+      onClick={onClick}
       style={{
         position: 'absolute',
         left: pos.x,
@@ -50,8 +51,9 @@ function DraggableDevice({ device, geometry, updateGeometry }: { device: any, ge
         justifyContent: 'center',
         cursor: isDragging ? 'grabbing' : 'grab',
         userSelect: 'none',
-        boxShadow: 'var(--md-sys-elevation-level-1)',
-        zIndex: isDragging ? 10 : 1,
+        boxShadow: isSelected ? '0 0 0 3px var(--copper-tertiary)' : 'var(--md-sys-elevation-level-1)',
+        border: isSelected ? '2px solid white' : 'none',
+        zIndex: isDragging || isSelected ? 10 : 1,
         fontSize: '0.75rem',
         fontWeight: 'bold'
       }}
@@ -65,6 +67,8 @@ export function FloorplanMode() {
   const { t } = useTranslation();
 
   const document = useDocumentStore(state => state.document);
+  const selectedIds = useDocumentStore(state => state.selectedIds) || [];
+  const setSelectedIds = useDocumentStore(state => state.setSelectedIds);
   const updateDocument = useDocumentStore(state => state.updateDocument);
   const [mode, setMode] = useState<'select' | 'viewer' | 'participant' | 'task'>('select');
   const [drawingRect, setDrawingRect] = useState<{ startX: number, startY: number, endX: number, endY: number } | null>(null);
@@ -81,7 +85,10 @@ export function FloorplanMode() {
   };
 
   const handleBackgroundPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (mode === 'select') return;
+    if (mode === 'select') {
+      setSelectedIds([]);
+      return;
+    }
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -224,6 +231,15 @@ export function FloorplanMode() {
             device={device}
             geometry={document.geometry?.[device.id]}
             updateGeometry={handleUpdateGeometry}
+            isSelected={selectedIds.includes(device.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (e.shiftKey || e.metaKey || e.ctrlKey) {
+                setSelectedIds(selectedIds.includes(device.id) ? selectedIds.filter(id => id !== device.id) : [...selectedIds, device.id]);
+              } else {
+                setSelectedIds([device.id]);
+              }
+            }}
           />
         ))}
       </div>

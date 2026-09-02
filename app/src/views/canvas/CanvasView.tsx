@@ -138,12 +138,18 @@ export function CanvasView({
     };
   }, [enableWiring]);
 
+  const selectedIds = useDocumentStore(state => state.selectedIds) || [];
+
   useEffect(() => {
     const graph = graphRef.current;
     if (!graph) return;
 
     const x6Nodes = nodes.map(n => ({
       ...n,
+      data: {
+        ...n.data,
+        isSelected: selectedIds.includes(n.id)
+      },
       ports: {
         ...n.ports,
         groups: {
@@ -177,6 +183,28 @@ export function CanvasView({
 
     graph.fromJSON({ nodes: x6Nodes, edges: x6Edges });
     graph.centerContent();
+  }, [nodes, edges, document, updateDocument]); // Removed setSelectedIds to avoid unnecessary re-renders when only selection changes
+
+  useEffect(() => {
+    const graph = graphRef.current;
+    if (!graph) return;
+    graph.getNodes().forEach(node => {
+      const isSelected = selectedIds.includes(node.id);
+      const data = node.getData();
+      if (data && data.isSelected !== isSelected) {
+        node.setData({ ...data, isSelected });
+      }
+    });
+  }, [selectedIds]);
+
+  useEffect(() => {
+    const graph = graphRef.current;
+    if (!graph) return;
+
+    // Remove old listeners to avoid duplicates
+    graph.off('cell:click');
+    graph.off('blank:click');
+    graph.off('edge:connected');
 
     graph.on('cell:click', ({ cell }) => {
       setSelectedIds([cell.id]);

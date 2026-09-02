@@ -87,9 +87,11 @@ export function CableRoutingMode() {
   };
 
   const routes = document.geometry?.routes || {};
+  const selectedIds = useDocumentStore(state => state.selectedIds) || [];
+  const setSelectedIds = useDocumentStore(state => state.setSelectedIds);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'auto', background: 'var(--copper-surface-container-lowest)' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'auto', background: 'var(--copper-surface-container-lowest)' }} onClick={() => setSelectedIds([])}>
       {/* Locations */}
       {document.locations.map(loc => {
         const layout = (loc as any).layout || { x: 0, y: 0, width: 400, height: 300 };
@@ -104,7 +106,7 @@ export function CableRoutingMode() {
       {/* Routes SVG */}
       <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 5 }}>
         {Object.entries(routes).map(([cableId, path]) => (
-          <path key={cableId} d={path as string} fill="none" stroke="var(--copper-primary)" strokeWidth="2" strokeDasharray="4 2" />
+          <path key={cableId} d={path as string} fill="none" stroke={selectedIds.includes(cableId) ? 'var(--copper-tertiary)' : 'var(--copper-primary)'} strokeWidth={selectedIds.includes(cableId) ? "4" : "2"} strokeDasharray="4 2" />
         ))}
       </svg>
 
@@ -112,8 +114,16 @@ export function CableRoutingMode() {
       {document.devices.map(device => {
         const pos = document.geometry?.[device.id]?.position;
         if (!pos) return null;
+        const isSelected = selectedIds.includes(device.id);
         return (
-          <div key={device.id} style={{ position: 'absolute', left: pos.x, top: pos.y, width: 24, height: 24, transform: 'translate(-50%, -50%)', background: 'var(--copper-secondary)', borderRadius: '50%', zIndex: 10 }} />
+          <div key={device.id} onClick={(e) => {
+            e.stopPropagation();
+            if (e.shiftKey || e.metaKey || e.ctrlKey) {
+              setSelectedIds(selectedIds.includes(device.id) ? selectedIds.filter(id => id !== device.id) : [...selectedIds, device.id]);
+            } else {
+              setSelectedIds([device.id]);
+            }
+          }} style={{ position: 'absolute', left: pos.x, top: pos.y, width: 24, height: 24, transform: 'translate(-50%, -50%)', background: isSelected ? 'var(--copper-tertiary)' : 'var(--copper-secondary)', border: isSelected ? '2px solid white' : 'none', borderRadius: '50%', zIndex: isSelected ? 11 : 10, cursor: 'pointer' }} />
         );
       })}
 

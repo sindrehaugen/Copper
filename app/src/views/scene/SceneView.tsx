@@ -50,13 +50,15 @@ function ExportButton() {
 
 export function SceneView() {
   const document = useDocumentStore((state) => state.document);
+  const selectedIds = useDocumentStore(state => state.selectedIds) || [];
+  const setSelectedIds = useDocumentStore(state => state.setSelectedIds);
   const locations = document?.locations;
   const racks = document?.racks;
   const devices = document?.devices;
 
   return (
     <div style={{ width: '100%', height: '100vh', background: 'var(--md-sys-color-surface-container-lowest)' }}>
-      <Canvas camera={{ position: [5, 5, 5] }}>
+      <Canvas camera={{ position: [5, 5, 5] }} onPointerMissed={() => setSelectedIds([])}>
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 10]} intensity={1} />
         
@@ -90,15 +92,23 @@ export function SceneView() {
           const x = pos.x * scale;
           const z = pos.y * scale;
           const h = 1.0; // Place it a bit above ground or at specific Z if known
+          const isSelected = selectedIds.includes(device.id);
 
           return (
-            <group key={device.id} position={[x, h, z]}>
+            <group key={device.id} position={[x, h, z]} onClick={(e) => {
+              e.stopPropagation();
+              if (e.shiftKey) {
+                setSelectedIds(isSelected ? selectedIds.filter(id => id !== device.id) : [...selectedIds, device.id]);
+              } else {
+                setSelectedIds([device.id]);
+              }
+            }}>
               <mesh>
                 <boxGeometry args={[0.3, 0.3, 0.3]} />
-                <meshStandardMaterial color='var(--copper-primary)' />
+                <meshStandardMaterial color={isSelected ? 'var(--copper-tertiary)' : 'var(--copper-primary)'} />
               </mesh>
               <Html distanceFactor={10} position={[0, 0.4, 0]} transform>
-                <div style={{ background: 'var(--copper-surface)', color: 'var(--copper-on-surface)', padding: '2px 4px', borderRadius: 4, fontSize: 10, whiteSpace: 'nowrap' }}>
+                <div style={{ background: 'var(--copper-surface)', color: 'var(--copper-on-surface)', padding: '2px 4px', borderRadius: 4, fontSize: 10, whiteSpace: 'nowrap', border: isSelected ? '2px solid var(--copper-tertiary)' : 'none' }}>
                   {device.name}
                 </div>
               </Html>

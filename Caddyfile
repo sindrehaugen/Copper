@@ -1,18 +1,62 @@
+# TriMCP & Copper v1.0 — Single-Origin Edge Proxy Configuration (Contract-D / B152)
 {
 	auto_https off
 	admin off
 }
 
-:80 {
-	root * /srv
+:80, :443 {
 	encode zstd gzip
 
-	@immutable path /assets/*
-	header @immutable Cache-Control "public, max-age=31536000, immutable"
+	# Security Headers
+	header {
+		X-Frame-Options "DENY"
+		X-Content-Type-Options "nosniff"
+		X-XSS-Protection "1; mode=block"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "geolocation=(), camera=(), microphone=()"
+		Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self';"
+		-Server
+	}
 
-	@spa not path /assets/*
-	header @spa Cache-Control "no-store, no-cache, must-revalidate"
+	# Route /api/* to Copper BFF (port 8005) — single-origin, eliminates CORS
+	handle /api/* {
+		reverse_proxy copper-bff:8005
+	}
 
-	try_files {path} /index.html
-	file_server
+	# Route /admin* to NCE Admin REST API (port 8003)
+	handle /admin* {
+		reverse_proxy nce-admin:8003
+	}
+
+	# Route webhooks to webhook-receiver (port 8080)
+	handle /webhooks/* {
+		request_body {
+			max_size 1048576
+		}
+		reverse_proxy webhook-receiver:8080
+	}
+
+	# Route / to Copper Web SPA (port 8006) or serve static assets if mounted locally in /srv
+	handle {
+		@has_srv file {
+			root /srv
+			try_files {path} /index.html
+		}
+
+		route @has_srv {
+			root * /srv
+			@immutable path /assets/*
+			header @immutable Cache-Control "public, max-age=31536000, immutable"
+
+			@spa not path /assets/*
+			header @spa Cache-Control "no-store, no-cache, must-revalidate"
+
+			try_files {path} /index.html
+			file_server
+		}
+
+		route {
+			reverse_proxy copper-web:8006
+		}
+	}
 }

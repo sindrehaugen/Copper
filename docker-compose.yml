@@ -1,0 +1,106 @@
+# Docker Compose stack for Copper & NCE integration (Contract-D / B152)
+# Usage:
+#   docker compose --profile copper up -d
+# Default profile starts the backend services without Copper.
+
+services:
+  # --- Edge Proxy (Single Origin) ---
+  caddy:
+    image: caddy:2.9-alpine
+    container_name: nce-caddy
+    restart: unless-stopped
+    ports:
+      - "${CADDY_HTTP_PORT:-80}:80"
+      - "${CADDY_HTTPS_PORT:-443}:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - nce-network
+    depends_on:
+      - nce-admin
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  # --- NCE Core Backend Service ---
+  nce-admin:
+    image: ghcr.io/sindrehaugen/nce-admin:${NCE_IMAGE_TAG:-latest}
+    container_name: nce-admin
+    restart: unless-stopped
+    environment:
+      - PORT=8003
+      - NCE_ENV=production
+    networks:
+      - nce-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8003/healthz || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  # --- Copper Backend-for-Frontend (BFF) ---
+  copper-bff:
+    image: ghcr.io/sindrehaugen/copper-bff:${COPPER_IMAGE_TAG:-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile.bff
+    container_name: copper-bff
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=${COPPER_BFF_PORT:-8005}
+      - NCE_BASE_URL=http://nce-admin:8003
+      - COOKIE_SECRET_FILE=/run/secrets/cookie_secret
+      - NCE_API_KEY_FILE=/run/secrets/nce_api_key
+      - ENTRA_CLIENT_SECRET_FILE=/run/secrets/entra_client_secret
+    secrets:
+      - cookie_secret
+      - nce_api_key
+      - entra_client_secret
+    networks:
+      - nce-network
+    # Contract-D / B152: depends_on nce-admin without condition: service_healthy
+    # (NCE healthcheck only proves a socket answered, not readiness)
+    depends_on:
+      - nce-admin
+    profiles:
+      - copper
+
+  # --- Copper Web SPA ---
+  copper-web:
+    image: ghcr.io/sindrehaugen/copper-web:${COPPER_IMAGE_TAG:-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    container_name: copper-web
+    restart: unless-stopped
+    environment:
+      - PORT=${COPPER_WEB_PORT:-8006}
+    networks:
+      - nce-network
+    depends_on:
+      - copper-bff
+    profiles:
+      - copper
+
+networks:
+  nce-network:
+    driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+secrets:
+  cookie_secret:
+    file: ./secrets/cookie_secret.txt
+  nce_api_key:
+    file: ./secrets/nce_api_key.txt
+  entra_client_secret:
+    file: ./secrets/entra_client_secret.txt

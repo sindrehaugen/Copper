@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { canConnect, PortSignature } from './connector-accepts';
+import { canConnect, PortSignature, getSuggestedAdapters } from './connector-accepts';
 
 describe('connector-accepts', () => {
   it('returns true for exact matches', () => {
@@ -51,5 +51,25 @@ describe('connector-accepts', () => {
     const p2: PortSignature = { signalType: 'VIDEO', connectorType: 'VGA' };
     // We didn't explicitly link HDMI direct to VGA
     expect(canConnect(p1, p2)).toBe(false);
+  });
+});
+
+describe('getSuggestedAdapters', () => {
+  it('suggests Dante AVIO Adapter for AUDIO to NETWORK', () => {
+    const p1: PortSignature = { signalType: 'AUDIO', connectorType: 'XLR' };
+    const p2: PortSignature = { signalType: 'NETWORK', connectorType: 'RJ45' };
+    expect(getSuggestedAdapters(p1, p2)).toContain('Dante AVIO Adapter');
+  });
+
+  it('suggests SDVoE Encoder for VIDEO to NETWORK', () => {
+    const p1: PortSignature = { signalType: 'VIDEO', connectorType: 'HDMI' };
+    const p2: PortSignature = { signalType: 'NETWORK', connectorType: 'RJ45' };
+    expect(getSuggestedAdapters(p1, p2)).toContain('SDVoE Encoder');
+  });
+
+  it('returns empty for unrelated signals', () => {
+    const p1: PortSignature = { signalType: 'VIDEO', connectorType: 'HDMI' };
+    const p2: PortSignature = { signalType: 'AUDIO', connectorType: 'XLR' };
+    expect(getSuggestedAdapters(p1, p2)).toEqual([]);
   });
 });

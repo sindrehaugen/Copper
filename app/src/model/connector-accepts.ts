@@ -112,3 +112,13 @@ function matches(port: PortSignature, pattern: PortSignature): boolean {
   return port.signalType === pattern.signalType && 
          port.connectorType.toLowerCase() === pattern.connectorType.toLowerCase();
 }
+
+export function getSuggestedAdapters(srcSig: PortSignature, tgtSig: PortSignature): string[] {
+  const adapters: string[] = [];
+  if (srcSig.signalType === 'AUDIO' && tgtSig.signalType === 'NETWORK') {
+    adapters.push('Dante AVIO Adapter');
+  } else if (srcSig.signalType === 'VIDEO' && tgtSig.signalType === 'NETWORK') {
+    adapters.push('SDVoE Encoder');
+  }
+  return adapters;
+}

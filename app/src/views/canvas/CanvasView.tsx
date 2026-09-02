@@ -1,9 +1,11 @@
-import { useEffect, useRef, CSSProperties } from 'react';
+import { useEffect, useRef, CSSProperties, useState } from 'react';
 import { Graph } from '@antv/x6';
 import { register, getProvider } from '@antv/x6-react-shape';
 import { DeviceNodeComponent } from './nodes/DeviceNode';
 import { LegendNodeComponent } from './nodes/LegendNode';
 import { useDocumentStore } from '../../store/documentStore';
+import { getPortSignature } from '../../utils/portSignature';
+import { canConnect, getSuggestedAdapters } from '../../model/connector-accepts';
 
 register({
   shape: 'device-node',
@@ -29,10 +31,6 @@ export interface CanvasViewProps {
   enableWiring?: boolean;
 }
 
-import { getPortSignature } from '../../utils/portSignature';
-import { canConnect } from '../../model/connector-accepts';
-import { useState } from 'react';
-
 const defaultCanvasStyle: CSSProperties = {
   width: '100%',
   height: '100%',
@@ -54,6 +52,11 @@ export function CanvasView({
 
   const [rejectedDrop, setRejectedDrop] = useState<{ srcDevice: string; tgtDevice: string; srcPortType: string; tgtPortType: string; suggestedAdapters: string[] } | null>(null);
 
+  const documentRef = useRef(document);
+  useEffect(() => { documentRef.current = document; }, [document]);
+
+  const lastIncompatibleRef = useRef<any>(null);
+
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -72,15 +75,43 @@ export function CanvasView({
         allowBlank: false,
         allowLoop: false,
         allowNode: false,
+        highlight: true,
         validateConnection({ sourceMagnet, targetMagnet, sourceCell, targetCell }) {
-          if (!sourceMagnet || !targetMagnet) return false;
+          // Clear any previous incompatible hover
+          lastIncompatibleRef.current = null;
+
+          if (!sourceMagnet || !targetMagnet || !sourceCell || !targetCell) return false;
           if (sourceCell === targetCell) return false;
           const srcPortGroup = sourceMagnet.getAttribute('port-group');
           const tgtPortGroup = targetMagnet.getAttribute('port-group');
           if (srcPortGroup === tgtPortGroup) return false; // Prevent in->in or out->out
 
-          // Additional logic for B102: Check connector/signal class compatibility
-          // For now just prevent same-group wiring. Full check happens at drop.
+          const sourcePort = sourceMagnet.getAttribute('port');
+          const targetPort = targetMagnet.getAttribute('port');
+          if (!sourcePort || !targetPort) return false;
+
+          const doc = documentRef.current;
+          if (!doc) return true;
+
+          const srcSig = getPortSignature(doc, sourceCell.id, sourcePort);
+          const tgtSig = getPortSignature(doc, targetCell.id, targetPort);
+
+          if (srcSig && tgtSig) {
+            const compatible = canConnect(srcSig, tgtSig);
+            if (!compatible) {
+              const srcDevice = doc.devices.find(d => d.id === sourceCell.id)?.name || sourceCell.id;
+              const tgtDevice = doc.devices.find(d => d.id === targetCell.id)?.name || targetCell.id;
+              lastIncompatibleRef.current = {
+                srcDevice,
+                tgtDevice,
+                srcPortType: srcSig.connectorType,
+                tgtPortType: tgtSig.connectorType,
+                suggestedAdapters: getSuggestedAdapters(srcSig, tgtSig)
+              };
+              return false;
+            }
+            return true;
+          }
           return true;
         }
       }
@@ -88,7 +119,21 @@ export function CanvasView({
 
     graphRef.current = graph;
 
+    // Listen to edge routing failure or general mouse up to show reject popup
+    const handleMouseUp = () => {
+      if (lastIncompatibleRef.current) {
+        setRejectedDrop(lastIncompatibleRef.current);
+        lastIncompatibleRef.current = null;
+      }
+    };
+    
+    // Add mouseup to container to catch when a connection is dropped over a target but rejected
+    containerRef.current.addEventListener('mouseup', handleMouseUp);
+
     return () => {
+      if (containerRef.current) {
+        containerRef.current.removeEventListener('mouseup', handleMouseUp);
+      }
       graph.dispose();
     };
   }, [enableWiring]);
@@ -147,32 +192,8 @@ export function CanvasView({
       const target = edge.getTarget();
       
       if (source.cell && target.cell && source.port && target.port) {
-        // B102: Connect Assist Validation
         const srcSig = getPortSignature(document, source.cell, source.port);
-        const tgtSig = getPortSignature(document, target.cell, target.port);
-
-        if (srcSig && tgtSig && !canConnect(srcSig, tgtSig)) {
-          // Reject
-          edge.remove();
-          
-          // Suggest adapters (naive mock for Dante etc)
-          const suggestedAdapters: string[] = [];
-          if (srcSig.signalType === 'AUDIO' && tgtSig.signalType === 'NETWORK') {
-            suggestedAdapters.push('Dante AVIO Adapter');
-          } else if (srcSig.signalType === 'VIDEO' && tgtSig.signalType === 'NETWORK') {
-            suggestedAdapters.push('SDVoE Encoder');
-          }
-
-          setRejectedDrop({
-            srcDevice: document.devices.find(d => d.id === source.cell)?.name || source.cell,
-            tgtDevice: document.devices.find(d => d.id === target.cell)?.name || target.cell,
-            srcPortType: srcSig.connectorType,
-            tgtPortType: tgtSig.connectorType,
-            suggestedAdapters
-          });
-          return;
-        }
-
+        
         updateDocument(draft => {
           draft.cables.push({
             id: edge.id,
@@ -197,10 +218,10 @@ export function CanvasView({
       {rejectedDrop && (
         <div style={{
           position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
-          background: 'var(--copper-surface-container-high)', border: '1px solid var(--copper-outline)', padding: 24, borderRadius: 12,
-          boxShadow: 'var(--md-sys-elevation-level-4)', zIndex: 10000, color: 'var(--copper-on-surface)'
+          background: 'var(--md-sys-color-surface-container-high)', border: '1px solid var(--md-sys-color-outline)', padding: 24, borderRadius: 12,
+          boxShadow: 'var(--md-sys-elevation-level-4)', zIndex: 10000, color: 'var(--md-sys-color-on-surface)'
         }}>
-          <h3 style={{ margin: '0 0 16px 0', color: 'var(--copper-error)' }}>Incompatible Connection</h3>
+          <h3 style={{ margin: '0 0 16px 0', color: 'var(--md-sys-color-error)' }}>Incompatible Connection</h3>
           <p style={{ margin: '0 0 16px 0' }}>
             Cannot connect <b>{rejectedDrop.srcPortType}</b> ({rejectedDrop.srcDevice}) to <b>{rejectedDrop.tgtPortType}</b> ({rejectedDrop.tgtDevice}).
           </p>
@@ -208,14 +229,14 @@ export function CanvasView({
             <div style={{ marginBottom: 16 }}>
               <strong style={{ display: 'block', marginBottom: 8 }}>Suggested Adapters:</strong>
               {rejectedDrop.suggestedAdapters.map((a: string, i: number) => (
-                <button key={i} style={{ padding: '4px 12px', background: 'var(--copper-primary-container)', color: 'var(--copper-on-primary-container)', border: 'none', borderRadius: 4, marginRight: 8 }}>
+                <button key={i} style={{ padding: '4px 12px', background: 'var(--md-sys-color-primary-container)', color: 'var(--md-sys-color-on-primary-container)', border: 'none', borderRadius: 4, marginRight: 8 }}>
                   {a}
                 </button>
               ))}
             </div>
           )}
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <button onClick={() => setRejectedDrop(null)} style={{ padding: '8px 16px', background: 'var(--copper-primary)', color: 'var(--copper-on-primary)', border: 'none', borderRadius: 8, cursor: 'pointer' }}>
+            <button onClick={() => setRejectedDrop(null)} style={{ padding: '8px 16px', background: 'var(--md-sys-color-primary)', color: 'var(--md-sys-color-on-primary)', border: 'none', borderRadius: 8, cursor: 'pointer' }}>
               Dismiss
             </button>
           </div>
@@ -224,6 +245,7 @@ export function CanvasView({
     </div>
   );
 }
+
 
 
 

@@ -735,7 +735,10 @@ export const DesignDocumentSchema = z
     cables: z.array(CableSchema).default([]), // netbox: designdocument.cables
     signalClasses: z.array(SignalClassSchema).default([]), // extension: designdocument.signal_classes
     zones: z.array(ZoneSchema).default([]), // extension: designdocument.zones
-    geometry: z.record(z.any()).optional(), // B108 geometry persistence // extension: test fix
+    geometry: z.record(z.object({
+      position: z.object({ x: z.number(), y: z.number(), z: z.number().optional() }).optional(),
+      size: z.object({ width: z.number(), height: z.number(), depth: z.number().optional() }).optional()
+    })).optional(), // B108 geometry persistence // extension: test fix
   })
   .strict()
   .refine(

@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { SettingsPanel } from './SettingsPanel';
 import { describe, it, expect, vi } from 'vitest';
 import * as i18nModule from '../../locales/i18n';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 vi.mock('../../locales/i18n', async () => {
   const actual = await vi.importActual<any>('../../locales/i18n');

@@ -37,13 +37,14 @@ export const LedWallDesigner: React.FC = () => {
   const [presetName, setPresetName] = useState<string>('Samsung IWA012');
   const [cols, setCols] = useState<number>(18);
   const [rows, setRows] = useState<number>(12);
-  const [cabinet, setCabinet] = useState<LedCabinet>(PRESETS['Samsung IWA012']);
+  const [cabinet, setCabinet] = useState<LedCabinet>(PRESETS['Samsung IWA012'] as LedCabinet);
 
   const handlePresetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const val = e.target.value;
     setPresetName(val);
-    if (PRESETS[val]) {
-      setCabinet(PRESETS[val]);
+    const p = PRESETS[val];
+    if (p) {
+      setCabinet(p);
     }
   };
 
@@ -60,7 +61,7 @@ export const LedWallDesigner: React.FC = () => {
 
   return (
     <div style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto', fontFamily: 'sans-serif' }}>
-      <h1>LED Wall Power & Signal Planner</h1>
+      <h1>{t('nav.ledwall')}</h1>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '2rem' }}>
         <div style={{ padding: '1rem', border: '1px solid var(--md-sys-color-outline)', borderRadius: '8px' }}>
           <h3>Configuration</h3>

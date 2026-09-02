@@ -1,6 +1,5 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { expect, it, describe, vi } from 'vitest';
+import { expect, it, describe } from 'vitest';
 import { LedWallDesigner } from '../LedWallDesigner';
 import '../../../locales/i18n';
 

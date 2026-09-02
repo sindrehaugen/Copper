@@ -9,13 +9,13 @@ import {
 
 export class ShellSubscriptionClient {
   private url: string;
-  private namespace?: string;
+  private namespace?: string | undefined;
   private autoReconnect: boolean;
   private initialBackoffMs: number;
   private maxBackoffMs: number;
   private backoffMultiplier: number;
   private maxRetries: number;
-  private eventSourceFactory?: (url: string) => EventSource;
+  private eventSourceFactory?: ((url: string) => EventSource) | undefined;
 
   private eventSource: EventSource | null = null;
   private status: ConnectionStatus = 'DISCONNECTED';

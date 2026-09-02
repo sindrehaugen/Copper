@@ -35,6 +35,9 @@ importers:
       eslint:
         specifier: ^9.21.0
         version: 9.39.5(supports-color@7.2.0)
+      eslint-plugin-i18next:
+        specifier: ^6.1.5
+        version: 6.1.5
       eslint-plugin-jsx-a11y:
         specifier: ^6.10.2
         version: 6.10.2(eslint@9.39.5(supports-color@7.2.0))
@@ -222,6 +225,19 @@ importers:
       vitest:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@22.20.1)(jsdom@30.0.1)(supports-color@7.2.0)
+
+  packages/design:
+    dependencies:
+      '@material/material-color-utilities':
+        specifier: ^0.3.0
+        version: 0.3.0
+    devDependencies:
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.7
+        version: 3.2.7(@types/node@22.20.1)(jsdom@30.0.1)(supports-color@7.2.0)(tsx@4.23.12)
 
   packages/schema:
     dependencies:
@@ -1806,6 +1822,10 @@ packages:
     resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
     engines: {node: '>=10'}
 
+  eslint-plugin-i18next@6.1.5:
+    resolution: {integrity: sha512-xCTfstbK9ZpQ6UFT5S1s6zbZMhKn2o2jRSQYiU2UkV7wt8y1m3WjkUYGkGlipgRdFInYI9+LAqE+JQU/L73HmA==}
+    engines: {node: '>=18.10.0'}
+
   eslint-plugin-jsx-a11y@6.10.2:
     resolution: {integrity: sha512-scB3nz4WmG75pV8+3eRUQOHZlNSUhFNq37xnpgRkCCELU3XMvXAxLk1eqWWyE22Ki4Q01Fnsw9BA3cJHDPgn2Q==}
     engines: {node: '>=4.0'}
@@ -2579,6 +2599,10 @@ packages:
   require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
+
+  requireindex@1.1.0:
+    resolution: {integrity: sha512-LBnkqsDE7BZKvqylbmn7lTIVdpx4K/QCduRATpO5R+wtPmky/a8pN1bO2D6wXppn1497AJF9mNjqAXr6bdl9jg==}
+    engines: {node: '>=0.10.5'}
 
   resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
@@ -4701,6 +4725,10 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
+  eslint-plugin-i18next@6.1.5:
+    dependencies:
+      requireindex: 1.1.0
+
   eslint-plugin-jsx-a11y@6.10.2(eslint@9.39.5(supports-color@7.2.0)):
     dependencies:
       aria-query: 5.3.2
@@ -5518,6 +5546,8 @@ snapshots:
       set-function-name: 2.0.2
 
   require-from-string@2.0.2: {}
+
+  requireindex@1.1.0: {}
 
   resolve-from@4.0.0: {}
 

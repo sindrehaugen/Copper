@@ -14,6 +14,9 @@ export type EntityType =
   | "WORK_ORDER"
   | "PO_LINE"
   | "GOODS_RECEIPT"
+  | "RACK"
+  | "DEVICE"
+  | "SITE"
   | "ACTION"
   | "NAV"
   | string;
@@ -46,6 +49,32 @@ export interface RerankOptions {
   typeBonus?: Record<string, number> | undefined;
 }
 
+export type TopologyFetcher = (
+  namespaceId: string,
+  signal?: AbortSignal
+) => Promise<any>;
+
+export interface UseGlobalSearchOptions {
+  query?: string | undefined;
+  namespace?: string | undefined;
+  fetcher?: TopologyFetcher | undefined;
+  debounceMs?: number | undefined;
+  localItems?: SearchItem[] | undefined;
+  enabled?: boolean | undefined;
+  options?: RerankOptions | undefined;
+}
+
+export interface UseGlobalSearchResult {
+  query: string;
+  setQuery: (q: string) => void;
+  results: SearchItem[];
+  isLoading: boolean;
+  isFetching: boolean;
+  error: Error | null;
+  refetch: () => Promise<void>;
+  topologyItems: SearchItem[];
+}
+
 export interface CommandPaletteProps {
   isOpen: boolean;
   onClose: () => void;
@@ -53,4 +82,6 @@ export interface CommandPaletteProps {
   items?: SearchItem[] | undefined;
   placeholder?: string | undefined;
   namespace?: string | undefined;
+  fetcher?: TopologyFetcher | undefined;
+  debounceMs?: number | undefined;
 }

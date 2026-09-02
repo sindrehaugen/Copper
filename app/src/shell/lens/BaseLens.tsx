@@ -2,6 +2,7 @@ import { LensHeader } from "./LensHeader";
 import { LoadingState } from "../loading-state";
 import { ErrorState } from "../error-state";
 import { EmptyState } from "../empty-state";
+import { LensErrorBoundary } from "../error";
 import type { BaseLensProps } from "./types";
 
 export function BaseLens({
@@ -41,15 +42,17 @@ export function BaseLens({
       </LensHeader>
 
       <div className="copper-lens-body">
-        {isLoading ? (
-          <LoadingState />
-        ) : error ? (
-          <ErrorState error={error} {...(onRetry !== undefined ? { onRetry } : {})} />
-        ) : isEmpty ? (
-          <EmptyState />
-        ) : (
-          children
-        )}
+        <LensErrorBoundary onReset={onRetry} lensKind={lensKind}>
+          {isLoading ? (
+            <LoadingState />
+          ) : error ? (
+            <ErrorState error={error} {...(onRetry !== undefined ? { onRetry } : {})} />
+          ) : isEmpty ? (
+            <EmptyState />
+          ) : (
+            children
+          )}
+        </LensErrorBoundary>
       </div>
     </div>
   );

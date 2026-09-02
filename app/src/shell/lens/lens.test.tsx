@@ -136,6 +136,26 @@ describe("Batch 135 (SH.W7) Lens Primitives", () => {
           expect(onRetry).toHaveBeenCalledTimes(1);
         });
 
+        it("catches runtime errors thrown by children with per-lens error boundary", () => {
+          const consoleErrorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+          const CrashingChild = () => {
+            throw new Error(`${name} component crashed during render`);
+          };
+
+          render(
+            <Component title={`${name} Title`} lensKind={kind}>
+              <CrashingChild />
+            </Component>
+          );
+
+          expect(screen.getByText(`${name} Title`)).toBeDefined();
+          const alertEl = screen.getByRole("alert");
+          expect(alertEl).toBeDefined();
+          expect(screen.getByText(`${name} component crashed during render`)).toBeDefined();
+
+          consoleErrorSpy.mockRestore();
+        });
+
         it("renders empty state when isEmpty is true", () => {
           render(
             <Component

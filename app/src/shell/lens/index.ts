@@ -13,6 +13,7 @@ export {
   DrillThroughControl,
   CockpitRuleViolationError,
 } from "./CockpitLens";
+export { LensErrorBoundary } from "../error";
 
 export type {
   LensKind,

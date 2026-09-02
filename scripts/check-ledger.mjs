@@ -2,78 +2,92 @@
 import fs from 'fs';
 import path from 'path';
 
-const CL2_PATH = path.resolve('orchestration/CL2.md');
-if (!fs.existsSync(CL2_PATH)) {
-  console.log('CL2.md not found.');
-  process.exit(1);
-}
-
-const lines = fs.readFileSync(CL2_PATH, 'utf8').split('\n');
 let hasError = false;
 
-const rowRegex = /^(?:>\s*)?\*\s+\[(DONE|LOCKED|IN PROGRESS|WAITING TAG|FAILED TAG|NO TAG|ADOPTED[^\]]*|\?\?|[^\]]+)\]\s+(?:\*\*)?(B\d+|[A-Z]\d+[a-z]?|-)(?:\*\*)?/;
-const doneTagRegex = /\[PASSED TAG/;
+// 1. Gather all rows across all ledgers
+const ledgers = ['orchestration/CL.md', 'orchestration/CL2.md', 'orchestration/CL3.md'];
+const ids = new Set();
+let totalRows = 0;
 
-let currentDoneRow = null;
-let currentDoneRowHasTag = false;
-
-for (let i = 0; i < lines.length; i++) {
-  const line = lines[i];
-  const match = line.match(rowRegex);
+for (const ledger of ledgers) {
+  const filepath = path.resolve(ledger);
+  if (!fs.existsSync(filepath)) continue;
   
-  if (match) {
-    if (currentDoneRow !== null && !currentDoneRowHasTag) {
-      console.error(`Ledger Error: [DONE] row at line ${currentDoneRow.lineNum} lacks [PASSED TAG]`);
-      hasError = true;
-    }
+  const lines = fs.readFileSync(filepath, 'utf8').split('\n');
+  const bulletCount = lines.filter(l => /^\s*\*\s+\[/.test(l)).length;
+  
+  // Use the robust regex from the instructions
+  const rowRegex = /^\s*\*\s+(?:\S+\s+)?\[([^\]]+)\]\s+\*{0,2}(B\d+)\*{0,2}\s*[—-]/;
+  let rowsFound = 0;
+  
+  let currentDoneRow = null;
+  let currentDoneRowHasTag = false;
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const match = line.match(rowRegex);
     
-    // Support "* ?? [LOCKED]" which doesn't match perfectly if we only look at the bracket
-    let state = match[1];
-    if (line.includes('[DONE]')) {
-      state = 'DONE';
-    } else if (line.includes('[LOCKED]')) {
-      state = 'LOCKED';
-    } else if (line.includes('[IN PROGRESS]')) {
-      state = 'IN PROGRESS';
-    }
-    
-    const id = match[2];
-    
-    if (id === '-' || id.trim() === '') {
-      console.error(`Ledger Error: Row at line ${i + 1} has an empty ID slot: ${line.trim()}`);
-      hasError = true;
-    }
-    
-    if (state === 'DONE') {
-      currentDoneRow = { lineNum: i + 1, content: line };
-      currentDoneRowHasTag = doneTagRegex.test(line);
-    } else {
-      currentDoneRow = null;
-    }
-  } else if (currentDoneRow !== null) {
-    if (!currentDoneRowHasTag && doneTagRegex.test(line)) {
-      currentDoneRowHasTag = true;
-    }
-    if (/^##+ /.test(line)) {
-      if (!currentDoneRowHasTag) {
-        console.error(`Ledger Error: [DONE] row at line ${currentDoneRow.lineNum} lacks [PASSED TAG]`);
+    if (match) {
+      rowsFound++;
+      totalRows++;
+      
+      const state = match[1];
+      const id = match[2];
+      
+      if (ids.has(id)) {
+        console.error(`Ledger Error: Duplicate B-number ${id} in ${ledger}:${i+1}`);
         hasError = true;
       }
-      currentDoneRow = null;
+      ids.add(id);
+      
+      if (id === '-' || id.trim() === '') {
+        console.error(`Ledger Error: Row at line ${i + 1} has an empty ID slot: ${line.trim()}`);
+        hasError = true;
+      }
+      
+      if (currentDoneRow !== null && !currentDoneRowHasTag) {
+        console.error(`Ledger Error: [DONE] row at line ${currentDoneRow.lineNum} in ${ledger} lacks [PASSED TAG]`);
+        hasError = true;
+      }
+      
+      if (line.includes('[DONE]')) {
+        currentDoneRow = { lineNum: i + 1, content: line };
+        currentDoneRowHasTag = line.includes('[PASSED TAG');
+      } else {
+        currentDoneRow = null;
+      }
+    } else if (currentDoneRow !== null) {
+      if (line.includes('[PASSED TAG')) {
+        currentDoneRowHasTag = true;
+      }
+      if (/^##+ /.test(line)) {
+        if (!currentDoneRowHasTag) {
+          console.error(`Ledger Error: [DONE] row at line ${currentDoneRow.lineNum} in ${ledger} lacks [PASSED TAG]`);
+          hasError = true;
+        }
+        currentDoneRow = null;
+      }
     }
   }
-}
-
-if (currentDoneRow !== null && !currentDoneRowHasTag) {
-  console.error(`Ledger Error: [DONE] row at line ${currentDoneRow.lineNum} lacks [PASSED TAG]`);
-  hasError = true;
+  
+  if (currentDoneRow !== null && !currentDoneRowHasTag) {
+    console.error(`Ledger Error: [DONE] row at line ${currentDoneRow.lineNum} in ${ledger} lacks [PASSED TAG]`);
+    hasError = true;
+  }
+  
+  if (rowsFound < bulletCount) {
+    console.error(`Ledger Error in ${ledger}: matcher found ${rowsFound} rows, but there are ${bulletCount} bullets. PATTERN is broken.`);
+    hasError = true;
+  }
+  if (ledger.includes('CL2') && rowsFound < 50) {
+    console.error(`Ledger Error in ${ledger}: matcher found ${rowsFound} rows, expected at least 50.`);
+    hasError = true;
+  }
 }
 
 if (hasError) {
   process.exit(1);
 } else {
-  console.log('Ledger integrity check passed.');
+  console.log(`Ledger integrity check passed across ${totalRows} rows.`);
   process.exit(0);
 }
-
-

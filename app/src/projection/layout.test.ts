@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { applyElkLayoutX6 } from './layout';
-import { CARD_WIDTH, CARD_HEADER_H } from '../model/geometry';
+import { CARD_WIDTH, CARD_HEADER_H } from '../model/geometry.js';
 
 type Node = { id: string, x: number, y: number, data?: any, width?: number, height?: number };
 type Edge = { id: string, source: { cell: string }, target: { cell: string } };

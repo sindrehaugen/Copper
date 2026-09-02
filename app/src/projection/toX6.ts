@@ -1,5 +1,5 @@
 import type { DesignDocument, PortRef } from '../model/schema';
-import { CARD_WIDTH, CARD_HEADER_H, CARD_PAD_Y, PORT_ROW_H } from '../model/geometry';
+import { CARD_WIDTH, CARD_HEADER_H, CARD_PAD_Y, PORT_ROW_H } from '../model/geometry.js';
 
 export type LayoutData = Record<string, { x: number; y: number }>;
 

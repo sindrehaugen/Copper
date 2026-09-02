@@ -417,6 +417,13 @@ ${schemeToCssProperties(schemes.light, '  ')}
 
   /* --- Copper Aliases (B117) --- */
 ${copperAliasToCssProperties('  ')}
+
+  /* --- Zone Roles (B126) --- */
+  --copper-zone-viewer: rgba(0, 0, 255, 0.2);
+  --copper-zone-participant: rgba(0, 255, 0, 0.2);
+  --copper-zone-task: rgba(255, 165, 0, 0.2);
+  --copper-zone-drawing: rgba(0, 150, 255, 0.3);
+  --copper-zone-drawing-border: #0096ff;
 }
 
 /* --- Dark Theme Color Roles (OS Follower — zero theme flash) --- */

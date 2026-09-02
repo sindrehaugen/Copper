@@ -184,9 +184,9 @@ export function FloorplanMode() {
         {zones.map(zone => {
           const geo = document.geometry?.[zone.id];
           if (!geo || !geo.position || !geo.size) return null;
-          let color = 'rgba(0, 0, 255, 0.2)';
-          if (zone.type === 'participant') color = 'rgba(0, 255, 0, 0.2)';
-          if (zone.type === 'task') color = 'rgba(255, 165, 0, 0.2)';
+          let colorVar = 'var(--copper-zone-viewer)';
+          if (zone.type === 'participant') colorVar = 'var(--copper-zone-participant)';
+          if (zone.type === 'task') colorVar = 'var(--copper-zone-task)';
 
           return (
             <div
@@ -197,15 +197,15 @@ export function FloorplanMode() {
                 top: geo.position.y,
                 width: geo.size.width,
                 height: geo.size.height,
-                background: color,
-                border: `1px solid ${color.replace('0.2', '0.8')}`,
+                background: colorVar,
+                border: `1px solid var(--md-sys-color-outline)`,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 pointerEvents: 'none'
               }}
             >
-              <span style={{ fontWeight: 'bold', color: '#333' }}>{zone.name}</span>
+              <span style={{ fontWeight: 'bold', color: 'var(--md-sys-color-on-surface)' }}>{zone.name}</span>
             </div>
           );
         })}
@@ -218,8 +218,8 @@ export function FloorplanMode() {
             top: Math.min(drawingRect.startY, drawingRect.endY),
             width: Math.abs(drawingRect.endX - drawingRect.startX),
             height: Math.abs(drawingRect.endY - drawingRect.startY),
-            background: 'rgba(0, 150, 255, 0.3)',
-            border: '1px dashed #0096ff',
+            background: 'var(--copper-zone-drawing)',
+            border: '1px dashed var(--copper-zone-drawing-border)',
             pointerEvents: 'none'
           }} />
         )}

@@ -1,6 +1,6 @@
 import ELK from 'elkjs/lib/elk.bundled.js';
 import type { ElkNode, ElkExtendedEdge } from 'elkjs';
-import { CARD_WIDTH, CARD_HEADER_H } from '../model/geometry';
+import { CARD_WIDTH, CARD_HEADER_H } from '../model/geometry.js';
 
 const elk = new ELK();
 

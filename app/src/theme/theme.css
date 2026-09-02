@@ -212,6 +212,13 @@
   --copper-tertiary-container: var(--md-sys-color-tertiary-container);
   --copper-on-tertiary-container: var(--md-sys-color-on-tertiary-container);
   --copper-text-secondary: var(--md-sys-color-on-surface-variant);
+
+  /* --- Zone Roles (B126) --- */
+  --copper-zone-viewer: rgba(0, 0, 255, 0.2);
+  --copper-zone-participant: rgba(0, 255, 0, 0.2);
+  --copper-zone-task: rgba(255, 165, 0, 0.2);
+  --copper-zone-drawing: rgba(0, 150, 255, 0.3);
+  --copper-zone-drawing-border: #0096ff;
 }
 
 /* --- Density Rules (HS-14: compact default) --- */

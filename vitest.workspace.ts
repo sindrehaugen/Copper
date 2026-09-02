@@ -31,6 +31,7 @@ export default defineWorkspace([
       root: 'bff',
       environment: 'node',
       include: ['src/**/*.{test,spec}.{ts,tsx}'],
+      setupFiles: ['./vitest.setup.ts'],
     },
   },
   {

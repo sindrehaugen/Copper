@@ -15,6 +15,7 @@ COPY rig/package.json ./rig/
 COPY packages/acoustics/package.json ./packages/acoustics/
 COPY packages/av-physics/package.json ./packages/av-physics/
 COPY packages/schema/package.json ./packages/schema/
+COPY packages/design/package.json ./packages/design/
 
 # Install workspace dependencies
 RUN pnpm install --frozen-lockfile
@@ -32,6 +33,8 @@ COPY packages/av-physics/src/ ./packages/av-physics/src/
 COPY packages/av-physics/tsconfig.json ./packages/av-physics/
 COPY packages/schema/src/ ./packages/schema/src/
 COPY packages/schema/tsconfig.json ./packages/schema/
+COPY packages/design/src/ ./packages/design/src/
+COPY packages/design/tsconfig.json ./packages/design/
 
 # Copy app source tree, fixtures and configs
 COPY app/src/ ./app/src/
@@ -41,6 +44,7 @@ COPY app/index.html app/vite.config.ts app/tsconfig.json ./app/
 # Build required workspace packages and app bundle
 RUN (cd packages/schema && /app/node_modules/.bin/tsc) && \
     (cd packages/av-physics && /app/node_modules/.bin/tsc) && \
+    (cd packages/design && /app/node_modules/.bin/tsc) && \
     (cp /app/app/src/views/bom/BomView.tsx /app/app/src/views/bom/BOMView.tsx 2>/dev/null || true) && \
     pnpm --filter app exec vite build
 

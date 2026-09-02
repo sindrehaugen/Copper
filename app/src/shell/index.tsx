@@ -12,7 +12,7 @@ import { SceneView } from '../views/scene/SceneView';
 import { DsarSurface } from '../components/compliance/DsarSurface';
 import { LedWallDesigner } from '../views/led/LedWallDesigner';
 import { SettingsPanel } from '../views/canvas/SettingsPanel';
-import { BOMView } from '../views/bom/BOMView';
+import { BOMView } from '../views/bom/BomView';
 
 import fixtureReferenceProject from '../../tests/fixtures/reference-projects/AV_U1A21.project.json';
 import { bffClient } from '../api/client';
@@ -27,8 +27,9 @@ import { GlobalBar } from './GlobalBar';
 import { ContextRail } from './ContextRail';
 import { IntelligenceRail } from './IntelligenceRail';
 import { FindingsTray } from './FindingsTray';
+import { CommandPalette } from './command';
 
-export { ShellLayout, GlobalBar, ContextRail, IntelligenceRail, FindingsTray };
+export { ShellLayout, GlobalBar, ContextRail, IntelligenceRail, FindingsTray, CommandPalette };
 
 interface SessionContextType {
   tenantId: string;
@@ -243,3 +244,4 @@ export function AppShell() {
     </SessionContext.Provider>
   );
 }
+

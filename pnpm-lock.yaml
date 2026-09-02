@@ -80,6 +80,9 @@ importers:
       '@copper/schema':
         specifier: workspace:*
         version: link:../packages/schema
+      '@copper/spine':
+        specifier: workspace:*
+        version: link:../packages/spine
       '@material/material-color-utilities':
         specifier: ^0.3.0
         version: 0.3.0
@@ -251,6 +254,37 @@ importers:
       typescript:
         specifier: ^5.6.2
         version: 5.9.3
+
+  packages/spine:
+    dependencies:
+      '@copper/design':
+        specifier: workspace:*
+        version: link:../design
+    devDependencies:
+      '@testing-library/react':
+        specifier: ^16.3.2
+        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@types/react':
+        specifier: ^19.0.10
+        version: 19.2.18
+      '@types/react-dom':
+        specifier: ^19.0.4
+        version: 19.2.5(@types/react@19.2.18)
+      jsdom:
+        specifier: ^30.0.1
+        version: 30.0.1
+      react:
+        specifier: ^19.0.0
+        version: 19.2.8
+      react-dom:
+        specifier: ^19.0.0
+        version: 19.2.8(react@19.2.8)
+      typescript:
+        specifier: ^5.7.3
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.7
+        version: 3.2.7(@types/node@22.20.1)(jsdom@30.0.1)(supports-color@7.2.0)(tsx@4.23.12)
 
   rig:
     devDependencies:

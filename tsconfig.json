@@ -5,6 +5,8 @@
     { "path": "./app" },
     { "path": "./bff" },
     { "path": "./packages/acoustics" },
-    { "path": "./packages/av-physics" }
+    { "path": "./packages/av-physics" },
+    { "path": "./packages/design" },
+    { "path": "./packages/spine" }
   ]
 }

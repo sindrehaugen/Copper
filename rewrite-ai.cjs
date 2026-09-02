@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+const fs = require('fs');
+const code = `import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import './compliance.css';
 
@@ -19,7 +20,7 @@ export const AiConfirmDialog: React.FC<AiConfirmDialogProps> = ({
   onConfirm,
   onReject,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('compliance');
   const [isOverride, setIsOverride] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
   const previousFocus = useRef<HTMLElement | null>(null);
@@ -80,25 +81,25 @@ export const AiConfirmDialog: React.FC<AiConfirmDialogProps> = ({
               {title}
             </h2>
             <span className="m3-badge">
-              {t('compliance.aiSuggestion')}
+              {t('aiSuggestion')}
             </span>
           </div>
 
           <div className="m3-dialog-body">
             <div className="m3-panel">
-              <h3 className="m3-panel-title">{t('compliance.proposedActionLabel')}</h3>
+              <h3 className="m3-panel-title">{t('proposedActionLabel')}</h3>
               <p className="m3-panel-content">{proposedAction}</p>
             </div>
 
             <div className="m3-confidence">
-              <span>{t('compliance.confidenceLabel')} </span>
+              <span>{t('confidenceLabel')} </span>
               <span className={confClass}>
                 {confidenceString}
               </span>
             </div>
 
             <div className="m3-panel m3-panel-info">
-              <h3 className="m3-panel-title">{t('compliance.provenanceLabel')}</h3>
+              <h3 className="m3-panel-title">{t('provenanceLabel')}</h3>
               <p className="m3-panel-content">{provenance}</p>
             </div>
 
@@ -110,17 +111,17 @@ export const AiConfirmDialog: React.FC<AiConfirmDialogProps> = ({
                 onChange={(e) => setIsOverride(e.target.checked)}
               />
               <label htmlFor="human-override">
-                {t('compliance.humanOverride')}
+                {t('humanOverride')}
               </label>
             </div>
           </div>
 
           <div className="m3-dialog-actions">
             <button onClick={onReject} className="m3-btn m3-btn-outlined">
-              {t('compliance.rejectBtn')}
+              {t('rejectBtn')}
             </button>
             <button onClick={() => onConfirm(isOverride)} className="m3-btn m3-btn-filled">
-              {isOverride ? t('compliance.confirmOverrideBtn') : t('compliance.approveBtn')}
+              {isOverride ? t('confirmOverrideBtn') : t('approveBtn')}
             </button>
           </div>
         </div>
@@ -128,3 +129,6 @@ export const AiConfirmDialog: React.FC<AiConfirmDialogProps> = ({
     </>
   );
 };
+`;
+fs.writeFileSync('app/src/components/compliance/AiConfirmDialog.tsx', code);
+console.log('Rewrote AiConfirmDialog.tsx');

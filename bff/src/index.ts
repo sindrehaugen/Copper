@@ -4,6 +4,7 @@ import process from 'node:process';
 import { serve } from '@hono/node-server';
 import { Hono } from 'hono';
 import { requireAuth } from './auth';
+import { meRoutes } from './routes/me';
 import type { Context, Next } from 'hono';
 
 /**
@@ -157,6 +158,7 @@ export function createBffApp(): Hono {
   });
 
   app.route('/api/design', designRoutes);
+  app.route('/api/me', meRoutes);
 
   return app;
 }

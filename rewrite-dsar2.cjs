@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+const fs = require('fs');
+const code = `import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AiConfirmDialog } from './AiConfirmDialog';
 import { ProvenanceViewer, ProvenanceRecord } from './ProvenanceViewer';
 
 export const DsarSurface: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('compliance');
   const [exportStatus, setExportStatus] = useState<string>('');
   const [deleteStatus, setDeleteStatus] = useState<string>('');
   const [showConfirm, setShowConfirm] = useState(false);
@@ -25,20 +26,20 @@ export const DsarSurface: React.FC = () => {
   }, []);
 
   const requestExport = async () => {
-    setExportStatus(t('compliance.exportPending', 'Request Pending'));
+    setExportStatus(t('exportPending', 'Request Pending'));
     try {
       const res = await fetch('/api/me/dsar/export');
       if (!res.ok) {
         if (res.status === 404) {
-          setExportStatus(t('compliance.unavailable', 'Temporarily Unavailable (HS-13)'));
+          setExportStatus(t('unavailable', 'Temporarily Unavailable (HS-13)'));
         } else {
-          setExportStatus(t('compliance.exportFailed', 'Export Failed'));
+          setExportStatus(t('exportFailed', 'Export Failed'));
         }
         return;
       }
-      setExportStatus(t('compliance.exportSuccess', 'Data Ready to Download'));
+      setExportStatus(t('exportSuccess', 'Data Ready to Download'));
     } catch {
-      setExportStatus(t('compliance.exportFailed', 'Export Failed'));
+      setExportStatus(t('exportFailed', 'Export Failed'));
     }
   };
 
@@ -48,7 +49,7 @@ export const DsarSurface: React.FC = () => {
 
   const executeDeletion = async (override: boolean) => {
     setShowConfirm(false);
-    setDeleteStatus(t('compliance.deletePending', 'Request Pending'));
+    setDeleteStatus(t('deletePending', 'Request Pending'));
     try {
       const res = await fetch('/api/me/dsar/erase', { 
         method: 'POST',
@@ -57,45 +58,45 @@ export const DsarSurface: React.FC = () => {
       });
       if (!res.ok) {
         if (res.status === 404) {
-          setDeleteStatus(t('compliance.unavailable', 'Temporarily Unavailable (HS-13)'));
+          setDeleteStatus(t('unavailable', 'Temporarily Unavailable (HS-13)'));
         } else {
-          setDeleteStatus(t('compliance.deleteFailed', 'Deletion Failed'));
+          setDeleteStatus(t('deleteFailed', 'Deletion Failed'));
         }
         return;
       }
-      setDeleteStatus(t('compliance.deleteSuccess', 'Deletion Request Received'));
+      setDeleteStatus(t('deleteSuccess', 'Deletion Request Received'));
     } catch {
-      setDeleteStatus(t('compliance.deleteFailed', 'Deletion Failed'));
+      setDeleteStatus(t('deleteFailed', 'Deletion Failed'));
     }
   };
 
   return (
     <div className="dsar-surface">
-      <h2>{t('compliance.title', 'Data Subject Access Request (DSAR) & Compliance')}</h2>
+      <h2>{t('title', 'Data Subject Access Request (DSAR) & Compliance')}</h2>
       
       <div className="dsar-section">
-        <h3>{t('compliance.exportTitle', 'Request Your Data')}</h3>
-        <button onClick={requestExport} data-testid="export-btn" className="m3-btn m3-btn-outlined">{t('compliance.exportButton', 'Request Data Export')}</button>
+        <h3>{t('exportTitle', 'Request Your Data')}</h3>
+        <button onClick={requestExport} data-testid="export-btn" className="m3-btn m3-btn-outlined">{t('exportButton', 'Request Data Export')}</button>
         {exportStatus && <p data-testid="export-status">{exportStatus}</p>}
       </div>
 
       <div className="dsar-section" style={{ marginTop: '24px' }}>
-        <h3>{t('compliance.deleteTitle', 'Request Account Deletion')}</h3>
-        <button onClick={handleDeletionAttempt} data-testid="delete-btn" className="m3-btn m3-btn-filled" style={{ backgroundColor: 'var(--md-sys-color-error)' }}>{t('compliance.deleteButton', 'Request Deletion')}</button>
+        <h3>{t('deleteTitle', 'Request Account Deletion')}</h3>
+        <button onClick={handleDeletionAttempt} data-testid="delete-btn" className="m3-btn m3-btn-filled" style={{ backgroundColor: 'var(--md-sys-color-error)' }}>{t('deleteButton', 'Request Deletion')}</button>
         {deleteStatus && <p data-testid="delete-status">{deleteStatus}</p>}
       </div>
 
       <div className="dsar-section" style={{ marginTop: '32px' }}>
-        <h3>{t('compliance.provenanceTitle', 'System Provenance')}</h3>
+        <h3>{t('provenanceTitle', 'System Provenance')}</h3>
         <ProvenanceViewer records={provenanceRecords} />
       </div>
 
       {showConfirm && (
         <AiConfirmDialog
-          title={t('compliance.confirmTitle', 'Confirm Account Deletion')}
-          proposedAction={t('compliance.confirmAction', 'Erase all PII and design documents associated with this tenant.')}
-          confidenceString={t('compliance.confirmConfidence', 'High')}
-          provenance={t('compliance.confirmProvenance', 'GDPR Article 17 Right to Erasure.')}
+          title={t('confirmTitle', 'Confirm Account Deletion')}
+          proposedAction={t('confirmAction', 'Erase all PII and design documents associated with this tenant.')}
+          confidenceString={t('confirmConfidence', 'High')}
+          provenance={t('confirmProvenance', 'GDPR Article 17 Right to Erasure.')}
           onConfirm={executeDeletion}
           onReject={() => setShowConfirm(false)}
         />
@@ -103,3 +104,6 @@ export const DsarSurface: React.FC = () => {
     </div>
   );
 };
+`;
+fs.writeFileSync('app/src/components/compliance/DsarSurface.tsx', code);
+console.log('Rewrote DsarSurface2.tsx');

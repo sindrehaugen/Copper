@@ -1,4 +1,5 @@
-import React from 'react';
+const fs = require('fs');
+const code = `import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './compliance.css';
 
@@ -18,13 +19,13 @@ export interface ProvenanceViewerProps {
 }
 
 export const ProvenanceViewer: React.FC<ProvenanceViewerProps> = ({ records, className = '' }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('compliance');
   if (!records || records.length === 0) {
-    return <div className={`m3-provenance-time ${className}`}>{t('compliance.noRecords')}</div>;
+    return <div className={\`m3-provenance-time \${className}\`}>{t('noRecords')}</div>;
   }
 
   return (
-    <div className={`m3-provenance-list ${className}`}>
+    <div className={\`m3-provenance-list \${className}\`}>
       {records.map((record) => (
         <div key={record.id} className="m3-provenance-record">
           <div className="m3-provenance-header">
@@ -32,19 +33,19 @@ export const ProvenanceViewer: React.FC<ProvenanceViewerProps> = ({ records, cla
             <span className="m3-provenance-time">{new Date(record.timestamp).toLocaleString()}</span>
           </div>
           <p className="m3-provenance-action">
-            <strong>{t('compliance.actionLabel')}</strong> {record.action}
+            <strong>{t('actionLabel')}</strong> {record.action}
           </p>
           {(record.originalValue || record.newValue) && (
             <div className="m3-provenance-diff">
               {record.originalValue && (
                 <div>
-                  <span className="m3-provenance-diff-label">{t('compliance.originalLabel')}</span>
+                  <span className="m3-provenance-diff-label">{t('originalLabel')}</span>
                   <span className="m3-provenance-diff-old">{record.originalValue}</span>
                 </div>
               )}
               {record.newValue && (
                 <div>
-                  <span className="m3-provenance-diff-label">{t('compliance.newLabel')}</span>
+                  <span className="m3-provenance-diff-label">{t('newLabel')}</span>
                   <span className="m3-provenance-diff-new">{record.newValue}</span>
                 </div>
               )}
@@ -52,7 +53,7 @@ export const ProvenanceViewer: React.FC<ProvenanceViewerProps> = ({ records, cla
           )}
           {record.citation && (
             <p className="m3-provenance-citation">
-              <strong>{t('compliance.citationLabel')}</strong> {record.citation}
+              <strong>{t('citationLabel')}</strong> {record.citation}
             </p>
           )}
         </div>
@@ -60,3 +61,6 @@ export const ProvenanceViewer: React.FC<ProvenanceViewerProps> = ({ records, cla
     </div>
   );
 };
+`;
+fs.writeFileSync('app/src/components/compliance/ProvenanceViewer.tsx', code);
+console.log('Rewrote ProvenanceViewer.tsx');

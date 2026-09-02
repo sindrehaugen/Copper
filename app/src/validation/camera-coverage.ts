@@ -5,7 +5,6 @@ import { ValidationFinding } from './registry';
 export function validateCameraCoverage(doc: DesignDocument): { findings: Omit<ValidationFinding, 'source'>[] } {
   const findings: Omit<ValidationFinding, 'source'>[] = [];
   
-  if (!doc.zones || doc.zones.length === 0) return { findings };
 
   const getZoneRect = (zoneId: string) => {
     const geo = doc.geometry?.[zoneId];
@@ -20,7 +19,7 @@ export function validateCameraCoverage(doc: DesignDocument): { findings: Omit<Va
     return null;
   };
 
-  const participantZones = doc.zones.filter(z => z.type === 'participant');
+  const participantZones = (doc.zones || []).filter(z => z.type === 'participant' || z.type === 'viewer');
 
   const cameras = doc.devices.filter(() => true); // We'll filter properly inside
 
@@ -48,7 +47,10 @@ export function validateCameraCoverage(doc: DesignDocument): { findings: Omit<Va
         findings.push({
           targetId: device.id,
           severity: 'Warning',
-          message: `Camera FOV (${fov.toFixed(1)}°) cannot cover the entire width of ${zone.name} (${zoneWidthAngle.toFixed(1)}° required).`
+          message: `Camera FOV (${fov.toFixed(1)}°) cannot cover the entire width of ${zone.name} (${zoneWidthAngle.toFixed(1)}° required). Suggesting wider lens or repositioning.`,
+          details: {
+            fixActions: ["Suggest wider lens", "Reposition camera or zone"]
+          }
         });
       }
     }

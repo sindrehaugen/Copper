@@ -19,6 +19,7 @@ export function DesignWorkspace() {
   const currentMode = mode || 'schematic';
   const promoteDocument = useDocumentStore(state => state.promoteDocument);
   const isSaving = useDocumentStore(state => state.isSaving);
+  const updateDocument = useDocumentStore(state => state.updateDocument);
 
   const handleExportDXF = () => {
     if (!document) return;
@@ -52,6 +53,86 @@ export function DesignWorkspace() {
         alert(e.message);
       }
     }
+  };
+
+  const handle100VClick = () => {
+    updateDocument((draft) => {
+      const ampType = draft.deviceTypes.find(dt => dt.model.toLowerCase().includes('amp') || dt.slug.includes('amp')) || draft.deviceTypes[0];
+      const spkType = draft.deviceTypes.find(dt => dt.model.toLowerCase().includes('speaker') || dt.slug.includes('speaker')) || draft.deviceTypes[0];
+      const siteId = draft.sites[0]?.id || 'site-1';
+      
+      if (!draft.sites.some(s => s.id === siteId)) {
+        draft.sites.push({ id: siteId, name: 'Default Site', slug: 'default-site' });
+      }
+
+      const ampId = 'amp-' + Math.random().toString(36).substring(2, 9);
+      draft.devices.push({
+        id: ampId,
+        name: 'Paging Amp',
+        deviceTypeId: ampType?.id || 'fallback',
+        siteId,
+        status: 'planned'
+      });
+      
+      let prevId = ampId;
+      for(let i=1; i<=4; i++) {
+        const spkId = 'spk-' + Math.random().toString(36).substring(2, 9);
+        draft.devices.push({
+          id: spkId,
+          name: `Ceiling Speaker ${i}`,
+          deviceTypeId: spkType?.id || 'fallback',
+          siteId,
+          status: 'planned'
+        });
+        
+        draft.cables.push({
+          id: 'cab-' + Math.random().toString(36).substring(2, 9),
+          status: 'planned',
+          terminations: [
+            { deviceId: prevId, portRef: { kind: 'rearPort', name: prevId === ampId ? 'out' : 'link' } },
+            { deviceId: spkId, portRef: { kind: 'rearPort', name: 'in' } }
+          ]
+        });
+        prevId = spkId;
+      }
+    });
+  };
+
+  const handleBoardroomClick = () => {
+    updateDocument((draft) => {
+      const displayType = draft.deviceTypes.find(dt => dt.model.toLowerCase().includes('display') || dt.slug.includes('display')) || draft.deviceTypes[0];
+      const camType = draft.deviceTypes.find(dt => dt.model.toLowerCase().includes('camera') || dt.slug.includes('camera')) || draft.deviceTypes[0];
+      const micType = draft.deviceTypes.find(dt => dt.model.toLowerCase().includes('mic') || dt.slug.includes('mic')) || draft.deviceTypes[0];
+      const siteId = draft.sites[0]?.id || 'site-1';
+      
+      if (!draft.sites.some(s => s.id === siteId)) {
+        draft.sites.push({ id: siteId, name: 'Default Site', slug: 'default-site' });
+      }
+
+      draft.devices.push({
+        id: 'disp-' + Math.random().toString(36).substring(2, 9),
+        name: 'Main Display',
+        deviceTypeId: displayType?.id || 'fallback',
+        siteId,
+        status: 'planned'
+      });
+      
+      draft.devices.push({
+        id: 'cam-' + Math.random().toString(36).substring(2, 9),
+        name: 'PTZ Camera',
+        deviceTypeId: camType?.id || 'fallback',
+        siteId,
+        status: 'planned'
+      });
+      
+      draft.devices.push({
+        id: 'mic-' + Math.random().toString(36).substring(2, 9),
+        name: 'Ceiling Mic',
+        deviceTypeId: micType?.id || 'fallback',
+        siteId,
+        status: 'planned'
+      });
+    });
   };
 
   const modes = [
@@ -124,11 +205,17 @@ export function DesignWorkspace() {
             <h2 style={{ color: 'var(--copper-on-surface)' }}>{t('common.designFromIntent')}</h2>
             <p style={{ color: 'var(--copper-on-surface-variant)', marginBottom: 32 }}>{t('common.chooseAGenerativeStartingPoint')}</p>
             <div style={{ display: 'flex', gap: 16 }}>
-              <div style={{ padding: 24, background: 'var(--copper-surface-container)', borderRadius: 12, border: '1px solid var(--copper-outline)', cursor: 'pointer' }}>
+              <div 
+                onClick={handle100VClick}
+                style={{ padding: 24, background: 'var(--copper-surface-container)', borderRadius: 12, border: '1px solid var(--copper-outline)', cursor: 'pointer' }}
+              >
                 <h3>{t('common.100VPagingZone')}</h3>
                 <p style={{ color: 'var(--copper-on-surface-variant)' }}>{t('common.amp8CeilingSpeakers')}</p>
               </div>
-              <div style={{ padding: 24, background: 'var(--copper-surface-container)', borderRadius: 12, border: '1px solid var(--copper-outline)', cursor: 'pointer' }}>
+              <div 
+                onClick={handleBoardroomClick}
+                style={{ padding: 24, background: 'var(--copper-surface-container)', borderRadius: 12, border: '1px solid var(--copper-outline)', cursor: 'pointer' }}
+              >
                 <h3>{t('common.boardroomVC')}</h3>
                 <p style={{ color: 'var(--copper-on-surface-variant)' }}>{t('common.dSPAmpsPTZCameraMics')}</p>
               </div>

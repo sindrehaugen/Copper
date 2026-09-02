@@ -1,0 +1,369 @@
+/* Lens Shell & Primitives Styles (Batch 135 / SH.W7) */
+
+.copper-lens {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  min-height: 0;
+  min-width: 0;
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  box-sizing: border-box;
+}
+
+/* Common Lens Header */
+.copper-lens-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 20px;
+  background-color: var(--md-sys-color-surface-container-low);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+  flex-shrink: 0;
+}
+
+.copper-lens-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--md-sys-typescale-body-small-font-size);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.copper-lens-breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.copper-lens-breadcrumb-separator {
+  opacity: 0.6;
+}
+
+.copper-lens-header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.copper-lens-header-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.copper-lens-kind-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: var(--md-sys-shape-corner-extra-small);
+  font-size: var(--md-sys-typescale-label-small-font-size);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface-variant);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  flex-shrink: 0;
+}
+
+.copper-lens-kind-badge[data-lens-kind="cockpit"] {
+  background-color: var(--copper-primary-container);
+  color: var(--copper-on-primary-container);
+  border-color: var(--copper-primary);
+}
+
+.copper-lens-kind-badge[data-lens-kind="grid"] {
+  background-color: var(--copper-secondary-container);
+  color: var(--copper-on-secondary-container);
+  border-color: var(--copper-secondary);
+}
+
+.copper-lens-kind-badge[data-lens-kind="entity"] {
+  background-color: var(--md-sys-color-tertiary-container);
+  color: var(--md-sys-color-on-tertiary-container);
+}
+
+.copper-lens-kind-badge[data-lens-kind="canvas"] {
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+}
+
+.copper-lens-kind-badge[data-lens-kind="board"] {
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.copper-lens-title-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.copper-lens-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.copper-lens-title {
+  margin: 0;
+  font-size: var(--md-sys-typescale-headline-small-font-size);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--md-sys-color-on-surface);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copper-lens-badge {
+  display: inline-flex;
+  align-items: center;
+}
+
+.copper-lens-subtitle {
+  margin: 2px 0 0 0;
+  font-size: var(--md-sys-typescale-body-small-font-size);
+  color: var(--md-sys-color-on-surface-variant);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copper-lens-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Lens Body Container */
+.copper-lens-body {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  position: relative;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.copper-lens-body > .loading-state,
+.copper-lens-body > .error-state,
+.copper-lens-body > .empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  min-height: 200px;
+}
+
+/* Specific Lens Shell Variants */
+.copper-lens-entity .copper-lens-body {
+  padding: 16px;
+  gap: 16px;
+}
+
+.copper-lens-grid .copper-lens-body {
+  padding: 0;
+}
+
+.copper-lens-canvas .copper-lens-body {
+  padding: 0;
+  overflow: hidden;
+}
+
+.copper-lens-board .copper-lens-body {
+  padding: 16px;
+  overflow-x: auto;
+}
+
+.copper-lens-cockpit .copper-lens-body {
+  padding: 20px;
+  gap: 20px;
+}
+
+/* Cockpit Figure & Controls (Cockpit Rule) */
+.copper-cockpit-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.copper-cockpit-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.copper-cockpit-section-title {
+  font-size: var(--md-sys-typescale-title-medium-font-size);
+  font-weight: 600;
+  color: var(--md-sys-color-on-surface);
+  margin: 0;
+}
+
+.copper-cockpit-section-description {
+  font-size: var(--md-sys-typescale-body-small-font-size);
+  color: var(--md-sys-color-on-surface-variant);
+  margin: 0;
+}
+
+.copper-cockpit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.copper-cockpit-figure {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: var(--md-sys-shape-corner-medium);
+  background-color: var(--md-sys-color-surface-container);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  box-shadow: var(--copper-elevation-1, var(--md-sys-elevation-level-1));
+  cursor: pointer;
+  text-align: left;
+  position: relative;
+  transition: border-color var(--copper-motion-duration-short, 120ms) var(--copper-motion-easing-standard, ease),
+              box-shadow var(--copper-motion-duration-short, 120ms) var(--copper-motion-easing-standard, ease),
+              background-color var(--copper-motion-duration-short, 120ms) var(--copper-motion-easing-standard, ease);
+  font-family: inherit;
+  color: inherit;
+  user-select: none;
+}
+
+.copper-cockpit-figure:hover {
+  background-color: var(--md-sys-color-surface-container-high);
+  border-color: var(--copper-primary, var(--md-sys-color-primary));
+  box-shadow: var(--copper-elevation-2, var(--md-sys-elevation-level-2));
+}
+
+.copper-cockpit-figure:focus-visible {
+  outline: 2px solid var(--copper-primary, var(--md-sys-color-primary));
+  outline-offset: 2px;
+}
+
+.copper-cockpit-figure-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.copper-cockpit-figure-label {
+  font-size: var(--md-sys-typescale-label-medium-font-size);
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.copper-cockpit-drillthrough-icon {
+  font-size: 14px;
+  color: var(--copper-primary, var(--md-sys-color-primary));
+  opacity: 0.7;
+  transition: opacity var(--copper-motion-duration-short, 120ms) ease,
+              transform var(--copper-motion-duration-short, 120ms) ease;
+}
+
+.copper-cockpit-figure:hover .copper-cockpit-drillthrough-icon {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+.copper-cockpit-figure-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.copper-cockpit-figure-value {
+  font-size: var(--md-sys-typescale-headline-medium-font-size);
+  font-weight: 700;
+  color: var(--md-sys-color-on-surface);
+  font-variant-numeric: var(--copper-font-numeric, tabular-nums);
+  line-height: 1.1;
+}
+
+.copper-cockpit-figure-unit {
+  font-size: var(--md-sys-typescale-body-small-font-size);
+  color: var(--md-sys-color-on-surface-variant);
+  font-weight: 500;
+}
+
+.copper-cockpit-figure-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.copper-cockpit-figure-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--md-sys-typescale-label-small-font-size);
+  font-weight: 600;
+  font-variant-numeric: var(--copper-font-numeric, tabular-nums);
+}
+
+.copper-cockpit-trend-up {
+  color: var(--copper-secondary, #3A6E6A);
+}
+
+.copper-cockpit-trend-down {
+  color: var(--copper-semantic-risk, #B05500);
+}
+
+.copper-cockpit-trend-neutral {
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.copper-cockpit-figure-drillthrough-hint {
+  font-size: var(--md-sys-typescale-label-small-font-size);
+  color: var(--copper-primary, var(--md-sys-color-primary));
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+/* Generic Drill-Through Wrapper Control */
+.copper-drillthrough-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 2px 4px;
+  border-radius: var(--md-sys-shape-corner-extra-small);
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-variant-numeric: var(--copper-font-numeric, tabular-nums);
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--copper-primary, var(--md-sys-color-primary));
+  transition: background-color var(--copper-motion-duration-short, 120ms) ease;
+}
+
+.copper-drillthrough-control:hover {
+  background-color: var(--md-sys-color-surface-container-high);
+  text-decoration-style: solid;
+}
+
+.copper-drillthrough-control:focus-visible {
+  outline: 2px solid var(--copper-primary, var(--md-sys-color-primary));
+  outline-offset: 2px;
+}

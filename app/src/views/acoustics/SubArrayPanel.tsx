@@ -124,13 +124,13 @@ export function SubArrayPanel() {
       boxShadow: 'var(--md-sys-elevation-level-3)'
     }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 12 }}>
-        <h3 style={{ margin: 0 }}>Sub Array Designer</h3>
-        <button className="m3-button m3-button-text" onClick={() => setIsOpen(false)}>×</button>
+        <h3 style={{ margin: 0 }}>{t('subarray.designer', 'Sub Array Designer')}</h3>
+        <button className="m3-button m3-button-text" aria-label={t('subarray.close', 'Close')} onClick={() => setIsOpen(false)}>×</button>
       </div>
 
       <div style={{ marginBottom: '12px' }}>
-        <label htmlFor="sub-model" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Subwoofer Model</label>
-        <select id="sub-model" className="m3-input" value={selectedSubId} 
+        <label htmlFor="sub-model" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>{t('subarray.subwooferModel', 'Subwoofer Model')}</label>
+        <select id="sub-model" aria-label={t('subarray.subwooferModel', 'Subwoofer Model')} className="m3-input" value={selectedSubId} 
           onChange={e => setSelectedSubId(e.target.value)}
           style={{ width: '100%' }}
         >
@@ -142,21 +142,21 @@ export function SubArrayPanel() {
 
       <div style={{ display: 'flex', gap: '8px', marginBottom: '12px' }}>
         <div style={{ flex: 1 }}>
-          <label htmlFor="preset" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Preset</label>
-          <select id="preset" className="m3-input" value={preset} 
+          <label htmlFor="preset" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>{t('subarray.preset', 'Preset')}</label>
+          <select id="preset" aria-label={t('subarray.preset', 'Preset')} className="m3-input" value={preset} 
             onChange={e => setPreset(e.target.value as ArrayPreset)}
             style={{ width: '100%' }}
           >
-            <option value="Endfire">Endfire</option>
-            <option value="Broadside">Broadside</option>
-            <option value="Cardioid">Cardioid</option>
-            <option value="Arc">Arc</option>
-            <option value="Gradient">Gradient</option>
+            <option value="Endfire">{t('subarray.preset.endfire', 'Endfire')}</option>
+            <option value="Broadside">{t('subarray.preset.broadside', 'Broadside')}</option>
+            <option value="Cardioid">{t('subarray.preset.cardioid', 'Cardioid')}</option>
+            <option value="Arc">{t('subarray.preset.arc', 'Arc')}</option>
+            <option value="Gradient">{t('subarray.preset.gradient', 'Gradient')}</option>
           </select>
         </div>
         <div style={{ width: '80px' }}>
-          <label htmlFor="count" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Units</label>
-          <input id="count" type="number" className="m3-input" value={count} onChange={e => setCount(Math.max(2, parseInt(e.target.value) || 2))}
+          <label htmlFor="count" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>{t('subarray.units', 'Units')}</label>
+          <input id="count" aria-label={t('subarray.units', 'Units')} type="number" className="m3-input" value={count} onChange={e => setCount(Math.max(2, parseInt(e.target.value) || 2))}
             style={{ width: '100%' }}
           />
         </div>
@@ -164,28 +164,28 @@ export function SubArrayPanel() {
 
       
       <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', alignItems: 'center' }}>
-        <label style={{ display: 'flex', alignItems: 'center', fontSize: '12px', gap: '4px', cursor: 'pointer' }}>
-          <input type="checkbox" checked={amplitudeShading} onChange={e => setAmplitudeShading(e.target.checked)} />
-          Amplitude Shading
+        <label htmlFor="amplitudeShading" style={{ display: 'flex', alignItems: 'center', fontSize: '12px', gap: '4px', cursor: 'pointer' }}>
+          <input id="amplitudeShading" type="checkbox" checked={amplitudeShading} onChange={e => setAmplitudeShading(e.target.checked)} />
+          {t('subarray.amplitudeShading', 'Amplitude Shading')}
         </label>
         
         <div style={{ flex: 1, marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <label htmlFor="delayTapering" style={{ fontSize: '12px' }}>Delay Taper (deg):</label>
-          <input id="delayTapering" type="number" className="m3-input" value={delayTapering} onChange={e => setDelayTapering(e.target.value === '' ? '' : parseInt(e.target.value))} style={{ width: '60px' }} />
+          <label htmlFor="delayTapering" style={{ fontSize: '12px' }}>{t('subarray.delayTaper', 'Delay Taper (deg):')}</label>
+          <input id="delayTapering" aria-label={t('subarray.delayTaper', 'Delay Taper (deg):')} type="number" className="m3-input" value={delayTapering} onChange={e => setDelayTapering(e.target.value === '' ? '' : parseInt(e.target.value))} style={{ width: '60px' }} />
         </div>
       </div>
       
       <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
         <div style={{ flex: 1 }}>
-          <label htmlFor="freq" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Frequency (Hz)</label>
-          <input id="freq" type="number" className="m3-input" value={freq} onChange={e => setFreq(parseInt(e.target.value) || 60)}
+          <label htmlFor="freq" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>{t('subarray.frequency', 'Frequency (Hz)')}</label>
+          <input id="freq" aria-label={t('subarray.frequency', 'Frequency (Hz)')} type="number" className="m3-input" value={freq} onChange={e => setFreq(parseInt(e.target.value) || 60)}
             style={{ width: '100%' }}
           />
         </div>
         <div style={{ flex: 1 }}>
-          <label htmlFor="spacing" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>Spacing (m)</label>
-          <input 
-            type="number" className="m3-input" placeholder="Auto"
+          <label htmlFor="spacing" style={{ display: 'block', fontSize: '12px', marginBottom: 4 }}>{t('subarray.spacing', 'Spacing (m)')}</label>
+          <input id="spacing"
+            type="number" className="m3-input" placeholder={t('subarray.auto', 'Auto')} aria-label={t('subarray.spacing', 'Spacing (m)')}
             value={spacing} onChange={e => setSpacing(e.target.value === '' ? '' : parseFloat(e.target.value))}
             style={{ width: '100%' }}
           />
@@ -194,7 +194,7 @@ export function SubArrayPanel() {
 
       <div style={{ display: 'flex', gap: '16px', marginBottom: '16px' }}>
         <div style={{ flex: 1, position: 'relative', height: '150px', border: '1px solid var(--copper-outline)', borderRadius: 4, overflow: 'hidden' }}>
-          <svg width="100%" height="100%" viewBox="-1 -1 2 2" preserveAspectRatio="xMidYMid meet">
+          <svg width="100%" height="100%" viewBox="-1 -1 2 2" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
             {/* SVG Polar Plot */}
             <circle cx="0" cy="0" r="1" fill="none" stroke="var(--copper-outline)" strokeWidth="0.01" />
             <circle cx="0" cy="0" r="0.75" fill="none" stroke="var(--copper-outline)" strokeWidth="0.01" strokeDasharray="0.05 0.05" />
@@ -214,13 +214,13 @@ export function SubArrayPanel() {
           </svg>
         </div>
         <div style={{ width: '150px', height: '150px', border: '1px solid var(--copper-outline)', borderRadius: 4, overflow: 'hidden' }}>
-          <canvas ref={canvasRef}></canvas>
+          <canvas ref={canvasRef} aria-hidden="true"></canvas>
         </div>
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <div style={{ fontSize: '10px', color: 'var(--copper-text-secondary)' }}>
-          Math by <a href="https://www.merlijnvanveen.nl/" target="_blank" rel="noreferrer" style={{ color: 'inherit' }}>Merlijn van Veen</a>
+          {t('subarray.mathBy', 'Math by')} <a href="https://www.merlijnvanveen.nl/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit' }}>{t('subarray.merlijn', 'Merlijn van Veen')}</a>
         </div>
         <button className="m3-button m3-button-primary" onClick={handlePlace} disabled={!selectedSubId}>
           {t('subarray.place')}

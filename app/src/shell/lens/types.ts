@@ -37,9 +37,11 @@ export interface BaseLensProps {
   dataTestId?: string | undefined;
   headerSlot?: ReactNode | undefined;
   lensKind?: LensKind | undefined;
+  "data-entity-type"?: string | undefined;
+  "data-entity-id"?: string | undefined;
 }
 
-export interface EntityLensProps extends BaseLensProps {
+export interface EntityLensProps extends Partial<BaseLensProps> {
   entityType?: string | undefined;
   entityId?: string | undefined;
 }
@@ -112,3 +114,4 @@ export interface CockpitSectionProps {
   children: ReactNode;
   className?: string | undefined;
 }
+

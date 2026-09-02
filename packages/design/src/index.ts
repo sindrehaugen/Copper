@@ -10,6 +10,7 @@ export * from "./typography";
 export * from "./elevation";
 export * from "./motion";
 export * from "./schemes";
+export * from "./entity";
 
 import { COPPER_PRIMARY_HEX, PATINA_SECONDARY_HEX } from "./colors";
 import {

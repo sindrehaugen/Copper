@@ -810,3 +810,8 @@ export const BomLineSchema = z
 
 export type BomLine = z.infer<typeof BomLineSchema>;
 
+// ============================================================================
+// Entity Registry & EntityRef (Batch 139 / OB.W1 - Contract-G)
+// ============================================================================
+export * from './entity';
+

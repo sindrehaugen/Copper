@@ -212,6 +212,8 @@
   --copper-tertiary-container: var(--md-sys-color-tertiary-container);
   --copper-on-tertiary-container: var(--md-sys-color-on-tertiary-container);
   --copper-text-secondary: var(--md-sys-color-on-surface-variant);
+  --copper-accent-primary: var(--md-sys-color-primary);
+  --copper-accent-secondary: var(--md-sys-color-secondary);
 
   /* --- Zone Roles (B126) --- */
   --copper-zone-viewer: rgba(0, 0, 255, 0.2);

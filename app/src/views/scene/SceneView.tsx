@@ -9,7 +9,7 @@ import { CoverageOverlay } from './CoverageOverlay';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
 
 function ExportButton() {
-  
+  const { t } = useTranslation();
 
   const { scene } = useThree();
 
@@ -49,8 +49,6 @@ function ExportButton() {
 }
 
 export function SceneView() {
-  
-
   const document = useDocumentStore((state) => state.document);
   const locations = document?.locations;
   const racks = document?.racks;

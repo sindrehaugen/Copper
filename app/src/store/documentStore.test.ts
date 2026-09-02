@@ -139,5 +139,36 @@ describe('documentStore', () => {
     expect(state.historyIndex).toBe(2);
     expect(state.history[2]?.designLabel).toBe('Forked');
   });
+
+  it('blocks promotion on remote validation failure', async () => {
+    const mockDoc = { ...sampleDoc };
+    useDocumentStore.getState().loadDocument(mockDoc);
+    
+    const validateSpy = vi.spyOn(bffClient, 'validateDesignGraph').mockResolvedValue({ valid: false, findings: [{ source: 'Remote', message: 'Fail', severity: 'Error' }] } as any);
+    
+    await expect(useDocumentStore.getState().promoteDocument(bffClient, 'tenant-1', 'user-1', 'active'))
+      .rejects.toThrow(/Remote validation failed/);
+      
+    expect(useDocumentStore.getState().remoteFindings).toHaveLength(1);
+    
+    validateSpy.mockRestore();
+  });
+
+  it('succeeds promotion when green', async () => {
+    const mockDoc = { ...sampleDoc };
+    useDocumentStore.getState().loadDocument(mockDoc);
+    
+    const validateSpy = vi.spyOn(bffClient, 'validateDesignGraph').mockResolvedValue({ valid: true, findings: [] });
+    const authorTopologySpy = vi.spyOn(bffClient, 'authorTopology').mockResolvedValue(undefined);
+    
+    await useDocumentStore.getState().promoteDocument(bffClient, 'tenant-1', 'user-1', 'active');
+    
+    expect(authorTopologySpy).toHaveBeenCalledWith('tenant-1', expect.objectContaining({
+      design: expect.objectContaining({ status: 'active' })
+    }));
+    
+    validateSpy.mockRestore();
+    authorTopologySpy.mockRestore();
+  });
 });
 

@@ -7,6 +7,7 @@ import { CableRoutingMode } from './CableRoutingMode';
 import { useDocumentStore } from '../../store/documentStore';
 import { ProblemsPanel } from '../../ui/problems/ProblemsPanel';
 import { exportToDxf } from '../../export/dxf';
+import { bffClient } from '../../api/client';
 
 export function DesignWorkspace() {
   const { t } = useTranslation();
@@ -16,6 +17,8 @@ export function DesignWorkspace() {
   const document = useDocumentStore(state => state.document);
 
   const currentMode = mode || 'schematic';
+  const promoteDocument = useDocumentStore(state => state.promoteDocument);
+  const isSaving = useDocumentStore(state => state.isSaving);
 
   const handleExportDXF = () => {
     if (!document) return;
@@ -36,6 +39,19 @@ export function DesignWorkspace() {
     a.href = url;
     a.download = 'design.dxf';
     a.click();
+  };
+
+  const handlePromote = async (targetStatus: 'quoted' | 'active') => {
+    try {
+      await promoteDocument(bffClient, 'test-namespace', 'test-actor', targetStatus);
+      alert(`Successfully promoted to ${targetStatus}`);
+    } catch (e: any) {
+      if (e.message.includes('409')) {
+        alert('Conflict (409 expected_version): Please reload and reapply your changes.');
+      } else {
+        alert(e.message);
+      }
+    }
   };
 
   const modes = [
@@ -74,7 +90,21 @@ export function DesignWorkspace() {
             );
           })}
         </div>
-        <div style={{ marginLeft: '16px', display: 'flex', alignItems: 'center' }}>
+        <div style={{ marginLeft: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <button 
+            onClick={() => handlePromote('quoted')}
+            disabled={isSaving}
+            style={{ padding: '8px 16px', background: 'var(--copper-tertiary)', color: 'var(--copper-on-tertiary)', border: 'none', borderRadius: 8, cursor: 'pointer' }}
+          >
+            Promote to Quoted
+          </button>
+          <button 
+            onClick={() => handlePromote('active')}
+            disabled={isSaving}
+            style={{ padding: '8px 16px', background: 'var(--copper-tertiary)', color: 'var(--copper-on-tertiary)', border: 'none', borderRadius: 8, cursor: 'pointer' }}
+          >
+            Promote to Active
+          </button>
           <button 
             onClick={handleExportDXF}
             style={{ padding: '8px 16px', background: 'var(--copper-primary)', color: 'var(--copper-on-primary)', border: 'none', borderRadius: 8, cursor: 'pointer' }}

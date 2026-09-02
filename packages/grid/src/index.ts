@@ -29,3 +29,25 @@ export {
   type GridViewStorage,
   type GridViewManagerProps,
 } from './views/GridViewManager';
+
+export {
+  useBulkSelection,
+  createSelectionColumnDef,
+  type UseBulkSelectionOptions,
+  type UseBulkSelectionResult,
+  type CreateSelectionColumnOptions,
+} from './bulk/useBulkSelection';
+
+export {
+  GridBulkActions,
+  useBulkGovernedActions,
+  generateBulkIdempotencyKey,
+  type BulkRowStatus,
+  type BulkActionStatus,
+  type BulkItemResult,
+  type BulkExecutionSummary,
+  type BulkActionDef,
+  type UseBulkGovernedActionsOptions,
+  type UseBulkGovernedActionsResult,
+  type GridBulkActionsProps,
+} from './bulk/GridBulkActions';

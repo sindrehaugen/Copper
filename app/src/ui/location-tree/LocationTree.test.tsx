@@ -104,7 +104,7 @@ describe('LocationTree (SP.W1 / Batch 155)', () => {
 
     // Wait for the tree to load and render hierarchy
     await waitFor(() => {
-      expect(screen.getByTestId('site-site-nordic')).toBeDefined();
+      expect(screen.getByTestId('location-bldg-1')).toBeDefined();
     });
 
     const siteNode = screen.getByTestId('site-site-nordic');

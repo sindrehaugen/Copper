@@ -13,7 +13,8 @@
     "check:catalog": "node catalog/scripts/validate.mjs",
     "check:theme": "node scripts/check-hex-literals.mjs",
     "check:ledger": "node scripts/check-ledger.mjs",
-    "check:bytes": "node scripts/check-bytes.mjs"
+    "check:bytes": "node scripts/check-bytes.mjs",
+    "check:setinterval": "node scripts/check-setinterval.mjs"
   },
   "devDependencies": {
     "@copper/schema": "workspace:*",

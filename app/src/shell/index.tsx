@@ -9,6 +9,7 @@ import { RackElevationView } from '../views/rack/RackElevationView';
 import { CableScheduleView } from '../views/cable-schedule/CableScheduleView';
 import { SceneView } from '../views/scene/SceneView';
 import { DsarSurface } from '../components/compliance/DsarSurface';
+import { LedWallDesigner } from '../views/led/LedWallDesigner';
 import { SettingsPanel } from '../views/canvas/SettingsPanel';
 import { BOMView } from '../views/bom/BOMView';
 
@@ -69,6 +70,7 @@ function Layout({ children }: { children: ReactNode }) {
           <NavItem to="/3d" label={t('nav.walkthrough')} />
           <NavItem to="/bom" label={t('nav.bom')} />
           <NavItem to="/compliance" label={t('nav.compliance')} />
+          <NavItem to="/ledwall" label={t('nav.ledwall')} />
         </ul>
         <div className="session-info">
           {session?.tenantId} • {session?.userId}
@@ -226,6 +228,7 @@ export function AppShell() {
             <Route path="/3d" element={<SceneView />} />
             <Route path="/bom" element={<BOMView />} />
             <Route path="/compliance" element={<div style={{padding: '2rem'}}><DsarSurface /></div>} />
+              <Route path="/ledwall" element={<LedWallDesigner />} />
             <Route path="*" element={<div style={{padding: '2rem'}}>404 Not Found</div>} />
           </Routes>
         </Layout>

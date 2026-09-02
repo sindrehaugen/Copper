@@ -67,9 +67,17 @@ USER node
 # Expose BFF port
 EXPOSE 3001
 
-# Explicit healthcheck asserting /healthz responds
+# Authenticated readiness healthcheck querying live upstream topology
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-  CMD node -e "fetch('http://localhost:' + (process.env.PORT || 3001) + '/healthz').then(r => (r.status < 500 ? process.exit(0) : process.exit(1))).catch(() => process.exit(1))"
+  CMD node -e "import('hono/cookie').then(async ({ generateSignedCookie }) => { \
+    const fs = await import('node:fs'); \
+    const secret = process.env.COOKIE_SECRET || (process.env.COOKIE_SECRET_FILE && fs.existsSync(process.env.COOKIE_SECRET_FILE) ? fs.readFileSync(process.env.COOKIE_SECRET_FILE, 'utf8').replace(/^\uFEFF/, '').trim() : ''); \
+    if (!secret) process.exit(1); \
+    const cookie = await generateSignedCookie('copper_session', JSON.stringify({ group: 'DefaultGroup', upn: 'healthcheck@internal' }), secret); \
+    const port = process.env.PORT || 3001; \
+    const res = await fetch('http://localhost:' + port + '/api/design/topology?namespace_id=default', { headers: { Cookie: cookie } }); \
+    process.exit(res.ok ? 0 : 1); \
+  }).catch(() => process.exit(1))"
 
 # Start the BFF service
 CMD ["node", "dist/index.js"]

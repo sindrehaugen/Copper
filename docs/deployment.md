@@ -1,6 +1,6 @@
 # Deployment & Secret Architecture (Contract-D)
 
-This document describes the deployment architecture and secret management strategy for Copper (`copper-bff` and `copper-web`) per **Contract-D** and Batch 153 (DX.W4).
+This document describes the deployment architecture, secret management strategy, container healthcheck contracts, and CI/CD pipelines for Copper (`copper-bff` and `copper-web`) per **Contract-D**, Batch 153 (DX.W4), and Batch 154 (DX.W5).
 
 ---
 
@@ -13,17 +13,44 @@ Copper is deployed as a dual-container workload alongside the NCE stack:
 
 ---
 
-## 2. Docker Compose Secrets Configuration
+## 2. CI/CD Image Pipeline (Batch 154 / DX.W5)
+
+Container images for `copper-bff` and `copper-web` are built and published via `.github/workflows/ci.yml` on the self-hosted runner:
+- **Registry**: GitHub Container Registry (`ghcr.io/sindrehaugen/copper-bff`, `ghcr.io/sindrehaugen/copper-web`) beside `ghcr.io/sindrehaugen/nce-*`.
+- **Tagging Discipline**: Every build carries the exact commit SHA tag (`:${{ github.sha }}`) and updates `:latest` on main branch pushes. A locally-built `latest` never reaches a shared environment without an associated SHA tag.
+- **Multi-Stage Separation**: Development dependencies and source trees are stripped in builder stages; runtime images run as non-privileged users (`node` / `appuser`).
+
+> ⚠️ **GitHub Actions Runner & Billing Caveat**:
+> GitHub Actions billing has blocked workflow runs twice in this estate. A 2-second all-jobs failure is a runner/account billing limitation, never a defect in the code diff.
+
+---
+
+## 3. Container Healthchecks & Authenticated Readiness Probes
+
+### Why `/healthz` Was Retired
+A naive process-level `/healthz` endpoint returning `{"status":"ok"}` proves only that a TCP socket answered. It provides zero assurance that credentials can decrypt or that upstream services are reachable.
+
+*Historical Evidence (2026-09-02)*: `nce-a2a` could not decrypt its active signing key for **26 hours / 10,438 log lines** while `docker ps` continuously printed `healthy`. The application was failing closed honestly, but the healthcheck probe was deaf to the failure.
+
+### Authenticated Topology Probe (`Dockerfile.bff`)
+`copper-bff`'s `HEALTHCHECK` performs its own readiness probe against a route it actually requires to operate:
+- **Endpoint**: `GET /api/design/topology?namespace_id=default`
+- **Authentication**: Dynamically signs a valid `copper_session` cookie using the container's active `COOKIE_SECRET` (or `COOKIE_SECRET_FILE`).
+- **Failure Semantics**: If upstream `nce-admin` is stopped, partitioned, unreachable, or returns HTTP 500, the route returns an error status and the probe exits with code 1. The container transitions to `unhealthy` within its configured interval (3 retries × 30s).
+
+---
+
+## 4. Docker Compose Secrets Configuration
 
 Per Contract-D, secrets are passed to containers using Docker Secrets (`*_FILE` mounts) mounted in memory (e.g., `/run/secrets/*`), preventing secrets from leaking into container images or process listings.
 
 > **Note on `docker-compose.yml`**:
-> `docker-compose.yml` is owned by the NCE repository. The compose secrets block below defines the contract for running Copper under the `copper` profile:
+> `docker-compose.yml` is owned by the NCE repository. The compose block below defines the contract for running Copper under the `copper` profile:
 
 ```yaml
 services:
   copper-bff:
-    image: ghcr.io/sindrehaugen/copper-bff:latest
+    image: ghcr.io/sindrehaugen/copper-bff:${COPPER_IMAGE_TAG:-latest}
     container_name: copper-bff
     restart: unless-stopped
     environment:
@@ -42,6 +69,15 @@ services:
     profiles:
       - copper
 
+  copper-web:
+    image: ghcr.io/sindrehaugen/copper-web:${COPPER_IMAGE_TAG:-latest}
+    container_name: copper-web
+    restart: unless-stopped
+    networks:
+      - nce-network
+    profiles:
+      - copper
+
 secrets:
   cookie_secret:
     file: ./secrets/cookie_secret.txt
@@ -53,7 +89,7 @@ secrets:
 
 ---
 
-## 3. Fail-Closed Secret Reader (`bff/src/config.ts`)
+## 5. Fail-Closed Secret Reader (`bff/src/config.ts`)
 
 The BFF secrets reader adheres to strict security invariants to prevent silent failure modes:
 
@@ -76,10 +112,9 @@ The BFF secrets reader adheres to strict security invariants to prevent silent f
 
 ---
 
-## 4. Verification & Testing
+## 6. Verification & Testing
 
-The secret reader behavior is verified by unit tests in `bff/src/config.test.ts`:
-- BOM-prefixed secret files produce identical values to clean secret files.
-- Non-existent or unreadable secret files throw on boot.
-- Empty or whitespace-only secret files throw on boot.
-- Missing required secrets throw with descriptive error messages.
+The deployment invariants and secret reader behaviors are verified by automated tests:
+- **`bff/src/config.test.ts`**: Verifies BOM stripping, missing secret throw semantics, and fallback absence.
+- **`bff/src/routes/design.test.ts`**: Verifies authenticated endpoint behavior and namespace isolation.
+- **Container Readiness Demonstration**: Verifies container transitions to `unhealthy` when upstream NCE is stopped.

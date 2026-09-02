@@ -7,6 +7,7 @@
     { "path": "./packages/acoustics" },
     { "path": "./packages/av-physics" },
     { "path": "./packages/design" },
-    { "path": "./packages/spine" }
+    { "path": "./packages/spine" },
+    { "path": "./packages/grid" }
   ]
 }

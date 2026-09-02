@@ -74,4 +74,12 @@ export default defineWorkspace([
       include: ["src/**/*.{test,spec}.{ts,tsx}"],
     },
   },
+  {
+    test: {
+      name: "grid",
+      root: "packages/grid",
+      environment: "jsdom",
+      include: ["src/**/*.{test,spec}.{ts,tsx}"],
+    },
+  },
 ]);

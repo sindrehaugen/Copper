@@ -1,0 +1,74 @@
+# Stage 1: Build stage
+FROM node:22-alpine AS builder
+
+WORKDIR /app
+
+# Install pnpm and esbuild
+RUN npm install -g pnpm@11.24.0 esbuild@0.25.0
+
+# Copy workspace configuration and package manifests for layer caching
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY bff/package.json ./bff/
+COPY packages/schema/package.json ./packages/schema/
+COPY packages/acoustics/package.json ./packages/acoustics/
+COPY packages/av-physics/package.json ./packages/av-physics/
+
+# Fetch package dependencies to cache layer
+RUN pnpm fetch || true
+
+# Copy source trees and TypeScript configurations
+COPY tsconfig.json tsconfig.node.json ./
+COPY packages/ ./packages/
+COPY bff/ ./bff/
+
+# Install dependencies from offline/cached store
+RUN pnpm install --prefer-offline
+
+# Build workspace packages
+RUN pnpm --filter @copper/schema build
+
+# Bundle BFF service into clean standalone ESM JavaScript (inlining workspace packages)
+RUN esbuild bff/src/index.ts \
+  --bundle \
+  --platform=node \
+  --format=esm \
+  --alias:@copper/schema=./packages/schema/src/index.ts \
+  --external:@hono/node-server \
+  --external:hono \
+  --external:zod \
+  --outfile=bff/dist/index.js
+
+# Deploy production-only dependencies and bundle
+RUN pnpm --filter bff --prod --legacy deploy /prod/bff && \
+  cp -r bff/dist /prod/bff/dist && \
+  rm -rf /prod/bff/src /prod/bff/tsconfig.json /prod/bff/fixtures
+
+# Set ownership to non-root node user in the build layer
+RUN chown -R node:node /prod/bff
+
+
+# Stage 2: Production runtime stage
+FROM node:22-alpine AS runner
+
+WORKDIR /app
+
+# Production environment variables
+ENV NODE_ENV=production
+ENV PORT=3001
+ENV BFF_SERVE_AUTO=true
+
+# Copy production artifacts from builder stage with correct ownership
+COPY --from=builder --chown=node:node /prod/bff ./
+
+# Switch to non-root user
+USER node
+
+# Expose BFF port
+EXPOSE 3001
+
+# Explicit healthcheck asserting /healthz responds
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD node -e "fetch('http://localhost:' + (process.env.PORT || 3001) + '/healthz').then(r => (r.status < 500 ? process.exit(0) : process.exit(1))).catch(() => process.exit(1))"
+
+# Start the BFF service
+CMD ["node", "dist/index.js"]

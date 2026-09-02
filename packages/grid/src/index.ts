@@ -9,3 +9,23 @@ export {
   type VirtualWindowParams,
   type VirtualWindowResult,
 } from './DataGrid';
+
+export {
+  GridViewManager,
+  LocalStorageGridViewStorage,
+  MemoryGridViewStorage,
+  defaultGridViewStorage,
+  serializeViewState,
+  deserializeViewState,
+  encodeViewStateToUrl,
+  decodeViewStateFromUrl,
+  applyGridViewFiltersAndSort,
+  type FilterOperator,
+  type ColumnFilter,
+  type SortDirection,
+  type SortRule,
+  type GridViewState,
+  type GridView,
+  type GridViewStorage,
+  type GridViewManagerProps,
+} from './views/GridViewManager';

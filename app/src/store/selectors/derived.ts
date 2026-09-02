@@ -7,17 +7,26 @@ export interface BOMItem {
   manufacturer: string;
   quantity: number;
   unitPrice?: number;
+  designators?: string[];
 }
 
 export function useBOM(): BOMItem[] {
   const document = useDocumentStore(state => state.document);
+  const refs = useReferenceDesignators();
 
   return useMemo(() => {
     if (!document) return [];
     
     const countMap = new Map<string, number>();
+    const desMap = new Map<string, string[]>();
+
     for (const dev of document.devices) {
       countMap.set(dev.deviceTypeId, (countMap.get(dev.deviceTypeId) || 0) + 1);
+      const des = refs[dev.id];
+      if (des) {
+        if (!desMap.has(dev.deviceTypeId)) desMap.set(dev.deviceTypeId, []);
+        desMap.get(dev.deviceTypeId)!.push(des);
+      }
     }
 
     const bom: BOMItem[] = [];
@@ -29,13 +38,14 @@ export function useBOM(): BOMItem[] {
           name: dt.name as string,
           manufacturer: dt.manufacturer as string,
           quantity: qty,
-          unitPrice: (dt.pricing as any)?.msrp
+          unitPrice: (dt.pricing as any)?.msrp,
+          designators: desMap.get(typeId) || []
         });
       }
     }
     
     return bom.sort((a, b) => b.quantity - a.quantity);
-  }, [document]);
+  }, [document, refs]);
 }
 
 export interface CableScheduleRow {
@@ -45,7 +55,7 @@ export interface CableScheduleRow {
   sourcePort: string;
   targetDev: string;
   targetPort: string;
-  lengthM: number;
+  lengthM: number | undefined;
   type: string;
   signal: string;
 }
@@ -58,17 +68,31 @@ export function useCableScheduleRows(): CableScheduleRow[] {
 
     const deviceMap = new Map(document.devices.map(d => [d.id, d.name ?? d.id]));
 
-    return document.cables.map((e: any) => ({
-      edgeId: e.id,
-      cableId: e.id.substring(0, 8),
-      sourceDev: deviceMap.get(e.terminations[0].deviceId) || e.terminations[0].deviceId,
-      sourcePort: e.terminations[0].portRef.name,
-      targetDev: deviceMap.get(e.terminations[1].deviceId) || e.terminations[1].deviceId,
-      targetPort: e.terminations[1].portRef.name,
-      lengthM: e.lengthM, // will be overridden by B109
-      type: e.type,
-      signal: e.signalType
-    }));
+    return document.cables.map((e: any) => {
+      let lengthM = e.lengthM !== undefined ? e.lengthM : e.length;
+      if (lengthM === undefined) {
+        const srcId = e.terminations?.[0]?.deviceId;
+        const tgtId = e.terminations?.[1]?.deviceId;
+        const p1 = document.geometry?.[srcId]?.position;
+        const p2 = document.geometry?.[tgtId]?.position;
+        if (p1 && p2) {
+          const dist = Math.sqrt(Math.pow(p2.x - p1.x, 2) + Math.pow(p2.y - p1.y, 2));
+          lengthM = Math.max(1, Math.round(dist * 0.01 * 10) / 10);
+        }
+      }
+
+      return {
+        edgeId: e.id,
+        cableId: e.id.substring(0, 8),
+        sourceDev: deviceMap.get(e.terminations[0].deviceId) || e.terminations[0].deviceId,
+        sourcePort: e.terminations[0].portRef.name,
+        targetDev: deviceMap.get(e.terminations[1].deviceId) || e.terminations[1].deviceId,
+        targetPort: e.terminations[1].portRef.name,
+        lengthM,
+        type: e.type,
+        signal: e.signalType
+      };
+    });
   }, [document]);
 }
 

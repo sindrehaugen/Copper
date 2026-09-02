@@ -10,7 +10,7 @@ import { CableScheduleView } from '../views/cable-schedule/CableScheduleView';
 import { SceneView } from '../views/scene/SceneView';
 import { DsarSurface } from '../components/compliance/DsarSurface';
 import { SettingsPanel } from '../views/canvas/SettingsPanel';
-import { BomView } from '../views/bom/BomView';
+import { BOMView } from '../views/bom/BOMView';
 
 import fixtureReferenceProject from '../../tests/fixtures/reference-projects/AV_U1A21.project.json';
 import { bffClient } from '../api/client';
@@ -18,6 +18,7 @@ import { LoadingState } from './loading-state';
 import { readProjectSchema } from '../exchange/projectschema/read';
 import { toX6 } from '../projection/toX6';
 import { applyElkLayoutX6 } from '../projection/layout';
+import { exportToDxf } from '../export/dxf';
 
 interface SessionContextType {
   tenantId: string;
@@ -119,9 +120,38 @@ export function ConnectedCanvasView() {
     '--copper-header-height': `${settings.headerFontSize + 14}px`,
   } as React.CSSProperties;
 
+  const handleExportDXF = () => {
+    if (!document) return;
+    const dxfNodes = document.devices.map((d: any) => ({
+      id: d.name || d.id,
+      position: { x: d.geometry?.x ?? 0, y: d.geometry?.y ?? 0 },
+      initialWidth: 200,
+      initialHeight: 100
+    }));
+    const dxfEdges = document.cables.map((c: any) => ({
+      source: document.devices.find((d: any) => d.id === c.terminations[0].deviceId)?.name || c.terminations[0].deviceId,
+      target: document.devices.find((d: any) => d.id === c.terminations[1].deviceId)?.name || c.terminations[1].deviceId,
+    }));
+    const dxfStr = exportToDxf(dxfNodes, dxfEdges);
+    const blob = new Blob([dxfStr], { type: 'application/dxf' });
+    const url = URL.createObjectURL(blob);
+    const a = window.document.createElement('a');
+    a.href = url;
+    a.download = 'design.dxf';
+    a.click();
+  };
+
   if (!document) return <div style={{padding: '2rem'}}>{t('common.loadingDocument')}</div>;
   return (
     <div style={{ width: '100%', height: '100%', position: 'relative', ...cssVars }}>
+      <div style={{ position: 'absolute', top: 16, left: 16, zIndex: 1000, display: 'flex', gap: 8 }}>
+        <button 
+          onClick={handleExportDXF}
+          className="m3-button m3-button-filled"
+        >
+          {t('common.exportDXF', 'Export DXF')}
+        </button>
+      </div>
       <SettingsPanel />
       <CanvasView nodes={nodes} edges={edges} enableWiring={true} />
     </div>
@@ -194,7 +224,7 @@ export function AppShell() {
             <Route path="/rack" element={<ConnectedRackElevationView />} />
             <Route path="/schedule" element={<ConnectedCableScheduleView />} />
             <Route path="/3d" element={<SceneView />} />
-            <Route path="/bom" element={<BomView />} />
+            <Route path="/bom" element={<BOMView />} />
             <Route path="/compliance" element={<div style={{padding: '2rem'}}><DsarSurface /></div>} />
             <Route path="*" element={<ErrorState error={{ code: -32005 }} />} />
           </Routes>

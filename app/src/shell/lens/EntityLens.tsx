@@ -4,7 +4,7 @@ import { getEntityMetadata } from "@copper/spine";
 import { BaseLens } from "./BaseLens";
 import type { EntityLensProps } from "./types";
 import { FacetContainer } from "../facet";
-import { useFindings } from "../finding";
+import { useFindings, FindingsTray } from "../finding";
 
 export function EntityLens(props: EntityLensProps) {
   const { t } = useTranslation();
@@ -28,6 +28,12 @@ export function EntityLens(props: EntityLensProps) {
       lensKind="entity"
       data-entity-type={entityType}
       data-entity-id={entityId}
+      headerSlot={
+        <>
+          {props.headerSlot}
+          <FindingsTray filter={{ entityType, entityId }} />
+        </>
+      }
     >
       {findings.length > 0 && (
         <div

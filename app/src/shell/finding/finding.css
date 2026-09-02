@@ -1,0 +1,98 @@
+/* Finding and Tray Styles (Batch 142 / OB.W4) */
+
+.copper-finding-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: var(--md-sys-shape-corner-small, 4px);
+  background-color: var(--md-sys-color-surface, #fff);
+  border: 1px solid var(--md-sys-color-outline-variant, #e0e0e0);
+  font-size: var(--md-sys-typescale-body-small-font-size, 12px);
+  gap: 12px;
+}
+
+.copper-finding-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.copper-finding-rule {
+  font-family: var(--copper-font-mono, monospace);
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--md-sys-color-on-surface, inherit);
+  white-space: nowrap;
+}
+
+.copper-finding-message {
+  color: var(--md-sys-color-on-surface, inherit);
+}
+
+.copper-finding-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.copper-finding-entity {
+  font-family: var(--copper-font-mono, monospace);
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background-color: var(--md-sys-color-surface-container-high, #f0f0f0);
+  color: var(--md-sys-color-on-surface-variant, #666);
+}
+
+.copper-finding-provenance {
+  font-size: 11px;
+  color: var(--copper-accent-patina, var(--md-sys-color-primary, #3a6e6a));
+  text-decoration: none;
+}
+
+.copper-finding-evidence {
+  font-size: 11px;
+  color: var(--md-sys-color-on-surface-variant, #666);
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copper-finding-fix-btn {
+  padding: 4px 10px;
+  border-radius: var(--md-sys-shape-corner-small, 4px);
+  background-color: var(--copper-primary, var(--md-sys-color-primary, #b87333));
+  color: var(--copper-on-primary, #fff);
+  border: none;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+.copper-finding-fix-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.copper-finding-fix-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.copper-entity-findings-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: var(--md-sys-shape-corner-small, 4px);
+  background-color: var(--md-sys-color-surface-container-high, #f5f5f5);
+  border: 1px solid var(--md-sys-color-outline-variant, #e0e0e0);
+  font-size: 12px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}

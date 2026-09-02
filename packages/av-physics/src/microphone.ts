@@ -27,3 +27,27 @@ export function calculatePAGNAGMargin(Ds: number, D0: number, D1: number, D2: nu
   const nag = 20 * Math.log10(D0 / Ds);
   return pag - nag;
 }
+
+/**
+ * Calculates the relative sensitivity (attenuation) at a specific angle for standard polar patterns.
+ * @param angleDegrees Angle off-axis in degrees (0 is on-axis)
+ * @param pattern Polar pattern type ('omni', 'cardioid', 'supercardioid', 'hypercardioid', 'figure8')
+ * @returns Sensitivity multiplier (0.0 to 1.0)
+ */
+export function calculatePolarAttenuation(angleDegrees: number, pattern: 'omni' | 'cardioid' | 'supercardioid' | 'hypercardioid' | 'figure8'): number {
+  const theta = angleDegrees * (Math.PI / 180);
+  switch (pattern) {
+    case 'omni':
+      return 1;
+    case 'cardioid':
+      return 0.5 + 0.5 * Math.cos(theta);
+    case 'supercardioid':
+      return 0.37 + 0.63 * Math.cos(theta);
+    case 'hypercardioid':
+      return 0.25 + 0.75 * Math.cos(theta);
+    case 'figure8':
+      return Math.abs(Math.cos(theta));
+    default:
+      return 1;
+  }
+}

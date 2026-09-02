@@ -5,6 +5,8 @@ export type DxfEdge = { source: string, target: string };
 
 export function exportToDxf(nodes: DxfNode[], edges: DxfEdge[]): string {
   const d = new Drawing();
+  d.addLayer('DEVICES', Drawing.ACI.BLUE, 'CONTINUOUS');
+  d.addLayer('CABLES', Drawing.ACI.RED, 'CONTINUOUS');
   
   const nodeMap = new Map<string, DxfNode>();
   for (const node of nodes) {
@@ -17,6 +19,7 @@ export function exportToDxf(nodes: DxfNode[], edges: DxfEdge[]): string {
     const width = node.initialWidth ?? 0;
     const height = node.initialHeight ?? 0;
     
+    d.setActiveLayer('DEVICES');
     d.drawRect(x, y, x + width, y + height);
     d.drawText(x + 5, y + 15, 10, 0, node.id);
   }
@@ -34,6 +37,7 @@ export function exportToDxf(nodes: DxfNode[], edges: DxfEdge[]): string {
       const y1 = source.position.y + sourceHeight / 2;
       const x2 = target.position.x + targetWidth / 2;
       const y2 = target.position.y + targetHeight / 2;
+      d.setActiveLayer('CABLES');
       d.drawLine(x1, y1, x2, y2);
     }
   }

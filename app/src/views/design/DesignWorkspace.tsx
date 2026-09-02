@@ -40,6 +40,7 @@ export function DesignWorkspace() {
     a.href = url;
     a.download = 'design.dxf';
     a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 100);
   };
 
   const handlePromote = async (targetStatus: 'quoted' | 'active') => {

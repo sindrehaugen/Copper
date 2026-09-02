@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDocumentStore } from '../../store/documentStore';
 import { calculateLedInfrastructure, LedCabinet, LedWall } from '@copper/av-physics';
 
 const PRESETS: Record<string, LedCabinet> = {
@@ -37,6 +38,8 @@ export const LedWallDesigner: React.FC = () => {
   const [presetName, setPresetName] = useState<string>('Samsung IWA012');
   const [cols, setCols] = useState<number>(18);
   const [rows, setRows] = useState<number>(12);
+  const updateDocument = useDocumentStore(state => state.updateDocument);
+  const document = useDocumentStore(state => state.document);
   const [cabinet, setCabinet] = useState<LedCabinet>(PRESETS['Samsung IWA012'] as LedCabinet);
 
   const handlePresetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -59,9 +62,42 @@ export const LedWallDesigner: React.FC = () => {
   const totalWidthM = (cols * cabinet.widthMm) / 1000;
   const totalHeightM = (rows * cabinet.heightMm) / 1000;
 
-  return (
-    <div style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto', fontFamily: 'sans-serif' }}>
-      <h1>{t('nav.ledwall')}</h1>
+    const handleAddToDesign = () => {
+    if (!document) return;
+    const doc = JSON.parse(JSON.stringify(document));
+    const dtId = 'led-wall-' + presetName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    if (!doc.deviceTypes.find((d: any) => d.id === dtId)) {
+      doc.deviceTypes.push({
+        id: dtId,
+        name: presetName + ' LED Wall (' + cols + 'x' + rows + ')',
+        manufacturer: 'Generic',
+        model: presetName,
+        slug: dtId,
+        uHeight: 0,
+        isFullDepth: false,
+        ports: [
+          { name: 'power', direction: 'in', connector: 'PowerCON', signalType: 'POWER' },
+          { name: 'data', direction: 'in', connector: 'RJ45', signalType: 'NETWORK' }
+        ],
+        customFields: {
+          ledConfig: { preset: presetName, cols, rows }
+        }
+      });
+    }
+    
+    doc.devices.push({
+      id: 'led-' + Math.random().toString(36).substring(2,8),
+      deviceTypeId: dtId,
+      siteId: doc.devices[0]?.siteId || 'default-site',
+      name: 'LED Wall ' + cols + 'x' + rows,
+      status: 'planned'
+    });
+    updateDocument(doc);
+    alert('Added to design! Check BOM.');
+  };
+
+  return (    <div style={{ padding: '2rem', maxWidth: '1000px', margin: '0 auto', fontFamily: 'sans-serif' }}>
+      <h1>{t('nav.ledwall')} <button onClick={handleAddToDesign} style={{ marginLeft: 16, padding: '8px 16px', background: 'var(--md-sys-color-primary)', color: 'var(--md-sys-color-on-primary)', border: 'none', borderRadius: 8, cursor: 'pointer', fontSize: '1rem' }}>Add to Design</button></h1>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '2rem' }}>
         <div style={{ padding: '1rem', border: '1px solid var(--md-sys-color-outline)', borderRadius: '8px' }}>
           <h3>Configuration</h3>

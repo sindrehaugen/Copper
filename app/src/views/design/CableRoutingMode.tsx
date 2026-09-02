@@ -5,6 +5,8 @@ export function CableRoutingMode() {
   const document = useDocumentStore(state => state.document);
   const updateDocument = useDocumentStore(state => state.updateDocument);
   const [computing, setComputing] = useState(false);
+  const selectedIds = useDocumentStore(state => state.selectedIds) || [];
+  const setSelectedIds = useDocumentStore(state => state.setSelectedIds);
 
   if (!document) return null;
 
@@ -66,7 +68,8 @@ export function CableRoutingMode() {
             
             const cable = draft.cables.find(c => c.id === e.id);
             if (cable) {
-              cable.length = lengthMeters;
+              cable.lengthM = lengthMeters;
+              delete (cable as any).length;
               if (!draft.geometry) draft.geometry = {};
               if (!draft.geometry.routes) draft.geometry.routes = {};
               draft.geometry.routes[cable.id] = path;
@@ -87,8 +90,6 @@ export function CableRoutingMode() {
   };
 
   const routes = document.geometry?.routes || {};
-  const selectedIds = useDocumentStore(state => state.selectedIds) || [];
-  const setSelectedIds = useDocumentStore(state => state.setSelectedIds);
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'auto', background: 'var(--copper-surface-container-lowest)' }} onClick={() => setSelectedIds([])}>

@@ -33,6 +33,26 @@ export function useBOM(): BOMItem[] {
     for (const [typeId, qty] of countMap.entries()) {
       const dt = document.deviceTypes.find(d => d.id === typeId);
       if (dt) {
+        if (dt.customFields?.ledConfig) {
+          const cfg = dt.customFields.ledConfig as any;
+          const numCabinets = (cfg.cols || 1) * (cfg.rows || 1);
+          bom.push({
+            deviceTypeId: typeId + '_cabinet',
+            name: cfg.preset + ' Cabinet',
+            manufacturer: 'LED Vendor',
+            quantity: qty * numCabinets,
+            unitPrice: 0,
+            designators: []
+          });
+          bom.push({
+            deviceTypeId: typeId + '_processor',
+            name: 'NovaStar H-Series (or similar)',
+            manufacturer: 'NovaStar',
+            quantity: qty,
+            unitPrice: 0,
+            designators: []
+          });
+        }
         bom.push({
           deviceTypeId: typeId,
           name: dt.name as string,

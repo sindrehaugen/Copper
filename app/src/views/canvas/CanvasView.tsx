@@ -50,7 +50,7 @@ export function CanvasView({
   const containerRef = useRef<HTMLDivElement>(null);
   const graphRef = useRef<Graph | null>(null);
 
-  const [rejectedDrop, setRejectedDrop] = useState<{ srcDevice: string; tgtDevice: string; srcPortType: string; tgtPortType: string; suggestedAdapters: string[] } | null>(null);
+  const [rejectedDrop, setRejectedDrop] = useState<any>(null);
 
   const documentRef = useRef(document);
   useEffect(() => { documentRef.current = document; }, [document]);
@@ -102,10 +102,11 @@ export function CanvasView({
               const srcDevice = doc.devices.find(d => d.id === sourceCell.id)?.name || sourceCell.id;
               const tgtDevice = doc.devices.find(d => d.id === targetCell.id)?.name || targetCell.id;
               lastIncompatibleRef.current = {
-                srcDevice,
-                tgtDevice,
-                srcPortType: srcSig.connectorType,
-                tgtPortType: tgtSig.connectorType,
+                srcDevice, tgtDevice,
+                srcDeviceId: sourceCell.id, tgtDeviceId: targetCell.id,
+                srcPort: sourcePort, tgtPort: targetPort,
+                srcPortType: srcSig.connectorType, tgtPortType: tgtSig.connectorType,
+                srcSignalType: srcSig.signalType, tgtSignalType: tgtSig.signalType,
                 suggestedAdapters: getSuggestedAdapters(srcSig, tgtSig)
               };
               return false;
@@ -239,6 +240,68 @@ export function CanvasView({
 
   }, [nodes, edges, setSelectedIds, document, updateDocument]);
 
+  const handleInsertAdapter = (adapterName: string) => {
+    if (!rejectedDrop || !document) return;
+    const doc = JSON.parse(JSON.stringify(document)); // deep copy
+    const newDeviceId = 'adapter-' + Math.random().toString(36).substring(2, 8);
+    
+    let typeId = doc.deviceTypes.find((dt: any) => dt.name === adapterName)?.id;
+    if (!typeId) {
+      typeId = 'dt-' + Math.random().toString(36).substring(2, 8);
+      doc.deviceTypes.push({
+        id: typeId,
+        name: adapterName,
+        manufacturer: 'Generic',
+        model: adapterName,
+        slug: adapterName.toLowerCase().replace(/ /g, '-'),
+        uHeight: 0,
+        isFullDepth: false,
+        ports: [
+          { name: 'in', direction: 'in', connector: rejectedDrop.srcPortType, signalType: rejectedDrop.srcSignalType },
+          { name: 'out', direction: 'out', connector: rejectedDrop.tgtPortType, signalType: rejectedDrop.tgtSignalType }
+        ]
+      });
+    }
+
+    const srcGeom = doc.geometry?.[rejectedDrop.srcDeviceId]?.position || { x: 100, y: 100 };
+    const tgtGeom = doc.geometry?.[rejectedDrop.tgtDeviceId]?.position || { x: 300, y: 100 };
+
+    if (!doc.geometry) doc.geometry = {};
+    doc.geometry[newDeviceId] = {
+      position: { x: (srcGeom.x + tgtGeom.x) / 2, y: (srcGeom.y + tgtGeom.y) / 2 }
+    };
+
+    doc.devices.push({
+      id: newDeviceId,
+      deviceTypeId: typeId,
+      siteId: doc.devices[0]?.siteId || 'default-site',
+      name: adapterName,
+      status: 'planned'
+    });
+
+    doc.cables.push({
+      id: 'cable-' + Math.random().toString(36).substring(2, 8),
+      terminations: [
+        { deviceId: rejectedDrop.srcDeviceId, portRef: { name: rejectedDrop.srcPort } },
+        { deviceId: newDeviceId, portRef: { name: 'in' } }
+      ],
+      type: 'AUTO',
+      signalType: rejectedDrop.srcSignalType
+    });
+    doc.cables.push({
+      id: 'cable-' + Math.random().toString(36).substring(2, 8),
+      terminations: [
+        { deviceId: newDeviceId, portRef: { name: 'out' } },
+        { deviceId: rejectedDrop.tgtDeviceId, portRef: { name: rejectedDrop.tgtPort } }
+      ],
+      type: 'AUTO',
+      signalType: rejectedDrop.tgtSignalType
+    });
+
+    updateDocument(doc);
+    setRejectedDrop(null);
+  };
+
   return (
     <div className="copper-canvas-container" style={{ ...defaultCanvasStyle, ...style }} data-testid="copper-canvas-view">
       <div ref={containerRef} style={{ width: '100%', height: '100%' }} />
@@ -257,7 +320,7 @@ export function CanvasView({
             <div style={{ marginBottom: 16 }}>
               <strong style={{ display: 'block', marginBottom: 8 }}>Suggested Adapters:</strong>
               {rejectedDrop.suggestedAdapters.map((a: string, i: number) => (
-                <button key={i} style={{ padding: '4px 12px', background: 'var(--md-sys-color-primary-container)', color: 'var(--md-sys-color-on-primary-container)', border: 'none', borderRadius: 4, marginRight: 8 }}>
+                <button key={i} onClick={() => handleInsertAdapter(a)} style={{ padding: '4px 12px', background: 'var(--md-sys-color-primary-container)', color: 'var(--md-sys-color-on-primary-container)', border: 'none', borderRadius: 4, marginRight: 8, cursor: 'pointer' }}>
                   {a}
                 </button>
               ))}

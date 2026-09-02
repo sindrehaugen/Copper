@@ -1,4 +1,9 @@
-import { vi } from 'vitest';
+import { afterEach, beforeEach, vi } from 'vitest';
+import { cleanup } from '@testing-library/react';
+import { useDocumentStore } from './src/store/documentStore';
+import { useSettingsStore } from './src/store/settingsStore';
+
+// Existing imports
 import enCommon from './src/locales/en/common.json';
 import enNav from './src/locales/en/nav.json';
 import enCompliance from './src/locales/en/compliance.json';
@@ -22,3 +27,24 @@ vi.mock('react-i18next', () => ({
     t: (key: string, defaultValue?: string) => resources[key] || defaultValue || key.split('.').pop()
   })
 }));
+
+// Suppress R3F casing warnings in tests
+const originalConsoleError = console.error;
+console.error = (...args) => {
+  if (
+    typeof args[0] === 'string' && 
+    (args[0].includes('is using incorrect casing') || args[0].includes('The tag <'))
+  ) {
+    return;
+  }
+  originalConsoleError(...args);
+};
+
+// Global Zustand reset
+const initialDocumentState = useDocumentStore.getState();
+const initialSettingsState = useSettingsStore.getState();
+
+afterEach(() => {
+  useDocumentStore.setState(initialDocumentState, true);
+  useSettingsStore.setState(initialSettingsState, true);
+});

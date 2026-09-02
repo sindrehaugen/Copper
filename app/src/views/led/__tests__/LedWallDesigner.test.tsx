@@ -8,7 +8,7 @@ describe('LedWallDesigner', () => {
     render(<LedWallDesigner />);
     
     // Check if the title is there
-    expect(screen.getByText('LED Wall Power & Signal Planner')).toBeTruthy();
+    expect(screen.getByText('LED Wall Designer')).toBeTruthy();
 
     // Check if the output defaults are shown
     expect(screen.getByText('Normal Power Load')).toBeTruthy();

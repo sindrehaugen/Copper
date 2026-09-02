@@ -141,6 +141,7 @@ export function ConnectedCanvasView() {
     a.href = url;
     a.download = 'design.dxf';
     a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 100);
   };
 
   if (!document) return <div style={{padding: '2rem'}}>{t('common.loadingDocument')}</div>;

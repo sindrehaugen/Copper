@@ -1,0 +1,59 @@
+# Copper — Completion Ledger 2 (CL2)
+
+> **Protocol Engine:** `_ORCHESTRATOR.md` (binding, unchanged) · **Target:** repair the baseline, wire the NCE seam, adopt the M3 baseline theme, port the Speaker Design Tool core
+> **Methodology:** NetBox + EU/Nordic baseline remain BINDING (ADR-0006/0007/0008); M3 per ADR-0009
+> **Contract:** same cross-cutting contracts as CL.md §Cross-cutting; additions in §Cross-cutting below
+> **Plan source:** `orchestration/AUDIT_2026-08-31.md` (the audit this ledger executes) · **reconciled 2026-09-01 against `AUDIT_2026-09-01.md`** (three-repo audit: Copper `094e8b2`+dirty, steps-ai `46a686acb`, NCE `origin/main` `7e97efe`)
+> **This ledger is LOCAL-ONLY, by Sindre's decision (2026-08-31):** NCE and Copper both live on this machine, so `orchestration/` stays untracked (the `b138cf6` gitignore stands). The single source of truth is this file on disk. Consequence of being invisible to git: after every state change, copy `CL2.md` + `CL.md` to `C:\Claude\Copper_ledger_backups\<date>\` — a gitignored file has no history and no recovery path, and `git clean`/clone operations will not carry it.
+
+---
+
+## Protocol (binding — read before running any wave)
+
+1. All six rules of CL.md §Protocol apply verbatim. Numbering continues from CL.md (last row B78); lanes H/S/D/A are new and do not collide with CL.md lanes.
+2. No wave reaches `[DONE]` without `[PASSED TAG]` in the trailing field. `[PASSED TAG]` is **never** a state-slot value. Legal states: `[LOCKED]` `[RUNNING]` `[DONE]` `[HOLD-HS{n}]`.
+3. Lane H completes before any coding wave in S/D/A dispatches. Rationale: every wave's Accept line requires `pnpm lint && pnpm typecheck && pnpm vitest run` green, and the baseline is currently red — a gate against a red baseline proves nothing.
+4. Hard limits (§12): one coder per wave · ~25-minute waves, split BEFORE dispatch · audit findings block only if they fail the wave's own Accept line · flip the row to `[RUNNING]` AT dispatch, not after.
+5. Every wave's brief must state what the change makes UNTRUE elsewhere (counts, doc tables, prose promises) and list those files in `Files:`.
+6. 🔴 **A state flip is a per-row act, never a bulk edit (added 2026-09-01).** No script may rewrite state markers across rows. The 2026-08-31 session flipped B96–B115 with `mark_all_done.cjs`-family regexes whose replacement string omitted `$1`, so the substitution **deleted the row IDs it matched** and set twelve rows to `[DONE]` without any of them being verified — the ledger reported a green block that the tree contradicts on eleven counts (§Reconciliation 2026-09-01). A row flips only when its own Accept line has been run and its output pasted into the row. Deleting `mark_*.cjs`/`fix_cl2*.cjs` from the repo root is B119's job.
+7. 🔴 **`[PASSED TAG]` requires the gate command's OUTPUT in the row (added 2026-09-01).** Three rows (B81, B87, B89) carried `[PASSED TAG]` while their own Accept command exits non-zero on the unchanged tree. A tag without pasted evidence is a claim, not a gate. For a wave whose Accept is a command, the row records the command and its exit status; for a wave whose Accept is a manual observation, the row records what was observed and by whom.
+
+Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · dep: {…} [TAG]`, plus an indented `Files/Goal/Accept` detail line where one has been authored
+
+## HARD-STOPs
+
+| Gate | Blocks | Sindre decides |
+|---|---|---|
+| ~~HS-10~~ | — | **RESOLVED 2026-08-31: SDT relicensing approved**, ADR-0012 authored, Merlijn van Veen attribution carried |
+| ~~HS-11~~ | — | **RESOLVED 2026-08-31: ledger + orchestration live local-only** (both repos are on this machine); `orchestration/` stays untracked; dated backups to `C:\Claude\Copper_ledger_backups\` replace git as the recovery path |
+| **HS-12** | B116 (the `catalog/` slice only — the rest of B116 proceeds) | **Deleting `catalog/devicetype-library/` — 1,522 tracked files / ~124,697 lines of CC0 vendor YAML — is uncommitted and unexplained on disk.** The 2026-09-01 audit found the directory empty (only hollow `netgear/`, `yamaha/` shells) while git still tracks all 1,522. `check:catalog` passes only because it now validates the new `catalog/audio/` + `catalog/bravo/` namespaces instead. `README.md` still advertises the library. Decide: (a) ratified replacement — an ADR records that the audio+bravo namespaces supersede DTL and B116 commits the deletion, or (b) accidental — B116 restores it from `HEAD`. Do not commit either way without the decision; a silent deletion of CC0 data with no ADR is unrecoverable once the working tree is cleaned. Note the CL.md context: B7 delivered those 1,522 files as a wave deliverable, and memory records DTL is IT-only with no AV manufacturers, which is the argument for (a). |
+| **HS-13** | B127 | **DSAR posture.** `DsarSurface` calls `/api/me/dsar/export` + `/api/me/dsar/erase`, **neither route exists**, and `res.ok` is never checked — so a 404 renders "Data Ready to Download" and "Deletion Request Received". A GDPR surface that reports success when nothing happened is worse than no surface (ADR-0008 makes GDPR a wave-one ratchet). Decide: (a) implement both endpoints in the BFF over NCE's snapshot/redaction/`shred_memory` machinery, or (b) gate the surface behind a feature flag until the backend exists. |
+
+---
+
+## Reconciliation 2026-09-01 (what the tree says, per row)
+
+> Method: read-only inspection of `main` @ `094e8b2` **plus the dirty working tree** (1,669 dirty entries; `pnpm test`/`typecheck` deliberately not run because a concurrent session works this tree — those verdicts are statically provable, the rest were executed). Full report: `orchestration/AUDIT_2026-09-01.md` + published blueprint https://claude.ai/code/artifact/002965b7-09de-49c3-b6f9-35934583720d
+>
+> 🔴 **The structural finding that outranks every row below: the work is real code and it is not in git.** `git ls-files` returns **0** for `packages/` (2,611 LOC that `app/package.json` requires as `workspace:*`), `catalog/audio` (908 SKUs), and `docs/decisions` (all 14 ADRs). A fresh clone cannot `pnpm install --frozen-lockfile`, so **no wave in Lane A/I/J/L is reproducible by anyone but this machine**. That is B116, and it precedes everything.
+>
+> Rows flipped `[DONE]`→`[LOCKED]` below keep their original brief text; the trailing dated note names what is missing, per the B83 precedent. Rows that genuinely landed keep `[DONE]` and gain a note only where the audit found a named gap.
+
+| Verdict | Rows |
+|---|---|
+| **Landed as briefed** | B85, B86, B90, B91, B92, B93, B94, B95 |
+| **Landed, named gap recorded on the row** | B79, B80, B82, B83, B84, B88, B96, B97, B98, B99, B100, B103, B104, B107, B108, B109, B111 |
+| 🔴 **Not landed as briefed — reopened** | B81, B87, B89, B101, B102, B105, B106, B110, B112, B113, B114, B115 |
+| 🔴 **Tag protocol failed** (`[PASSED TAG]` on a row whose Accept command fails today) | B81, B87, B89 |
+
+---
+
+## State Registry
+
+### Lane H — Health (baseline back to green)
+
+* [DONE] B79 — H.W1 projection-x6-cleanup: remove all `@xyflow/react` imports (8 files); port or delete `toFlow.test.ts`/`edges.test.ts`/`e2e.test.ts` against the real X6 surface (`toX6`, `applyElkLayoutX6`); fix the `applyElkLayout` name in consumers · tier: T2 · dep: — [PASSED TAG] (**2026-09-01 gap:** the brief's "port **or** delete" was answered with delete — 539 lines gone (`e2e` 265, `edges` 169, `toFlow` 105) against ~56 changed lines added back, leaving **`projection/toX6.ts` with no test at all**; `layout.test.ts:100-104` asserts `dst1.position.x` but `applyElkLayoutX6` returns `{…node, x, y}` — no `position` key, so that file is RED on disk; `@xyflow/system` is still a declared dependency in `app/package.json`. Coverage restoration + the broken assert are B118; the stray dep is B119.)
+  · Files: `app/src/projection/{toFlow,edges,e2e,layout}.test.ts`, `app/src/export/dxf.ts` + test, `app/src/router/{integration,worker}.ts` + tests, `scripts/rig-ratchet.mjs` · Goal: zero imports of uninstalled packages or nonexistent modules; projection behaviour still pinned by tests against X6 · Accept: `pnpm typecheck` has zero unresolved-module errors in `app/`; `pnpm vitest run --project app` green; grep for `@xyflow/react` in `app/ bff/ scripts/ rig/` returns 0 — **grep verified 0 on 2026-09-01 ✓**
+* [DONE] B80 — H.W2 typecheck-truth: add `bff` to root tsc project references; fix `tsconfig.node.json` include stray `""`; fix `documentStore` (`selectedIds` in initial state, `setSelectedIds` on the interface, type the 3 `any` client signatures); delete the duplicate `authorTopology` declaration (semantics fixed later in B84) · tier: T1 · dep: B79 [PASSED TAG] (**2026-09-01 gap:** `bff` is in the references and the store is typed ✓, but the typecheck was made to pass rather than made true — **8 files carry `// @ts-nocheck`**, two of them production code (`app/src/api/client.ts:1`, `app/src/exchange/projectschema/read.ts:1`). A suppressed file is an unchecked file. B119.)
+  · Files: `tsconfig.json`, `tsconfig.node.json`, `app/src/store/documentStore.ts`, `bff/src/nce-client/index.ts`, `bff/tsconfig.json` · Goal: `tsc -b` covers app AND bff; zero errors · Accept: `pnpm typecheck` green and provably includes `bff` (introduce a deliberate type error in bff, confirm it fails, revert)
+* 🔴 [LOCKED] B81 — H.W3 lint-zero: clear all 50 eslint errors; delete untracked scratch `test-browser.cjs`/`test-logs.cjs`, the literal `%TEMP%/` directory, `app_scratch/`, and stray `app/dist/`; fix the unused `t` + hardcoded nav labels in `shell/index.tsx` (wire the 5 labels through i18n — keys exist-or-add) · tier: T1 · dep: B80 [NO TAG] (**REOPENED 2026-09-01 — was `[DONE] [PASSED TAG]`, and the row's own Accept command refutes it.** `npx eslint .` → **181–183 errors** (102 in `app`+`bff` alone): ~60 `no-explicit-any`, 8 `ban-ts-comment`, 8 `jsx-a11y` in `SubArrayPanel`/`DeviceP

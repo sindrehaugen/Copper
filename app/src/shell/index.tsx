@@ -12,7 +12,7 @@ import { DsarSurface } from '../components/compliance/DsarSurface';
 import { SettingsPanel } from '../views/canvas/SettingsPanel';
 import { BomView } from '../views/bom/BomView';
 
-import fixtureGymmen from '../../tests/fixtures/av-fasit/AV_U1A21.project.json';
+import fixtureReferenceProject from '../../tests/fixtures/reference-projects/AV_U1A21.project.json';
 import { bffClient } from '../api/client';
 import { LoadingState } from './loading-state';
 import { readProjectSchema } from '../exchange/projectschema/read';
@@ -154,7 +154,7 @@ export function AppShell() {
       setSession(sess);
 
       if ((import.meta as any).env.VITE_COPPER_FIXTURE === '1') {
-        const { document: parsedDoc } = readProjectSchema(fixtureGymmen as any);
+        const { document: parsedDoc } = readProjectSchema(fixtureReferenceProject as any);
         loadDocument(parsedDoc);
       } else {
         const docRes = await fetch(`/api/design/topology?namespace_id=${sess.tenantId}`);

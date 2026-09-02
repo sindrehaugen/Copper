@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 import en from './en.json';
 import nbNO from './nb-NO.json';
 
@@ -14,19 +15,23 @@ const resources = {
 };
 
 i18n
+  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'en',
     fallbackLng: 'en',
+    supportedLngs: ['en', 'nb-NO'],
+    detection: {
+      order: ['localStorage', 'navigator'],
+      lookupLocalStorage: 'copper_language',
+      caches: ['localStorage']
+    },
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
   });
 
 export default i18n;
-
-
 
 interface LocaleContextType {
   language: string;
@@ -37,13 +42,6 @@ interface LocaleContextType {
   setTimezone: (tz: string) => void;
 }
 
-const getBrowserLocale = () => {
-  if (typeof navigator !== 'undefined' && navigator.language) {
-    return navigator.language;
-  }
-  return 'en-US';
-};
-
 const getBrowserTimezone = () => {
   if (typeof Intl !== 'undefined') {
     return Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -52,8 +50,8 @@ const getBrowserTimezone = () => {
 };
 
 export const LocaleContext = createContext<LocaleContextType>({
-  language: 'en-US',
-  region: 'en-US',
+  language: 'en',
+  region: 'US',
   timezone: 'UTC',
   setLanguage: () => {},
   setRegion: () => {},
@@ -61,18 +59,23 @@ export const LocaleContext = createContext<LocaleContextType>({
 });
 
 export const LocaleProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState(() => {
-    if (typeof localStorage !== 'undefined') {
-      return localStorage.getItem('copper_language') || getBrowserLocale();
-    }
-    return getBrowserLocale();
-  });
+  const [language, setLanguageState] = useState(i18n.resolvedLanguage || 'en');
+
+  useEffect(() => {
+    const handleLanguageChanged = (lng: string) => {
+      setLanguageState(lng);
+    };
+    i18n.on('languageChanged', handleLanguageChanged);
+    return () => {
+      i18n.off('languageChanged', handleLanguageChanged);
+    };
+  }, []);
 
   const [region, setRegionState] = useState(() => {
     if (typeof localStorage !== 'undefined') {
-      return localStorage.getItem('copper_region') || getBrowserLocale();
+      return localStorage.getItem('copper_region') || 'US';
     }
-    return getBrowserLocale();
+    return 'US';
   });
 
   const [timezone, setTimezoneState] = useState(() => {
@@ -83,8 +86,7 @@ export const LocaleProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   });
 
   const setLanguage = (lang: string) => {
-    if (typeof localStorage !== 'undefined') localStorage.setItem('copper_language', lang);
-    setLanguageState(lang);
+    i18n.changeLanguage(lang);
   };
 
   const setRegion = (reg: string) => {
@@ -116,7 +118,6 @@ export function formatDate(date: Date, locale: string): string {
 
 export function getComplianceRegion(locale: string): string {
   if (locale.includes('US')) return 'US';
-  if (locale.includes('EU') || locale.includes('FR') || locale.includes('DE')) return 'EU';
+  if (locale.includes('EU') || locale.includes('FR') || locale.includes('DE') || locale.includes('NO')) return 'EU';
   return 'GLOBAL';
 }
-

@@ -75,7 +75,7 @@ export async function processFixturesDir(fixturesDir) {
 
 const isMain = process.argv[1] && process.argv[1].replace(/\\/g, '/').endsWith('scripts/rig-ratchet.mjs');
 if (isMain) {
-    const fixturesDir = path.resolve(__dirname, '../app/tests/fixtures/av-fasit');
+    const fixturesDir = path.resolve(__dirname, '../app/tests/fixtures/reference-projects');
     processFixturesDir(fixturesDir).then(totalScore => {
         console.log(`Quality score: ${totalScore} (Floor: ${FLOOR_SCORE})`);
 

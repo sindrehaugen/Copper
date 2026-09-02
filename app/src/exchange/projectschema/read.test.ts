@@ -59,8 +59,8 @@
  */
 
 import { describe, expect, it } from 'vitest';
-import fixtureGymmen from '../../../tests/fixtures/av-fasit/AV_U1A21.project.json';
-import fixtureStudio from '../../../tests/fixtures/av-fasit/AV_H3B19.project.json';
+import fixtureReferenceProject from '../../../tests/fixtures/reference-projects/AV_U1A21.project.json';
+import fixtureStudio from '../../../tests/fixtures/reference-projects/AV_H3B19.project.json';
 import { readProjectSchema } from './read';
 import { DesignDocumentSchema } from '../../model/schema';
 
@@ -76,7 +76,7 @@ describe('ProjectSchema Reader (readProjectSchema)', () => {
     // - Skipped Objects: 0
 
     it('parses AV_U1A21 into a valid Copper DesignDocument matching hand-counted metrics', () => {
-      const { document, report } = readProjectSchema(fixtureGymmen);
+      const { document, report } = readProjectSchema(fixtureReferenceProject);
 
       // Validate that the output document strictly conforms to Copper's DesignDocumentSchema
       expect(DesignDocumentSchema.safeParse(document).success).toBe(true);
@@ -98,7 +98,7 @@ describe('ProjectSchema Reader (readProjectSchema)', () => {
     });
 
     it('spot-checks known devices and ports in AV_U1A21', () => {
-      const { document } = readProjectSchema(fixtureGymmen);
+      const { document } = readProjectSchema(fixtureReferenceProject);
 
       // Spot-check switch UM003
       const sw = document.devices.find((d) => d.id === 'device-U1-UM003');
@@ -133,7 +133,7 @@ describe('ProjectSchema Reader (readProjectSchema)', () => {
     });
 
     it('tracks distinct signalTypes and unmapped fields for AV_U1A21 in report', () => {
-      const { report } = readProjectSchema(fixtureGymmen);
+      const { report } = readProjectSchema(fixtureReferenceProject);
 
       // Signal types checked
       expect(report.signalTypes['ethernet']).toBe(9); // 7 ports + 2 cables
@@ -237,7 +237,7 @@ describe('ProjectSchema Reader (readProjectSchema)', () => {
   describe('Report Assertions & Mutation Scenarios (§6.4)', () => {
     it('catches and counts unknown/custom fields added to foreign JSON', () => {
       const mutatedFixture = {
-        ...fixtureGymmen,
+        ...fixtureReferenceProject,
         customEnterpriseField: 'EnterpriseValue123',
       };
 
@@ -247,9 +247,9 @@ describe('ProjectSchema Reader (readProjectSchema)', () => {
 
     it('wire-endpoint guard: skips dangling cables when an endpoint device is missing', () => {
       const mutatedWithDanglingCable = {
-        ...fixtureGymmen,
+        ...fixtureReferenceProject,
         edges: [
-          ...fixtureGymmen.edges,
+          ...fixtureReferenceProject.edges,
           {
             id: 'edge-dangling-dev',
             source: 'device-U1-UM003',
@@ -278,9 +278,9 @@ describe('ProjectSchema Reader (readProjectSchema)', () => {
 
     it('wire-endpoint guard: skips dangling cables when an endpoint port is missing on existing device', () => {
       const mutatedWithDanglingPort = {
-        ...fixtureGymmen,
+        ...fixtureReferenceProject,
         edges: [
-          ...fixtureGymmen.edges,
+          ...fixtureReferenceProject.edges,
           {
             id: 'edge-dangling-port',
             source: 'device-U1-UM003',
@@ -305,9 +305,9 @@ describe('ProjectSchema Reader (readProjectSchema)', () => {
 
     it('dropping a device reduces deviceCount and skips any cables attached to it', () => {
       // Remove device-U1-UM008 from Gymmen fixture
-      const mutatedNodes = fixtureGymmen.nodes.filter((n) => n.id !== 'device-U1-UM008');
+      const mutatedNodes = fixtureReferenceProject.nodes.filter((n) => n.id !== 'device-U1-UM008');
       const mutatedFixture = {
-        ...fixtureGymmen,
+        ...fixtureReferenceProject,
         nodes: mutatedNodes,
       };
 

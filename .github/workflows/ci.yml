@@ -37,6 +37,9 @@ jobs:
       - name: Verify NCE Contract Drift
         run: pnpm vitest run bff/src/nce-client/schema.test.ts
 
+      - name: Verify Suite-Wide Entity & Engine Coverage (OB.W7 / B145)
+        run: pnpm vitest run packages/spine/src/__tests__/coverage.test.ts
+
       - name: Rig Ratchet Check
         run: pnpm run check:rig
 

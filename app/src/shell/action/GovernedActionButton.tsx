@@ -44,13 +44,13 @@ export function GovernedActionButton({
         fontSize: '13px',
         cursor: isDisabled ? 'not-allowed' : 'pointer',
         opacity: isDisabled ? 0.7 : 1,
-        border: '1px solid var(--copper-accent-primary)',
+        border: '1px solid var(--copper-primary)',
         background: isPending
           ? 'var(--copper-tertiary-container, var(--md-sys-color-tertiary-container))'
-          : 'var(--copper-accent-primary)',
+          : 'var(--copper-primary)',
         color: isPending
-          ? 'var(--copper-accent-primary)'
-          : 'var(--copper-on-accent-primary, var(--md-sys-color-on-primary))',
+          ? 'var(--copper-primary)'
+          : 'var(--copper-on-primary, var(--md-sys-color-on-primary))',
         transition: 'all 120ms ease-in-out',
         ...style,
       }}

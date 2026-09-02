@@ -58,7 +58,7 @@ export function GovernedActionStatus({
               width: '12px',
               height: '12px',
               borderRadius: '50%',
-              border: '2px solid var(--copper-accent-primary)',
+              border: '2px solid var(--copper-primary)',
               borderTopColor: 'transparent',
               animation: 'spin 1s linear infinite',
             }}
@@ -84,8 +84,8 @@ export function GovernedActionStatus({
         style={{
           ...baseStyle,
           background: 'var(--copper-tertiary-container, var(--md-sys-color-tertiary-container))',
-          color: 'var(--copper-accent-primary)',
-          borderColor: 'var(--copper-accent-primary)',
+          color: 'var(--copper-primary)',
+          borderColor: 'var(--copper-primary)',
         }}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -96,7 +96,7 @@ export function GovernedActionStatus({
                 width: '8px',
                 height: '8px',
                 borderRadius: '50%',
-                background: 'var(--copper-accent-primary)',
+                background: 'var(--copper-primary)',
               }}
             />
             <span style={{ fontWeight: 600 }}>
@@ -129,8 +129,8 @@ export function GovernedActionStatus({
         style={{
           ...baseStyle,
           background: 'var(--copper-surface-container-high, var(--md-sys-color-surface-container-high))',
-          color: 'var(--copper-accent-secondary)',
-          borderColor: 'var(--copper-accent-secondary)',
+          color: 'var(--copper-secondary)',
+          borderColor: 'var(--copper-secondary)',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

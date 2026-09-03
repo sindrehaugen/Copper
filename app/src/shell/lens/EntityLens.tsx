@@ -7,13 +7,18 @@ import { FacetContainer } from "../facet";
 import { useFindings, FindingsTray } from "../finding";
 import { RoomSurface, type RoomSurfaceData } from "../../views/room/RoomSurface";
 import { EstateMap, type EstateMapProps } from "../../views/map/EstateMap";
+import { CanvasLens, type ExtendedCanvasLensProps } from "./canvas/CanvasLens";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
   level?: string | undefined;
   isRoom?: boolean | undefined;
   isSite?: boolean | undefined;
+  isCanvas?: boolean | undefined;
+  viewMode?: string | undefined;
+  mode?: string | undefined;
   roomData?: RoomSurfaceData | null | undefined;
   estateMapProps?: EstateMapProps | undefined;
+  canvasProps?: ExtendedCanvasLensProps | undefined;
   onNavigate?: ((path: string, entity?: any) => void) | undefined;
 }
 
@@ -46,6 +51,13 @@ export function EntityLens(props: ExtendedEntityLensProps) {
   const metadata = getEntityMetadata(entityType);
 
   const level = props.level ?? searchParams.get("level");
+  const viewMode = props.viewMode ?? props.mode ?? searchParams.get("view") ?? searchParams.get("mode");
+
+  const isCanvas =
+    props.isCanvas === true ||
+    viewMode?.toLowerCase() === "canvas" ||
+    viewMode?.toLowerCase() === "schematic";
+
   const isRoom =
     entityType.toUpperCase() === "ROOM" ||
     (entityType.toUpperCase() === "FUNCTIONAL_LOCATION" &&
@@ -71,6 +83,18 @@ export function EntityLens(props: ExtendedEntityLensProps) {
 
   const displayTitle =
     props.title ?? (entityId ? `${metadata.label} ${entityId}` : metadata.label);
+
+  if (isCanvas) {
+    return (
+      <CanvasLens
+        title={displayTitle}
+        data-entity-type={entityType}
+        data-entity-id={entityId}
+        {...props.canvasProps}
+        {...props}
+      />
+    );
+  }
 
   return (
     <BaseLens

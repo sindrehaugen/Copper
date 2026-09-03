@@ -24,6 +24,7 @@ import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/Sourc
 import { StockGrid } from "../../views/inventory/StockGrid";
 import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
+import { FinanceWBS, type FinanceWBSProps } from "../../views/projects/FinanceWBS";
 import { PhaseBoard, type PhaseBoardProps } from "../../views/projects/PhaseBoard";
 import { AssetTelemetry, type AssetTelemetryProps } from "../../views/assets/AssetTelemetry";
 import { AssetLifecycle, type AssetLifecycleProps } from "../../views/assets/AssetLifecycle";
@@ -95,6 +96,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
+  isFinanceWBS?: boolean | undefined;
+  financeWBSProps?: FinanceWBSProps | any | undefined;
   isPhaseBoard?: boolean | undefined;
   phaseBoardProps?: PhaseBoardProps | any | undefined;
   isAssetTelemetry?: boolean | undefined;
@@ -387,6 +390,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "goods-receipt" ||
     searchParams.get("mode") === "goods-receipt";
 
+  const isFinanceWBS =
+    props.isFinanceWBS === true ||
+    entityType.toUpperCase() === 'FINANCE_WBS' ||
+    entityId.toLowerCase() === 'finance-wbs' ||
+    viewMode?.toLowerCase() === 'finance-wbs' ||
+    searchParams.get('view') === 'finance-wbs' ||
+    searchParams.get('mode') === 'finance-wbs';
+
   const isPhaseBoard =
     props.isPhaseBoard === true ||
     entityType.toUpperCase() === 'PHASE_BOARD' ||
@@ -625,6 +636,19 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         }
         onNavigate={props.onNavigate}
         {...props.goodsReceiptProps}
+      />
+    );
+  }
+
+  if (isFinanceWBS) {
+    return (
+      <FinanceWBS
+        projectId={
+          props.financeWBSProps?.projectId ??
+          (entityType.toUpperCase() === "PROJECT" ? entityId : undefined)
+        }
+        onNavigate={props.onNavigate}
+        {...props.financeWBSProps}
       />
     );
   }

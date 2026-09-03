@@ -51,3 +51,4 @@ orchestration/
 docs/proposals/
 *.md.tmp
 scratch/
+orchestration/HANDOFF_*.md

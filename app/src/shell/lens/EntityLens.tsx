@@ -19,6 +19,7 @@ import { ExtractionReview, type ExtractionTask, type ExtractionReviewProps } fro
 import { CatalogBrowserLens, type CatalogData, type ProductItem, type CatalogBrowserLensProps } from "./product/CatalogBrowserLens";
 import { MatchWizard, type MatchWizardProps } from "../../views/product/MatchWizard";
 import { EnrichmentReview, type EnrichmentReviewProps, type EnrichmentItem } from "../../views/product/EnrichmentReview";
+import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/SourcingDesk";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
   level?: string | undefined;
@@ -72,6 +73,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   enrichmentItems?: EnrichmentItem[] | undefined;
   selectedEnrichmentItemId?: string | undefined;
   enrichmentProps?: EnrichmentReviewProps | undefined;
+  isSourcing?: boolean | undefined;
+  sourcingProps?: SourcingDeskProps | any | undefined;
   onNavigate?: ((path: string, entity?: any) => void) | undefined;
 }
 
@@ -307,6 +310,16 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("mode") === "enrichment" ||
     searchParams.get("mode") === "enrichment-review";
 
+  const isSourcing =
+    props.isSourcing === true ||
+    entityType.toUpperCase() === "SOURCING" ||
+    entityType.toUpperCase() === "SOURCING_DESK" ||
+    entityId.toLowerCase() === "sourcing" ||
+    entityId.toLowerCase() === "sourcing-desk" ||
+    viewMode?.toLowerCase() === "sourcing" ||
+    searchParams.get("view") === "sourcing" ||
+    searchParams.get("mode") === "sourcing";
+
   const { findings, blockers, risks, advice } = useFindings({
     entityType,
     entityId,
@@ -422,6 +435,19 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         data-entity-type={entityType}
         data-entity-id={entityId}
         {...props.matchWizardProps}
+      />
+    );
+  }
+
+  if (isSourcing) {
+    return (
+      <SourcingDesk
+        title={displayTitle}
+        onNavigate={props.onNavigate}
+        data-entity-type={entityType}
+        data-entity-id={entityId}
+        {...props.sourcingProps}
+        {...props}
       />
     );
   }

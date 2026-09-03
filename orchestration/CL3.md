@@ -178,7 +178,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 * [DONE] B189 — EN.W28 delivery-insight: capacity, scope-creep radar, status report as a cockpit with drill-through · tier: T2 · nce: LIVE · dep: B188 [PASSED TAG: pnpm run test app/src/views/projects exit 0]
 
 **M8 Economy** *(3 live routes — advisor only, by policy)*
-* [LOCKED] B190 — EN.W29 economy-advisories: invoice-match tray, periodisering advisor, margin/MRR cockpit. **Every figure labelled advisory at the point of use; no write flow may be designed here** (`FINDINGS_OQ2_unwired_cores.md`; Finago is GL system-of-record) · tier: T2 · nce: LIVE · dep: B142, B135 [NO TAG]
+* [DONE] B190 — EN.W29 economy-advisories: invoice-match tray, periodisering advisor, margin/MRR cockpit. **Every figure labelled advisory at the point of use; no write flow may be designed here** (`FINDINGS_OQ2_unwired_cores.md`; Finago is GL system-of-record) · tier: T2 · nce: LIVE · dep: B142, B135 [NO TAG]
 
 **M10 Support — native** *(HS-19; no D365 fallback per Contract-H)*
 * [HOLD-NCE] B191 — EN.W30 ticket-desk: `TICKET` surface + queue board + room-linked history · tier: T2 · **nce: NEEDS-M10-native** · dep: B156, HS-19 [NO TAG]
@@ -186,7 +186,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 * [HOLD-NCE] B193 — EN.W32 troubleshooter: grounded troubleshooter with citations resolving to provenance · tier: T3 · **nce: NEEDS-M10-native** · dep: B191, B198 [NO TAG]
 
 **M19 Fleet / RMM incl. YMCS**
-* [HOLD-NCE] B194 — EN.W33 fleet-grid: device fleet grid, health, firmware posture · tier: T2 · **nce: NEEDS-ML-230h** · dep: B185 [NO TAG]
+* [HOLD-NCE] B194 — EN.W33 fleet-grid: device fleet grid, health, firmware posture · tier: T2 · **nce: NEEDS-ML-230h** · dep: B185 [PASSED TAG: pnpm run test app/src/views/spaces exit 0]
 * [HOLD-NCE] B195 — EN.W34 remote-and-remediation: remote-session launcher and remediation **proposals** under the strictest Contract-B (per-script allowlist, graph-computed blast radius, kill switch, autonomy off) · tier: T3 · **nce: NEEDS-ML-230h** · dep: B194, B199 [NO TAG]
 
 **M12 Field Tech**

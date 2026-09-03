@@ -24,6 +24,7 @@ import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/Sourc
 import { StockGrid } from "../../views/inventory/StockGrid";
 import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
+import { StockIntelligence, type StockIntelligenceProps } from "../../views/inventory/StockIntelligence";
 import { SpendAdvisors, type SpendAdvisorsProps } from "../../views/sourcing/SpendAdvisors";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
@@ -88,6 +89,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
+  isStockIntelligence?: boolean | undefined;
+  stockIntelligenceProps?: StockIntelligenceProps | any | undefined;
   onNavigate?: ((path: string, entity?: any) => void) | undefined;
 }
 
@@ -366,6 +369,15 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "goods-receipt" ||
     searchParams.get("mode") === "goods-receipt";
 
+  const isStockIntelligence =
+    props.isStockIntelligence === true ||
+    entityType.toUpperCase() === "STOCK_INTELLIGENCE" ||
+    entityType.toUpperCase() === "STOCK-INTELLIGENCE" ||
+    entityId.toLowerCase() === "stock-intelligence" ||
+    viewMode?.toLowerCase() === "stock-intelligence" ||
+    searchParams.get("view") === "stock-intelligence" ||
+    searchParams.get("mode") === "stock-intelligence";
+
   const { findings, blockers, risks, advice } = useFindings({
     entityType,
     entityId,
@@ -547,6 +559,19 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         }
         onNavigate={props.onNavigate}
         {...props.goodsReceiptProps}
+      />
+    );
+  }
+
+  if (isStockIntelligence) {
+    return (
+      <StockIntelligence
+        title={displayTitle}
+        onNavigate={props.onNavigate}
+        data-entity-type={entityType}
+        data-entity-id={entityId}
+        {...props.stockIntelligenceProps}
+        {...props}
       />
     );
   }

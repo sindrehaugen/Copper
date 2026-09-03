@@ -66,6 +66,7 @@ export const SEVERITY_WEIGHT: Record<FindingSeverity, number> = {
 };
 
 export const THREE_WAY_MATCH_PRODUCER_ID = 'three-way-match';
+export const STOCK_INTELLIGENCE_PRODUCER_ID = 'stock-intelligence';
 
 export class FindingRegistry {
   private producers: Map<string, FindingProducer> = new Map();

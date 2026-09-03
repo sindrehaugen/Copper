@@ -165,7 +165,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 * [DONE] B182 — EN.W21 stock-intelligence: demand forecast, restock advisor, dead-stock reconcile — advisories as findings, ordering still human · tier: T2 · nce: LIVE · dep: B178, B142 [PASSED TAG: pnpm run test app/src/views/inventory exit 0]
 
 **M4 Vendors** *(2 routes + 10 tools)*
-* [LOCKED] B183 — EN.W22 vendor-scorecards: `VENDOR` surface + scorecard, tier status, at-risk, reliability radar; degradation as findings · tier: T2 · nce: LIVE · dep: B141, B142 [NO TAG]
+* [DONE] B183 — EN.W22 vendor-scorecards: `VENDOR` surface + scorecard, tier status, at-risk, reliability radar; degradation as findings · tier: T2 · nce: LIVE · dep: B141, B142 [PASSED TAG: pnpm run test app/src/views/sourcing exit 0]
 * [LOCKED] B184 — EN.W23 contractor-matching: contractor match + partner-scoped view honouring the A2A contractor allowlist (`vendors_partner_view` only) · tier: T3 · nce: LIVE · dep: B183 [NO TAG]
 
 **M9 Assets** *(3 routes + 4 tools)*

@@ -6,6 +6,7 @@ import { useDocumentStore } from "../../../store/documentStore";
 import { findingRegistry, type Finding, normalizeEntityRef } from "../../finding";
 import { toX6 } from "../../../projection/toX6";
 import type { DesignDocument, Cable } from "../../../model/schema";
+import { DesignDerivationsTray } from "./DesignDerivationsTray";
 
 // Lazy-load CanvasView so that @antv/x6 is not evaluated when importing CanvasLens
 const LazyCanvasView = React.lazy(() =>
@@ -57,6 +58,8 @@ export function CanvasLens(props: ExtendedCanvasLensProps) {
   const [activeMode, setActiveMode] = useState<CanvasMode>(initialMode);
   const [registryFindings, setRegistryFindings] = useState<Finding[]>(() => findingRegistry.getAllFindings());
   const [isTrayOpen, setIsTrayOpen] = useState(true);
+  const [showFindings, setShowFindings] = useState(true);
+  const [showDerivations, setShowDerivations] = useState(true);
 
   useEffect(() => {
     setRegistryFindings(findingRegistry.getAllFindings());
@@ -254,15 +257,86 @@ export function CanvasLens(props: ExtendedCanvasLensProps) {
           </Suspense>
         </div>
 
-        {/* Validation Tray consuming findingRegistry */}
+        {/* Bottom Trays Container (Derivations Tray alongside Validation Tray) */}
+        <div
+          className="copper-canvas-trays-container"
+          data-testid="canvas-trays-container"
+          style={{
+            position: "absolute",
+            bottom: 16,
+            right: 16,
+            display: "flex",
+            flexDirection: "row-reverse",
+            alignItems: "flex-end",
+            gap: "12px",
+            zIndex: 800,
+            pointerEvents: "none",
+            maxWidth: "calc(100vw - 32px)",
+          }}
+        >
+          {/* Tray Dock Toggle Controls */}
+          <div
+            className="copper-tray-toggle-bar"
+            data-testid="canvas-tray-toggle-bar"
+            style={{
+              position: "absolute",
+              top: -36,
+              right: 0,
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              pointerEvents: "auto",
+              background: "var(--copper-surface-container, #1e2022)",
+              padding: "3px 6px",
+              borderRadius: "6px",
+              border: "1px solid var(--copper-outline, #30363d)",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.25)",
+            }}
+          >
+            <button
+              type="button"
+              data-testid="tray-toggle-findings"
+              onClick={() => setShowFindings(prev => !prev)}
+              style={{
+                padding: "3px 8px",
+                borderRadius: "4px",
+                border: "none",
+                fontSize: "11px",
+                fontWeight: 600,
+                cursor: "pointer",
+                background: showFindings ? "var(--copper-primary, #b87333)" : "transparent",
+                color: showFindings ? "#ffffff" : "var(--copper-on-surface-variant, #99a1ab)",
+              }}
+            >
+              {t("canvas.findingsToggle", `Findings (${relevantFindings.length})`)}
+            </button>
+            <button
+              type="button"
+              data-testid="tray-toggle-derivations"
+              onClick={() => setShowDerivations(prev => !prev)}
+              style={{
+                padding: "3px 8px",
+                borderRadius: "4px",
+                border: "none",
+                fontSize: "11px",
+                fontWeight: 600,
+                cursor: "pointer",
+                background: showDerivations ? "var(--copper-secondary, #3a6e6a)" : "transparent",
+                color: showDerivations ? "#ffffff" : "var(--copper-on-surface-variant, #99a1ab)",
+              }}
+            >
+              {t("canvas.derivationsToggle", "Derivations")}
+            </button>
+          </div>
+
+          {/* Validation Tray */}
+          {showFindings && (
         <aside
           className="copper-canvas-validation-tray"
           data-testid="canvas-validation-tray"
           aria-label={t("canvas.validationTray", "Canvas Validation Tray")}
           style={{
-            position: "absolute",
-            bottom: 16,
-            right: 16,
+            pointerEvents: "auto",
             width: "min(420px, calc(100vw - 32px))",
             maxHeight: "min(360px, calc(100vh - 140px))",
             background: "var(--copper-surface-container, #1f2328)",
@@ -426,6 +500,18 @@ export function CanvasLens(props: ExtendedCanvasLensProps) {
             </div>
           )}
         </aside>
+          )}
+
+          {/* Design Derivations Tray */}
+          {showDerivations && (
+            <div style={{ pointerEvents: "auto" }}>
+              <DesignDerivationsTray
+                document={document}
+                onSelectEntity={handleSelectEntity}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </BaseLens>
   );

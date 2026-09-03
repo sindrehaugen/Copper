@@ -21,6 +21,7 @@ import { MatchWizard, type MatchWizardProps } from "../../views/product/MatchWiz
 import { EnrichmentReview, type EnrichmentReviewProps, type EnrichmentItem } from "../../views/product/EnrichmentReview";
 import { ThreeWayMatchProvider } from "../../views/sourcing/ThreeWayMatchProvider";
 import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/SourcingDesk";
+import { SpendAdvisors, type SpendAdvisorsProps } from "../../views/sourcing/SpendAdvisors";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
   level?: string | undefined;
@@ -76,6 +77,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   enrichmentProps?: EnrichmentReviewProps | undefined;
   isSourcing?: boolean | undefined;
   sourcingProps?: SourcingDeskProps | any | undefined;
+  isSpendAdvisors?: boolean | undefined;
+  spendAdvisorsProps?: SpendAdvisorsProps | any | undefined;
   onNavigate?: ((path: string, entity?: any) => void) | undefined;
 }
 
@@ -321,6 +324,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "sourcing" ||
     searchParams.get("mode") === "sourcing";
 
+  const isSpendAdvisors =
+    props.isSpendAdvisors === true ||
+    entityType.toUpperCase() === "SPEND_ADVISORS" ||
+    entityId.toLowerCase() === "spend-advisors" ||
+    viewMode?.toLowerCase() === "spend-advisors" ||
+    searchParams.get("view") === "spend-advisors" ||
+    searchParams.get("mode") === "spend-advisors";
+
   const { findings, blockers, risks, advice } = useFindings({
     entityType,
     entityId,
@@ -448,6 +459,19 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         data-entity-type={entityType}
         data-entity-id={entityId}
         {...props.sourcingProps}
+        {...props}
+      />
+    );
+  }
+
+  if (isSpendAdvisors) {
+    return (
+      <SpendAdvisors
+        title={displayTitle}
+        onNavigate={props.onNavigate}
+        data-entity-type={entityType}
+        data-entity-id={entityId}
+        {...props.spendAdvisorsProps}
         {...props}
       />
     );

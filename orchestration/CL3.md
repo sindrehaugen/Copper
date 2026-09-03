@@ -174,7 +174,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 * [DONE] B187 — EN.W26 asset-telemetry: telemetry facet + device-health rollup · tier: T3 · **nce: NEEDS-ML-230g** — ✅ **ML orch decided MERGE, 2026-09-02.** `NCE-B145` is one commit / 1,657 insertions (migration `057_telemetry_samples.sql`, `assets/telemetry.py` 525 lines, `tests/test_assets_telemetry.py` 817 lines) — complete work, not a stub; never pushed, 1 ahead / **111 behind** `origin/main`. Numbering into the 057 gap is safe because the ledger is `applied_migrations` with **`filename` as PRIMARY KEY**, not a version watermark (057 is absent from the live DB). Merging adds tenant table `telemetry_samples`, moving `EXPECTED_TENANT_RLS_TABLES` **64 → 65** and tripping the docs ratchet across 13 sites — that is the gate working. · dep: B185 [PASSED TAG: pnpm run test app/src/views/assets exit 0]
 
 **M7 Project** *(6 live routes)*
-* [LOCKED] B188 — EN.W27 phase-board: G0–G5 gate board with `can_enter_phase` checks and governed `advance_phase`; quote→project conversion · tier: T2 · nce: LIVE · dep: B135, B137 [NO TAG]
+* [DONE] B188 — EN.W27 phase-board: G0–G5 gate board with `can_enter_phase` checks and governed `advance_phase`; quote→project conversion · tier: T2 · nce: LIVE · dep: B135, B137 [PASSED TAG: pnpm run test app/src/views/projects exit 0]
 * [LOCKED] B189 — EN.W28 delivery-insight: capacity, scope-creep radar, status report as a cockpit with drill-through · tier: T2 · nce: LIVE · dep: B188 [NO TAG]
 
 **M8 Economy** *(3 live routes — advisor only, by policy)*

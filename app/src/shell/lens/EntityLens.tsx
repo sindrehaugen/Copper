@@ -11,6 +11,7 @@ import { CanvasLens, type ExtendedCanvasLensProps } from "./canvas/CanvasLens";
 import { PipelineBoard, type PipelineBoardProps } from "./board/PipelineBoard";
 import { CustomerSurface, type CustomerSurfaceData, type CustomerSurfaceProps } from "../../views/customer/CustomerSurface";
 import { QuoteViewer, type QuoteData, type QuoteViewerProps } from "../../views/quote/QuoteViewer";
+import { SalesPerformanceLens, type SalesPerformanceData, type SalesPerformanceLensProps } from "./sales/SalesPerformanceLens";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
   level?: string | undefined;
@@ -22,6 +23,10 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   isCustomer?: boolean | undefined;
   isQuote?: boolean | undefined;
   isBaseline?: boolean | undefined;
+  isSalesPerformance?: boolean | undefined;
+  isPerformance?: boolean | undefined;
+  salesPerformanceData?: SalesPerformanceData | null | undefined;
+  salesPerformanceProps?: SalesPerformanceLensProps | undefined;
   viewMode?: string | undefined;
   mode?: string | undefined;
   roomData?: RoomSurfaceData | null | undefined;
@@ -71,8 +76,26 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     viewMode?.toLowerCase() === "canvas" ||
     viewMode?.toLowerCase() === "schematic";
 
+  const isSalesPerformance =
+    props.isSalesPerformance === true ||
+    props.isPerformance === true ||
+    entityType.toUpperCase() === "SALES_PERFORMANCE" ||
+    entityType.toUpperCase() === "PERFORMANCE" ||
+    (entityType.toUpperCase() === "SALES" &&
+      (entityId.toLowerCase() === "performance" ||
+        entityId.toLowerCase() === "cockpit" ||
+        viewMode?.toLowerCase() === "performance" ||
+        viewMode?.toLowerCase() === "cockpit" ||
+        searchParams.get("view") === "performance" ||
+        searchParams.get("mode") === "performance")) ||
+    viewMode?.toLowerCase() === "performance" ||
+    viewMode?.toLowerCase() === "cockpit" ||
+    searchParams.get("view") === "performance" ||
+    searchParams.get("mode") === "performance";
+
   const isPipeline =
-    props.isPipeline === true ||
+    !isSalesPerformance &&
+    (props.isPipeline === true ||
     props.isBoard === true ||
     viewMode?.toLowerCase() === "pipeline" ||
     viewMode?.toLowerCase() === "board" ||
@@ -88,7 +111,7 @@ export function EntityLens(props: ExtendedEntityLensProps) {
       (entityId.toLowerCase() === "pipeline" ||
         entityId.toLowerCase() === "board" ||
         viewMode?.toLowerCase() === "board" ||
-        viewMode?.toLowerCase() === "pipeline"));
+        viewMode?.toLowerCase() === "pipeline")));
 
   const isRoom =
     entityType.toUpperCase() === "ROOM" ||
@@ -144,6 +167,20 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         data-entity-type={entityType}
         data-entity-id={entityId}
         {...props.canvasProps}
+        {...props}
+      />
+    );
+  }
+
+  if (isSalesPerformance) {
+    return (
+      <SalesPerformanceLens
+        title={displayTitle}
+        data-entity-type={entityType}
+        data-entity-id={entityId}
+        onNavigate={props.onNavigate}
+        data={props.salesPerformanceData}
+        {...props.salesPerformanceProps}
         {...props}
       />
     );

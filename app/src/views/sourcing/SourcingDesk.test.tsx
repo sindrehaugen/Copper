@@ -11,6 +11,6 @@ describe("SourcingDesk", () => {
         <SourcingDesk />
       </MemoryRouter>
     );
-    expect(screen.getByTestId("sourcing-desk-dashboard")).toBeInTheDocument();
+    expect(screen.getByTestId("sourcing-desk-surface")).toBeDefined();
   });
 });

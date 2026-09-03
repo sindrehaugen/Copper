@@ -24,6 +24,7 @@ import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/Sourc
 import { StockGrid } from "../../views/inventory/StockGrid";
 import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
+import { CostAndUsage, type CostAndUsageProps } from "../../views/intelligence/CostAndUsage";
 import { MorningBrief, type MorningBriefProps } from "../../views/now/MorningBrief";
 import { MyDay, type MyDayProps } from "../../views/now/MyDay";
 import { SpaceHierarchy, type SpaceHierarchyProps } from "../../views/spaces/SpaceHierarchy";
@@ -99,6 +100,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
+  isCostAndUsage?: boolean | undefined;
+  costAndUsageProps?: CostAndUsageProps | any | undefined;
   isMorningBrief?: boolean | undefined;
   morningBriefProps?: MorningBriefProps | any | undefined;
   isMyDay?: boolean | undefined;
@@ -399,6 +402,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "goods-receipt" ||
     searchParams.get("mode") === "goods-receipt";
 
+  const isCostAndUsage =
+    props.isCostAndUsage === true ||
+    entityType.toUpperCase() === 'COST_USAGE' ||
+    entityId.toLowerCase() === 'cost-usage' ||
+    viewMode?.toLowerCase() === 'cost-usage' ||
+    searchParams.get('view') === 'cost-usage' ||
+    searchParams.get('mode') === 'cost-usage';
+
   const isMorningBrief =
     props.isMorningBrief === true ||
     entityType.toUpperCase() === 'MORNING_BRIEF' ||
@@ -669,6 +680,15 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         }
         onNavigate={props.onNavigate}
         {...props.goodsReceiptProps}
+      />
+    );
+  }
+
+  if (isCostAndUsage) {
+    return (
+      <CostAndUsage
+        onNavigate={props.onNavigate}
+        {...props.costAndUsageProps}
       />
     );
   }

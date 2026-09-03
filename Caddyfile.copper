@@ -1,0 +1,11 @@
+:80 {
+    encode gzip
+
+    handle_path /api/* {
+        reverse_proxy copper-bff:8005
+    }
+
+    handle {
+        reverse_proxy copper-web:8006
+    }
+}

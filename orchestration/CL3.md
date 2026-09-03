@@ -161,7 +161,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 * [DONE] B178 — EN.W17 stock-grid: stock levels + valuation across warehouse and van locations; `STOCK_LOCATION` surface · tier: T2 · nce: LIVE · dep: B146, B141 [PASSED TAG: pnpm run test app/src/views/inventory exit 0]
 * [DONE] B179 — EN.W18 stock-movements: reserve/release/transfer/record-consumption as governed grid actions · tier: T2 · nce: LIVE · dep: B178, B148 [PASSED TAG: pnpm run test app/src/views/inventory exit 0]
 * [DONE] B180 — EN.W19 goods-receipt: receipt capture incl. `record-goods-receipt-and-match`, so a receipt raises a 3-way-match finding · tier: T3 · nce: LIVE · dep: B179, B176 [PASSED TAG: pnpm run test app/src/views/inventory exit 0]
-* [LOCKED] B181 — EN.W20 rma-and-disposal: RMA intake, restock-from-RMA, WEEE disposal with its compliance record · tier: T2 · nce: LIVE · dep: B179 [NO TAG]
+* [DONE] B181 — EN.W20 rma-and-disposal: RMA intake, restock-from-RMA, WEEE disposal with its compliance record · tier: T2 · nce: LIVE · dep: B179 [PASSED TAG: pnpm run test app/src/views/inventory exit 0]
 * [LOCKED] B182 — EN.W21 stock-intelligence: demand forecast, restock advisor, dead-stock reconcile — advisories as findings, ordering still human · tier: T2 · nce: LIVE · dep: B178, B142 [NO TAG]
 
 **M4 Vendors** *(2 routes + 10 tools)*

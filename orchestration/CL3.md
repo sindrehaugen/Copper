@@ -149,8 +149,8 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 
 **M2 Product** *(3 routes + 6 tools)*
 * [DONE] B172 — EN.W11 catalog-browser: grid lens over `/api/product/search` + `PRODUCT` surface; capability search ("8Ω 200W ceiling", "PoE++ 24p") · tier: T2 · nce: LIVE · dep: B146, B141 [PASSED TAG: pnpm test app/src/shell/lens/product/CatalogBrowserLens.test.tsx exit 0]
-* [LOCKED] B173 — EN.W12 match-wizard: BOM-line matching via `product_match_bom_line` with **ADR-0030 no-guess tiering** — hard key links, fuzzy only *proposes* into the merge queue · tier: T3 · nce: LIVE · dep: B172, B137 [NO TAG]
-* [LOCKED] B174 — EN.W13 enrichment-review: `/api/product/enrichment/review` queue; AI enrichment renders as **flagged suggestion, never fact**; golden-record diff · tier: T2 · nce: LIVE · dep: B172 [NO TAG]
+* [RUNNING] B173 — EN.W12 match-wizard: BOM-line matching via `product_match_bom_line` with **ADR-0030 no-guess tiering** — hard key links, fuzzy only *proposes* into the merge queue · tier: T3 · nce: LIVE · dep: B172, B137 [NO TAG]
+* [RUNNING] B174 — EN.W13 enrichment-review: `/api/product/enrichment/review` queue; AI enrichment renders as **flagged suggestion, never fact**; golden-record diff · tier: T2 · nce: LIVE · dep: B172 [NO TAG]
 
 **M1 Procurement** *(8 live routes)*
 * [LOCKED] B175 — EN.W14 sourcing-desk: supplier ranking (`/rank`) + TCO comparator (`/tco`), catalog sync status · tier: T2 · nce: LIVE · dep: B146 [NO TAG]
@@ -171,7 +171,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 **M9 Assets** *(3 routes + 4 tools)*
 * [LOCKED] B185 — EN.W24 asset-register: grid lens + `ASSET` surface over `/api/assets{,/{id}}`; room-linked via `lives_in` · tier: T2 · nce: LIVE · dep: B146, B156 [NO TAG]
 * [LOCKED] B186 — EN.W25 asset-lifecycle: 14-state lifecycle timeline with governed transitions (`/{id}/lifecycle`); warranty/EOL radar as findings; source-strength merge queue via C1 · tier: T3 · nce: LIVE · dep: B185, B137 [NO TAG]
-* [HOLD-NCE] B187 — EN.W26 asset-telemetry: telemetry facet + device-health rollup · tier: T3 · **nce: NEEDS-ML-230g** — ✅ **ML orch decided MERGE, 2026-09-02.** `NCE-B145` is one commit / 1,657 insertions (migration `057_telemetry_samples.sql`, `assets/telemetry.py` 525 lines, `tests/test_assets_telemetry.py` 817 lines) — complete work, not a stub; never pushed, 1 ahead / **111 behind** `origin/main`. Numbering into the 057 gap is safe because the ledger is `applied_migrations` with **`filename` as PRIMARY KEY**, not a version watermark (057 is absent from the live DB). Merging adds tenant table `telemetry_samples`, moving `EXPECTED_TENANT_RLS_TABLES` **64 → 65** and tripping the docs ratchet across 13 sites — that is the gate working. · dep: B185 [NO TAG]
+* [LOCKED] B187 — EN.W26 asset-telemetry: telemetry facet + device-health rollup · tier: T3 · **nce: NEEDS-ML-230g** — ✅ **ML orch decided MERGE, 2026-09-02.** `NCE-B145` is one commit / 1,657 insertions (migration `057_telemetry_samples.sql`, `assets/telemetry.py` 525 lines, `tests/test_assets_telemetry.py` 817 lines) — complete work, not a stub; never pushed, 1 ahead / **111 behind** `origin/main`. Numbering into the 057 gap is safe because the ledger is `applied_migrations` with **`filename` as PRIMARY KEY**, not a version watermark (057 is absent from the live DB). Merging adds tenant table `telemetry_samples`, moving `EXPECTED_TENANT_RLS_TABLES` **64 → 65** and tripping the docs ratchet across 13 sites — that is the gate working. · dep: B185 [NO TAG]
 
 **M7 Project** *(6 live routes)*
 * [LOCKED] B188 — EN.W27 phase-board: G0–G5 gate board with `can_enter_phase` checks and governed `advance_phase`; quote→project conversion · tier: T2 · nce: LIVE · dep: B135, B137 [NO TAG]

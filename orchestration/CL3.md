@@ -139,7 +139,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 **M5 Sales** *(11 live routes — the commercial core)*
 * [DONE] B165 — EN.W4 pipeline-board: board lens over `/api/sales/{dashboard,overview,stats}` with stage moves as governed actions · tier: T2 · nce: LIVE · dep: B135, B137 [PASSED TAG]
 * [DONE] B166 — EN.W5 customer-surface: `CUSTOMER` facets over `/api/sales/customers{,/{id}}` — quotes, agreements, rooms, assets, tickets, spend, health (internal only) · tier: T2 · nce: LIVE · dep: B141 [PASSED TAG]
-* [LOCKED] B167 — EN.W6 quote-builder: quote authoring from catalog + design BOM, margin advisory (labelled), governed submit · tier: T3 · nce: LIVE · dep: B166, B173 [NO TAG]
+* [DONE] B167 — EN.W6 quote-builder: quote authoring from catalog + design BOM, margin advisory (labelled), governed submit · tier: T3 · nce: LIVE · dep: B166, B173 [PASSED TAG: pnpm run test app/src/views/quote exit 0]
 * [DONE] B168 — EN.W7 quote-and-baseline-viewer: quote viewer + public link, and the **read-only** signed-baseline viewer (frozen once, by contract) · tier: T2 · nce: LIVE · dep: B166 [PASSED TAG]
 * [DONE] B169 — EN.W8 sales-performance: targets, stats, seller detail, manager view as a cockpit with drill-through to grid lenses · tier: T2 · nce: LIVE · dep: B135, B165 [PASSED TAG]
 

@@ -243,6 +243,7 @@ export function AppShell() {
           </Routes>
         </ShellLayout>
         <AskAgentModal />
+        <ActionTray />
       </BrowserRouter>
     </SessionContext.Provider>
   );

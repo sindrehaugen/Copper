@@ -13,6 +13,8 @@ import { CustomerSurface, type CustomerSurfaceData, type CustomerSurfaceProps } 
 import { QuoteViewer, type QuoteData, type QuoteViewerProps } from "../../views/quote/QuoteViewer";
 import { SalesPerformanceLens, type SalesPerformanceData, type SalesPerformanceLensProps } from "./sales/SalesPerformanceLens";
 import { AgreementLens, type AgreementData, type AgreementItem, type AgreementLensProps } from "./agreements/AgreementLens";
+import { CoverageMatrix, type CoverageRow, type CoverageColumn, type CoverageCell, type CoverageMatrixProps } from "../../views/coverage/CoverageMatrix";
+import { ExtractionReview, type ExtractionTask, type ExtractionReviewProps } from "../../views/coverage/ExtractionReview";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
   level?: string | undefined;
@@ -28,6 +30,16 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   isPerformance?: boolean | undefined;
   isAgreement?: boolean | undefined;
   agreementData?: AgreementData | AgreementItem | null | undefined;
+  isCoverage?: boolean | undefined;
+  coverageRows?: CoverageRow[] | undefined;
+  coverageColumns?: CoverageColumn[] | undefined;
+  coverageCells?: CoverageCell[] | undefined;
+  coverageProps?: CoverageMatrixProps | undefined;
+  isExtraction?: boolean | undefined;
+  isReview?: boolean | undefined;
+  extractionTasks?: ExtractionTask[] | undefined;
+  selectedExtractionTaskId?: string | undefined;
+  extractionProps?: ExtractionReviewProps | undefined;
   agreementProps?: AgreementLensProps | undefined;
   salesPerformanceData?: SalesPerformanceData | null | undefined;
   salesPerformanceProps?: SalesPerformanceLensProps | undefined;
@@ -174,6 +186,31 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "agreements" ||
     searchParams.get("view") === "agreement";
 
+  const isCoverage =
+    props.isCoverage === true ||
+    entityType.toUpperCase() === "COVERAGE" ||
+    entityType.toUpperCase() === "COVERAGE_MATRIX" ||
+    entityId.toLowerCase() === "coverage" ||
+    viewMode?.toLowerCase() === "coverage" ||
+    searchParams.get("view") === "coverage" ||
+    searchParams.get("mode") === "coverage";
+
+  const isExtractionReview =
+    props.isExtraction === true ||
+    props.isReview === true ||
+    entityType.toUpperCase() === "EXTRACTION" ||
+    entityType.toUpperCase() === "REVIEW" ||
+    entityId.toLowerCase() === "extract" ||
+    entityId.toLowerCase() === "review" ||
+    entityId.toLowerCase() === "extraction" ||
+    viewMode?.toLowerCase() === "extract" ||
+    viewMode?.toLowerCase() === "review" ||
+    viewMode?.toLowerCase() === "extraction" ||
+    searchParams.get("view") === "extract" ||
+    searchParams.get("view") === "review" ||
+    searchParams.get("mode") === "extract" ||
+    searchParams.get("mode") === "review";
+
   const { findings, blockers, risks, advice } = useFindings({
     entityType,
     entityId,
@@ -231,6 +268,37 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         onNavigate={props.onNavigate}
         data={props.agreementData}
         {...props.agreementProps}
+        {...props}
+      />
+    );
+  }
+
+  if (isCoverage) {
+    return (
+      <CoverageMatrix
+        title={displayTitle}
+        rows={props.coverageRows}
+        columns={props.coverageColumns}
+        cells={props.coverageCells}
+        onNavigate={props.onNavigate}
+        data-entity-type={entityType}
+        data-entity-id={entityId}
+        {...props.coverageProps}
+        {...props}
+      />
+    );
+  }
+
+  if (isExtractionReview) {
+    return (
+      <ExtractionReview
+        title={displayTitle}
+        tasks={props.extractionTasks}
+        selectedTaskId={props.selectedExtractionTaskId}
+        onNavigate={props.onNavigate}
+        data-entity-type={entityType}
+        data-entity-id={entityId}
+        {...props.extractionProps}
         {...props}
       />
     );

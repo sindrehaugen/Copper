@@ -202,7 +202,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 
 ### Lane IQ — Intelligence *(P4)*
 
-* [LOCKED] B202 — IQ.W1 intelligence-rail: the rail's live content per stage object — proposals, findings, related, anomalies, why — within the Contract-R budget · tier: T2 · nce: LIVE · dep: B144, B142, B199 [NO TAG]
+* [DONE] B202 — IQ.W1 intelligence-rail: the rail's live content per stage object — proposals, findings, related, anomalies, why — within the Contract-R budget · tier: T2 · nce: LIVE · dep: B144, B142, B199 [PASSED TAG: manual tag exit 0]
 * [LOCKED] B203 — IQ.W2 ask-about-this: `⌥K` scoped question over the stage object's subgraph via `semantic_search` + `graph_search` + the query catalog (`execute_query_template` preserves the **no-LLM-generated-SQL** rule), answered with citations that resolve to provenance and "it is not in what I read" as a contractual output · tier: T3 · nce: LIVE · dep: B202, B143 [NO TAG]
 * [LOCKED] B204 — IQ.W3 agent-orchestrator: the BFF-side agent over the MCP surface — **region gate** (customer picks a region, never a vendor; the gate supplies the key; fail closed on missing/unknown/lookup-error) + per-call **cost ledger priced at write time**; every proposed mutation routes to B199 · tier: T3 · nce: LIVE (tool discovery improves with ML 230c–e) · dep: B199, B203, HS-18 [NO TAG]
 * [LOCKED] B205 — IQ.W4 cost-and-usage: cost-ledger cockpit per namespace/function/model, with the drift lesson designed out — **attribution is required at the call site, not inferred** · tier: T2 · nce: LIVE · dep: B204 [NO TAG]

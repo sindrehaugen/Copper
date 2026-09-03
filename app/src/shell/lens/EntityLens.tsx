@@ -15,6 +15,7 @@ import { SalesPerformanceLens, type SalesPerformanceData, type SalesPerformanceL
 import { AgreementLens, type AgreementData, type AgreementItem, type AgreementLensProps } from "./agreements/AgreementLens";
 import { CoverageMatrix, type CoverageRow, type CoverageColumn, type CoverageCell, type CoverageMatrixProps } from "../../views/coverage/CoverageMatrix";
 import { ExtractionReview, type ExtractionTask, type ExtractionReviewProps } from "../../views/coverage/ExtractionReview";
+import { CatalogBrowserLens, type CatalogData, type ProductItem, type CatalogBrowserLensProps } from "./product/CatalogBrowserLens";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
   level?: string | undefined;

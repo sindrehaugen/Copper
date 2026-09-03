@@ -9,6 +9,7 @@ import { RoomSurface, type RoomSurfaceData } from "../../views/room/RoomSurface"
 import { EstateMap, type EstateMapProps } from "../../views/map/EstateMap";
 import { CanvasLens, type ExtendedCanvasLensProps } from "./canvas/CanvasLens";
 import { PipelineBoard, type PipelineBoardProps } from "./board/PipelineBoard";
+import { CustomerSurface, type CustomerSurfaceData, type CustomerSurfaceProps } from "../../views/customer/CustomerSurface";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
   level?: string | undefined;
@@ -17,12 +18,15 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   isCanvas?: boolean | undefined;
   isPipeline?: boolean | undefined;
   isBoard?: boolean | undefined;
+  isCustomer?: boolean | undefined;
   viewMode?: string | undefined;
   mode?: string | undefined;
   roomData?: RoomSurfaceData | null | undefined;
+  customerData?: CustomerSurfaceData | null | undefined;
   estateMapProps?: EstateMapProps | undefined;
   canvasProps?: ExtendedCanvasLensProps | undefined;
   pipelineProps?: PipelineBoardProps | undefined;
+  customerProps?: CustomerSurfaceProps | undefined;
   onNavigate?: ((path: string, entity?: any) => void) | undefined;
 }
 
@@ -98,6 +102,12 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         searchParams.get("level") === "site" ||
         entityId.toLowerCase().startsWith("site-") ||
         entityId.toLowerCase().includes("site")));
+
+  const isCustomer =
+    props.isCustomer === true ||
+    entityType.toUpperCase() === "CUSTOMER" ||
+    (entityType.toUpperCase() === "SALES" &&
+      (viewMode?.toLowerCase() === "customer" || searchParams.get("view") === "customer"));
 
   const { findings, blockers, risks, advice } = useFindings({
     entityType,
@@ -192,6 +202,13 @@ export function EntityLens(props: ExtendedEntityLensProps) {
           siteId={entityId}
           onNavigate={props.onNavigate}
           {...props.estateMapProps}
+        />
+      ) : isCustomer ? (
+        <CustomerSurface
+          customerId={entityId}
+          data={props.customerData}
+          onNavigate={props.onNavigate}
+          {...props.customerProps}
         />
       ) : (
         <FacetContainer entityType={entityType} entityId={entityId} />

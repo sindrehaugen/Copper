@@ -24,6 +24,7 @@ import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/Sourc
 import { StockGrid } from "../../views/inventory/StockGrid";
 import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
+import { ContractorMatch, type ContractorMatchProps } from "../../views/sourcing/ContractorMatch";
 import { VendorScorecard, type VendorScorecardProps } from "../../views/sourcing/VendorScorecard";
 import { StockIntelligence, type StockIntelligenceProps } from "../../views/inventory/StockIntelligence";
 import { SpendAdvisors, type SpendAdvisorsProps } from "../../views/sourcing/SpendAdvisors";
@@ -90,6 +91,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
+  isContractorMatch?: boolean | undefined;
+  contractorMatchProps?: ContractorMatchProps | any | undefined;
   isVendorScorecard?: boolean | undefined;
   vendorScorecardProps?: VendorScorecardProps | any | undefined;
   isStockIntelligence?: boolean | undefined;
@@ -372,6 +375,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "goods-receipt" ||
     searchParams.get("mode") === "goods-receipt";
 
+  const isContractorMatch =
+    props.isContractorMatch === true ||
+    entityType.toUpperCase() === 'CONTRACTOR' ||
+    entityId.toLowerCase() === 'contractor-match' ||
+    viewMode?.toLowerCase() === 'contractor-match' ||
+    searchParams.get('view') === 'contractor-match' ||
+    searchParams.get('mode') === 'contractor-match';
+
   const isVendorScorecard =
     props.isVendorScorecard === true ||
     entityType.toUpperCase() === 'VENDOR' ||
@@ -570,6 +581,15 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         }
         onNavigate={props.onNavigate}
         {...props.goodsReceiptProps}
+      />
+    );
+  }
+
+  if (isContractorMatch) {
+    return (
+      <ContractorMatch
+        onNavigate={props.onNavigate}
+        {...props.contractorMatchProps}
       />
     );
   }

@@ -8,17 +8,21 @@ import { useFindings, FindingsTray } from "../finding";
 import { RoomSurface, type RoomSurfaceData } from "../../views/room/RoomSurface";
 import { EstateMap, type EstateMapProps } from "../../views/map/EstateMap";
 import { CanvasLens, type ExtendedCanvasLensProps } from "./canvas/CanvasLens";
+import { PipelineBoard, type PipelineBoardProps } from "./board/PipelineBoard";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
   level?: string | undefined;
   isRoom?: boolean | undefined;
   isSite?: boolean | undefined;
   isCanvas?: boolean | undefined;
+  isPipeline?: boolean | undefined;
+  isBoard?: boolean | undefined;
   viewMode?: string | undefined;
   mode?: string | undefined;
   roomData?: RoomSurfaceData | null | undefined;
   estateMapProps?: EstateMapProps | undefined;
   canvasProps?: ExtendedCanvasLensProps | undefined;
+  pipelineProps?: PipelineBoardProps | undefined;
   onNavigate?: ((path: string, entity?: any) => void) | undefined;
 }
 
@@ -58,6 +62,25 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     viewMode?.toLowerCase() === "canvas" ||
     viewMode?.toLowerCase() === "schematic";
 
+  const isPipeline =
+    props.isPipeline === true ||
+    props.isBoard === true ||
+    viewMode?.toLowerCase() === "pipeline" ||
+    viewMode?.toLowerCase() === "board" ||
+    entityType.toUpperCase() === "PIPELINE" ||
+    (entityType.toUpperCase() === "SALES" &&
+      (entityId.toLowerCase() === "pipeline" ||
+        entityId.toLowerCase() === "board" ||
+        entityId.toLowerCase() === "overview" ||
+        !entityId ||
+        viewMode?.toLowerCase() === "board" ||
+        viewMode?.toLowerCase() === "pipeline")) ||
+    (entityType.toUpperCase() === "OPPORTUNITY" &&
+      (entityId.toLowerCase() === "pipeline" ||
+        entityId.toLowerCase() === "board" ||
+        viewMode?.toLowerCase() === "board" ||
+        viewMode?.toLowerCase() === "pipeline"));
+
   const isRoom =
     entityType.toUpperCase() === "ROOM" ||
     (entityType.toUpperCase() === "FUNCTIONAL_LOCATION" &&
@@ -91,6 +114,18 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         data-entity-type={entityType}
         data-entity-id={entityId}
         {...props.canvasProps}
+        {...props}
+      />
+    );
+  }
+
+  if (isPipeline) {
+    return (
+      <PipelineBoard
+        title={displayTitle}
+        data-entity-type={entityType}
+        data-entity-id={entityId}
+        {...props.pipelineProps}
         {...props}
       />
     );
@@ -164,3 +199,4 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     </BaseLens>
   );
 }
+

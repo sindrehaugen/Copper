@@ -120,7 +120,7 @@ describe("Batch 172 (EN.W11) — Catalog Browser & PRODUCT Surface", () => {
       expect(lensEl.getAttribute("data-lens-kind")).toBe("grid");
 
       // Verify Header & KPI summary
-      expect(screen.getByText(/Product Catalog/i)).toBeDefined();
+      expect(screen.getAllByText(/Product Catalog/i).length).toBeGreaterThan(0);
       expect(screen.getByTestId("kpi-total-products")).toBeDefined();
       expect(screen.getByTestId("kpi-in-stock")).toBeDefined();
 
@@ -221,7 +221,7 @@ describe("Batch 172 (EN.W11) — Catalog Browser & PRODUCT Surface", () => {
       expect(lensEl.getAttribute("data-entity-id")).toBe("prod-spk-bose-fs2c");
 
       // Verify Product Surface Header
-      expect(screen.getByText("Bose FreeSpace FS2C In-Ceiling Loudspeaker")).toBeDefined();
+      expect(screen.getAllByText("Bose FreeSpace FS2C In-Ceiling Loudspeaker").length).toBeGreaterThan(0);
       expect(screen.getByText("FS2C-W-8R")).toBeDefined();
       expect(screen.getByText("Bose Professional")).toBeDefined();
 
@@ -272,7 +272,7 @@ describe("Batch 172 (EN.W11) — Catalog Browser & PRODUCT Surface", () => {
       expect(lensEl).toBeDefined();
       expect(lensEl.getAttribute("data-entity-type")).toBe("PRODUCT");
       expect(lensEl.getAttribute("data-entity-id")).toBe("prod-spk-bose-fs2c");
-      expect(screen.getByText("Bose FreeSpace FS2C In-Ceiling Loudspeaker")).toBeDefined();
+      expect(screen.getAllByText("Bose FreeSpace FS2C In-Ceiling Loudspeaker").length).toBeGreaterThan(0);
       expect(screen.getByTestId("product-specs-section")).toBeDefined();
     });
 

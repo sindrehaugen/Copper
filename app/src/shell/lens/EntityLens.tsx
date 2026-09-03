@@ -54,6 +54,11 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   pipelineProps?: PipelineBoardProps | undefined;
   customerProps?: CustomerSurfaceProps | undefined;
   quoteProps?: QuoteViewerProps | undefined;
+  isProduct?: boolean | undefined;
+  isCatalog?: boolean | undefined;
+  productData?: CatalogData | ProductItem | null | undefined;
+  catalogData?: CatalogData | ProductItem | null | undefined;
+  catalogProps?: CatalogBrowserLensProps | undefined;
   onNavigate?: ((path: string, entity?: any) => void) | undefined;
 }
 
@@ -212,6 +217,32 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("mode") === "extract" ||
     searchParams.get("mode") === "review";
 
+  const isProduct =
+    props.isProduct === true ||
+    entityType.toUpperCase() === "PRODUCT" ||
+    entityType.toUpperCase() === "PRODUCT_SKU";
+
+  const isCatalog =
+    props.isCatalog === true ||
+    entityType.toUpperCase() === "CATALOG" ||
+    (entityType.toUpperCase() === "SUPPLY" &&
+      (entityId.toLowerCase() === "catalog" ||
+        entityId.toLowerCase() === "products" ||
+        viewMode?.toLowerCase() === "catalog" ||
+        searchParams.get("view") === "catalog")) ||
+    (entityType.toUpperCase() === "COMMERCE" &&
+      (entityId.toLowerCase() === "catalog" ||
+        entityId.toLowerCase() === "products" ||
+        viewMode?.toLowerCase() === "catalog" ||
+        searchParams.get("view") === "catalog")) ||
+    viewMode?.toLowerCase() === "catalog" ||
+    viewMode?.toLowerCase() === "product" ||
+    viewMode?.toLowerCase() === "products" ||
+    searchParams.get("view") === "catalog" ||
+    searchParams.get("view") === "product" ||
+    searchParams.get("view") === "products" ||
+    searchParams.get("mode") === "catalog";
+
   const { findings, blockers, risks, advice } = useFindings({
     entityType,
     entityId,
@@ -300,6 +331,22 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         data-entity-type={entityType}
         data-entity-id={entityId}
         {...props.extractionProps}
+        {...props}
+      />
+    );
+  }
+
+  if (isProduct || isCatalog) {
+    return (
+      <CatalogBrowserLens
+        entityId={entityId}
+        entityType={entityType}
+        title={props.title}
+        data-entity-type={entityType}
+        data-entity-id={entityId}
+        onNavigate={props.onNavigate}
+        data={props.catalogData ?? props.productData}
+        {...props.catalogProps}
         {...props}
       />
     );

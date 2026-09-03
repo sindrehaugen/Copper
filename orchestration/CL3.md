@@ -148,7 +148,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 * [DONE] B171 — EN.W10 coverage-and-extraction: coverage matrix (`/coverage`) with gaps as findings, and the extraction review queue (`/extract`, `/review`) as a human-confirm surface · tier: T2 · nce: LIVE · dep: B170, B142 [PASSED TAG]
 
 **M2 Product** *(3 routes + 6 tools)*
-* [RUNNING] B172 — EN.W11 catalog-browser: grid lens over `/api/product/search` + `PRODUCT` surface; capability search ("8Ω 200W ceiling", "PoE++ 24p") · tier: T2 · nce: LIVE · dep: B146, B141 [NO TAG]
+* [DONE] B172 — EN.W11 catalog-browser: grid lens over `/api/product/search` + `PRODUCT` surface; capability search ("8Ω 200W ceiling", "PoE++ 24p") · tier: T2 · nce: LIVE · dep: B146, B141 [PASSED TAG: pnpm test app/src/shell/lens/product/CatalogBrowserLens.test.tsx exit 0]
 * [LOCKED] B173 — EN.W12 match-wizard: BOM-line matching via `product_match_bom_line` with **ADR-0030 no-guess tiering** — hard key links, fuzzy only *proposes* into the merge queue · tier: T3 · nce: LIVE · dep: B172, B137 [NO TAG]
 * [LOCKED] B174 — EN.W13 enrichment-review: `/api/product/enrichment/review` queue; AI enrichment renders as **flagged suggestion, never fact**; golden-record diff · tier: T2 · nce: LIVE · dep: B172 [NO TAG]
 

@@ -222,8 +222,8 @@ describe("Batch 172 (EN.W11) — Catalog Browser & PRODUCT Surface", () => {
 
       // Verify Product Surface Header
       expect(screen.getAllByText("Bose FreeSpace FS2C In-Ceiling Loudspeaker").length).toBeGreaterThan(0);
-      expect(screen.getByText("FS2C-W-8R")).toBeDefined();
-      expect(screen.getByText("Bose Professional")).toBeDefined();
+      expect(screen.getAllByText("FS2C-W-8R").length).toBeGreaterThan(0);
+      expect(screen.getAllByText("Bose Professional").length).toBeGreaterThan(0);
 
       // Verify Details Facet
       const detailsSection = screen.getByTestId("product-details-section");

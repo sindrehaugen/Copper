@@ -196,7 +196,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 ### Lane NW — Now / the operator's day *(P4)*
 
 * [DONE] B198 — NW.W1 my-day: the landing surface — today's tasks, gates, SLA clocks, approvals awaiting me, and what changed since I left · tier: T2 · nce: LIVE · dep: B188, B142 [PASSED TAG: pnpm run test app/src/views/now exit 0]
-* [LOCKED] B199 — NW.W2 proposal-inbox: 🔴 **the crown surface of the ideology** — every governed action awaiting a human, with proposal, confidence, provenance, graph-computed blast radius, and approve / **override (recorded as override)** / reject. Wired to `/api/admin/approval-queue{,/{id}}` and `actor-trust`; CL2's `AiConfirmDialog` is the interaction, repaired so the override flag reaches `onConfirm` and the audit log · tier: T2 · nce: LIVE · dep: B137, B143, CL2 B127 [NO TAG]
+* [DONE] B199 — NW.W2 proposal-inbox: 🔴 **the crown surface of the ideology** — every governed action awaiting a human, with proposal, confidence, provenance, graph-computed blast radius, and approve / **override (recorded as override)** / reject. Wired to `/api/admin/approval-queue{,/{id}}` and `actor-trust`; CL2's `AiConfirmDialog` is the interaction, repaired so the override flag reaches `onConfirm` and the audit log · tier: T2 · nce: LIVE · dep: B137, B143, CL2 B127 [NO TAG]
 * [LOCKED] B200 — NW.W3 alerts-and-clocks: cross-engine alert stream (SLA, EOL, stock, reliability, contradiction) with acknowledge and route-to-owner · tier: T2 · nce: LIVE · dep: B136, B142 [NO TAG]
 * [LOCKED] B201 — NW.W4 morning-brief: the day's brief composed from findings, approvals and deltas — a cockpit that always drills through · tier: T3 · nce: LIVE · dep: B198, B200 [NO TAG]
 

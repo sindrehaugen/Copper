@@ -175,7 +175,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 
 **M7 Project** *(6 live routes)*
 * [DONE] B188 — EN.W27 phase-board: G0–G5 gate board with `can_enter_phase` checks and governed `advance_phase`; quote→project conversion · tier: T2 · nce: LIVE · dep: B135, B137 [PASSED TAG: pnpm run test app/src/views/projects exit 0]
-* [LOCKED] B189 — EN.W28 delivery-insight: capacity, scope-creep radar, status report as a cockpit with drill-through · tier: T2 · nce: LIVE · dep: B188 [NO TAG]
+* [DONE] B189 — EN.W28 delivery-insight: capacity, scope-creep radar, status report as a cockpit with drill-through · tier: T2 · nce: LIVE · dep: B188 [PASSED TAG: pnpm run test app/src/views/projects exit 0]
 
 **M8 Economy** *(3 live routes — advisor only, by policy)*
 * [LOCKED] B190 — EN.W29 economy-advisories: invoice-match tray, periodisering advisor, margin/MRR cockpit. **Every figure labelled advisory at the point of use; no write flow may be designed here** (`FINDINGS_OQ2_unwired_cores.md`; Finago is GL system-of-record) · tier: T2 · nce: LIVE · dep: B142, B135 [NO TAG]

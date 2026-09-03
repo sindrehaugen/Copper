@@ -24,6 +24,7 @@ import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/Sourc
 import { StockGrid } from "../../views/inventory/StockGrid";
 import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
+import { NamespacesAndUsers, type NamespacesAndUsersProps } from "../../views/system/NamespacesAndUsers";
 import { SettingsPlane, type SettingsPlaneProps } from "../../views/system/SettingsPlane";
 import { CostAndUsage, type CostAndUsageProps } from "../../views/intelligence/CostAndUsage";
 import { MorningBrief, type MorningBriefProps } from "../../views/now/MorningBrief";
@@ -101,6 +102,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
+  isNamespaces?: boolean | undefined;
+  namespacesProps?: NamespacesAndUsersProps | any | undefined;
   isSettings?: boolean | undefined;
   settingsProps?: SettingsPlaneProps | any | undefined;
   isCostAndUsage?: boolean | undefined;
@@ -405,6 +408,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "goods-receipt" ||
     searchParams.get("mode") === "goods-receipt";
 
+  const isNamespaces =
+    props.isNamespaces === true ||
+    entityType.toUpperCase() === 'NAMESPACES' ||
+    entityId.toLowerCase() === 'namespaces' ||
+    viewMode?.toLowerCase() === 'namespaces' ||
+    searchParams.get('view') === 'namespaces' ||
+    searchParams.get('mode') === 'namespaces';
+
   const isSettings =
     props.isSettings === true ||
     entityType.toUpperCase() === 'SETTINGS' ||
@@ -691,6 +702,15 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         }
         onNavigate={props.onNavigate}
         {...props.goodsReceiptProps}
+      />
+    );
+  }
+
+  if (isNamespaces) {
+    return (
+      <NamespacesAndUsers
+        onNavigate={props.onNavigate}
+        {...props.namespacesProps}
       />
     );
   }

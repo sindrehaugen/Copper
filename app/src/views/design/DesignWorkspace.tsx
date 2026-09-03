@@ -4,6 +4,7 @@ import { ConnectedCanvasView } from '../../shell/index';
 import { SceneView } from '../scene/SceneView';
 import { FloorplanMode } from './FloorplanMode';
 import { CableRoutingMode } from './CableRoutingMode';
+import { SpatialFindingsTray } from './SpatialFindingsTray';
 import { useDocumentStore } from '../../store/documentStore';
 import { ProblemsPanel } from '../../ui/problems/ProblemsPanel';
 import { exportToDxf } from '../../export/dxf';
@@ -48,7 +49,7 @@ export function DesignWorkspace() {
       await promoteDocument(bffClient, 'test-namespace', 'test-actor', targetStatus);
       alert(`Successfully promoted to ${targetStatus}`);
     } catch (e: any) {
-      if (e.message.includes('409')) {
+      if (e.message?.includes('409')) {
         alert('Conflict (409 expected_version): Please reload and reapply your changes.');
       } else {
         alert(e.message);
@@ -156,6 +157,7 @@ export function DesignWorkspace() {
             return (
               <button
                 key={m.id}
+                type="button"
                 onClick={() => navigate('/design/' + m.id)}
                 style={{
                   padding: '8px 16px',
@@ -174,20 +176,23 @@ export function DesignWorkspace() {
         </div>
         <div style={{ marginLeft: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
           <button 
+            type="button"
             onClick={() => handlePromote('quoted')}
             disabled={isSaving}
             style={{ padding: '8px 16px', background: 'var(--copper-tertiary)', color: 'var(--copper-on-tertiary)', border: 'none', borderRadius: 8, cursor: 'pointer' }}
           >
-            Promote to Quoted
+            {t('common.promoteToQuoted', 'Promote to Quoted')}
           </button>
           <button 
+            type="button"
             onClick={() => handlePromote('active')}
             disabled={isSaving}
             style={{ padding: '8px 16px', background: 'var(--copper-tertiary)', color: 'var(--copper-on-tertiary)', border: 'none', borderRadius: 8, cursor: 'pointer' }}
           >
-            Promote to Active
+            {t('common.promoteToActive', 'Promote to Active')}
           </button>
           <button 
+            type="button"
             onClick={handleExportDXF}
             style={{ padding: '8px 16px', background: 'var(--copper-primary)', color: 'var(--copper-on-primary)', border: 'none', borderRadius: 8, cursor: 'pointer' }}
           >
@@ -207,14 +212,20 @@ export function DesignWorkspace() {
             <p style={{ color: 'var(--copper-on-surface-variant)', marginBottom: 32 }}>{t('common.chooseAGenerativeStartingPoint')}</p>
             <div style={{ display: 'flex', gap: 16 }}>
               <div 
+                role="button"
+                tabIndex={0}
                 onClick={handle100VClick}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handle100VClick(); } }}
                 style={{ padding: 24, background: 'var(--copper-surface-container)', borderRadius: 12, border: '1px solid var(--copper-outline)', cursor: 'pointer' }}
               >
                 <h3>{t('common.100VPagingZone')}</h3>
                 <p style={{ color: 'var(--copper-on-surface-variant)' }}>{t('common.amp8CeilingSpeakers')}</p>
               </div>
               <div 
+                role="button"
+                tabIndex={0}
                 onClick={handleBoardroomClick}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleBoardroomClick(); } }}
                 style={{ padding: 24, background: 'var(--copper-surface-container)', borderRadius: 12, border: '1px solid var(--copper-outline)', cursor: 'pointer' }}
               >
                 <h3>{t('common.boardroomVC')}</h3>
@@ -227,7 +238,11 @@ export function DesignWorkspace() {
         {currentMode === 'floorplan' && <FloorplanMode />}
         {currentMode === 'routing' && <CableRoutingMode />}
         {currentMode === '3d' && <SceneView />}
-        <ProblemsPanel />
+        {currentMode === 'floorplan' || currentMode === '3d' ? (
+          <SpatialFindingsTray />
+        ) : (
+          <ProblemsPanel />
+        )}
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import { PipelineBoard, type PipelineBoardProps } from "./board/PipelineBoard";
 import { CustomerSurface, type CustomerSurfaceData, type CustomerSurfaceProps } from "../../views/customer/CustomerSurface";
 import { QuoteViewer, type QuoteData, type QuoteViewerProps } from "../../views/quote/QuoteViewer";
 import { SalesPerformanceLens, type SalesPerformanceData, type SalesPerformanceLensProps } from "./sales/SalesPerformanceLens";
+import { AgreementLens, type AgreementData, type AgreementItem, type AgreementLensProps } from "./agreements/AgreementLens";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
   level?: string | undefined;
@@ -25,6 +26,9 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   isBaseline?: boolean | undefined;
   isSalesPerformance?: boolean | undefined;
   isPerformance?: boolean | undefined;
+  isAgreement?: boolean | undefined;
+  agreementData?: AgreementData | AgreementItem | null | undefined;
+  agreementProps?: AgreementLensProps | undefined;
   salesPerformanceData?: SalesPerformanceData | null | undefined;
   salesPerformanceProps?: SalesPerformanceLensProps | undefined;
   viewMode?: string | undefined;
@@ -152,6 +156,24 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     viewMode?.toLowerCase() === "quote" ||
     searchParams.get("view") === "quote";
 
+  const isAgreement =
+    props.isAgreement === true ||
+    entityType.toUpperCase() === "AGREEMENT" ||
+    entityType.toUpperCase() === "AGREEMENTS" ||
+    entityType.toUpperCase() === "AGREEMENT_BOOK" ||
+    entityType.toUpperCase() === "AGREEMENT_TERM" ||
+    entityType.toUpperCase() === "AGREEMENT_SIGNATURE" ||
+    (entityType.toUpperCase() === "COMMERCE" &&
+      (entityId.toLowerCase() === "agreements" ||
+        entityId.toLowerCase() === "agreement-book" ||
+        viewMode?.toLowerCase() === "agreements" ||
+        searchParams.get("view") === "agreements")) ||
+    viewMode?.toLowerCase() === "agreement" ||
+    viewMode?.toLowerCase() === "agreements" ||
+    viewMode?.toLowerCase() === "renewal-calendar" ||
+    searchParams.get("view") === "agreements" ||
+    searchParams.get("view") === "agreement";
+
   const { findings, blockers, risks, advice } = useFindings({
     entityType,
     entityId,
@@ -193,6 +215,22 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         data-entity-type={entityType}
         data-entity-id={entityId}
         {...props.pipelineProps}
+        {...props}
+      />
+    );
+  }
+
+  if (isAgreement) {
+    return (
+      <AgreementLens
+        entityId={entityId}
+        entityType={entityType}
+        title={props.title}
+        data-entity-type={entityType}
+        data-entity-id={entityId}
+        onNavigate={props.onNavigate}
+        data={props.agreementData}
+        {...props.agreementProps}
         {...props}
       />
     );
@@ -282,4 +320,3 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     </BaseLens>
   );
 }
-

@@ -242,6 +242,7 @@ export function AppShell() {
             <Route path="*" element={<div style={{padding: '2rem'}}>{t('nav.notFound')}</div>} />
           </Routes>
         </ShellLayout>
+        <AskAgentModal />
       </BrowserRouter>
     </SessionContext.Provider>
   );

@@ -17,6 +17,7 @@ import { CoverageMatrix, type CoverageRow, type CoverageColumn, type CoverageCel
 import { ExtractionReview, type ExtractionTask, type ExtractionReviewProps } from "../../views/coverage/ExtractionReview";
 import { CatalogBrowserLens, type CatalogData, type ProductItem, type CatalogBrowserLensProps } from "./product/CatalogBrowserLens";
 import { MatchWizard, type MatchWizardProps } from "../../views/product/MatchWizard";
+import { EnrichmentReview, type EnrichmentReviewProps, type EnrichmentItem } from "../../views/product/EnrichmentReview";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
   level?: string | undefined;
@@ -63,6 +64,11 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   isMatchWizard?: boolean | undefined;
   isMatch?: boolean | undefined;
   matchWizardProps?: MatchWizardProps | undefined;
+  isEnrichment?: boolean | undefined;
+  isEnrichmentReview?: boolean | undefined;
+  enrichmentItems?: EnrichmentItem[] | undefined;
+  selectedEnrichmentItemId?: string | undefined;
+  enrichmentProps?: EnrichmentReviewProps | undefined;
   onNavigate?: ((path: string, entity?: any) => void) | undefined;
 }
 
@@ -263,6 +269,21 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "bom-match" ||
     searchParams.get("mode") === "match";
 
+  const isEnrichmentReview =
+    props.isEnrichmentReview === true ||
+    props.isEnrichment === true ||
+    entityType.toUpperCase() === "ENRICHMENT" ||
+    entityType.toUpperCase() === "ENRICHMENT_REVIEW" ||
+    entityType.toUpperCase() === "PRODUCT_ENRICHMENT" ||
+    entityId.toLowerCase() === "enrichment" ||
+    entityId.toLowerCase() === "enrichment-review" ||
+    viewMode?.toLowerCase() === "enrichment" ||
+    viewMode?.toLowerCase() === "enrichment-review" ||
+    searchParams.get("view") === "enrichment" ||
+    searchParams.get("view") === "enrichment-review" ||
+    searchParams.get("mode") === "enrichment" ||
+    searchParams.get("mode") === "enrichment-review";
+
   const { findings, blockers, risks, advice } = useFindings({
     entityType,
     entityId,
@@ -352,6 +373,20 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         data-entity-id={entityId}
         {...props.extractionProps}
         {...props}
+      />
+    );
+  }
+
+  if (isEnrichmentReview) {
+    return (
+      <EnrichmentReview
+        title={displayTitle}
+        items={props.enrichmentItems}
+        selectedItemId={props.selectedEnrichmentItemId}
+        onNavigate={props.onNavigate}
+        data-entity-type={entityType}
+        data-entity-id={entityId}
+        {...props.enrichmentProps}
       />
     );
   }

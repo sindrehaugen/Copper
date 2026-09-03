@@ -24,6 +24,7 @@ import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/Sourc
 import { StockGrid } from "../../views/inventory/StockGrid";
 import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
+import { MyDay, type MyDayProps } from "../../views/now/MyDay";
 import { SpaceHierarchy, type SpaceHierarchyProps } from "../../views/spaces/SpaceHierarchy";
 import { FinanceWBS, type FinanceWBSProps } from "../../views/projects/FinanceWBS";
 import { PhaseBoard, type PhaseBoardProps } from "../../views/projects/PhaseBoard";
@@ -97,6 +98,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
+  isMyDay?: boolean | undefined;
+  myDayProps?: MyDayProps | any | undefined;
   isSpaceHierarchy?: boolean | undefined;
   spaceHierarchyProps?: SpaceHierarchyProps | any | undefined;
   isFinanceWBS?: boolean | undefined;
@@ -393,6 +396,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "goods-receipt" ||
     searchParams.get("mode") === "goods-receipt";
 
+  const isMyDay =
+    props.isMyDay === true ||
+    entityType.toUpperCase() === 'MY_DAY' ||
+    entityId.toLowerCase() === 'my-day' ||
+    viewMode?.toLowerCase() === 'my-day' ||
+    searchParams.get('view') === 'my-day' ||
+    searchParams.get('mode') === 'my-day';
+
   const isSpaceHierarchy =
     props.isSpaceHierarchy === true ||
     entityType.toUpperCase() === 'SPACE_HIERARCHY' ||
@@ -647,6 +658,15 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         }
         onNavigate={props.onNavigate}
         {...props.goodsReceiptProps}
+      />
+    );
+  }
+
+  if (isMyDay) {
+    return (
+      <MyDay
+        onNavigate={props.onNavigate}
+        {...props.myDayProps}
       />
     );
   }

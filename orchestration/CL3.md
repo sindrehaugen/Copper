@@ -153,7 +153,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 * [DONE] B174 — EN.W13 enrichment-review: `/api/product/enrichment/review` queue; AI enrichment renders as **flagged suggestion, never fact**; golden-record diff · tier: T2 · nce: LIVE · dep: B172 [PASSED TAG: pnpm run test app/src/views/product exit 0]
 
 **M1 Procurement** *(8 live routes)*
-* [LOCKED] B175 — EN.W14 sourcing-desk: supplier ranking (`/rank`) + TCO comparator (`/tco`), catalog sync status · tier: T2 · nce: LIVE · dep: B146 [NO TAG]
+* [DONE] B175 — EN.W14 sourcing-desk: supplier ranking (`/rank`) + TCO comparator (`/tco`), catalog sync status · tier: T2 · nce: LIVE · dep: B146 [PASSED TAG: pnpm run test app/src/views/sourcing exit 0]
 * [LOCKED] B176 — EN.W15 three-way-match-tray: `/match` results as findings with fix actions · tier: T2 · nce: LIVE · dep: B142, B175 [NO TAG]
 * [LOCKED] B177 — EN.W16 spend-advisors: rebate forecast, move-spend recommender, spend what-if as a cockpit. **PO generate/submit stay unwired in NCE — surface advisory only, never an order button** · tier: T2 · nce: LIVE · dep: B175 [NO TAG]
 

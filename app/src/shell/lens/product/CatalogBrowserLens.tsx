@@ -546,6 +546,7 @@ export const CatalogBrowserLens: FC<CatalogBrowserLensProps> = (props) => {
     return DEFAULT_CATALOG_PRODUCTS;
   }, [props.products, props.data]);
 
+  const [showGrid, setShowGrid] = useState(isModuleRoot);
   const [selectedId, setSelectedId] = useState<string>(
     isModuleRoot ? "" : rawEntityId
   );
@@ -559,7 +560,7 @@ export const CatalogBrowserLens: FC<CatalogBrowserLensProps> = (props) => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
 
-  const effectiveId = selectedId || (!isModuleRoot ? rawEntityId : "");
+  const effectiveId = showGrid ? "" : (selectedId || (!isModuleRoot ? rawEntityId : ""));
 
   const activeProduct = useMemo(() => {
     if (!effectiveId) return null;
@@ -569,6 +570,7 @@ export const CatalogBrowserLens: FC<CatalogBrowserLensProps> = (props) => {
   }, [effectiveId, allProducts]);
 
   const handleSelectProduct = (product: ProductItem) => {
+    setShowGrid(false);
     if (props.onSelectProduct) {
       props.onSelectProduct(product);
     }
@@ -579,6 +581,7 @@ export const CatalogBrowserLens: FC<CatalogBrowserLensProps> = (props) => {
   };
 
   const handleBackToGrid = () => {
+    setShowGrid(true);
     setSelectedId("");
     if (props.onNavigate) {
       props.onNavigate("/e/PRODUCT");

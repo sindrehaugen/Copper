@@ -16,6 +16,7 @@ import { AgreementLens, type AgreementData, type AgreementItem, type AgreementLe
 import { CoverageMatrix, type CoverageRow, type CoverageColumn, type CoverageCell, type CoverageMatrixProps } from "../../views/coverage/CoverageMatrix";
 import { ExtractionReview, type ExtractionTask, type ExtractionReviewProps } from "../../views/coverage/ExtractionReview";
 import { CatalogBrowserLens, type CatalogData, type ProductItem, type CatalogBrowserLensProps } from "./product/CatalogBrowserLens";
+import { MatchWizard, type MatchWizardProps } from "../../views/product/MatchWizard";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
   level?: string | undefined;
@@ -59,6 +60,9 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   productData?: CatalogData | ProductItem | null | undefined;
   catalogData?: CatalogData | ProductItem | null | undefined;
   catalogProps?: CatalogBrowserLensProps | undefined;
+  isMatchWizard?: boolean | undefined;
+  isMatch?: boolean | undefined;
+  matchWizardProps?: MatchWizardProps | undefined;
   onNavigate?: ((path: string, entity?: any) => void) | undefined;
 }
 
@@ -243,6 +247,22 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "products" ||
     searchParams.get("mode") === "catalog";
 
+  const isMatchWizard =
+    props.isMatchWizard === true ||
+    props.isMatch === true ||
+    entityType.toUpperCase() === "BOM_MATCH" ||
+    entityType.toUpperCase() === "MATCH_WIZARD" ||
+    entityType.toUpperCase() === "MATCH" ||
+    entityId.toLowerCase() === "match" ||
+    entityId.toLowerCase() === "match-wizard" ||
+    viewMode?.toLowerCase() === "match" ||
+    viewMode?.toLowerCase() === "wizard" ||
+    viewMode?.toLowerCase() === "bom-match" ||
+    searchParams.get("view") === "match" ||
+    searchParams.get("view") === "wizard" ||
+    searchParams.get("view") === "bom-match" ||
+    searchParams.get("mode") === "match";
+
   const { findings, blockers, risks, advice } = useFindings({
     entityType,
     entityId,
@@ -332,6 +352,18 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         data-entity-id={entityId}
         {...props.extractionProps}
         {...props}
+      />
+    );
+  }
+
+  if (isMatchWizard) {
+    return (
+      <MatchWizard
+        title={displayTitle}
+        onNavigate={props.onNavigate}
+        data-entity-type={entityType}
+        data-entity-id={entityId}
+        {...props.matchWizardProps}
       />
     );
   }

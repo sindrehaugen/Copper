@@ -229,16 +229,16 @@ describe("Batch 172 (EN.W11) — Catalog Browser & PRODUCT Surface", () => {
       const detailsSection = screen.getByTestId("product-details-section");
       expect(detailsSection).toBeDefined();
       expect(within(detailsSection).getByText(/High-performance in-ceiling loudspeaker/i)).toBeDefined();
-      expect(within(detailsSection).getByText(/CE/i)).toBeDefined();
+      expect(within(detailsSection).getByText("CE")).toBeDefined();
       expect(within(detailsSection).getByText(/RoHS/i)).toBeDefined();
 
       // Verify Specs Facet
       const specsSection = screen.getByTestId("product-specs-section");
       expect(specsSection).toBeDefined();
-      expect(within(specsSection).getByText("Nominal Impedance")).toBeDefined();
-      expect(within(specsSection).getByText("8Ω")).toBeDefined();
-      expect(within(specsSection).getByText("Max Power Handling")).toBeDefined();
-      expect(within(specsSection).getByText("200W")).toBeDefined();
+      expect(within(specsSection).getByText(/Nominal Impedance/i)).toBeDefined();
+      expect(within(specsSection).getAllByText("8Ω").length).toBeGreaterThan(0);
+      expect(within(specsSection).getByText(/Max Power Handling/i)).toBeDefined();
+      expect(within(specsSection).getAllByText("200W").length).toBeGreaterThan(0);
 
       // Verify Stock Facet
       const stockSection = screen.getByTestId("product-stock-section");

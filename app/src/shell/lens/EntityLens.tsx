@@ -19,6 +19,7 @@ import { ExtractionReview, type ExtractionTask, type ExtractionReviewProps } fro
 import { CatalogBrowserLens, type CatalogData, type ProductItem, type CatalogBrowserLensProps } from "./product/CatalogBrowserLens";
 import { MatchWizard, type MatchWizardProps } from "../../views/product/MatchWizard";
 import { EnrichmentReview, type EnrichmentReviewProps, type EnrichmentItem } from "../../views/product/EnrichmentReview";
+import { ThreeWayMatchProvider } from "../../views/sourcing/ThreeWayMatchProvider";
 import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/SourcingDesk";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
@@ -478,6 +479,7 @@ export function EntityLens(props: ExtendedEntityLensProps) {
       headerSlot={
         <>
           {props.headerSlot}
+          <ThreeWayMatchProvider entityType={entityType} entityId={entityId} />
           <FindingsTray filter={{ entityType, entityId }} />
         </>
       }

@@ -158,7 +158,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 * [DONE] B177 — EN.W16 spend-advisors: rebate forecast, move-spend recommender, spend what-if as a cockpit. **PO generate/submit stay unwired in NCE — surface advisory only, never an order button** · tier: T2 · nce: LIVE · dep: B175 [PASSED TAG: pnpm run test app/src/views/sourcing exit 0]
 
 **M11 Inventory** *(14 live routes — the second-richest surface)*
-* [LOCKED] B178 — EN.W17 stock-grid: stock levels + valuation across warehouse and van locations; `STOCK_LOCATION` surface · tier: T2 · nce: LIVE · dep: B146, B141 [NO TAG]
+* [DONE] B178 — EN.W17 stock-grid: stock levels + valuation across warehouse and van locations; `STOCK_LOCATION` surface · tier: T2 · nce: LIVE · dep: B146, B141 [PASSED TAG: pnpm run test app/src/views/inventory exit 0]
 * [LOCKED] B179 — EN.W18 stock-movements: reserve/release/transfer/record-consumption as governed grid actions · tier: T2 · nce: LIVE · dep: B178, B148 [NO TAG]
 * [LOCKED] B180 — EN.W19 goods-receipt: receipt capture incl. `record-goods-receipt-and-match`, so a receipt raises a 3-way-match finding · tier: T3 · nce: LIVE · dep: B179, B176 [NO TAG]
 * [LOCKED] B181 — EN.W20 rma-and-disposal: RMA intake, restock-from-RMA, WEEE disposal with its compliance record · tier: T2 · nce: LIVE · dep: B179 [NO TAG]

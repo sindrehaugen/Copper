@@ -6,6 +6,9 @@ export function AskAgentModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
 
+  // Simulated active context
+  const activeContext = { type: 'PROJECT', id: 'PRJ-1092' };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -27,19 +30,29 @@ export function AskAgentModal() {
       <div className="bg-white dark:bg-slate-900 w-full max-w-2xl rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden flex flex-col max-h-[70vh]">
         
         {/* Input Header */}
-        <div className="flex items-center p-4 border-b border-slate-200 dark:border-slate-800">
-          <svg className="w-5 h-5 text-purple-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-          <input 
-            type="text"
-            autoFocus
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            placeholder={t('shell.agent.placeholder', 'Ask Copper AI anything...')}
-            className="flex-1 bg-transparent border-none outline-none text-lg text-slate-900 dark:text-white placeholder-slate-400"
-          />
-          <button onClick={() => setIsOpen(false)} className="ml-2 p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-          </button>
+        <div className="flex flex-col border-b border-slate-200 dark:border-slate-800">
+          <div className="flex items-center p-4 pb-2">
+            <svg className="w-5 h-5 text-purple-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <input 
+              type="text"
+              autoFocus
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              placeholder={t('shell.agent.placeholderScoped', 'Ask about {{id}}...', { id: activeContext.id })}
+              className="flex-1 bg-transparent border-none outline-none text-lg text-slate-900 dark:text-white placeholder-slate-400"
+            />
+            <button onClick={() => setIsOpen(false)} className="ml-2 p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 bg-slate-100 dark:bg-slate-800 rounded">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+          </div>
+          
+          {/* Context Pill */}
+          <div className="px-11 pb-3 flex gap-2">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 border border-purple-200 dark:border-purple-800" data-testid="context-pill">
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+              {t('shell.agent.scopedTo', 'Scoped to: ')}{activeContext.type} {activeContext.id}
+            </span>
+          </div>
         </div>
 
         {/* Chat Body */}

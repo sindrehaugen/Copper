@@ -21,6 +21,7 @@ import { MatchWizard, type MatchWizardProps } from "../../views/product/MatchWiz
 import { EnrichmentReview, type EnrichmentReviewProps, type EnrichmentItem } from "../../views/product/EnrichmentReview";
 import { ThreeWayMatchProvider } from "../../views/sourcing/ThreeWayMatchProvider";
 import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/SourcingDesk";
+import { StockGrid } from "../../views/inventory/StockGrid";
 import { SpendAdvisors, type SpendAdvisorsProps } from "../../views/sourcing/SpendAdvisors";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
@@ -77,6 +78,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   enrichmentProps?: EnrichmentReviewProps | undefined;
   isSourcing?: boolean | undefined;
   sourcingProps?: SourcingDeskProps | any | undefined;
+  isStockLocation?: boolean | undefined;
+  stockGridProps?: any | undefined;
   isSpendAdvisors?: boolean | undefined;
   spendAdvisorsProps?: SpendAdvisorsProps | any | undefined;
   onNavigate?: ((path: string, entity?: any) => void) | undefined;
@@ -324,6 +327,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "sourcing" ||
     searchParams.get("mode") === "sourcing";
 
+  const isStockLocation =
+    props.isStockLocation === true ||
+    entityType.toUpperCase() === 'STOCK_LOCATION' ||
+    entityId.toLowerCase() === 'stock-location' ||
+    viewMode?.toLowerCase() === 'stock-location' ||
+    searchParams.get('view') === 'stock-location' ||
+    searchParams.get('mode') === 'stock-location';
+
   const isSpendAdvisors =
     props.isSpendAdvisors === true ||
     entityType.toUpperCase() === "SPEND_ADVISORS" ||
@@ -459,6 +470,18 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         data-entity-type={entityType}
         data-entity-id={entityId}
         {...props.sourcingProps}
+        {...props}
+      />
+    );
+  }
+
+  if (isStockLocation) {
+    return (
+      <StockGrid
+        locationId={entityId}
+        className="h-full w-full"
+        onNavigate={props.onNavigate}
+        {...props.stockGridProps}
         {...props}
       />
     );

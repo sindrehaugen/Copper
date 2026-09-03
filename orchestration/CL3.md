@@ -169,7 +169,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 * [DONE] B184 — EN.W23 contractor-matching: contractor match + partner-scoped view honouring the A2A contractor allowlist (`vendors_partner_view` only) · tier: T3 · nce: LIVE · dep: B183 [PASSED TAG: pnpm run test app/src/views/sourcing exit 0]
 
 **M9 Assets** *(3 routes + 4 tools)*
-* [LOCKED] B185 — EN.W24 asset-register: grid lens + `ASSET` surface over `/api/assets{,/{id}}`; room-linked via `lives_in` · tier: T2 · nce: LIVE · dep: B146, B156 [NO TAG]
+* [DONE] B185 — EN.W24 asset-register: grid lens + `ASSET` surface over `/api/assets{,/{id}}`; room-linked via `lives_in` · tier: T2 · nce: LIVE · dep: B146, B156 [PASSED TAG: pnpm run test app/src/views/assets exit 0]
 * [LOCKED] B186 — EN.W25 asset-lifecycle: 14-state lifecycle timeline with governed transitions (`/{id}/lifecycle`); warranty/EOL radar as findings; source-strength merge queue via C1 · tier: T3 · nce: LIVE · dep: B185, B137 [NO TAG]
 * [LOCKED] B187 — EN.W26 asset-telemetry: telemetry facet + device-health rollup · tier: T3 · **nce: NEEDS-ML-230g** — ✅ **ML orch decided MERGE, 2026-09-02.** `NCE-B145` is one commit / 1,657 insertions (migration `057_telemetry_samples.sql`, `assets/telemetry.py` 525 lines, `tests/test_assets_telemetry.py` 817 lines) — complete work, not a stub; never pushed, 1 ahead / **111 behind** `origin/main`. Numbering into the 057 gap is safe because the ledger is `applied_migrations` with **`filename` as PRIMARY KEY**, not a version watermark (057 is absent from the live DB). Merging adds tenant table `telemetry_samples`, moving `EXPECTED_TENANT_RLS_TABLES` **64 → 65** and tripping the docs ratchet across 13 sites — that is the gate working. · dep: B185 [NO TAG]
 

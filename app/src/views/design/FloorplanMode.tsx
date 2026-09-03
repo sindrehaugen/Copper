@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useDocumentStore } from '../../store/documentStore';
 import { PITCH } from '../../model/geometry';
 import type { Device, Location, Zone } from '../../model/schema';
+import { TelemetryOverlay2D, type TelemetryStreamItem } from './TelemetryOverlay2D';
 
 export const GRID_PITCH = PITCH || 24;
 export const PIXELS_PER_METER = 40;
@@ -16,6 +17,8 @@ export interface GeometryUpdatePayload {
 
 export interface FloorplanModeProps {
   onSaveGeometry?: (payload: GeometryUpdatePayload) => Promise<void> | void;
+  telemetryData?: TelemetryStreamItem[] | undefined;
+  showTelemetry?: boolean | undefined;
 }
 
 interface DraggableDeviceProps {
@@ -148,7 +151,7 @@ function DraggableDevice({
   );
 }
 
-export function FloorplanMode({ onSaveGeometry }: FloorplanModeProps = {}) {
+export function FloorplanMode({ onSaveGeometry, telemetryData, showTelemetry = true }: FloorplanModeProps = {}) {
   const { t } = useTranslation();
 
   const document = useDocumentStore(state => state.document);
@@ -471,6 +474,9 @@ export function FloorplanMode({ onSaveGeometry }: FloorplanModeProps = {}) {
             </div>
           );
         })}
+
+        {/* Telemetry Overlays Layer */}
+        <TelemetryOverlay2D telemetryData={telemetryData} visible={showTelemetry} />
 
         {/* Drawing Rect */}
         {drawingRect && (

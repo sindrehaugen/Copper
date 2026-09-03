@@ -5,6 +5,8 @@ import { OrbitControls, Html } from '@react-three/drei';
 import { useDocumentStore } from '../../store/documentStore';
 import { RackVolume } from './RackVolume';
 import { CoverageOverlay } from './CoverageOverlay';
+import { TelemetryOverlay3D } from './TelemetryOverlay3D';
+import type { TelemetryStreamItem } from '../design/TelemetryOverlay2D';
 import { PITCH } from '../../model/geometry';
 import type { Location, Device, Zone } from '../../model/schema';
 import { GLTFExporter } from 'three/examples/jsm/exporters/GLTFExporter.js';
@@ -118,7 +120,7 @@ function RoomNode({ location }: RoomNodeProps) {
 interface DeviceNodeProps {
   device: Device;
   isSelected: boolean;
-  gridPos: { x: number; y: number; z?: number };
+  gridPos: { x: number; y: number; z?: number | undefined };
   onSelect: (e: React.MouseEvent) => void;
 }
 
@@ -167,7 +169,12 @@ function DeviceNode({ device, isSelected, gridPos, onSelect }: DeviceNodeProps) 
   );
 }
 
-export function SceneView() {
+export interface SceneViewProps {
+  telemetryData?: TelemetryStreamItem[] | undefined;
+  showTelemetry?: boolean | undefined;
+}
+
+export function SceneView({ telemetryData, showTelemetry = true }: SceneViewProps = {}) {
   const document = useDocumentStore((state) => state.document);
   const selectedIds = useDocumentStore((state) => state.selectedIds) || [];
   const setSelectedIds = useDocumentStore((state) => state.setSelectedIds);
@@ -196,6 +203,7 @@ export function SceneView() {
         ))}
 
         <CoverageOverlay />
+        <TelemetryOverlay3D telemetryData={telemetryData} visible={showTelemetry} />
 
         {/* Zones */}
         {zones.map((zone: Zone) => {

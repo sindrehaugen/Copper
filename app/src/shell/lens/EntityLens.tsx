@@ -6,11 +6,15 @@ import type { EntityLensProps } from "./types";
 import { FacetContainer } from "../facet";
 import { useFindings, FindingsTray } from "../finding";
 import { RoomSurface, type RoomSurfaceData } from "../../views/room/RoomSurface";
+import { EstateMap, type EstateMapProps } from "../../views/map/EstateMap";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
   level?: string | undefined;
   isRoom?: boolean | undefined;
+  isSite?: boolean | undefined;
   roomData?: RoomSurfaceData | null | undefined;
+  estateMapProps?: EstateMapProps | undefined;
+  onNavigate?: ((path: string, entity?: any) => void) | undefined;
 }
 
 function useSafeLocationSearch(): string {
@@ -50,6 +54,15 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         searchParams.get("level") === "room" ||
         entityId.toLowerCase().startsWith("room-") ||
         entityId.toLowerCase().includes("room")));
+
+  const isSite =
+    entityType.toUpperCase() === "SITE" ||
+    props.isSite === true ||
+    (entityType.toUpperCase() === "FUNCTIONAL_LOCATION" &&
+      (level?.toLowerCase() === "site" ||
+        searchParams.get("level") === "site" ||
+        entityId.toLowerCase().startsWith("site-") ||
+        entityId.toLowerCase().includes("site")));
 
   const { findings, blockers, risks, advice } = useFindings({
     entityType,
@@ -114,6 +127,12 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         <RoomSurface
           roomId={entityId}
           data={props.roomData}
+        />
+      ) : isSite ? (
+        <EstateMap
+          siteId={entityId}
+          onNavigate={props.onNavigate}
+          {...props.estateMapProps}
         />
       ) : (
         <FacetContainer entityType={entityType} entityId={entityId} />

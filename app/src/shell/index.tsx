@@ -213,12 +213,12 @@ export function AppShell() {
         <ShellLayout globalBarProps={globalBarProps}>
           <Routes>
             {/* Direct Context Group Routes */}
-            <Route path="/now" element={<ContextViewPlaceholder titleKey="nav.now" descKey="nav.nowDesc" />} />
-            <Route path="/rooms" element={<ContextViewPlaceholder titleKey="nav.rooms" descKey="nav.roomsDesc" />} />
+            <Route path="/now" element={<MyDay />} />
+            <Route path="/rooms" element={<SpaceHierarchy />} />
             <Route path="/commerce" element={<ContextViewPlaceholder titleKey="nav.commerce" descKey="nav.commerceDesc" />} />
-            <Route path="/supply" element={<ContextViewPlaceholder titleKey="nav.supply" descKey="nav.supplyDesc" />} />
-            <Route path="/service" element={<ContextViewPlaceholder titleKey="nav.service" descKey="nav.serviceDesc" />} />
-            <Route path="/insight" element={<ContextViewPlaceholder titleKey="nav.insight" descKey="nav.insightDesc" />} />
+            <Route path="/supply" element={<SourcingDesk />} />
+            <Route path="/service" element={<AssetRegister />} />
+            <Route path="/insight" element={<StockIntelligence />} />
             <Route path="/ops" element={<ContextViewPlaceholder titleKey="nav.ops" descKey="nav.opsDesc" />} />
 
             {/* Design Context Routes & Sub-views */}

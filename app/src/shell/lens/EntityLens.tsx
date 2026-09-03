@@ -24,6 +24,7 @@ import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/Sourc
 import { StockGrid } from "../../views/inventory/StockGrid";
 import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
+import { ToolsGovernance, type ToolsGovernanceProps } from "../../views/system/ToolsGovernance";
 import { NamespacesAndUsers, type NamespacesAndUsersProps } from "../../views/system/NamespacesAndUsers";
 import { SettingsPlane, type SettingsPlaneProps } from "../../views/system/SettingsPlane";
 import { CostAndUsage, type CostAndUsageProps } from "../../views/intelligence/CostAndUsage";
@@ -102,6 +103,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
+  isTools?: boolean | undefined;
+  toolsProps?: ToolsGovernanceProps | any | undefined;
   isNamespaces?: boolean | undefined;
   namespacesProps?: NamespacesAndUsersProps | any | undefined;
   isSettings?: boolean | undefined;
@@ -408,6 +411,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "goods-receipt" ||
     searchParams.get("mode") === "goods-receipt";
 
+  const isTools =
+    props.isTools === true ||
+    entityType.toUpperCase() === 'TOOLS' ||
+    entityId.toLowerCase() === 'tools' ||
+    viewMode?.toLowerCase() === 'tools' ||
+    searchParams.get('view') === 'tools' ||
+    searchParams.get('mode') === 'tools';
+
   const isNamespaces =
     props.isNamespaces === true ||
     entityType.toUpperCase() === 'NAMESPACES' ||
@@ -702,6 +713,15 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         }
         onNavigate={props.onNavigate}
         {...props.goodsReceiptProps}
+      />
+    );
+  }
+
+  if (isTools) {
+    return (
+      <ToolsGovernance
+        onNavigate={props.onNavigate}
+        {...props.toolsProps}
       />
     );
   }

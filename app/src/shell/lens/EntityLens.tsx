@@ -10,6 +10,7 @@ import { EstateMap, type EstateMapProps } from "../../views/map/EstateMap";
 import { CanvasLens, type ExtendedCanvasLensProps } from "./canvas/CanvasLens";
 import { PipelineBoard, type PipelineBoardProps } from "./board/PipelineBoard";
 import { CustomerSurface, type CustomerSurfaceData, type CustomerSurfaceProps } from "../../views/customer/CustomerSurface";
+import { QuoteViewer, type QuoteData, type QuoteViewerProps } from "../../views/quote/QuoteViewer";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
   level?: string | undefined;
@@ -19,14 +20,18 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   isPipeline?: boolean | undefined;
   isBoard?: boolean | undefined;
   isCustomer?: boolean | undefined;
+  isQuote?: boolean | undefined;
+  isBaseline?: boolean | undefined;
   viewMode?: string | undefined;
   mode?: string | undefined;
   roomData?: RoomSurfaceData | null | undefined;
   customerData?: CustomerSurfaceData | null | undefined;
+  quoteData?: QuoteData | null | undefined;
   estateMapProps?: EstateMapProps | undefined;
   canvasProps?: ExtendedCanvasLensProps | undefined;
   pipelineProps?: PipelineBoardProps | undefined;
   customerProps?: CustomerSurfaceProps | undefined;
+  quoteProps?: QuoteViewerProps | undefined;
   onNavigate?: ((path: string, entity?: any) => void) | undefined;
 }
 
@@ -108,6 +113,21 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     entityType.toUpperCase() === "CUSTOMER" ||
     (entityType.toUpperCase() === "SALES" &&
       (viewMode?.toLowerCase() === "customer" || searchParams.get("view") === "customer"));
+
+  const isBaseline =
+    props.isBaseline === true ||
+    entityType.toUpperCase() === "BASELINE" ||
+    entityType.toUpperCase() === "SIGNED_BASELINE" ||
+    viewMode?.toLowerCase() === "baseline" ||
+    searchParams.get("view") === "baseline" ||
+    searchParams.get("mode") === "baseline";
+
+  const isQuote =
+    props.isQuote === true ||
+    isBaseline ||
+    entityType.toUpperCase() === "QUOTE" ||
+    viewMode?.toLowerCase() === "quote" ||
+    searchParams.get("view") === "quote";
 
   const { findings, blockers, risks, advice } = useFindings({
     entityType,
@@ -209,6 +229,15 @@ export function EntityLens(props: ExtendedEntityLensProps) {
           data={props.customerData}
           onNavigate={props.onNavigate}
           {...props.customerProps}
+        />
+      ) : isQuote ? (
+        <QuoteViewer
+          entityId={entityId}
+          entityType={entityType}
+          isBaseline={isBaseline}
+          data={props.quoteData}
+          onNavigate={props.onNavigate}
+          {...props.quoteProps}
         />
       ) : (
         <FacetContainer entityType={entityType} entityId={entityId} />

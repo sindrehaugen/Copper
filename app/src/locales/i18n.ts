@@ -16,6 +16,8 @@ import en_problems from './en/problems.json';
 import nbNO_problems from './nb-NO/problems.json';
 import en_subarray from './en/subarray.json';
 import nbNO_subarray from './nb-NO/subarray.json';
+import en_sourcing from './en/sourcing.json';
+import nbNO_sourcing from './nb-NO/sourcing.json';
 
 const resources = {
   en: {
@@ -26,7 +28,8 @@ const resources = {
       acoustics: en_acoustics,
       compliance: en_compliance,
       problems: en_problems,
-      subarray: en_subarray
+      subarray: en_subarray,
+      sourcing: en_sourcing
     }
   },
   'nb-NO': {
@@ -37,7 +40,8 @@ const resources = {
       acoustics: nbNO_acoustics,
       compliance: nbNO_compliance,
       problems: nbNO_problems,
-      subarray: nbNO_subarray
+      subarray: nbNO_subarray,
+      sourcing: nbNO_sourcing
     }
   },
 };

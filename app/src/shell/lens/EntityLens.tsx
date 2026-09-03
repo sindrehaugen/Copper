@@ -24,6 +24,7 @@ import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/Sourc
 import { StockGrid } from "../../views/inventory/StockGrid";
 import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
+import { SpaceHierarchy, type SpaceHierarchyProps } from "../../views/spaces/SpaceHierarchy";
 import { FinanceWBS, type FinanceWBSProps } from "../../views/projects/FinanceWBS";
 import { PhaseBoard, type PhaseBoardProps } from "../../views/projects/PhaseBoard";
 import { AssetTelemetry, type AssetTelemetryProps } from "../../views/assets/AssetTelemetry";
@@ -96,6 +97,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
+  isSpaceHierarchy?: boolean | undefined;
+  spaceHierarchyProps?: SpaceHierarchyProps | any | undefined;
   isFinanceWBS?: boolean | undefined;
   financeWBSProps?: FinanceWBSProps | any | undefined;
   isPhaseBoard?: boolean | undefined;
@@ -390,6 +393,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "goods-receipt" ||
     searchParams.get("mode") === "goods-receipt";
 
+  const isSpaceHierarchy =
+    props.isSpaceHierarchy === true ||
+    entityType.toUpperCase() === 'SPACE_HIERARCHY' ||
+    entityId.toLowerCase() === 'space-hierarchy' ||
+    viewMode?.toLowerCase() === 'space-hierarchy' ||
+    searchParams.get('view') === 'space-hierarchy' ||
+    searchParams.get('mode') === 'space-hierarchy';
+
   const isFinanceWBS =
     props.isFinanceWBS === true ||
     entityType.toUpperCase() === 'FINANCE_WBS' ||
@@ -636,6 +647,16 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         }
         onNavigate={props.onNavigate}
         {...props.goodsReceiptProps}
+      />
+    );
+  }
+
+  if (isSpaceHierarchy) {
+    return (
+      <SpaceHierarchy
+        campusId={props.spaceHierarchyProps?.campusId}
+        onNavigate={props.onNavigate}
+        {...props.spaceHierarchyProps}
       />
     );
   }

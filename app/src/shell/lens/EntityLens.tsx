@@ -24,6 +24,7 @@ import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/Sourc
 import { StockGrid } from "../../views/inventory/StockGrid";
 import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
+import { AssetRegister, type AssetRegisterProps } from "../../views/assets/AssetRegister";
 import { ContractorMatch, type ContractorMatchProps } from "../../views/sourcing/ContractorMatch";
 import { VendorScorecard, type VendorScorecardProps } from "../../views/sourcing/VendorScorecard";
 import { StockIntelligence, type StockIntelligenceProps } from "../../views/inventory/StockIntelligence";
@@ -91,6 +92,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
+  isAssetRegister?: boolean | undefined;
+  assetRegisterProps?: AssetRegisterProps | any | undefined;
   isContractorMatch?: boolean | undefined;
   contractorMatchProps?: ContractorMatchProps | any | undefined;
   isVendorScorecard?: boolean | undefined;
@@ -375,6 +378,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "goods-receipt" ||
     searchParams.get("mode") === "goods-receipt";
 
+  const isAssetRegister =
+    props.isAssetRegister === true ||
+    entityType.toUpperCase() === 'ASSET' ||
+    entityId.toLowerCase() === 'asset-register' ||
+    viewMode?.toLowerCase() === 'asset-register' ||
+    searchParams.get('view') === 'asset-register' ||
+    searchParams.get('mode') === 'asset-register';
+
   const isContractorMatch =
     props.isContractorMatch === true ||
     entityType.toUpperCase() === 'CONTRACTOR' ||
@@ -581,6 +592,19 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         }
         onNavigate={props.onNavigate}
         {...props.goodsReceiptProps}
+      />
+    );
+  }
+
+  if (isAssetRegister) {
+    return (
+      <AssetRegister
+        assetId={
+          props.assetRegisterProps?.assetId ??
+          (entityType.toUpperCase() === "ASSET" ? entityId : undefined)
+        }
+        onNavigate={props.onNavigate}
+        {...props.assetRegisterProps}
       />
     );
   }

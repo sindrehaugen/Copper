@@ -24,6 +24,7 @@ import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/Sourc
 import { StockGrid } from "../../views/inventory/StockGrid";
 import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
+import { PhaseBoard, type PhaseBoardProps } from "../../views/projects/PhaseBoard";
 import { AssetTelemetry, type AssetTelemetryProps } from "../../views/assets/AssetTelemetry";
 import { AssetLifecycle, type AssetLifecycleProps } from "../../views/assets/AssetLifecycle";
 import { AssetRegister, type AssetRegisterProps } from "../../views/assets/AssetRegister";
@@ -94,6 +95,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
+  isPhaseBoard?: boolean | undefined;
+  phaseBoardProps?: PhaseBoardProps | any | undefined;
   isAssetTelemetry?: boolean | undefined;
   assetTelemetryProps?: AssetTelemetryProps | any | undefined;
   isAssetLifecycle?: boolean | undefined;
@@ -384,6 +387,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "goods-receipt" ||
     searchParams.get("mode") === "goods-receipt";
 
+  const isPhaseBoard =
+    props.isPhaseBoard === true ||
+    entityType.toUpperCase() === 'PHASE_BOARD' ||
+    entityId.toLowerCase() === 'phase-board' ||
+    viewMode?.toLowerCase() === 'phase-board' ||
+    searchParams.get('view') === 'phase-board' ||
+    searchParams.get('mode') === 'phase-board';
+
   const isAssetTelemetry =
     props.isAssetTelemetry === true ||
     entityType.toUpperCase() === 'ASSET_TELEMETRY' ||
@@ -614,6 +625,19 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         }
         onNavigate={props.onNavigate}
         {...props.goodsReceiptProps}
+      />
+    );
+  }
+
+  if (isPhaseBoard) {
+    return (
+      <PhaseBoard
+        projectId={
+          props.phaseBoardProps?.projectId ??
+          (entityType.toUpperCase() === "PROJECT" ? entityId : undefined)
+        }
+        onNavigate={props.onNavigate}
+        {...props.phaseBoardProps}
       />
     );
   }

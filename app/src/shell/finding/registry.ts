@@ -65,6 +65,8 @@ export const SEVERITY_WEIGHT: Record<FindingSeverity, number> = {
   advice: 3,
 };
 
+export const THREE_WAY_MATCH_PRODUCER_ID = 'three-way-match';
+
 export class FindingRegistry {
   private producers: Map<string, FindingProducer> = new Map();
   private dynamicFindings: Map<string, Finding[]> = new Map();
@@ -96,6 +98,22 @@ export class FindingRegistry {
       producerId,
       findings.map(f => ({ ...f, producerId }))
     );
+    this.notify();
+  }
+
+  public addFindings(producerId: string, findings: Finding[]): void {
+    const existing = this.dynamicFindings.get(producerId) || [];
+    const newItems = findings.map(f => ({ ...f, producerId }));
+    const updated = [...existing];
+    for (const item of newItems) {
+      const idx = updated.findIndex(f => f.id === item.id);
+      if (idx >= 0) {
+        updated[idx] = item;
+      } else {
+        updated.push(item);
+      }
+    }
+    this.dynamicFindings.set(producerId, updated);
     this.notify();
   }
 

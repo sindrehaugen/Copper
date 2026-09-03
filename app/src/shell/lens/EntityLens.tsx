@@ -22,6 +22,7 @@ import { EnrichmentReview, type EnrichmentReviewProps, type EnrichmentItem } fro
 import { ThreeWayMatchProvider } from "../../views/sourcing/ThreeWayMatchProvider";
 import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/SourcingDesk";
 import { StockGrid } from "../../views/inventory/StockGrid";
+import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
 import { SpendAdvisors, type SpendAdvisorsProps } from "../../views/sourcing/SpendAdvisors";
 
 export interface ExtendedEntityLensProps extends EntityLensProps {
@@ -82,6 +83,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   stockGridProps?: any | undefined;
   isSpendAdvisors?: boolean | undefined;
   spendAdvisorsProps?: SpendAdvisorsProps | any | undefined;
+  isGoodsReceipt?: boolean | undefined;
+  goodsReceiptProps?: GoodsReceiptProps | any | undefined;
   onNavigate?: ((path: string, entity?: any) => void) | undefined;
 }
 
@@ -343,6 +346,15 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "spend-advisors" ||
     searchParams.get("mode") === "spend-advisors";
 
+  const isGoodsReceipt =
+    props.isGoodsReceipt === true ||
+    entityType.toUpperCase() === "GOODS_RECEIPT" ||
+    entityType.toUpperCase() === "GOODS-RECEIPT" ||
+    entityId.toLowerCase() === "goods-receipt" ||
+    viewMode?.toLowerCase() === "goods-receipt" ||
+    searchParams.get("view") === "goods-receipt" ||
+    searchParams.get("mode") === "goods-receipt";
+
   const { findings, blockers, risks, advice } = useFindings({
     entityType,
     entityId,
@@ -496,6 +508,21 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         data-entity-id={entityId}
         {...props.spendAdvisorsProps}
         {...props}
+      />
+    );
+  }
+
+  if (isGoodsReceipt) {
+    return (
+      <GoodsReceipt
+        poNumber={
+          props.goodsReceiptProps?.poNumber ??
+          (entityType.toUpperCase() === "PO" || entityType.toUpperCase() === "PURCHASE_ORDER"
+            ? entityId
+            : undefined)
+        }
+        onNavigate={props.onNavigate}
+        {...props.goodsReceiptProps}
       />
     );
   }

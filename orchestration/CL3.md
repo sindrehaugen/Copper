@@ -166,7 +166,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 
 **M4 Vendors** *(2 routes + 10 tools)*
 * [DONE] B183 — EN.W22 vendor-scorecards: `VENDOR` surface + scorecard, tier status, at-risk, reliability radar; degradation as findings · tier: T2 · nce: LIVE · dep: B141, B142 [PASSED TAG: pnpm run test app/src/views/sourcing exit 0]
-* [LOCKED] B184 — EN.W23 contractor-matching: contractor match + partner-scoped view honouring the A2A contractor allowlist (`vendors_partner_view` only) · tier: T3 · nce: LIVE · dep: B183 [NO TAG]
+* [DONE] B184 — EN.W23 contractor-matching: contractor match + partner-scoped view honouring the A2A contractor allowlist (`vendors_partner_view` only) · tier: T3 · nce: LIVE · dep: B183 [PASSED TAG: pnpm run test app/src/views/sourcing exit 0]
 
 **M9 Assets** *(3 routes + 4 tools)*
 * [LOCKED] B185 — EN.W24 asset-register: grid lens + `ASSET` surface over `/api/assets{,/{id}}`; room-linked via `lives_in` · tier: T2 · nce: LIVE · dep: B146, B156 [NO TAG]

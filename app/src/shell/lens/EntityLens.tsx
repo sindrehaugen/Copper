@@ -24,6 +24,7 @@ import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/Sourc
 import { StockGrid } from "../../views/inventory/StockGrid";
 import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
+import { AssetTelemetry, type AssetTelemetryProps } from "../../views/assets/AssetTelemetry";
 import { AssetLifecycle, type AssetLifecycleProps } from "../../views/assets/AssetLifecycle";
 import { AssetRegister, type AssetRegisterProps } from "../../views/assets/AssetRegister";
 import { ContractorMatch, type ContractorMatchProps } from "../../views/sourcing/ContractorMatch";
@@ -93,6 +94,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
+  isAssetTelemetry?: boolean | undefined;
+  assetTelemetryProps?: AssetTelemetryProps | any | undefined;
   isAssetLifecycle?: boolean | undefined;
   assetLifecycleProps?: AssetLifecycleProps | any | undefined;
   isAssetRegister?: boolean | undefined;
@@ -381,6 +384,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "goods-receipt" ||
     searchParams.get("mode") === "goods-receipt";
 
+  const isAssetTelemetry =
+    props.isAssetTelemetry === true ||
+    entityType.toUpperCase() === 'ASSET_TELEMETRY' ||
+    entityId.toLowerCase() === 'asset-telemetry' ||
+    viewMode?.toLowerCase() === 'asset-telemetry' ||
+    searchParams.get('view') === 'asset-telemetry' ||
+    searchParams.get('mode') === 'asset-telemetry';
+
   const isAssetLifecycle =
     props.isAssetLifecycle === true ||
     entityType.toUpperCase() === 'ASSET_LIFECYCLE' ||
@@ -603,6 +614,16 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         }
         onNavigate={props.onNavigate}
         {...props.goodsReceiptProps}
+      />
+    );
+  }
+
+  if (isAssetTelemetry) {
+    return (
+      <AssetTelemetry
+        assetId={props.assetTelemetryProps?.assetId}
+        onNavigate={props.onNavigate}
+        {...props.assetTelemetryProps}
       />
     );
   }

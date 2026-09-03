@@ -65,6 +65,7 @@ export const SEVERITY_WEIGHT: Record<FindingSeverity, number> = {
   advice: 3,
 };
 
+export const ASSET_TELEMETRY_PRODUCER_ID = 'asset-telemetry';
 export const ASSET_LIFECYCLE_PRODUCER_ID = 'asset-lifecycle';
 export const VENDOR_SCORECARD_PRODUCER_ID = 'vendor-scorecard';
 export const THREE_WAY_MATCH_PRODUCER_ID = 'three-way-match';

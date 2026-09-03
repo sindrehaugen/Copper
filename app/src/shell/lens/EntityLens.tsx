@@ -24,6 +24,7 @@ import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/Sourc
 import { StockGrid } from "../../views/inventory/StockGrid";
 import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
+import { SettingsPlane, type SettingsPlaneProps } from "../../views/system/SettingsPlane";
 import { CostAndUsage, type CostAndUsageProps } from "../../views/intelligence/CostAndUsage";
 import { MorningBrief, type MorningBriefProps } from "../../views/now/MorningBrief";
 import { MyDay, type MyDayProps } from "../../views/now/MyDay";
@@ -100,6 +101,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
+  isSettings?: boolean | undefined;
+  settingsProps?: SettingsPlaneProps | any | undefined;
   isCostAndUsage?: boolean | undefined;
   costAndUsageProps?: CostAndUsageProps | any | undefined;
   isMorningBrief?: boolean | undefined;
@@ -402,6 +405,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "goods-receipt" ||
     searchParams.get("mode") === "goods-receipt";
 
+  const isSettings =
+    props.isSettings === true ||
+    entityType.toUpperCase() === 'SETTINGS' ||
+    entityId.toLowerCase() === 'settings' ||
+    viewMode?.toLowerCase() === 'settings' ||
+    searchParams.get('view') === 'settings' ||
+    searchParams.get('mode') === 'settings';
+
   const isCostAndUsage =
     props.isCostAndUsage === true ||
     entityType.toUpperCase() === 'COST_USAGE' ||
@@ -680,6 +691,15 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         }
         onNavigate={props.onNavigate}
         {...props.goodsReceiptProps}
+      />
+    );
+  }
+
+  if (isSettings) {
+    return (
+      <SettingsPlane
+        onNavigate={props.onNavigate}
+        {...props.settingsProps}
       />
     );
   }

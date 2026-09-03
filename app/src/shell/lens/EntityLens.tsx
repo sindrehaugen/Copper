@@ -22,6 +22,7 @@ import { EnrichmentReview, type EnrichmentReviewProps, type EnrichmentItem } fro
 import { ThreeWayMatchProvider } from "../../views/sourcing/ThreeWayMatchProvider";
 import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/SourcingDesk";
 import { StockGrid } from "../../views/inventory/StockGrid";
+import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
 import { SpendAdvisors, type SpendAdvisorsProps } from "../../views/sourcing/SpendAdvisors";
 
@@ -83,6 +84,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   stockGridProps?: any | undefined;
   isSpendAdvisors?: boolean | undefined;
   spendAdvisorsProps?: SpendAdvisorsProps | any | undefined;
+  isRma?: boolean | undefined;
+  rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
   onNavigate?: ((path: string, entity?: any) => void) | undefined;
@@ -346,6 +349,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "spend-advisors" ||
     searchParams.get("mode") === "spend-advisors";
 
+  const isRma =
+    props.isRma === true ||
+    entityType.toUpperCase() === 'RMA' ||
+    entityId.toLowerCase() === 'rma' ||
+    viewMode?.toLowerCase() === 'rma' ||
+    searchParams.get('view') === 'rma' ||
+    searchParams.get('mode') === 'rma';
+
   const isGoodsReceipt =
     props.isGoodsReceipt === true ||
     entityType.toUpperCase() === "GOODS_RECEIPT" ||
@@ -508,6 +519,19 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         data-entity-id={entityId}
         {...props.spendAdvisorsProps}
         {...props}
+      />
+    );
+  }
+
+  if (isRma) {
+    return (
+      <RmaDisposal
+        rmaNumber={
+          props.rmaProps?.rmaNumber ??
+          (entityType.toUpperCase() === "RMA" ? entityId : undefined)
+        }
+        onNavigate={props.onNavigate}
+        {...props.rmaProps}
       />
     );
   }

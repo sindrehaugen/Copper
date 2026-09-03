@@ -11,6 +11,7 @@ import { CanvasLens, type ExtendedCanvasLensProps } from "./canvas/CanvasLens";
 import { PipelineBoard, type PipelineBoardProps } from "./board/PipelineBoard";
 import { CustomerSurface, type CustomerSurfaceData, type CustomerSurfaceProps } from "../../views/customer/CustomerSurface";
 import { QuoteViewer, type QuoteData, type QuoteViewerProps } from "../../views/quote/QuoteViewer";
+import { QuoteBuilder, type QuoteBuilderProps } from "../../views/quote/QuoteBuilder";
 import { SalesPerformanceLens, type SalesPerformanceData, type SalesPerformanceLensProps } from "./sales/SalesPerformanceLens";
 import { AgreementLens, type AgreementData, type AgreementItem, type AgreementLensProps } from "./agreements/AgreementLens";
 import { CoverageMatrix, type CoverageRow, type CoverageColumn, type CoverageCell, type CoverageMatrixProps } from "../../views/coverage/CoverageMatrix";
@@ -28,6 +29,7 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   isBoard?: boolean | undefined;
   isCustomer?: boolean | undefined;
   isQuote?: boolean | undefined;
+  isQuoteBuilder?: boolean | undefined;
   isBaseline?: boolean | undefined;
   isSalesPerformance?: boolean | undefined;
   isPerformance?: boolean | undefined;
@@ -56,6 +58,7 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   pipelineProps?: PipelineBoardProps | undefined;
   customerProps?: CustomerSurfaceProps | undefined;
   quoteProps?: QuoteViewerProps | undefined;
+  quoteBuilderProps?: QuoteBuilderProps | undefined;
   isProduct?: boolean | undefined;
   isCatalog?: boolean | undefined;
   productData?: CatalogData | ProductItem | null | undefined;
@@ -177,12 +180,32 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "baseline" ||
     searchParams.get("mode") === "baseline";
 
+  const isQuoteBuilder =
+    props.isQuoteBuilder === true ||
+    viewMode?.toLowerCase() === "quote-builder" ||
+    viewMode?.toLowerCase() === "builder" ||
+    entityType.toUpperCase() === "QUOTE_BUILDER" ||
+    (entityType.toUpperCase() === "QUOTE" &&
+      (entityId.toLowerCase() === "builder" ||
+        entityId.toLowerCase() === "new" ||
+        viewMode?.toLowerCase() === "builder" ||
+        viewMode?.toLowerCase() === "quote-builder" ||
+        searchParams.get("view") === "builder" ||
+        searchParams.get("view") === "quote-builder" ||
+        searchParams.get("mode") === "builder" ||
+        searchParams.get("mode") === "quote-builder")) ||
+    searchParams.get("view") === "quote-builder" ||
+    searchParams.get("view") === "builder" ||
+    searchParams.get("mode") === "quote-builder" ||
+    searchParams.get("mode") === "builder";
+
   const isQuote =
-    props.isQuote === true ||
+    !isQuoteBuilder &&
+    (props.isQuote === true ||
     isBaseline ||
     entityType.toUpperCase() === "QUOTE" ||
     viewMode?.toLowerCase() === "quote" ||
-    searchParams.get("view") === "quote";
+    searchParams.get("view") === "quote");
 
   const isAgreement =
     props.isAgreement === true ||
@@ -487,6 +510,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
           data={props.customerData}
           onNavigate={props.onNavigate}
           {...props.customerProps}
+        />
+      ) : isQuoteBuilder ? (
+        <QuoteBuilder
+          entityId={entityId}
+          entityType={entityType}
+          data={props.quoteData}
+          onNavigate={props.onNavigate}
+          {...props.quoteBuilderProps}
         />
       ) : isQuote ? (
         <QuoteViewer

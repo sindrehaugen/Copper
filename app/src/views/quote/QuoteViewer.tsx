@@ -13,6 +13,7 @@ export interface QuoteLineItem {
   manufacturer?: string | undefined;
   quantity: number;
   unitPrice: number;
+  unitCost?: number | undefined;
   totalPrice?: number | undefined;
   designators?: string[] | undefined;
   unit?: string | undefined;

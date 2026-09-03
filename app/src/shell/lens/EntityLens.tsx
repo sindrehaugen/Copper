@@ -24,6 +24,7 @@ import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/Sourc
 import { StockGrid } from "../../views/inventory/StockGrid";
 import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
+import { MorningBrief, type MorningBriefProps } from "../../views/now/MorningBrief";
 import { MyDay, type MyDayProps } from "../../views/now/MyDay";
 import { SpaceHierarchy, type SpaceHierarchyProps } from "../../views/spaces/SpaceHierarchy";
 import { FinanceWBS, type FinanceWBSProps } from "../../views/projects/FinanceWBS";
@@ -98,6 +99,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
+  isMorningBrief?: boolean | undefined;
+  morningBriefProps?: MorningBriefProps | any | undefined;
   isMyDay?: boolean | undefined;
   myDayProps?: MyDayProps | any | undefined;
   isSpaceHierarchy?: boolean | undefined;
@@ -396,6 +399,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "goods-receipt" ||
     searchParams.get("mode") === "goods-receipt";
 
+  const isMorningBrief =
+    props.isMorningBrief === true ||
+    entityType.toUpperCase() === 'MORNING_BRIEF' ||
+    entityId.toLowerCase() === 'morning-brief' ||
+    viewMode?.toLowerCase() === 'morning-brief' ||
+    searchParams.get('view') === 'morning-brief' ||
+    searchParams.get('mode') === 'morning-brief';
+
   const isMyDay =
     props.isMyDay === true ||
     entityType.toUpperCase() === 'MY_DAY' ||
@@ -658,6 +669,15 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         }
         onNavigate={props.onNavigate}
         {...props.goodsReceiptProps}
+      />
+    );
+  }
+
+  if (isMorningBrief) {
+    return (
+      <MorningBrief
+        onNavigate={props.onNavigate}
+        {...props.morningBriefProps}
       />
     );
   }

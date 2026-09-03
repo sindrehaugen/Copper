@@ -150,7 +150,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 **M2 Product** *(3 routes + 6 tools)*
 * [DONE] B172 — EN.W11 catalog-browser: grid lens over `/api/product/search` + `PRODUCT` surface; capability search ("8Ω 200W ceiling", "PoE++ 24p") · tier: T2 · nce: LIVE · dep: B146, B141 [PASSED TAG: pnpm test app/src/shell/lens/product/CatalogBrowserLens.test.tsx exit 0]
 * [DONE] B173 — EN.W12 match-wizard: BOM-line matching via `product_match_bom_line` with **ADR-0030 no-guess tiering** — hard key links, fuzzy only *proposes* into the merge queue · tier: T3 · nce: LIVE · dep: B172, B137 [PASSED TAG: pnpm run test app/src/views/product exit 0]
-* [RUNNING] B174 — EN.W13 enrichment-review: `/api/product/enrichment/review` queue; AI enrichment renders as **flagged suggestion, never fact**; golden-record diff · tier: T2 · nce: LIVE · dep: B172 [NO TAG]
+* [DONE] B174 — EN.W13 enrichment-review: `/api/product/enrichment/review` queue; AI enrichment renders as **flagged suggestion, never fact**; golden-record diff · tier: T2 · nce: LIVE · dep: B172 [PASSED TAG: pnpm run test app/src/views/product exit 0]
 
 **M1 Procurement** *(8 live routes)*
 * [LOCKED] B175 — EN.W14 sourcing-desk: supplier ranking (`/rank`) + TCO comparator (`/tco`), catalog sync status · tier: T2 · nce: LIVE · dep: B146 [NO TAG]

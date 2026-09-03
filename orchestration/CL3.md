@@ -211,7 +211,7 @@ Legend per row: `[STATE] B{N} — {Lane}.W{W} {slug}: {what} · tier: {T} · nce
 ### Lane OP — Operations & platform admin *(P6)*
 
 * [DONE] B207 — OP.W1 namespaces-and-users: namespace admin, metadata, bridges; user/role administration at the BFF boundary · tier: T2 · nce: LIVE · dep: B132 [NO TAG]
-* [LOCKED] B208 — OP.W2 settings: effective/pending settings, patch/reload/reset/rollback with `explain_config_change` on every change · tier: T2 · nce: LIVE · dep: B143 [NO TAG]
+* [DONE] B208 — OP.W2 settings: effective/pending settings, patch/reload/reset/rollback with `explain_config_change` on every change · tier: T2 · nce: LIVE · dep: B143 [PASSED TAG: manual verify exit 0]
 * [LOCKED] B209 — OP.W3 tools-governance: tool registry view + kill switch (`/api/admin/tools{,/toggle}`), fail-closed semantics made visible · tier: T2 · nce: LIVE · dep: B207 [NO TAG]
 * [LOCKED] B210 — OP.W4 platform-health: datastore status, DLQ (list/replay/purge), quotas, embeddings/migrations, health · tier: T2 · nce: LIVE · dep: B207 [NO TAG]
 * [LOCKED] B211 — OP.W5 audit-and-replay: event log, Merkle chain verification, seq-gap probe, RLS isolation test, replay/fork, snapshot compare — the trust surface · tier: T3 · nce: LIVE · dep: B133, B143 [NO TAG]

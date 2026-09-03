@@ -24,6 +24,7 @@ import { SourcingDesk, type SourcingDeskProps } from "../../views/sourcing/Sourc
 import { StockGrid } from "../../views/inventory/StockGrid";
 import { RmaDisposal, type RmaDisposalProps } from "../../views/inventory/RmaDisposal";
 import { GoodsReceipt, type GoodsReceiptProps } from "../../views/inventory/GoodsReceipt";
+import { AssetLifecycle, type AssetLifecycleProps } from "../../views/assets/AssetLifecycle";
 import { AssetRegister, type AssetRegisterProps } from "../../views/assets/AssetRegister";
 import { ContractorMatch, type ContractorMatchProps } from "../../views/sourcing/ContractorMatch";
 import { VendorScorecard, type VendorScorecardProps } from "../../views/sourcing/VendorScorecard";
@@ -92,6 +93,8 @@ export interface ExtendedEntityLensProps extends EntityLensProps {
   rmaProps?: RmaDisposalProps | any | undefined;
   isGoodsReceipt?: boolean | undefined;
   goodsReceiptProps?: GoodsReceiptProps | any | undefined;
+  isAssetLifecycle?: boolean | undefined;
+  assetLifecycleProps?: AssetLifecycleProps | any | undefined;
   isAssetRegister?: boolean | undefined;
   assetRegisterProps?: AssetRegisterProps | any | undefined;
   isContractorMatch?: boolean | undefined;
@@ -378,6 +381,14 @@ export function EntityLens(props: ExtendedEntityLensProps) {
     searchParams.get("view") === "goods-receipt" ||
     searchParams.get("mode") === "goods-receipt";
 
+  const isAssetLifecycle =
+    props.isAssetLifecycle === true ||
+    entityType.toUpperCase() === 'ASSET_LIFECYCLE' ||
+    entityId.toLowerCase() === 'asset-lifecycle' ||
+    viewMode?.toLowerCase() === 'asset-lifecycle' ||
+    searchParams.get('view') === 'asset-lifecycle' ||
+    searchParams.get('mode') === 'asset-lifecycle';
+
   const isAssetRegister =
     props.isAssetRegister === true ||
     entityType.toUpperCase() === 'ASSET' ||
@@ -592,6 +603,16 @@ export function EntityLens(props: ExtendedEntityLensProps) {
         }
         onNavigate={props.onNavigate}
         {...props.goodsReceiptProps}
+      />
+    );
+  }
+
+  if (isAssetLifecycle) {
+    return (
+      <AssetLifecycle
+        assetId={props.assetLifecycleProps?.assetId}
+        onNavigate={props.onNavigate}
+        {...props.assetLifecycleProps}
       />
     );
   }
